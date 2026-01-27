@@ -50,8 +50,8 @@ const getDefaultDailyLimit = (): DailyLimit => {
 export const useUserStore = create<UserState>((set) => ({
   userId: '',
   settings: {
-    notificationsEnabled: false,
-    premiumStatus: false,
+    notificationsEnabled: true,
+    premiumStatus: true, // All users have premium by default
     onboardingCompleted: false,
     preferredLanguage: 'en',
     theme: 'dark',

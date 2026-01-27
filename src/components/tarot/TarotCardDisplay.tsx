@@ -11,6 +11,7 @@ interface TarotCardDisplayProps {
   showName?: boolean;
   showPosition?: boolean;
   position?: 'past' | 'present' | 'future';
+  glowEffect?: boolean;
 }
 
 /**
@@ -25,6 +26,7 @@ export const TarotCardDisplay: React.FC<TarotCardDisplayProps> = ({
   showName = true,
   showPosition = false,
   position,
+  glowEffect = false,
 }) => {
   const dimensions = {
     small: { width: 80, height: 112, iconSize: 32 },

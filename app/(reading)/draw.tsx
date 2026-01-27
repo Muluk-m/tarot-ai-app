@@ -7,7 +7,7 @@ import { useReadingStore } from '@/stores/readingStore';
 import { useUserStore } from '@/stores/userStore';
 import type { TarotCard } from '@/types/tarot.types';
 import { colors } from '@/theme/colors';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from '@/utils/uuid';
 
 /**
  * Draw Screen

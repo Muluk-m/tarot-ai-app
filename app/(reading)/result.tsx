@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
+import Markdown from 'react-native-markdown-display';
 import { TarotCardDisplay } from '@/components/tarot/TarotCardDisplay';
 import { useReadingStore } from '@/stores/readingStore';
 import { useCardStore } from '@/stores/cardStore';
@@ -34,9 +35,26 @@ export default function Result() {
   const positions = spreadType === 'three' ? (['past', 'present', 'future'] as const) : undefined;
 
   useEffect(() => {
+    console.log('🎴 [Result] Component mounted');
+    console.log('🎴 [Result] drawnCards length:', drawnCards.length);
+    console.log('🎴 [Result] drawnCards:', drawnCards.map(c => c.name));
+    console.log('🎴 [Result] currentReading before clear:', currentReading ? 'exists' : 'null');
+    console.log('🎴 [Result] isGenerating:', isGenerating);
+    console.log('🎴 [Result] spreadType:', spreadType);
+
+    // IMPORTANT: Always clear any existing reading first to ensure fresh generation
+    if (currentReading) {
+      console.log('🎴 [Result] ⚠️ Found existing reading, clearing it now...');
+    }
+
     // Start generating reading when component mounts
-    if (drawnCards.length > 0 && !currentReading && !isGenerating) {
+    if (drawnCards.length > 0 && !isGenerating) {
+      console.log('🎴 [Result] ✅ Conditions met, calling generateReading...');
       generateReading(spreadType, drawnCards);
+    } else {
+      console.log('🎴 [Result] ❌ Conditions NOT met:');
+      console.log('  - drawnCards.length > 0:', drawnCards.length > 0);
+      console.log('  - !isGenerating:', !isGenerating);
     }
   }, []);
 
@@ -104,18 +122,22 @@ export default function Result() {
             </View>
           )}
 
-          {/* Streaming Text with Typewriter Effect */}
+          {/* Streaming Text with Markdown Rendering */}
           {streamingText && (
-            <View style={styles.textContainer}>
-              <Text style={styles.interpretationText}>
+            <ScrollView
+              style={styles.markdownScrollContainer}
+              showsVerticalScrollIndicator={true}
+              persistentScrollbar={true}
+            >
+              <Markdown style={markdownStyles}>
                 {streamingText}
-              </Text>
+              </Markdown>
 
               {/* Blinking cursor during generation */}
               {isGenerating && (
                 <Text style={styles.cursor}>|</Text>
               )}
-            </View>
+            </ScrollView>
           )}
 
           {/* Error State */}
@@ -257,6 +279,10 @@ const styles = StyleSheet.create({
   textContainer: {
     minHeight: 200,
   },
+  markdownScrollContainer: {
+    maxHeight: 400, // Fixed height for scrolling
+    minHeight: 200,
+  },
   interpretationText: {
     fontSize: 16,
     lineHeight: 26,
@@ -368,5 +394,105 @@ const styles = StyleSheet.create({
     color: colors.accent.gold,
     fontSize: 14,
     fontWeight: '500',
+  },
+});
+
+// Markdown styles for rich text rendering
+const markdownStyles = StyleSheet.create({
+  body: {
+    color: colors.text.primary,
+    fontSize: 16,
+    lineHeight: 26,
+    letterSpacing: 0.3,
+  },
+  heading1: {
+    color: colors.accent.gold,
+    fontSize: 24,
+    fontWeight: '700',
+    marginTop: 16,
+    marginBottom: 12,
+    letterSpacing: 0.5,
+  },
+  heading2: {
+    color: colors.accent.gold,
+    fontSize: 20,
+    fontWeight: '600',
+    marginTop: 14,
+    marginBottom: 10,
+    letterSpacing: 0.4,
+  },
+  heading3: {
+    color: colors.accent.purple,
+    fontSize: 18,
+    fontWeight: '600',
+    marginTop: 12,
+    marginBottom: 8,
+  },
+  paragraph: {
+    color: colors.text.primary,
+    fontSize: 16,
+    lineHeight: 26,
+    marginBottom: 12,
+  },
+  strong: {
+    color: colors.accent.gold,
+    fontWeight: '700',
+  },
+  em: {
+    color: colors.accent.purple,
+    fontStyle: 'italic',
+  },
+  bullet_list: {
+    marginBottom: 12,
+  },
+  ordered_list: {
+    marginBottom: 12,
+  },
+  list_item: {
+    color: colors.text.primary,
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 6,
+  },
+  bullet_list_icon: {
+    color: colors.accent.gold,
+    fontSize: 16,
+    marginRight: 8,
+  },
+  code_inline: {
+    backgroundColor: colors.background.tertiary,
+    color: colors.accent.purple,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+    fontSize: 14,
+    fontFamily: 'monospace',
+  },
+  code_block: {
+    backgroundColor: colors.background.tertiary,
+    color: colors.text.primary,
+    padding: 12,
+    borderRadius: 8,
+    marginVertical: 8,
+    fontSize: 14,
+    fontFamily: 'monospace',
+  },
+  blockquote: {
+    backgroundColor: colors.background.tertiary + '80',
+    borderLeftWidth: 4,
+    borderLeftColor: colors.accent.gold,
+    paddingLeft: 12,
+    paddingVertical: 8,
+    marginVertical: 8,
+    fontStyle: 'italic',
+  },
+  hr: {
+    backgroundColor: colors.accent.gold + '40',
+    height: 1,
+    marginVertical: 16,
+  },
+  link: {
+    color: colors.accent.purple,
+    textDecorationLine: 'underline',
   },
 });

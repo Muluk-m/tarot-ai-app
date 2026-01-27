@@ -1,6 +1,7 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useCardStore } from '@/stores/cardStore';
+import { useReadingStore } from '@/stores/readingStore';
 import { useUserStore } from '@/stores/userStore';
 import { SPREADS } from '@/data/spreads';
 import { colors } from '@/theme/colors';
@@ -8,18 +9,12 @@ import { colors } from '@/theme/colors';
 export default function SpreadSelection() {
   const router = useRouter();
   const { setSpreadType } = useCardStore();
-  const { dailyLimit } = useUserStore();
-  const { FREE_DAILY_LIMIT } = { FREE_DAILY_LIMIT: 3 };
-
-  const remainingReads = Math.max(0, FREE_DAILY_LIMIT - dailyLimit.count);
+  const { clearCurrentReading } = useReadingStore();
 
   const handleSelectSpread = (spreadKey: 'single' | 'three') => {
-    if (remainingReads <= 0) {
-      // TODO: Show paywall modal
-      alert('Daily limit reached! Upgrade to premium for unlimited readings.');
-      return;
-    }
-
+    console.log('🎴 [SpreadSelection] Starting new reading, clearing previous state');
+    // Clear any previous reading to ensure fresh start
+    clearCurrentReading();
     setSpreadType(spreadKey);
     router.push('/(reading)/shuffle');
   };
@@ -29,78 +24,163 @@ export default function SpreadSelection() {
       key: 'single' as const,
       config: SPREADS.single,
       icon: '🌟',
-      gradient: ['#D4AF37', '#F4D03F'],
+      primaryColor: '#D4AF37',
     },
     {
       key: 'three' as const,
       config: SPREADS.three,
       icon: '✨',
-      gradient: ['#8B5CF6', '#A78BFA'],
+      primaryColor: '#8B5CF6',
     },
   ];
 
   return (
-    <ScrollView className="flex-1 bg-bg-primary">
-      <View className="items-center justify-center py-16 px-6">
-        {/* Header */}
-        <Text className="text-3xl font-bold text-accent-gold mb-3">Select Your Spread</Text>
-        <Text className="text-base text-text-secondary mb-2 text-center">
+    <ScrollView style={styles.container}>
+      <View style={styles.content}>
+        <Text style={styles.title}>Select Your Spread</Text>
+        <Text style={styles.subtitle}>
           Choose a reading type to begin your journey
         </Text>
 
-        {/* Remaining reads counter */}
-        <View className="bg-bg-tertiary px-4 py-2 rounded-lg mb-8 border border-accent-gold/30">
-          <Text className="text-accent-gold text-sm font-semibold">
-            {remainingReads} readings left today
-          </Text>
+        {/* Unlimited badge */}
+        <View style={styles.unlimitedBadge}>
+          <Text style={styles.unlimitedText}>✨ Unlimited Readings</Text>
         </View>
 
-        {/* Spread options */}
-        <View className="w-full max-w-md gap-4">
+        <View style={styles.optionsContainer}>
           {spreadOptions.map((option) => (
-            <TouchableOpacity
+            <Pressable
               key={option.key}
               onPress={() => handleSelectSpread(option.key)}
-              activeOpacity={0.8}
-              className="bg-bg-secondary rounded-xl p-6 border-2 border-accent-gold/40"
-              style={{
-                shadowColor: option.gradient[0],
-                shadowOffset: { width: 0, height: 0 },
-                shadowOpacity: 0.3,
-                shadowRadius: 10,
-                elevation: 5,
-              }}
+              style={({ pressed }) => [
+                styles.optionCard,
+                {
+                  shadowColor: option.primaryColor,
+                  opacity: pressed ? 0.8 : 1,
+                  transform: [{ scale: pressed ? 0.98 : 1 }],
+                },
+              ]}
             >
-              {/* Icon */}
-              <View className="items-center mb-3">
-                <Text style={{ fontSize: 48 }}>{option.icon}</Text>
+              <View style={styles.iconContainer}>
+                <Text style={styles.icon}>{option.icon}</Text>
               </View>
 
-              {/* Title */}
-              <Text className="text-xl font-bold text-accent-gold text-center mb-2">
-                {option.config.name}
-              </Text>
+              <Text style={styles.optionTitle}>{option.config.name}</Text>
 
-              {/* Description */}
-              <Text className="text-sm text-text-secondary text-center mb-4">
+              <Text style={styles.optionDescription}>
                 {option.config.description}
               </Text>
 
-              {/* Card count badge */}
-              <View className="self-center bg-accent-purple/20 px-3 py-1 rounded-full">
-                <Text className="text-accent-purple text-xs font-semibold">
-                  {option.config.cardCount} {option.config.cardCount === 1 ? 'Card' : 'Cards'}
+              <View style={styles.badge}>
+                <Text style={styles.badgeText}>
+                  {option.config.cardCount}{' '}
+                  {option.config.cardCount === 1 ? 'Card' : 'Cards'}
                 </Text>
               </View>
-            </TouchableOpacity>
+            </Pressable>
           ))}
         </View>
 
-        {/* Disclaimer */}
-        <Text className="text-text-tertiary text-xs text-center mt-8 opacity-60">
+        <Text style={styles.disclaimer}>
           For entertainment purposes only
         </Text>
       </View>
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background.primary,
+  },
+  content: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 64,
+    paddingHorizontal: 24,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: colors.accent.gold,
+    marginBottom: 12,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: colors.text.secondary,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  unlimitedBadge: {
+    backgroundColor: 'rgba(212, 175, 55, 0.15)',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    marginBottom: 32,
+    borderWidth: 1,
+    borderColor: 'rgba(212, 175, 55, 0.4)',
+  },
+  unlimitedText: {
+    color: colors.accent.gold,
+    fontSize: 14,
+    fontWeight: '700',
+    letterSpacing: 0.5,
+  },
+  optionsContainer: {
+    width: '100%',
+    maxWidth: 448,
+    gap: 16,
+  },
+  optionCard: {
+    backgroundColor: colors.background.secondary,
+    borderRadius: 16,
+    padding: 24,
+    borderWidth: 2,
+    borderColor: 'rgba(212, 175, 55, 0.4)',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 5,
+    marginBottom: 16,
+  },
+  iconContainer: {
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  icon: {
+    fontSize: 48,
+  },
+  optionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.accent.gold,
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  optionDescription: {
+    fontSize: 14,
+    color: colors.text.secondary,
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  badge: {
+    alignSelf: 'center',
+    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 999,
+  },
+  badgeText: {
+    color: colors.accent.purple,
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  disclaimer: {
+    color: colors.text.tertiary,
+    fontSize: 12,
+    textAlign: 'center',
+    marginTop: 32,
+    opacity: 0.6,
+  },
+});

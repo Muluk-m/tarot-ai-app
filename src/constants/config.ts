@@ -11,10 +11,10 @@ export const config = {
     timeout: 30000, // 30 seconds
   },
 
-  // Usage Limits
+  // Usage Limits - ALL REMOVED (unlimited for everyone)
   limits: {
-    freeDaily: 3, // Free readings per day
-    premiumDaily: 999, // Effectively unlimited for premium
+    freeDaily: 999999, // Unlimited readings
+    premiumDaily: 999999, // Unlimited readings
   },
 
   // App Info
@@ -26,12 +26,12 @@ export const config = {
     },
   },
 
-  // Feature Flags
+  // Feature Flags - ALL FEATURES ENABLED
   features: {
     enableHistory: true,
     enableSharing: false, // User requested no sharing
-    enableNotifications: false, // Future feature
-    enablePremium: false, // Future feature
+    enableNotifications: true, // Enabled
+    enablePremium: true, // All premium features enabled for everyone
   },
 } as const;
 

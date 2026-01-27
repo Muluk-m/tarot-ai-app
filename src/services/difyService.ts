@@ -129,16 +129,23 @@ export async function getParameters(): Promise<any> {
 }
 
 /**
- * Generates tarot interpretation with streaming support (SSE)
+ * Generates tarot interpretation in blocking mode (returns complete response at once)
  * @param request - The interpretation request
- * @param onStream - Callback for each chunk of streaming data
+ * @param onStream - Callback for the complete result
  */
 export async function generateInterpretationStream(
   request: DifyInterpretationRequest,
   onStream: StreamCallback
 ): Promise<void> {
+  console.log('🔮 [Dify] generateInterpretationStream called (blocking mode)');
+  console.log('🔮 [Dify] Request:', JSON.stringify(request, null, 2));
+
   try {
     const { spreadType, cards, query } = request;
+
+    console.log(`🔮 [Dify] Spread Type: ${spreadType}`);
+    console.log(`🔮 [Dify] Cards Count: ${cards.length}`);
+    console.log(`🔮 [Dify] Cards:`, cards.map(c => c.card.name));
 
     // Format the prompt
     const spreadTypeLabel =
@@ -151,85 +158,61 @@ export async function generateInterpretationStream(
       ? `User Question: ${query}\n\n${spreadTypeLabel}\n\n${cardsPrompt}\n\nPlease provide a mystical and insightful interpretation of this tarot reading, addressing the user's question.`
       : `${spreadTypeLabel}\n\n${cardsPrompt}\n\nPlease provide a mystical and insightful interpretation of this tarot reading.`;
 
-    const response = await fetch(`${config.dify.apiUrl}/chat-messages`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.dify.apiKey}`,
-      },
-      body: JSON.stringify({
-        inputs: {},
-        query: userMessage,
-        response_mode: 'streaming',
-        user: 'tarot-app-user',
-      }),
-    });
+    console.log('🔮 [Dify] User Message Length:', userMessage.length);
+    console.log('🔮 [Dify] API URL:', config.dify.apiUrl);
+    console.log('🔮 [Dify] API Key:', config.dify.apiKey ? `${config.dify.apiKey.substring(0, 10)}...` : 'MISSING');
 
-    if (!response.ok) {
-      throw new Error(`API Error: ${response.statusText}`);
+    const requestPayload = {
+      inputs: {},
+      query: userMessage,
+      response_mode: 'blocking',
+      user: 'tarot-app-user',
+    };
+    console.log('🔮 [Dify] Request Payload:', JSON.stringify(requestPayload, null, 2));
+
+    console.log('🔮 [Dify] Sending blocking request...');
+    const response = await difyClient.post('/chat-messages', requestPayload);
+
+    console.log('🔮 [Dify] Response status:', response.status);
+    console.log('🔮 [Dify] Response data:', JSON.stringify(response.data, null, 2));
+
+    // Extract the answer from blocking response
+    const { answer } = response.data;
+
+    if (!answer) {
+      console.error('🔮 [Dify] ❌ No answer in response');
+      throw new Error('No answer received from API');
     }
 
-    if (!response.body) {
-      throw new Error('Response body is null');
-    }
+    console.log('🔮 [Dify] ✅ Got answer, length:', answer.length);
+    console.log('🔮 [Dify] Answer preview:', answer.substring(0, 100));
 
-    // Process the streaming response
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
-    let fullText = '';
+    // Call onStream with the complete answer
+    onStream(answer, true);
+    console.log('🔮 [Dify] ✅ Blocking response completed successfully');
 
-    while (true) {
-      const { done, value } = await reader.read();
-
-      if (done) {
-        onStream(fullText, true);
-        break;
-      }
-
-      // Decode the chunk
-      buffer += decoder.decode(value, { stream: true });
-
-      // Process SSE events (format: "data: {...}\n\n")
-      const lines = buffer.split('\n');
-      buffer = lines.pop() || ''; // Keep incomplete line in buffer
-
-      for (const line of lines) {
-        if (line.startsWith('data:')) {
-          try {
-            const jsonStr = line.slice(5).trim();
-            if (jsonStr === '[DONE]') {
-              continue;
-            }
-
-            const data = JSON.parse(jsonStr);
-
-            // Dify streaming events
-            if (data.event === 'agent_message' || data.event === 'message') {
-              if (data.answer) {
-                fullText = data.answer;
-                onStream(fullText, false);
-              }
-            } else if (data.event === 'message_end') {
-              // Stream complete
-              onStream(fullText, true);
-            } else if (data.event === 'error') {
-              throw new Error(data.message || 'Streaming error');
-            }
-          } catch (parseError) {
-            console.warn('Failed to parse SSE data:', line, parseError);
-          }
-        }
-      }
-    }
   } catch (error) {
-    console.error('Dify Streaming Error:', error);
+    console.error('🔮 [Dify] ❌ API Error:', error);
+
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<DifyErrorResponse>;
+
+      if (axiosError.response) {
+        console.error('🔮 [Dify] Error response data:', axiosError.response.data);
+        throw new Error(
+          `API Error: ${axiosError.response.data?.message || axiosError.message}`
+        );
+      } else if (axiosError.request) {
+        console.error('🔮 [Dify] No response received');
+        throw new Error('Network error: Unable to reach AI service');
+      }
+    }
 
     if (error instanceof Error) {
       throw error;
     }
 
-    throw new Error('Failed to generate streaming interpretation');
+    throw new Error('Failed to generate interpretation');
   }
 }
 

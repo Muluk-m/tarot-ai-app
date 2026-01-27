@@ -28,7 +28,7 @@ export default function Shuffle() {
   };
 
   const handleContinue = () => {
-    router.push('/(reading)/draw');
+    router.push('/(reading)/draw-simple');
   };
 
   return (
@@ -44,10 +44,13 @@ export default function Shuffle() {
             onPress={handleContinue}
             activeOpacity={0.8}
           >
-            <Text style={styles.continueButtonText}>✨ Tap to Draw Your Cards</Text>
+            <Text style={styles.continueButtonText}>Tap to Draw Your Cards</Text>
           </TouchableOpacity>
 
           <Text style={styles.spreadInfo}>
+            The cosmos align...
+          </Text>
+          <Text style={styles.spreadType}>
             {spreadType === 'single' ? 'Single Card Reading' : 'Three Card Spread'}
           </Text>
         </View>
@@ -58,7 +61,7 @@ export default function Shuffle() {
         style={styles.skipButton}
         onPress={() => {
           shuffleDeck();
-          router.push('/(reading)/draw');
+          router.push('/(reading)/draw-simple');
         }}
         activeOpacity={0.7}
       >
@@ -102,9 +105,18 @@ const styles = StyleSheet.create({
   },
   spreadInfo: {
     color: colors.text.secondary,
-    fontSize: 14,
+    fontSize: 13,
     marginTop: 12,
-    opacity: 0.8,
+    opacity: 0.7,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
+  spreadType: {
+    color: colors.text.secondary,
+    fontSize: 14,
+    marginTop: 4,
+    opacity: 0.9,
+    textAlign: 'center',
   },
   skipButton: {
     position: 'absolute',

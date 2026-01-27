@@ -33,13 +33,14 @@ export default function RootLayout() {
   // Auto-persist store changes after initialization
   usePersistence();
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+  // Temporarily disable loading screen for debugging
+  // if (isLoading) {
+  //   return <LoadingScreen />;
+  // }
 
-  if (error) {
-    return <ErrorScreen error={error} />;
-  }
+  // if (error) {
+  //   return <ErrorScreen error={error} />;
+  // }
 
   return (
     <SafeAreaProvider>

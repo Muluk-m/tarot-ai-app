@@ -77,8 +77,8 @@ export const ShuffleAnimation: React.FC<ShuffleAnimationProps> = ({
 
       {/* Shuffle text indicator */}
       <View style={styles.textContainer}>
-        <Text style={styles.shuffleText}>✨ Shuffling the cards...</Text>
-        <Text style={styles.subText}>The cosmos align...</Text>
+        <Text style={styles.shuffleText}>Shuffling the cards...</Text>
+        <Text style={styles.subText}>The cosmos align</Text>
       </View>
     </View>
   );

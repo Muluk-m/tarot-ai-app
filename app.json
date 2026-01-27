@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tarot-ai",
-    "slug": "tarot-ai",
+    "name": "CelestialEye",
+    "slug": "celestial-eye",
     "version": "1.0.0",
     "scheme": "tarot-ai",
     "web": {
@@ -27,14 +27,23 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.qlj.tarotai"
+      "bundleIdentifier": "com.qlj.CelestialEye",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0A0E1A"
       },
-      "package": "com.qlj.tarotai"
+      "package": "com.qlj.CelestialEye"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d172587d-77be-42d3-a41f-8c486b031e46"
+      }
     }
   }
 }

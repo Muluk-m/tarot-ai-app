@@ -1,33 +1,90 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 
 export default function Index() {
   const router = useRouter();
 
   return (
-    <View className="flex-1 items-center justify-center bg-bg-primary px-6">
-      <Text className="mb-2 text-4xl font-bold text-accent-gold">✨ Tarot AI</Text>
-      <Text className="mb-12 text-lg text-text-secondary">AI-Powered Mystical Guidance</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>✨ Tarot AI</Text>
+      <Text style={styles.subtitle}>AI-Powered Mystical Guidance</Text>
 
-      <View className="w-full max-w-sm">
-        <Pressable
-          className="mb-4 rounded-xl bg-accent-gold px-6 py-4 active:bg-accent-gold-dark"
-          onPress={() => router.push('/(reading)/spread-selection')}
-        >
-          <Text className="text-center text-lg font-semibold text-bg-primary">
-            Daily Card Draw
-          </Text>
-        </Pressable>
+      <TouchableOpacity
+        style={styles.goldButton}
+        onPress={() => router.push('/(reading)/spread-selection')}
+        activeOpacity={0.8}
+      >
+        <Text style={styles.goldButtonText}>Daily Card Draw</Text>
+      </TouchableOpacity>
 
-        <Pressable
-          className="rounded-xl bg-accent-purple px-6 py-4 active:bg-accent-purple-light"
-          onPress={() => router.push('/history')}
-        >
-          <Text className="text-center text-lg font-semibold text-white">My History</Text>
-        </Pressable>
-      </View>
+      <TouchableOpacity
+        style={styles.purpleButton}
+        onPress={() => router.push('/history')}
+        activeOpacity={0.8}
+      >
+        <Text style={styles.purpleButtonText}>My History</Text>
+      </TouchableOpacity>
 
-      <Text className="mt-8 text-xs text-text-tertiary">For entertainment purposes only</Text>
+      <Text style={styles.disclaimer}>For entertainment purposes only</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0A0E1A',
+    padding: 24,
+  },
+  title: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: '#D4AF37',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 18,
+    color: '#CBD5E1',
+    marginBottom: 48,
+    textAlign: 'center',
+  },
+  goldButton: {
+    backgroundColor: '#D4AF37',
+    padding: 20,
+    borderRadius: 12,
+    width: 300,
+    marginBottom: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 60,
+  },
+  goldButtonText: {
+    color: '#0A0E1A',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  purpleButton: {
+    backgroundColor: '#8B5CF6',
+    padding: 20,
+    borderRadius: 12,
+    width: 300,
+    marginBottom: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 60,
+  },
+  purpleButtonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  disclaimer: {
+    color: '#94A3B8',
+    fontSize: 12,
+    marginTop: 32,
+    textAlign: 'center',
+  },
+});
