@@ -64,10 +64,17 @@ export default function Index() {
 
         {/* Main action cards */}
         <View style={styles.cardsContainer}>
-          {/* Primary Card: Daily Reading */}
+          {/* Primary Card: Daily Reading (Single Card) */}
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => router.push('/(reading)/spread-selection')}
+            onPress={() => {
+              // Set single card spread and go directly to shuffle
+              const { setSpreadType } = require('@/stores/cardStore').useCardStore.getState();
+              const { clearCurrentReading } = require('@/stores/readingStore').useReadingStore.getState();
+              clearCurrentReading();
+              setSpreadType('single');
+              router.push('/(reading)/shuffle');
+            }}
             style={styles.primaryCard}
           >
             <LinearGradient
@@ -109,19 +116,26 @@ export default function Index() {
               </LinearGradient>
             </TouchableOpacity>
 
-            {/* Quick Reading Card */}
+            {/* Three Card Reading */}
             <TouchableOpacity
               activeOpacity={0.9}
-              onPress={() => router.push('/(reading)/spread-selection')}
+              onPress={() => {
+                // Set three card spread and go directly to shuffle
+                const { setSpreadType } = require('@/stores/cardStore').useCardStore.getState();
+                const { clearCurrentReading } = require('@/stores/readingStore').useReadingStore.getState();
+                clearCurrentReading();
+                setSpreadType('three');
+                router.push('/(reading)/shuffle');
+              }}
               style={styles.secondaryCard}
             >
               <LinearGradient
                 colors={[colors.accent.cyan + '20', colors.accent.cyan + '10']}
                 style={styles.secondaryCardGradient}
               >
-                <Text style={styles.secondaryCardIcon}>⚡</Text>
-                <Text style={styles.secondaryCardTitle}>Quick Read</Text>
-                <Text style={styles.secondaryCardSubtitle}>Single card</Text>
+                <Text style={styles.secondaryCardIcon}>✨</Text>
+                <Text style={styles.secondaryCardTitle}>Three Cards</Text>
+                <Text style={styles.secondaryCardSubtitle}>Past Present Future</Text>
               </LinearGradient>
             </TouchableOpacity>
           </View>
