@@ -1,0 +1,192 @@
+import type { TarotCard } from '@/types/tarot.types';
+
+/**
+ * Suit of Cups - 14 Cards (36-49)
+ * Element: Water | Themes: Emotions, Relationships, Intuition, Creativity
+ */
+
+export const CUPS: TarotCard[] = [
+  {
+    id: 36,
+    name: 'Ace of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: 'ace',
+    uprightKeywords: ['love', 'new relationships', 'compassion', 'creativity', 'emotional awakening'],
+    uprightMeaning:
+      'The Ace of Cups represents new emotional beginnings and unconditional love. Your heart overflows with compassion. Open yourself to deep connections and creative inspiration.',
+    iconKey: 'cups-ace',
+    colorScheme: '#22D3EE',
+    symbolEmoji: '💧',
+    element: 'water',
+  },
+  {
+    id: 37,
+    name: 'Two of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: '2',
+    uprightKeywords: ['unity', 'partnership', 'connection', 'attraction', 'mutual respect', 'harmony'],
+    uprightMeaning:
+      'The Two of Cups represents unity and partnership. A deep connection forms between two souls. Mutual respect and attraction create harmonious relationships.',
+    iconKey: 'cups-02',
+    colorScheme: '#06B6D4',
+    element: 'water',
+  },
+  {
+    id: 38,
+    name: 'Three of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: '3',
+    uprightKeywords: ['celebration', 'friendship', 'creativity', 'community', 'joy', 'gatherings'],
+    uprightMeaning:
+      'The Three of Cups represents celebration, friendship, and community. Joyful gatherings bring people together. Share your happiness with those you love.',
+    iconKey: 'cups-03',
+    colorScheme: '#0EA5E9',
+    element: 'water',
+  },
+  {
+    id: 39,
+    name: 'Four of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: '4',
+    uprightKeywords: ['apathy', 'contemplation', 'reevaluation', 'meditation', 'missed opportunities'],
+    uprightMeaning:
+      'The Four of Cups represents apathy and contemplation. Lost in thought, you may miss new opportunities. Look beyond your current perspective to see what\'s offered.',
+    iconKey: 'cups-04',
+    colorScheme: '#0284C7',
+    element: 'water',
+  },
+  {
+    id: 40,
+    name: 'Five of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: '5',
+    uprightKeywords: ['loss', 'grief', 'disappointment', 'regret', 'moving forward', 'acceptance'],
+    uprightMeaning:
+      'The Five of Cups represents loss and grief. While disappointment is real, not all is lost. Turn around to see the cups still standing and possibilities ahead.',
+    iconKey: 'cups-05',
+    colorScheme: '#0369A1',
+    element: 'water',
+  },
+  {
+    id: 41,
+    name: 'Six of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: '6',
+    uprightKeywords: ['nostalgia', 'memories', 'childhood', 'innocence', 'reunion', 'joy'],
+    uprightMeaning:
+      'The Six of Cups represents nostalgia and happy memories. The past holds sweetness. Honor your roots while moving forward, and reconnect with childhood joy.',
+    iconKey: 'cups-06',
+    colorScheme: '#67E8F9',
+    element: 'water',
+  },
+  {
+    id: 42,
+    name: 'Seven of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: '7',
+    uprightKeywords: ['fantasy', 'illusion', 'choices', 'wishful thinking', 'imagination', 'options'],
+    uprightMeaning:
+      'The Seven of Cups represents many options and illusions. Not all that glitters is gold. Ground your dreams in reality and choose wisely among possibilities.',
+    iconKey: 'cups-07',
+    colorScheme: '#22D3EE',
+    element: 'water',
+  },
+  {
+    id: 43,
+    name: 'Eight of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: '8',
+    uprightKeywords: ['walking away', 'seeking truth', 'letting go', 'moving on', 'spiritual journey'],
+    uprightMeaning:
+      'The Eight of Cups represents walking away from what no longer serves you. Though difficult, this journey leads to greater fulfillment. Seek deeper meaning.',
+    iconKey: 'cups-08',
+    colorScheme: '#06B6D4',
+    element: 'water',
+  },
+  {
+    id: 44,
+    name: 'Nine of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: '9',
+    uprightKeywords: ['contentment', 'satisfaction', 'wishes fulfilled', 'luxury', 'self-satisfaction'],
+    uprightMeaning:
+      'The Nine of Cups represents contentment and wishes fulfilled. This is the "wish card" of the tarot. Material and emotional satisfaction brings deep happiness.',
+    iconKey: 'cups-09',
+    colorScheme: '#0EA5E9',
+    element: 'water',
+  },
+  {
+    id: 45,
+    name: 'Ten of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: '10',
+    uprightKeywords: ['harmony', 'happiness', 'alignment', 'family', 'relationships', 'fulfillment'],
+    uprightMeaning:
+      'The Ten of Cups represents perfect harmony and emotional fulfillment. A happy family and loving relationships bring complete satisfaction. This is true happiness.',
+    iconKey: 'cups-10',
+    colorScheme: '#0284C7',
+    element: 'water',
+  },
+  {
+    id: 46,
+    name: 'Page of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: 'page',
+    uprightKeywords: ['creativity', 'intuition', 'messages', 'curiosity', 'new feelings', 'dreamer'],
+    uprightMeaning:
+      'The Page of Cups represents creative inspiration and intuitive messages. A new emotional phase begins. Stay open to imaginative possibilities and gentle feelings.',
+    iconKey: 'cups-page',
+    colorScheme: '#06B6D4',
+    element: 'water',
+  },
+  {
+    id: 47,
+    name: 'Knight of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: 'knight',
+    uprightKeywords: ['romance', 'charm', 'imagination', 'following the heart', 'idealism', 'proposals'],
+    uprightMeaning:
+      'The Knight of Cups represents romance and following your heart. He brings proposals and creative pursuits. Act on your feelings with charm and imagination.',
+    iconKey: 'cups-knight',
+    colorScheme: '#0EA5E9',
+    element: 'water',
+  },
+  {
+    id: 48,
+    name: 'Queen of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: 'queen',
+    uprightKeywords: ['compassion', 'intuition', 'nurturing', 'emotional security', 'sensitivity', 'care'],
+    uprightMeaning:
+      'The Queen of Cups represents compassion, intuition, and emotional depth. She nurtures others while staying connected to her feelings. Trust your inner voice.',
+    iconKey: 'cups-queen',
+    colorScheme: '#0284C7',
+    element: 'water',
+  },
+  {
+    id: 49,
+    name: 'King of Cups',
+    arcana: 'minor',
+    suit: 'cups',
+    rank: 'king',
+    uprightKeywords: ['emotional balance', 'diplomacy', 'compassion', 'wisdom', 'calm', 'control'],
+    uprightMeaning:
+      'The King of Cups represents emotional balance and wise compassion. He masters his feelings without suppressing them. Lead with empathy and diplomatic grace.',
+    iconKey: 'cups-king',
+    colorScheme: '#0369A1',
+    element: 'water',
+  },
+];

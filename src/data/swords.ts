@@ -1,0 +1,192 @@
+import type { TarotCard } from '@/types/tarot.types';
+
+/**
+ * Suit of Swords - 14 Cards (50-63)
+ * Element: Air | Themes: Intellect, Logic, Conflict, Communication, Truth
+ */
+
+export const SWORDS: TarotCard[] = [
+  {
+    id: 50,
+    name: 'Ace of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: 'ace',
+    uprightKeywords: ['breakthrough', 'clarity', 'truth', 'mental power', 'new ideas', 'victory'],
+    uprightMeaning:
+      'The Ace of Swords represents mental clarity and breakthrough. A powerful new idea cuts through confusion. Truth and justice prevail with sharp insight.',
+    iconKey: 'swords-ace',
+    colorScheme: '#CBD5E1',
+    symbolEmoji: '⚔️',
+    element: 'air',
+  },
+  {
+    id: 51,
+    name: 'Two of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: '2',
+    uprightKeywords: ['difficult choices', 'stalemate', 'avoidance', 'denial', 'blocked emotions'],
+    uprightMeaning:
+      'The Two of Swords represents difficult decisions and stalemate. Blindfolded and balanced, you avoid choosing. Remove the blindfold and face the truth.',
+    iconKey: 'swords-02',
+    colorScheme: '#94A3B8',
+    element: 'air',
+  },
+  {
+    id: 52,
+    name: 'Three of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: '3',
+    uprightKeywords: ['heartbreak', 'sorrow', 'grief', 'painful truth', 'suffering', 'release'],
+    uprightMeaning:
+      'The Three of Swords represents heartbreak and painful truth. Though sorrowful, this release is necessary for healing. Accept the pain and begin recovery.',
+    iconKey: 'swords-03',
+    colorScheme: '#64748B',
+    element: 'air',
+  },
+  {
+    id: 53,
+    name: 'Four of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: '4',
+    uprightKeywords: ['rest', 'restoration', 'contemplation', 'recovery', 'meditation', 'stillness'],
+    uprightMeaning:
+      'The Four of Swords represents rest and restoration. After struggle comes necessary recovery. Take time to heal, meditate, and restore your mental energy.',
+    iconKey: 'swords-04',
+    colorScheme: '#475569',
+    element: 'air',
+  },
+  {
+    id: 54,
+    name: 'Five of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: '5',
+    uprightKeywords: ['conflict', 'defeat', 'winning at all costs', 'betrayal', 'disagreement'],
+    uprightMeaning:
+      'The Five of Swords represents conflict and hollow victory. Winning at all costs leaves everyone wounded. Consider if this battle is worth fighting.',
+    iconKey: 'swords-05',
+    colorScheme: '#334155',
+    element: 'air',
+  },
+  {
+    id: 55,
+    name: 'Six of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: '6',
+    uprightKeywords: ['transition', 'moving on', 'travel', 'letting go', 'calmer waters', 'recovery'],
+    uprightMeaning:
+      'The Six of Swords represents transition and moving to calmer waters. Leave troubled times behind. Though the journey is difficult, better days await ahead.',
+    iconKey: 'swords-06',
+    colorScheme: '#94A3B8',
+    element: 'air',
+  },
+  {
+    id: 56,
+    name: 'Seven of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: '7',
+    uprightKeywords: ['deception', 'strategy', 'stealth', 'getting away with something', 'cunning'],
+    uprightMeaning:
+      'The Seven of Swords represents strategy and deception. Someone may not be fully honest. Use clever tactics wisely, but beware of cutting corners.',
+    iconKey: 'swords-07',
+    colorScheme: '#64748B',
+    element: 'air',
+  },
+  {
+    id: 57,
+    name: 'Eight of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: '8',
+    uprightKeywords: ['restriction', 'imprisonment', 'victim mentality', 'powerlessness', 'self-imposed'],
+    uprightMeaning:
+      'The Eight of Swords represents feeling trapped and restricted. Your bonds are often self-imposed. Remove the blindfold to see escape routes all around you.',
+    iconKey: 'swords-08',
+    colorScheme: '#475569',
+    element: 'air',
+  },
+  {
+    id: 58,
+    name: 'Nine of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: '9',
+    uprightKeywords: ['anxiety', 'worry', 'fear', 'nightmares', 'negative thoughts', 'mental anguish'],
+    uprightMeaning:
+      'The Nine of Swords represents anxiety and worry. Nightmares and negative thoughts plague the mind. Remember that fears are often worse than reality.',
+    iconKey: 'swords-09',
+    colorScheme: '#334155',
+    element: 'air',
+  },
+  {
+    id: 59,
+    name: 'Ten of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: '10',
+    uprightKeywords: ['painful endings', 'rock bottom', 'betrayal', 'crisis', 'rebirth', 'transformation'],
+    uprightMeaning:
+      'The Ten of Swords represents painful endings and hitting rock bottom. Though this is the darkest hour, dawn approaches. The only way forward is up.',
+    iconKey: 'swords-10',
+    colorScheme: '#1E293B',
+    element: 'air',
+  },
+  {
+    id: 60,
+    name: 'Page of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: 'page',
+    uprightKeywords: ['curiosity', 'mental energy', 'new ideas', 'vigilance', 'communication', 'truth-seeking'],
+    uprightMeaning:
+      'The Page of Swords represents curiosity and mental energy. A new idea or message arrives. Stay alert, ask questions, and seek truth with enthusiasm.',
+    iconKey: 'swords-page',
+    colorScheme: '#94A3B8',
+    element: 'air',
+  },
+  {
+    id: 61,
+    name: 'Knight of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: 'knight',
+    uprightKeywords: ['action', 'impulsiveness', 'ambition', 'driven', 'focused', 'quick thinking'],
+    uprightMeaning:
+      'The Knight of Swords represents swift action and ambitious drive. He charges forward with focused intensity. Act quickly but beware of recklessness.',
+    iconKey: 'swords-knight',
+    colorScheme: '#64748B',
+    element: 'air',
+  },
+  {
+    id: 62,
+    name: 'Queen of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: 'queen',
+    uprightKeywords: ['independent', 'clear thinking', 'direct communication', 'unbiased', 'perceptive'],
+    uprightMeaning:
+      'The Queen of Swords represents clarity, independence, and direct communication. She sees through illusions with sharp perception. Speak truth with compassionate honesty.',
+    iconKey: 'swords-queen',
+    colorScheme: '#475569',
+    element: 'air',
+  },
+  {
+    id: 63,
+    name: 'King of Swords',
+    arcana: 'minor',
+    suit: 'swords',
+    rank: 'king',
+    uprightKeywords: ['intellectual power', 'authority', 'truth', 'clarity', 'ethics', 'judgment'],
+    uprightMeaning:
+      'The King of Swords represents intellectual power and clear judgment. He rules with logic, ethics, and truth. Make decisions based on reason and moral clarity.',
+    iconKey: 'swords-king',
+    colorScheme: '#334155',
+    element: 'air',
+  },
+];

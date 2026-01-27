@@ -1,0 +1,192 @@
+import type { TarotCard } from '@/types/tarot.types';
+
+/**
+ * Suit of Wands - 14 Cards (22-35)
+ * Element: Fire | Themes: Energy, Passion, Creativity, Action
+ */
+
+export const WANDS: TarotCard[] = [
+  {
+    id: 22,
+    name: 'Ace of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: 'ace',
+    uprightKeywords: ['inspiration', 'new opportunities', 'growth', 'potential', 'creative spark'],
+    uprightMeaning:
+      'The Ace of Wands represents raw creative energy and new beginnings. A seed of inspiration is planted. Embrace new opportunities with passion and enthusiasm.',
+    iconKey: 'wands-ace',
+    colorScheme: '#EF4444',
+    symbolEmoji: '🔥',
+    element: 'fire',
+  },
+  {
+    id: 23,
+    name: 'Two of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: '2',
+    uprightKeywords: ['planning', 'decisions', 'discovery', 'personal power', 'future vision'],
+    uprightMeaning:
+      'The Two of Wands represents planning and making decisions about your future. You hold the world in your hands. Bold choices lead to expansion.',
+    iconKey: 'wands-02',
+    colorScheme: '#F97316',
+    element: 'fire',
+  },
+  {
+    id: 24,
+    name: 'Three of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: '3',
+    uprightKeywords: ['expansion', 'foresight', 'overseas opportunities', 'progress', 'leadership'],
+    uprightMeaning:
+      'The Three of Wands represents expansion and looking ahead. Your plans are in motion. Opportunities for growth and exploration await on the horizon.',
+    iconKey: 'wands-03',
+    colorScheme: '#FB923C',
+    element: 'fire',
+  },
+  {
+    id: 25,
+    name: 'Four of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: '4',
+    uprightKeywords: ['celebration', 'harmony', 'homecoming', 'stability', 'community', 'joy'],
+    uprightMeaning:
+      'The Four of Wands represents celebration, harmony, and homecoming. A milestone has been reached. Gather with loved ones and celebrate your achievements.',
+    iconKey: 'wands-04',
+    colorScheme: '#FDBA74',
+    element: 'fire',
+  },
+  {
+    id: 26,
+    name: 'Five of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: '5',
+    uprightKeywords: ['conflict', 'competition', 'tension', 'rivalry', 'disagreement', 'struggle'],
+    uprightMeaning:
+      'The Five of Wands represents conflict and competition. Different viewpoints clash. Navigate disagreements with respect and find common ground through communication.',
+    iconKey: 'wands-05',
+    colorScheme: '#F59E0B',
+    element: 'fire',
+  },
+  {
+    id: 27,
+    name: 'Six of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: '6',
+    uprightKeywords: ['victory', 'success', 'public recognition', 'pride', 'achievement', 'acclaim'],
+    uprightMeaning:
+      'The Six of Wands represents victory and public recognition. Your efforts have paid off. Accept praise graciously and celebrate your well-deserved success.',
+    iconKey: 'wands-06',
+    colorScheme: '#FBBF24',
+    element: 'fire',
+  },
+  {
+    id: 28,
+    name: 'Seven of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: '7',
+    uprightKeywords: ['challenge', 'perseverance', 'defending position', 'courage', 'determination'],
+    uprightMeaning:
+      'The Seven of Wands represents standing your ground and defending your position. Face challenges with courage. Your perseverance will overcome opposition.',
+    iconKey: 'wands-07',
+    colorScheme: '#F59E0B',
+    element: 'fire',
+  },
+  {
+    id: 29,
+    name: 'Eight of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: '8',
+    uprightKeywords: ['movement', 'speed', 'action', 'alignment', 'quick changes', 'progress'],
+    uprightMeaning:
+      'The Eight of Wands represents rapid movement and swift action. Things are accelerating quickly. Energy is aligned and progress happens at lightning speed.',
+    iconKey: 'wands-08',
+    colorScheme: '#EF4444',
+    element: 'fire',
+  },
+  {
+    id: 30,
+    name: 'Nine of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: '9',
+    uprightKeywords: ['resilience', 'courage', 'persistence', 'test of faith', 'boundaries', 'endurance'],
+    uprightMeaning:
+      'The Nine of Wands represents resilience and persistence. You\'ve been through challenges but remain standing. One final push will bring you to victory.',
+    iconKey: 'wands-09',
+    colorScheme: '#DC2626',
+    element: 'fire',
+  },
+  {
+    id: 31,
+    name: 'Ten of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: '10',
+    uprightKeywords: ['burden', 'responsibility', 'hard work', 'stress', 'accomplishment', 'overwhelm'],
+    uprightMeaning:
+      'The Ten of Wands represents burdens and responsibilities. You carry a heavy load. Success is near, but don\'t be afraid to delegate and ask for help.',
+    iconKey: 'wands-10',
+    colorScheme: '#B91C1C',
+    element: 'fire',
+  },
+  {
+    id: 32,
+    name: 'Page of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: 'page',
+    uprightKeywords: ['inspiration', 'ideas', 'discovery', 'enthusiasm', 'free spirit', 'good news'],
+    uprightMeaning:
+      'The Page of Wands represents inspiration and new ideas. A message of passion arrives. Explore creative pursuits with youthful enthusiasm and curiosity.',
+    iconKey: 'wands-page',
+    colorScheme: '#F97316',
+    element: 'fire',
+  },
+  {
+    id: 33,
+    name: 'Knight of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: 'knight',
+    uprightKeywords: ['energy', 'passion', 'adventure', 'impulsiveness', 'action', 'fearlessness'],
+    uprightMeaning:
+      'The Knight of Wands represents passionate energy and adventure. Act boldly and fearlessly. Channel your enthusiasm into purposeful action and embrace change.',
+    iconKey: 'wands-knight',
+    colorScheme: '#EA580C',
+    element: 'fire',
+  },
+  {
+    id: 34,
+    name: 'Queen of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: 'queen',
+    uprightKeywords: ['confidence', 'independence', 'social butterfly', 'determination', 'charisma'],
+    uprightMeaning:
+      'The Queen of Wands represents confidence, independence, and charisma. She radiates warmth and attracts others naturally. Be bold, authentic, and inspiring.',
+    iconKey: 'wands-queen',
+    colorScheme: '#DC2626',
+    element: 'fire',
+  },
+  {
+    id: 35,
+    name: 'King of Wands',
+    arcana: 'minor',
+    suit: 'wands',
+    rank: 'king',
+    uprightKeywords: ['leadership', 'vision', 'entrepreneurship', 'honor', 'boldness', 'charisma'],
+    uprightMeaning:
+      'The King of Wands represents natural leadership and vision. He is bold, charismatic, and inspiring. Take charge with confidence and turn your vision into reality.',
+    iconKey: 'wands-king',
+    colorScheme: '#B91C1C',
+    element: 'fire',
+  },
+];
