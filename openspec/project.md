@@ -85,8 +85,8 @@
 - AsyncStorage limitations for data persistence
 
 ### Bundle Identifiers
-- iOS: `com.qlj.tarotai`
-- Android: `com.qlj.tarotai`
+- iOS: `com.qlj.CelestialEye`
+- Android: `com.qlj.CelestialEye`
 
 ## External Dependencies
 

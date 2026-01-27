@@ -81,12 +81,12 @@ export default function DrawSimple() {
         {/* Header */}
         <Animated.View style={[styles.header, { opacity: fadeAnim }]}>
           <Text style={styles.title}>
-            {spreadType === 'single' ? 'Your Daily Card' : 'Your Three Cards'}
+            {spreadType === 'single' ? 'Your Daily Vision' : 'The Tri-Realm Spread'}
           </Text>
           <Text style={styles.subtitle}>
             {allCardsRevealed
-              ? 'All cards revealed! Get your reading below'
-              : 'Tap each card to reveal its wisdom'}
+              ? 'All visions revealed! Seek your interpretation below'
+              : 'Touch each card to unveil its celestial message'}
           </Text>
 
           {/* Progress indicator */}
@@ -198,7 +198,7 @@ export default function DrawSimple() {
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
               >
-                <Text style={styles.actionButtonText}>✨ Get AI Reading</Text>
+                <Text style={styles.actionButtonText}>✨ Receive Celestial Guidance</Text>
                 <View style={styles.actionButtonArrow}>
                   <Text style={styles.actionButtonArrowText}>→</Text>
                 </View>

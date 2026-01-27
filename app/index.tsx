@@ -46,18 +46,18 @@ export default function Index() {
           </View>
 
           {/* Title with gradient text effect */}
-          <Text style={styles.title}>Tarot AI</Text>
+          <Text style={styles.title}>Celestial Eye</Text>
           <Text style={styles.subtitle}>
-            Unlock the wisdom of the cosmos with{'\n'}AI-powered mystical insights
+            Gaze into the cosmos and unveil{'\n'}your destiny through ancient wisdom
           </Text>
 
           {/* Feature highlights */}
           <View style={styles.featuresRow}>
             <View style={styles.featurePill}>
-              <Text style={styles.featurePillText}>🌙 Unlimited Readings</Text>
+              <Text style={styles.featurePillText}>🌙 Unlimited Visions</Text>
             </View>
             <View style={styles.featurePill}>
-              <Text style={styles.featurePillText}>✨ AI Powered</Text>
+              <Text style={styles.featurePillText}>✨ Celestial Wisdom</Text>
             </View>
           </View>
         </View>
@@ -86,9 +86,9 @@ export default function Index() {
                   <Text style={styles.cardIcon}>🌟</Text>
                 </View>
                 <View style={styles.cardTextContainer}>
-                  <Text style={styles.cardTitle}>Daily Card Draw</Text>
+                  <Text style={styles.cardTitle}>Daily Vision</Text>
                   <Text style={styles.cardDescription}>
-                    Discover what the universe has in store for you today
+                    Glimpse what the celestial realm reveals for today
                   </Text>
                 </View>
                 <View style={styles.cardArrow}>
@@ -111,8 +111,8 @@ export default function Index() {
                 style={styles.secondaryCardGradient}
               >
                 <Text style={styles.secondaryCardIcon}>📖</Text>
-                <Text style={styles.secondaryCardTitle}>My Readings</Text>
-                <Text style={styles.secondaryCardSubtitle}>View history</Text>
+                <Text style={styles.secondaryCardTitle}>My Visions</Text>
+                <Text style={styles.secondaryCardSubtitle}>Past revelations</Text>
               </LinearGradient>
             </TouchableOpacity>
 
@@ -134,7 +134,7 @@ export default function Index() {
                 style={styles.secondaryCardGradient}
               >
                 <Text style={styles.secondaryCardIcon}>✨</Text>
-                <Text style={styles.secondaryCardTitle}>Three Cards</Text>
+                <Text style={styles.secondaryCardTitle}>Tri-Realm Spread</Text>
                 <Text style={styles.secondaryCardSubtitle}>Past Present Future</Text>
               </LinearGradient>
             </TouchableOpacity>
@@ -145,17 +145,17 @@ export default function Index() {
         <View style={styles.statsSection}>
           <View style={styles.statItem}>
             <Text style={styles.statNumber}>∞</Text>
-            <Text style={styles.statLabel}>Readings</Text>
+            <Text style={styles.statLabel}>Visions</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
             <Text style={styles.statNumber}>78</Text>
-            <Text style={styles.statLabel}>Tarot Cards</Text>
+            <Text style={styles.statLabel}>Sacred Cards</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>AI</Text>
-            <Text style={styles.statLabel}>Powered</Text>
+            <Text style={styles.statNumber}>✨</Text>
+            <Text style={styles.statLabel}>Celestial</Text>
           </View>
         </View>
 

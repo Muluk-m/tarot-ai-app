@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "CelestialEye",
+    "name": "Celestial Eye",
     "slug": "celestial-eye",
     "version": "1.0.0",
-    "scheme": "tarot-ai",
+    "scheme": "celestial-eye",
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"

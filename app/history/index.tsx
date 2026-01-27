@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useReadingStore } from '@/stores/readingStore';
 import { TarotCardDisplay } from '@/components/tarot/TarotCardDisplay';
 import { colors } from '@/theme/colors';
+import { spacing } from '@/theme/spacing';
+import { shadows } from '@/theme/shadows';
 
 export default function History() {
   const router = useRouter();
@@ -21,37 +24,42 @@ export default function History() {
       <TouchableOpacity
         style={styles.historyItem}
         onPress={() => handleReadingPress(item.id)}
-        activeOpacity={0.7}
+        activeOpacity={0.9}
       >
-        {/* Card preview */}
-        <View style={styles.cardPreview}>
-          {firstCard && (
-            <TarotCardDisplay
-              card={firstCard}
-              size="small"
-              showName={false}
-              glowEffect={false}
-            />
-          )}
-        </View>
-
-        {/* Reading info */}
-        <View style={styles.readingInfo}>
-          <Text style={styles.spreadType}>
-            {item.spreadType === 'single' ? '🌟 Single Card' : '✨ Three Card Spread'}
-          </Text>
-          <Text style={styles.date}>{item.dateFormatted}</Text>
-          <Text style={styles.preview} numberOfLines={2}>
-            {item.interpretation.substring(0, 100)}...
-          </Text>
-        </View>
-
-        {/* Favorite indicator */}
-        {item.favorite && (
-          <View style={styles.favoriteIndicator}>
-            <Text style={styles.favoriteIcon}>⭐</Text>
+        <LinearGradient
+          colors={[colors.accent.gold + '15', colors.accent.purple + '10']}
+          style={styles.historyItemGradient}
+        >
+          {/* Card preview */}
+          <View style={styles.cardPreview}>
+            {firstCard && (
+              <TarotCardDisplay
+                card={firstCard}
+                size="small"
+                showName={false}
+                glowEffect={false}
+              />
+            )}
           </View>
-        )}
+
+          {/* Reading info */}
+          <View style={styles.readingInfo}>
+            <Text style={styles.spreadType}>
+              {item.spreadType === 'single' ? '🌟 Daily Vision' : '✨ Tri-Realm Spread'}
+            </Text>
+            <Text style={styles.date}>{item.dateFormatted}</Text>
+            <Text style={styles.preview} numberOfLines={2}>
+              {item.interpretation.substring(0, 100)}...
+            </Text>
+          </View>
+
+          {/* Favorite indicator */}
+          {item.favorite && (
+            <View style={styles.favoriteIndicator}>
+              <Text style={styles.favoriteIcon}>⭐</Text>
+            </View>
+          )}
+        </LinearGradient>
       </TouchableOpacity>
     );
   };
@@ -59,27 +67,42 @@ export default function History() {
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
       <Text style={styles.emptyIcon}>🔮</Text>
-      <Text style={styles.emptyTitle}>No Readings Yet</Text>
+      <Text style={styles.emptyTitle}>No Visions Yet</Text>
       <Text style={styles.emptySubtitle}>
-        Start your mystical journey with your first tarot reading
+        Begin your celestial journey by gazing into the cosmic realm
       </Text>
       <TouchableOpacity
         style={styles.emptyButton}
         onPress={() => router.push('/')}
-        activeOpacity={0.8}
+        activeOpacity={0.9}
       >
-        <Text style={styles.emptyButtonText}>Get Your First Reading</Text>
+        <LinearGradient
+          colors={[colors.accent.gold, colors.accent.goldLight]}
+          style={styles.emptyButtonGradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        >
+          <Text style={styles.emptyButtonText}>✨ Receive Your First Vision</Text>
+        </LinearGradient>
       </TouchableOpacity>
     </View>
   );
 
   return (
     <View style={styles.container}>
+      {/* Aurora Background Gradient */}
+      <LinearGradient
+        colors={['#0A0E1A', '#1A0E2E', '#2E1A47', '#1E2638']}
+        style={styles.backgroundGradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      />
+
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.title}>Reading History</Text>
+        <Text style={styles.title}>📖 Vision Archive</Text>
         <Text style={styles.subtitle}>
-          {readingHistory.length} {readingHistory.length === 1 ? 'reading' : 'readings'}
+          {readingHistory.length} {readingHistory.length === 1 ? 'vision' : 'visions'} preserved
         </Text>
       </View>
 
@@ -110,123 +133,137 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background.primary,
   },
+  backgroundGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
   header: {
-    paddingTop: 60,
-    paddingHorizontal: 24,
-    paddingBottom: 20,
-    borderBottomWidth: 1,
+    paddingTop: spacing.xxxl,
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.lg,
+    borderBottomWidth: 2,
     borderBottomColor: colors.accent.gold + '30',
   },
   title: {
     fontSize: 32,
-    fontWeight: '700',
+    fontWeight: '800',
     color: colors.accent.gold,
-    marginBottom: 4,
+    marginBottom: spacing.xs,
+    textShadowColor: colors.accent.gold + '40',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 15,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 15,
     color: colors.text.secondary,
   },
   listContent: {
-    padding: 16,
+    padding: spacing.lg,
     flexGrow: 1,
   },
   historyItem: {
-    flexDirection: 'row',
-    backgroundColor: colors.background.secondary,
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    borderWidth: 1,
+    borderRadius: 20,
+    marginBottom: spacing.md,
+    overflow: 'hidden',
+    borderWidth: 2,
     borderColor: colors.accent.gold + '40',
-    shadowColor: colors.accent.gold,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
+    ...shadows.md,
+  },
+  historyItemGradient: {
+    flexDirection: 'row',
+    padding: spacing.lg,
   },
   cardPreview: {
-    marginRight: 16,
+    marginRight: spacing.md,
   },
   readingInfo: {
     flex: 1,
     justifyContent: 'center',
   },
   spreadType: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 15,
+    fontWeight: '700',
     color: colors.accent.gold,
-    marginBottom: 4,
+    marginBottom: spacing.xs,
   },
   date: {
     fontSize: 12,
     color: colors.text.tertiary,
-    marginBottom: 8,
+    marginBottom: spacing.sm,
   },
   preview: {
     fontSize: 13,
     color: colors.text.secondary,
-    lineHeight: 18,
+    lineHeight: 19,
   },
   favoriteIndicator: {
     position: 'absolute',
-    top: 12,
-    right: 12,
+    top: spacing.md,
+    right: spacing.md,
   },
   favoriteIcon: {
-    fontSize: 20,
+    fontSize: 24,
   },
   emptyContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 40,
+    paddingHorizontal: spacing.xxl,
     paddingTop: 100,
   },
   emptyIcon: {
     fontSize: 80,
-    marginBottom: 24,
+    marginBottom: spacing.xl,
   },
   emptyTitle: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: colors.text.primary,
-    marginBottom: 12,
+    fontSize: 28,
+    fontWeight: '800',
+    color: colors.accent.gold,
+    marginBottom: spacing.md,
+    textShadowColor: colors.accent.gold + '40',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
   },
   emptySubtitle: {
-    fontSize: 14,
+    fontSize: 15,
     color: colors.text.secondary,
     textAlign: 'center',
-    lineHeight: 20,
-    marginBottom: 32,
+    lineHeight: 22,
+    marginBottom: spacing.xxl,
   },
   emptyButton: {
-    backgroundColor: colors.accent.gold,
-    paddingVertical: 14,
-    paddingHorizontal: 32,
-    borderRadius: 12,
+    borderRadius: 16,
+    overflow: 'hidden',
+    ...shadows.goldGlow,
+  },
+  emptyButtonGradient: {
+    paddingVertical: spacing.lg,
+    paddingHorizontal: spacing.xl,
+    alignItems: 'center',
   },
   emptyButtonText: {
     color: colors.background.primary,
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 18,
+    fontWeight: '800',
   },
   backButton: {
     position: 'absolute',
     top: 50,
-    left: 20,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: colors.background.tertiary,
-    borderRadius: 8,
+    left: spacing.lg,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
+    backgroundColor: colors.background.tertiary + 'CC',
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: colors.accent.gold,
-    opacity: 0.7,
+    borderColor: colors.accent.gold + '40',
   },
   backButtonText: {
     color: colors.accent.gold,
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '600',
   },
 });
 

@@ -1,11 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import Markdown from 'react-native-markdown-display';
 import { TarotCardDisplay } from '@/components/tarot/TarotCardDisplay';
 import { useReadingStore } from '@/stores/readingStore';
 import { useCardStore } from '@/stores/cardStore';
 import { colors } from '@/theme/colors';
+import { spacing } from '@/theme/spacing';
+import { shadows } from '@/theme/shadows';
 
 /**
  * Result Screen
@@ -62,6 +65,14 @@ export default function Result() {
 
   return (
     <View style={styles.container}>
+      {/* Aurora Background Gradient */}
+      <LinearGradient
+        colors={['#0A0E1A', '#1A0E2E', '#2E1A47', '#1E2638']}
+        style={styles.backgroundGradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      />
+
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={styles.scrollContent}
@@ -69,9 +80,9 @@ export default function Result() {
       >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.title}>Your Reading</Text>
+          <Text style={styles.title}>Your Vision</Text>
           <Text style={styles.subtitle}>
-            {spreadType === 'single' ? 'Daily Card Guidance' : 'Past, Present & Future'}
+            {spreadType === 'single' ? '🌟 Daily Celestial Guidance' : '✨ The Tri-Realm Revelation'}
           </Text>
         </View>
 
@@ -91,17 +102,20 @@ export default function Result() {
         </View>
 
         {/* Interpretation Section */}
-        <View style={styles.interpretationContainer}>
+        <LinearGradient
+          colors={[colors.accent.gold + '15', colors.accent.purple + '10']}
+          style={styles.interpretationContainer}
+        >
           <View style={styles.interpretationHeader}>
-            <Text style={styles.interpretationTitle}>✨ AI Interpretation</Text>
+            <Text style={styles.interpretationTitle}>✨ Celestial Interpretation</Text>
           </View>
 
           {/* Loading State */}
           {isGenerating && streamingText === '' && (
             <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" color={colors.accent.gold} />
-              <Text style={styles.loadingText}>Consulting the cosmos...</Text>
-              <Text style={styles.loadingSubtext}>Channeling mystical energies...</Text>
+              <Text style={styles.loadingText}>Gazing into the celestial realm...</Text>
+              <Text style={styles.loadingSubtext}>Channeling cosmic wisdom...</Text>
             </View>
           )}
 
@@ -141,10 +155,10 @@ export default function Result() {
           {/* Completion indicator */}
           {!isGenerating && currentReading && (
             <View style={styles.completionBadge}>
-              <Text style={styles.completionText}>✓ Reading Complete</Text>
+              <Text style={styles.completionText}>✓ Vision Received</Text>
             </View>
           )}
-        </View>
+        </LinearGradient>
 
         {/* Action Buttons */}
         {!isGenerating && currentReading && (
@@ -152,9 +166,16 @@ export default function Result() {
             <TouchableOpacity
               style={styles.primaryButton}
               onPress={handleReturnHome}
-              activeOpacity={0.8}
+              activeOpacity={0.9}
             >
-              <Text style={styles.primaryButtonText}>✨ New Reading</Text>
+              <LinearGradient
+                colors={[colors.accent.gold, colors.accent.goldLight]}
+                style={styles.primaryButtonGradient}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
+                <Text style={styles.primaryButtonText}>✨ New Vision</Text>
+              </LinearGradient>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -162,7 +183,12 @@ export default function Result() {
               onPress={handleViewHistory}
               activeOpacity={0.8}
             >
-              <Text style={styles.secondaryButtonText}>View History</Text>
+              <LinearGradient
+                colors={[colors.accent.purple + '20', colors.accent.purple + '10']}
+                style={styles.secondaryButtonGradient}
+              >
+                <Text style={styles.secondaryButtonText}>📖 Past Visions</Text>
+              </LinearGradient>
             </TouchableOpacity>
           </View>
         )}
@@ -190,24 +216,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background.primary,
   },
+  backgroundGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
   scrollContent: {
-    paddingTop: 80,
-    paddingBottom: 40,
-    paddingHorizontal: 24,
+    paddingTop: spacing.xxxl + spacing.lg,
+    paddingBottom: spacing.xxl,
+    paddingHorizontal: spacing.lg,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: spacing.xl,
   },
   title: {
     fontSize: 32,
-    fontWeight: '700',
+    fontWeight: '800',
     color: colors.accent.gold,
-    marginBottom: 8,
+    marginBottom: spacing.sm,
     letterSpacing: 1,
+    textShadowColor: colors.accent.gold + '40',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 15,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 15,
     color: colors.text.secondary,
     textAlign: 'center',
   },
@@ -215,31 +251,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: 16,
-    marginBottom: 32,
+    gap: spacing.md,
+    marginBottom: spacing.xl,
   },
   interpretationContainer: {
-    backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-    padding: 20,
-    borderWidth: 1,
+    borderRadius: 20,
+    padding: spacing.lg,
+    borderWidth: 2,
     borderColor: colors.accent.gold + '40',
-    shadowColor: colors.accent.gold,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.2,
-    shadowRadius: 10,
-    elevation: 5,
-    marginBottom: 24,
+    ...shadows.lg,
+    marginBottom: spacing.xl,
   },
   interpretationHeader: {
-    marginBottom: 16,
-    paddingBottom: 12,
+    marginBottom: spacing.md,
+    paddingBottom: spacing.md,
     borderBottomWidth: 1,
     borderBottomColor: colors.accent.gold + '30',
   },
   interpretationTitle: {
-    fontSize: 20,
-    fontWeight: '600',
+    fontSize: 22,
+    fontWeight: '700',
     color: colors.accent.gold,
     letterSpacing: 0.5,
   },
@@ -318,65 +349,66 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   actionsContainer: {
-    gap: 12,
-    marginBottom: 24,
+    gap: spacing.md,
+    marginBottom: spacing.xl,
   },
   primaryButton: {
-    backgroundColor: colors.accent.gold,
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 12,
-    shadowColor: colors.accent.gold,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.6,
-    shadowRadius: 15,
-    elevation: 10,
+    borderRadius: 16,
+    overflow: 'hidden',
+    ...shadows.goldGlow,
+  },
+  primaryButtonGradient: {
+    paddingVertical: spacing.lg,
+    paddingHorizontal: spacing.xl,
+    alignItems: 'center',
   },
   primaryButtonText: {
     color: colors.background.primary,
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: 20,
+    fontWeight: '800',
     textAlign: 'center',
     letterSpacing: 0.5,
   },
   secondaryButton: {
-    backgroundColor: colors.background.tertiary,
-    paddingVertical: 14,
-    paddingHorizontal: 32,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: colors.accent.purple,
+    borderRadius: 16,
+    overflow: 'hidden',
+    borderWidth: 2,
+    borderColor: colors.accent.purple + '40',
+    ...shadows.md,
+  },
+  secondaryButtonGradient: {
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.xl,
+    alignItems: 'center',
   },
   secondaryButtonText: {
     color: colors.accent.purple,
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 18,
+    fontWeight: '700',
     textAlign: 'center',
   },
   disclaimer: {
     fontSize: 11,
-    color: colors.text.tertiary,
+    color: colors.text.quaternary,
     textAlign: 'center',
-    opacity: 0.6,
     fontStyle: 'italic',
-    marginTop: 8,
+    paddingHorizontal: spacing.xl,
   },
   backButton: {
     position: 'absolute',
     top: 50,
-    left: 20,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: colors.background.tertiary,
-    borderRadius: 8,
+    left: spacing.lg,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
+    backgroundColor: colors.background.tertiary + 'CC',
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: colors.accent.gold,
-    opacity: 0.7,
+    borderColor: colors.accent.gold + '40',
   },
   backButtonText: {
     color: colors.accent.gold,
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '600',
   },
 });
 

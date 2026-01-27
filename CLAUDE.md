@@ -23,7 +23,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Tarot AI** is a cross-platform mobile application (iOS/Android) that provides AI-powered tarot card readings. Built with Expo, React Native, and TypeScript, it integrates with Dify AI API for generating mystical interpretations of tarot spreads.
+**Celestial Eye** is a cross-platform mobile application (iOS/Android) that provides celestial-powered tarot card readings. Built with Expo, React Native, and TypeScript, it integrates with Dify AI API for generating mystical interpretations of tarot spreads through cosmic wisdom.
 
 **Tech Stack:**
 - Expo SDK 54 + Expo Router (file-based routing)

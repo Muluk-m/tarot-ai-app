@@ -21,8 +21,8 @@ export const config = {
   app: {
     version: '1.0.0',
     bundleId: {
-      ios: 'com.qlj.tarotai',
-      android: 'com.qlj.tarotai',
+      ios: 'com.qlj.CelestialEye',
+      android: 'com.qlj.CelestialEye',
     },
   },
 
