@@ -1,31 +1,155 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  Platform,
+} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import { colors } from '@/theme/colors';
+import { spacing } from '@/theme/spacing';
+import { shadows } from '@/theme/shadows';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export default function Index() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>✨ Tarot AI</Text>
-      <Text style={styles.subtitle}>AI-Powered Mystical Guidance</Text>
+      {/* Animated background gradient */}
+      <LinearGradient
+        colors={['#0A0E1A', '#1A0E2E', '#2E1A47', '#1E2638']}
+        style={styles.backgroundGradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      />
 
-      <TouchableOpacity
-        style={styles.goldButton}
-        onPress={() => router.push('/(reading)/spread-selection')}
-        activeOpacity={0.8}
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.goldButtonText}>Daily Card Draw</Text>
-      </TouchableOpacity>
+        {/* Hero Section */}
+        <View style={styles.heroSection}>
+          {/* Logo/Icon with glow */}
+          <View style={styles.logoContainer}>
+            <LinearGradient
+              colors={[colors.accent.gold, colors.accent.goldLight]}
+              style={styles.logoGradient}
+            >
+              <Text style={styles.logoIcon}>🔮</Text>
+            </LinearGradient>
+          </View>
 
-      <TouchableOpacity
-        style={styles.purpleButton}
-        onPress={() => router.push('/history')}
-        activeOpacity={0.8}
-      >
-        <Text style={styles.purpleButtonText}>My History</Text>
-      </TouchableOpacity>
+          {/* Title with gradient text effect */}
+          <Text style={styles.title}>Tarot AI</Text>
+          <Text style={styles.subtitle}>
+            Unlock the wisdom of the cosmos with{'\n'}AI-powered mystical insights
+          </Text>
 
-      <Text style={styles.disclaimer}>For entertainment purposes only</Text>
+          {/* Feature highlights */}
+          <View style={styles.featuresRow}>
+            <View style={styles.featurePill}>
+              <Text style={styles.featurePillText}>🌙 Unlimited Readings</Text>
+            </View>
+            <View style={styles.featurePill}>
+              <Text style={styles.featurePillText}>✨ AI Powered</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Main action cards */}
+        <View style={styles.cardsContainer}>
+          {/* Primary Card: Daily Reading */}
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => router.push('/(reading)/spread-selection')}
+            style={styles.primaryCard}
+          >
+            <LinearGradient
+              colors={[colors.accent.gold + '20', colors.accent.gold + '10']}
+              style={styles.cardGradient}
+            >
+              <View style={styles.cardContent}>
+                <View style={styles.cardIconContainer}>
+                  <Text style={styles.cardIcon}>🌟</Text>
+                </View>
+                <View style={styles.cardTextContainer}>
+                  <Text style={styles.cardTitle}>Daily Card Draw</Text>
+                  <Text style={styles.cardDescription}>
+                    Discover what the universe has in store for you today
+                  </Text>
+                </View>
+                <View style={styles.cardArrow}>
+                  <Text style={styles.arrowIcon}>→</Text>
+                </View>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          {/* Secondary Cards Grid */}
+          <View style={styles.secondaryCardsGrid}>
+            {/* History Card */}
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={() => router.push('/history')}
+              style={styles.secondaryCard}
+            >
+              <LinearGradient
+                colors={[colors.accent.purple + '20', colors.accent.purple + '10']}
+                style={styles.secondaryCardGradient}
+              >
+                <Text style={styles.secondaryCardIcon}>📖</Text>
+                <Text style={styles.secondaryCardTitle}>My Readings</Text>
+                <Text style={styles.secondaryCardSubtitle}>View history</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+
+            {/* Quick Reading Card */}
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={() => router.push('/(reading)/spread-selection')}
+              style={styles.secondaryCard}
+            >
+              <LinearGradient
+                colors={[colors.accent.cyan + '20', colors.accent.cyan + '10']}
+                style={styles.secondaryCardGradient}
+              >
+                <Text style={styles.secondaryCardIcon}>⚡</Text>
+                <Text style={styles.secondaryCardTitle}>Quick Read</Text>
+                <Text style={styles.secondaryCardSubtitle}>Single card</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Stats section */}
+        <View style={styles.statsSection}>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>∞</Text>
+            <Text style={styles.statLabel}>Readings</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>78</Text>
+            <Text style={styles.statLabel}>Tarot Cards</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>AI</Text>
+            <Text style={styles.statLabel}>Powered</Text>
+          </View>
+        </View>
+
+        {/* Disclaimer */}
+        <Text style={styles.disclaimer}>
+          For entertainment and self-reflection purposes only
+        </Text>
+      </ScrollView>
     </View>
   );
 }
@@ -33,58 +157,210 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.background.primary,
+  },
+  backgroundGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
+  scrollContent: {
+    paddingTop: spacing.xxxl + spacing.lg,
+    paddingBottom: spacing.xxl,
+    paddingHorizontal: spacing.lg,
+  },
+
+  // Hero Section
+  heroSection: {
+    alignItems: 'center',
+    marginBottom: spacing.xxl,
+  },
+  logoContainer: {
+    marginBottom: spacing.lg,
+  },
+  logoGradient: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0A0E1A',
-    padding: 24,
+    ...shadows.goldGlow,
+  },
+  logoIcon: {
+    fontSize: 48,
   },
   title: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    color: '#D4AF37',
-    marginBottom: 8,
+    fontSize: 48,
+    fontWeight: '800',
+    color: colors.accent.gold,
+    marginBottom: spacing.sm,
     textAlign: 'center',
+    letterSpacing: 2,
+    textShadowColor: colors.accent.gold + '40',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 20,
   },
   subtitle: {
-    fontSize: 18,
-    color: '#CBD5E1',
-    marginBottom: 48,
+    fontSize: 16,
+    color: colors.text.secondary,
     textAlign: 'center',
+    lineHeight: 24,
+    marginBottom: spacing.lg,
+    paddingHorizontal: spacing.md,
   },
-  goldButton: {
-    backgroundColor: '#D4AF37',
-    padding: 20,
-    borderRadius: 12,
-    width: 300,
-    marginBottom: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 60,
+  featuresRow: {
+    flexDirection: 'row',
+    gap: spacing.md,
+    marginTop: spacing.sm,
   },
-  goldButtonText: {
-    color: '#0A0E1A',
-    fontSize: 18,
-    fontWeight: 'bold',
+  featurePill: {
+    backgroundColor: colors.background.tertiary,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: colors.accent.gold + '30',
   },
-  purpleButton: {
-    backgroundColor: '#8B5CF6',
-    padding: 20,
-    borderRadius: 12,
-    width: 300,
-    marginBottom: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 60,
-  },
-  purpleButtonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  disclaimer: {
-    color: '#94A3B8',
+  featurePillText: {
+    color: colors.text.secondary,
     fontSize: 12,
-    marginTop: 32,
+    fontWeight: '600',
+  },
+
+  // Cards Section
+  cardsContainer: {
+    marginBottom: spacing.xl,
+  },
+  primaryCard: {
+    marginBottom: spacing.lg,
+    borderRadius: 24,
+    overflow: 'hidden',
+    ...shadows.goldGlow,
+  },
+  cardGradient: {
+    borderWidth: 1,
+    borderColor: colors.accent.gold + '40',
+    borderRadius: 24,
+  },
+  cardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: spacing.lg,
+    minHeight: 100,
+  },
+  cardIconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 16,
+    backgroundColor: colors.accent.gold,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: spacing.md,
+  },
+  cardIcon: {
+    fontSize: 28,
+  },
+  cardTextContainer: {
+    flex: 1,
+  },
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: colors.text.primary,
+    marginBottom: 4,
+  },
+  cardDescription: {
+    fontSize: 14,
+    color: colors.text.tertiary,
+    lineHeight: 20,
+  },
+  cardArrow: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: colors.accent.gold + '20',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  arrowIcon: {
+    fontSize: 18,
+    color: colors.accent.gold,
+    fontWeight: 'bold',
+  },
+
+  // Secondary Cards
+  secondaryCardsGrid: {
+    flexDirection: 'row',
+    gap: spacing.md,
+  },
+  secondaryCard: {
+    flex: 1,
+    borderRadius: 20,
+    overflow: 'hidden',
+    ...shadows.md,
+  },
+  secondaryCardGradient: {
+    padding: spacing.lg,
+    minHeight: 140,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 20,
+  },
+  secondaryCardIcon: {
+    fontSize: 32,
+    marginBottom: spacing.sm,
+  },
+  secondaryCardTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: colors.text.primary,
+    marginBottom: 4,
+  },
+  secondaryCardSubtitle: {
+    fontSize: 12,
+    color: colors.text.tertiary,
+  },
+
+  // Stats Section
+  statsSection: {
+    flexDirection: 'row',
+    backgroundColor: colors.background.secondary + '80',
+    borderRadius: 20,
+    padding: spacing.lg,
+    marginBottom: spacing.xl,
+    borderWidth: 1,
+    borderColor: colors.accent.gold + '20',
+    ...shadows.sm,
+  },
+  statItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  statNumber: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: colors.accent.gold,
+    marginBottom: 4,
+  },
+  statLabel: {
+    fontSize: 12,
+    color: colors.text.tertiary,
     textAlign: 'center',
+  },
+  statDivider: {
+    width: 1,
+    backgroundColor: colors.accent.gold + '20',
+    marginHorizontal: spacing.sm,
+  },
+
+  // Disclaimer
+  disclaimer: {
+    fontSize: 11,
+    color: colors.text.quaternary,
+    textAlign: 'center',
+    fontStyle: 'italic',
+    paddingHorizontal: spacing.xl,
   },
 });

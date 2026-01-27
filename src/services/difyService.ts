@@ -137,15 +137,8 @@ export async function generateInterpretationStream(
   request: DifyInterpretationRequest,
   onStream: StreamCallback
 ): Promise<void> {
-  console.log('🔮 [Dify] generateInterpretationStream called (blocking mode)');
-  console.log('🔮 [Dify] Request:', JSON.stringify(request, null, 2));
-
   try {
     const { spreadType, cards, query } = request;
-
-    console.log(`🔮 [Dify] Spread Type: ${spreadType}`);
-    console.log(`🔮 [Dify] Cards Count: ${cards.length}`);
-    console.log(`🔮 [Dify] Cards:`, cards.map(c => c.card.name));
 
     // Format the prompt
     const spreadTypeLabel =
@@ -158,38 +151,24 @@ export async function generateInterpretationStream(
       ? `User Question: ${query}\n\n${spreadTypeLabel}\n\n${cardsPrompt}\n\nPlease provide a mystical and insightful interpretation of this tarot reading, addressing the user's question.`
       : `${spreadTypeLabel}\n\n${cardsPrompt}\n\nPlease provide a mystical and insightful interpretation of this tarot reading.`;
 
-    console.log('🔮 [Dify] User Message Length:', userMessage.length);
-    console.log('🔮 [Dify] API URL:', config.dify.apiUrl);
-    console.log('🔮 [Dify] API Key:', config.dify.apiKey ? `${config.dify.apiKey.substring(0, 10)}...` : 'MISSING');
-
     const requestPayload = {
       inputs: {},
       query: userMessage,
       response_mode: 'blocking',
       user: 'tarot-app-user',
     };
-    console.log('🔮 [Dify] Request Payload:', JSON.stringify(requestPayload, null, 2));
 
-    console.log('🔮 [Dify] Sending blocking request...');
     const response = await difyClient.post('/chat-messages', requestPayload);
-
-    console.log('🔮 [Dify] Response status:', response.status);
-    console.log('🔮 [Dify] Response data:', JSON.stringify(response.data, null, 2));
 
     // Extract the answer from blocking response
     const { answer } = response.data;
 
     if (!answer) {
-      console.error('🔮 [Dify] ❌ No answer in response');
       throw new Error('No answer received from API');
     }
 
-    console.log('🔮 [Dify] ✅ Got answer, length:', answer.length);
-    console.log('🔮 [Dify] Answer preview:', answer.substring(0, 100));
-
     // Call onStream with the complete answer
     onStream(answer, true);
-    console.log('🔮 [Dify] ✅ Blocking response completed successfully');
 
   } catch (error) {
     console.error('🔮 [Dify] ❌ API Error:', error);

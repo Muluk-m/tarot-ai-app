@@ -90,20 +90,11 @@ export const useReadingStore = create<ReadingState>((set, get) => ({
   setError: (error) => set({ error }),
 
   generateReading: async (spreadType, cards, query) => {
-    console.log('📖 [ReadingStore] ==================');
-    console.log('📖 [ReadingStore] generateReading called');
-    console.log('📖 [ReadingStore] spreadType:', spreadType);
-    console.log('📖 [ReadingStore] cards count:', cards.length);
-    console.log('📖 [ReadingStore] cards:', cards.map(c => c.name));
-    console.log('📖 [ReadingStore] query:', query || 'none');
-
     // Clear any existing reading and reset state
     set({ currentReading: null, isGenerating: true, error: null, streamingText: '' });
-    console.log('📖 [ReadingStore] State reset: currentReading=null, isGenerating=true');
 
     try {
       // Format cards with positions
-      console.log('📖 [ReadingStore] Formatting cards with positions...');
       const drawnCards: DrawnCard[] = cards.map((card, index) => {
         if (spreadType === 'single') {
           return {
@@ -135,9 +126,6 @@ export const useReadingStore = create<ReadingState>((set, get) => ({
 
       let fullInterpretation = '';
 
-      console.log('📖 [ReadingStore] Prepared drawnCards:', drawnCards.length);
-      console.log('📖 [ReadingStore] Calling generateInterpretationStream...');
-
       // Start streaming
       await generateInterpretationStream(
         {
@@ -146,13 +134,11 @@ export const useReadingStore = create<ReadingState>((set, get) => ({
           query,
         },
         (chunk, isComplete) => {
-          console.log(`📖 [ReadingStore] 💬 Stream callback: length=${chunk.length}, complete=${isComplete}`);
           fullInterpretation = chunk;
           set({ streamingText: chunk });
 
           // When complete, save the reading
           if (isComplete) {
-            console.log('📖 [ReadingStore] ✅ Stream complete, saving reading...');
             const reading: ReadingRecord = {
               id: readingId,
               timestamp,
@@ -171,19 +157,13 @@ export const useReadingStore = create<ReadingState>((set, get) => ({
               isGenerating: false,
             });
 
-            console.log('📖 [ReadingStore] Reading saved to currentReading');
-
             // Add to history
             get().addToHistory(reading);
-            console.log('📖 [ReadingStore] Reading added to history');
           }
         }
       );
-
-      console.log('📖 [ReadingStore] ✅ generateInterpretationStream completed');
     } catch (error) {
-      console.error('📖 [ReadingStore] ❌ Failed to generate reading:', error);
-      console.error('📖 [ReadingStore] Error details:', JSON.stringify(error, null, 2));
+      console.error('Failed to generate reading:', error);
       set({
         error: error instanceof Error ? error.message : 'Failed to generate reading',
         isGenerating: false,

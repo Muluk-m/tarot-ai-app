@@ -35,26 +35,9 @@ export default function Result() {
   const positions = spreadType === 'three' ? (['past', 'present', 'future'] as const) : undefined;
 
   useEffect(() => {
-    console.log('🎴 [Result] Component mounted');
-    console.log('🎴 [Result] drawnCards length:', drawnCards.length);
-    console.log('🎴 [Result] drawnCards:', drawnCards.map(c => c.name));
-    console.log('🎴 [Result] currentReading before clear:', currentReading ? 'exists' : 'null');
-    console.log('🎴 [Result] isGenerating:', isGenerating);
-    console.log('🎴 [Result] spreadType:', spreadType);
-
-    // IMPORTANT: Always clear any existing reading first to ensure fresh generation
-    if (currentReading) {
-      console.log('🎴 [Result] ⚠️ Found existing reading, clearing it now...');
-    }
-
     // Start generating reading when component mounts
     if (drawnCards.length > 0 && !isGenerating) {
-      console.log('🎴 [Result] ✅ Conditions met, calling generateReading...');
       generateReading(spreadType, drawnCards);
-    } else {
-      console.log('🎴 [Result] ❌ Conditions NOT met:');
-      console.log('  - drawnCards.length > 0:', drawnCards.length > 0);
-      console.log('  - !isGenerating:', !isGenerating);
     }
   }, []);
 

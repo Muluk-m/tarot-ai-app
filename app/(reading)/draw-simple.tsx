@@ -33,9 +33,6 @@ export default function DrawSimple() {
 
   const handleGetReading = () => {
     try {
-      console.log('🎴 [DrawSimple] Clearing currentReading and navigating to result...');
-      console.log('🎴 [DrawSimple] drawnCards:', drawnCards.map(c => c.name));
-
       // Clear any previous reading so result.tsx will generate a new one
       clearCurrentReading();
 

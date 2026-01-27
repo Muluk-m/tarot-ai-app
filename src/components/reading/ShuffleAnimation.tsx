@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useShuffleAnimation } from '@/hooks/useShuffleAnimation';
@@ -20,13 +20,22 @@ import { colors } from '@/theme/colors';
 interface ShuffleAnimationProps {
   onComplete?: () => void;
   autoStart?: boolean;
+  hideTextOnComplete?: boolean;
 }
 
 export const ShuffleAnimation: React.FC<ShuffleAnimationProps> = ({
   onComplete,
   autoStart = true,
+  hideTextOnComplete = false,
 }) => {
-  const { cards, startShuffle } = useShuffleAnimation(20, onComplete);
+  const [isComplete, setIsComplete] = useState(false);
+
+  const handleComplete = () => {
+    setIsComplete(true);
+    onComplete?.();
+  };
+
+  const { cards, startShuffle } = useShuffleAnimation(20, handleComplete);
 
   useEffect(() => {
     if (autoStart) {
@@ -76,10 +85,12 @@ export const ShuffleAnimation: React.FC<ShuffleAnimationProps> = ({
       </View>
 
       {/* Shuffle text indicator */}
-      <View style={styles.textContainer}>
-        <Text style={styles.shuffleText}>Shuffling the cards...</Text>
-        <Text style={styles.subText}>The cosmos align</Text>
-      </View>
+      {!(hideTextOnComplete && isComplete) && (
+        <View style={styles.textContainer}>
+          <Text style={styles.shuffleText}>Shuffling the cards...</Text>
+          <Text style={styles.subText}>The cosmos align</Text>
+        </View>
+      )}
     </View>
   );
 };

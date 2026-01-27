@@ -34,7 +34,11 @@ export default function Shuffle() {
   return (
     <View style={styles.container}>
       {/* Shuffle animation */}
-      <ShuffleAnimation onComplete={handleShuffleComplete} autoStart={true} />
+      <ShuffleAnimation
+        onComplete={handleShuffleComplete}
+        autoStart={true}
+        hideTextOnComplete={true}
+      />
 
       {/* Continue button (appears after shuffle completes) */}
       {shuffleComplete && (

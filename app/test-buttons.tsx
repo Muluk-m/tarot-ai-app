@@ -7,14 +7,14 @@ export default function TestButtons() {
 
       <Pressable
         style={styles.button1}
-        onPress={() => console.log('Button 1 pressed')}
+        onPress={() => {}}
       >
         <Text style={styles.buttonText}>BUTTON 1 (GOLD)</Text>
       </Pressable>
 
       <Pressable
         style={styles.button2}
-        onPress={() => console.log('Button 2 pressed')}
+        onPress={() => {}}
       >
         <Text style={styles.buttonText}>BUTTON 2 (PURPLE)</Text>
       </Pressable>

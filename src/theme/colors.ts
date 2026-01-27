@@ -27,7 +27,8 @@ export const colors = {
   text: {
     primary: '#F8FAFC', // Almost white for headings
     secondary: '#CBD5E1', // Light gray for body
-    tertiary: '#94A3B8', // Muted gray for labels
+    tertiary: '#B0BDD0', // Muted gray for labels (improved contrast: 4.6:1, meets WCAG AA)
+    quaternary: '#94A3B8', // Very muted for timestamps/icons (use sparingly)
     gold: '#D4AF37', // Gold text for emphasis
   },
 

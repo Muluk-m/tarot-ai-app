@@ -12,7 +12,6 @@ export default function SpreadSelection() {
   const { clearCurrentReading } = useReadingStore();
 
   const handleSelectSpread = (spreadKey: 'single' | 'three') => {
-    console.log('🎴 [SpreadSelection] Starting new reading, clearing previous state');
     // Clear any previous reading to ensure fresh start
     clearCurrentReading();
     setSpreadType(spreadKey);
