@@ -30,7 +30,7 @@ export const TarotCardDisplay: React.FC<TarotCardDisplayProps> = ({
 }) => {
   const dimensions = {
     small: { width: 80, height: 112, iconSize: 32 },
-    medium: { width: 120, height: 168, iconSize: 48 },
+    medium: { width: 105, height: 154, iconSize: 40 },
     large: { width: 160, height: 224, iconSize: 64 },
   }[size];
 
@@ -101,10 +101,13 @@ export const TarotCardDisplay: React.FC<TarotCardDisplayProps> = ({
                 style={[
                   styles.cardName,
                   {
-                    fontSize: size === 'small' ? 10 : size === 'medium' ? 12 : 14,
+                    fontSize: size === 'small' ? 9 : size === 'medium' ? 10 : 13,
                   },
                 ]}
                 numberOfLines={2}
+                ellipsizeMode="tail"
+                adjustsFontSizeToFit={true}
+                minimumFontScale={0.8}
               >
                 {card.name}
               </Text>
@@ -136,22 +139,22 @@ const styles = StyleSheet.create({
   },
   cardBackground: {
     flex: 1,
-    padding: 8,
+    padding: 6,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   positionContainer: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
     backgroundColor: 'rgba(212, 175, 55, 0.2)',
     borderRadius: 4,
   },
   positionText: {
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: '600',
     color: '#D4AF37',
     textTransform: 'uppercase',
-    letterSpacing: 1,
+    letterSpacing: 0.5,
   },
   iconContainer: {
     flex: 1,
@@ -159,8 +162,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   nameContainer: {
-    paddingHorizontal: 4,
-    paddingVertical: 6,
+    paddingHorizontal: 3,
+    paddingVertical: 4,
     backgroundColor: 'rgba(10, 14, 26, 0.6)',
     borderRadius: 4,
     width: '100%',
@@ -169,7 +172,8 @@ const styles = StyleSheet.create({
     color: '#F8FAFC',
     fontWeight: '600',
     textAlign: 'center',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
+    lineHeight: 14,
   },
   symbolEmoji: {
     fontSize: 16,

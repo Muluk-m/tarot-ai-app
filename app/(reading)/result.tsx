@@ -251,8 +251,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: spacing.md,
+    gap: spacing.sm,
     marginBottom: spacing.xl,
+    paddingHorizontal: spacing.xs,
   },
   interpretationContainer: {
     borderRadius: 20,
