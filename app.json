@@ -39,11 +39,18 @@
       },
       "package": "com.qlj.CelestialEye"
     },
+    "updates": {
+      "url": "https://u.expo.dev/dde21b4c-572e-4155-aa9f-9b74d61b7cf5"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "d172587d-77be-42d3-a41f-8c486b031e46"
+        "projectId": "dde21b4c-572e-4155-aa9f-9b74d61b7cf5"
       }
-    }
+    },
+    "owner": "nainma"
   }
 }
