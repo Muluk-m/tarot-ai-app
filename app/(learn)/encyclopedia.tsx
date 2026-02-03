@@ -1,36 +1,55 @@
+/**
+ * Encyclopedia Screen - Card Encyclopedia
+ * iPad and iOS adaptive layout
+ */
+
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-  FlatList,
-} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet, Pressable, FlatList, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
 import { useLearningStore } from '@/stores/learningStore';
 import { TAROT_DECK } from '@/data/tarot-deck';
+import { TarotCardSVG } from '@/components/cards/svg';
 import type { TarotCard } from '@/types/tarot.types';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const CARD_WIDTH = (SCREEN_WIDTH - spacing.lg * 3) / 2;
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Spacer,
+  responsive,
+  isTablet,
+  isLargeTablet,
+  SectionHeader,
+  ChevronLeftIcon,
+  CheckIcon,
+  BookIcon,
+  StarIcon,
+  FlameIcon,
+  DropletIcon,
+  WindIcon,
+  MountainIcon,
+} from '@/components/ui';
+import { IconButton, Button } from '@/components/ui/Buttons';
 
 type Filter = 'all' | 'major' | 'wands' | 'cups' | 'swords' | 'pentacles';
 
-const FILTERS: { key: Filter; title: string; icon: string }[] = [
-  { key: 'all', title: 'All', icon: '🎴' },
-  { key: 'major', title: 'Major', icon: '⭐' },
-  { key: 'wands', title: 'Wands', icon: '🔥' },
-  { key: 'cups', title: 'Cups', icon: '💧' },
-  { key: 'swords', title: 'Swords', icon: '⚔️' },
-  { key: 'pentacles', title: 'Pentacles', icon: '💰' },
+const FILTERS: { key: Filter; title: string; Icon: React.FC<any>; color: string }[] = [
+  { key: 'all', title: 'All', Icon: StarIcon, color: colors.accent.gold },
+  { key: 'major', title: 'Major', Icon: StarIcon, color: colors.accent.gold },
+  { key: 'wands', title: 'Wands', Icon: FlameIcon, color: '#EF4444' },
+  { key: 'cups', title: 'Cups', Icon: DropletIcon, color: '#22D3EE' },
+  { key: 'swords', title: 'Swords', Icon: WindIcon, color: '#94A3B8' },
+  { key: 'pentacles', title: 'Pentacles', Icon: MountainIcon, color: '#10B981' },
 ];
+
+const ELEMENT_NAMES: Record<string, string> = {
+  fire: 'Fire',
+  water: 'Water',
+  air: 'Air',
+  earth: 'Earth',
+};
 
 export default function EncyclopediaScreen() {
   const router = useRouter();
@@ -58,167 +77,165 @@ export default function EncyclopediaScreen() {
 
   const cards = getFilteredCards();
   const masteredCount = cards.filter((c) => isCardMastered(c.id.toString())).length;
+  const filterInfo = FILTERS.find((f) => f.key === selectedFilter)!;
+
+  // Card columns based on device
+  const numColumns = isLargeTablet ? 4 : isTablet ? 3 : 2;
 
   const renderCard = ({ item: card }: { item: TarotCard }) => {
     const mastered = isCardMastered(card.id.toString());
     const learning = learningCards.includes(card.id.toString());
 
     return (
-      <TouchableOpacity
-        activeOpacity={0.9}
+      <Pressable
         onPress={() => setSelectedCard(card)}
-        style={styles.cardItem}
+        style={({ pressed }) => [
+          styles.cardItem,
+          mastered && styles.cardItemMastered,
+          learning && !mastered && styles.cardItemLearning,
+          pressed && styles.cardItemPressed,
+        ]}
       >
-        <LinearGradient
-          colors={
-            mastered
-              ? ['#10B981' + '25', '#10B981' + '10']
-              : learning
-              ? [colors.accent.gold + '20', colors.accent.gold + '10']
-              : [colors.background.secondary, colors.background.tertiary]
-          }
-          style={styles.cardGradient}
-        >
-          <Text style={styles.cardSymbol}>{card.symbolEmoji}</Text>
-          <Text style={styles.cardName} numberOfLines={2}>
-            {card.name}
-          </Text>
-          {mastered && (
-            <View style={styles.masteredBadge}>
-              <Text style={styles.masteredText}>✓</Text>
-            </View>
-          )}
-          {learning && !mastered && (
-            <View style={styles.learningBadge}>
-              <Text style={styles.learningText}>📖</Text>
-            </View>
-          )}
-        </LinearGradient>
-      </TouchableOpacity>
+        <View style={styles.cardImageContainer}>
+          <TarotCardSVG
+            cardId={card.id}
+            width={responsive.width(70, 90)}
+            height={responsive.width(105, 135)}
+            size={isTablet ? 'medium' : 'small'}
+            showNumber={false}
+          />
+        </View>
+        <Text style={styles.cardName} numberOfLines={2}>
+          {card.name}
+        </Text>
+        {mastered && (
+          <View style={styles.masteredBadge}>
+            <CheckIcon size={12} color={colors.text.primary} />
+          </View>
+        )}
+        {learning && !mastered && (
+          <View style={styles.learningBadge}>
+            <BookIcon size={12} color={colors.accent.gold} />
+          </View>
+        )}
+      </Pressable>
     );
   };
 
-  // Card Detail Modal
+  // Card Detail View
   if (selectedCard) {
     const mastered = isCardMastered(selectedCard.id.toString());
 
     return (
-      <View style={styles.container}>
-        <LinearGradient
-          colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-          style={styles.backgroundGradient}
-        />
+      <ScreenContainer>
+        <SafeScrollView maxWidth="md">
+          {/* Header */}
+          <Row justify="flex-start" align="center" style={styles.header}>
+            <IconButton
+              icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
+              onPress={() => setSelectedCard(null)}
+              variant="filled"
+              size="md"
+            />
+          </Row>
 
-        <SafeAreaView style={styles.safeArea}>
-          <ScrollView contentContainerStyle={styles.detailContent}>
-            {/* Header */}
-            <View style={styles.detailHeader}>
-              <TouchableOpacity
-                onPress={() => setSelectedCard(null)}
-                style={styles.backButton}
-              >
-                <Text style={styles.backIcon}>←</Text>
-              </TouchableOpacity>
+          {/* Card Display */}
+          <View style={styles.detailCardContainer}>
+            <View style={styles.detailCardWrapper}>
+              <TarotCardSVG
+                cardId={selectedCard.id}
+                width={responsive.width(160, 220)}
+                height={responsive.width(240, 330)}
+                size={isTablet ? 'large' : 'medium'}
+                showNumber={true}
+              />
+            </View>
+            <Text style={styles.detailName}>{selectedCard.name}</Text>
+
+            <View style={styles.arcanaTag}>
+              <Text style={styles.arcanaText}>
+                {selectedCard.arcana === 'major'
+                  ? 'Major Arcana'
+                  : `${selectedCard.suit === 'wands' ? 'Wands' : selectedCard.suit === 'cups' ? 'Cups' : selectedCard.suit === 'swords' ? 'Swords' : 'Pentacles'} · Minor Arcana`}
+              </Text>
             </View>
 
-            {/* Card Display */}
-            <View style={styles.detailCardContainer}>
-              <LinearGradient
-                colors={[colors.accent.gold + '25', colors.accent.gold + '10']}
-                style={styles.detailCardGradient}
-              >
-                <Text style={styles.detailSymbol}>{selectedCard.symbolEmoji}</Text>
-                <Text style={styles.detailName}>{selectedCard.name}</Text>
-
-                <View style={styles.arcanaTag}>
-                  <Text style={styles.arcanaText}>
-                    {selectedCard.arcana === 'major'
-                      ? 'Major Arcana'
-                      : `${selectedCard.suit?.charAt(0).toUpperCase()}${selectedCard.suit?.slice(1)} • Minor Arcana`}
-                  </Text>
-                </View>
-
-                {mastered && (
-                  <View style={styles.masteryStatus}>
-                    <Text style={styles.masteryIcon}>🏆</Text>
-                    <Text style={styles.masteryText}>Mastered</Text>
-                  </View>
-                )}
-              </LinearGradient>
-            </View>
-
-            {/* Keywords */}
-            <View style={styles.detailSection}>
-              <Text style={styles.sectionLabel}>Keywords</Text>
-              <View style={styles.keywordsContainer}>
-                {selectedCard.uprightKeywords.map((keyword, i) => (
-                  <View key={i} style={styles.keywordPill}>
-                    <Text style={styles.keywordText}>{keyword}</Text>
-                  </View>
-                ))}
-              </View>
-            </View>
-
-            {/* Meaning */}
-            <View style={styles.detailSection}>
-              <Text style={styles.sectionLabel}>Meaning</Text>
-              <Text style={styles.meaningText}>{selectedCard.uprightMeaning}</Text>
-            </View>
-
-            {/* Element */}
-            {selectedCard.element && (
-              <View style={styles.detailSection}>
-                <Text style={styles.sectionLabel}>Element</Text>
-                <View style={styles.elementContainer}>
-                  <Text style={styles.elementEmoji}>
-                    {selectedCard.element === 'fire'
-                      ? '🔥'
-                      : selectedCard.element === 'water'
-                      ? '💧'
-                      : selectedCard.element === 'air'
-                      ? '🌪️'
-                      : '🌍'}
-                  </Text>
-                  <Text style={styles.elementText}>
-                    {selectedCard.element.charAt(0).toUpperCase() +
-                      selectedCard.element.slice(1)}
-                  </Text>
-                </View>
+            {mastered && (
+              <View style={styles.masteryStatus}>
+                <CheckIcon size={16} color="#10B981" />
+                <Text style={styles.masteryText}>Mastered</Text>
               </View>
             )}
+          </View>
 
-            {/* Bottom spacing */}
-            <View style={{ height: spacing.xxl }} />
-          </ScrollView>
-        </SafeAreaView>
-      </View>
+          <Spacer size={responsive.spacing(24, 32)} />
+
+          {/* Keywords */}
+          <SectionHeader title="Keywords" />
+          <View style={styles.keywordsContainer}>
+            {selectedCard.uprightKeywords.map((keyword, i) => (
+              <View key={i} style={styles.keywordPill}>
+                <Text style={styles.keywordText}>{keyword}</Text>
+              </View>
+            ))}
+          </View>
+
+          <Spacer size={responsive.spacing(20, 28)} />
+
+          {/* Meaning */}
+          <SectionHeader title="Card Meaning" />
+          <Text style={styles.meaningText}>{selectedCard.uprightMeaning}</Text>
+
+          {/* Element */}
+          {selectedCard.element && (
+            <>
+              <Spacer size={responsive.spacing(20, 28)} />
+              <SectionHeader title="Element" />
+              <View style={styles.elementContainer}>
+                {selectedCard.element === 'fire' && (
+                  <FlameIcon size={20} color="#EF4444" />
+                )}
+                {selectedCard.element === 'water' && (
+                  <DropletIcon size={20} color="#22D3EE" />
+                )}
+                {selectedCard.element === 'air' && (
+                  <WindIcon size={20} color="#94A3B8" />
+                )}
+                {selectedCard.element === 'earth' && (
+                  <MountainIcon size={20} color="#10B981" />
+                )}
+                <Text style={styles.elementText}>
+                  {ELEMENT_NAMES[selectedCard.element]}
+                </Text>
+              </View>
+            </>
+          )}
+
+          <Spacer size={responsive.spacing(32, 48)} />
+        </SafeScrollView>
+      </ScreenContainer>
     );
   }
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-        style={styles.backgroundGradient}
-      />
-
-      <SafeAreaView style={styles.safeArea} edges={['top']}>
-        {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity
+    <ScreenContainer>
+      {/* Header - Outside FlatList */}
+      <View style={styles.headerContainer}>
+        <Row justify="space-between" align="center" style={styles.header}>
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
             onPress={() => router.back()}
-            style={styles.backButton}
-          >
-            <Text style={styles.backIcon}>←</Text>
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Card Encyclopedia</Text>
-          <View style={styles.placeholder} />
-        </View>
+            variant="filled"
+            size="md"
+          />
+          <Text style={styles.headerTitle}>Encyclopedia</Text>
+          <View style={{ width: responsive.width(40, 48) }} />
+        </Row>
 
         {/* Progress */}
         <View style={styles.progressSection}>
           <Text style={styles.progressLabel}>
-            {masteredCards.length} of 78 cards mastered
+            {masteredCards.length} / 78 cards mastered
           </Text>
           <View style={styles.progressBar}>
             <View
@@ -246,321 +263,269 @@ export default function EncyclopediaScreen() {
             const filterMastered = filterCards.filter((c) =>
               isCardMastered(c.id.toString())
             ).length;
+            const FilterIcon = filter.Icon;
 
             return (
-              <TouchableOpacity
+              <Pressable
                 key={filter.key}
                 onPress={() => setSelectedFilter(filter.key)}
-                style={[styles.filterTab, isSelected && styles.filterTabSelected]}
+                style={[
+                  styles.filterTab,
+                  isSelected && { borderColor: filter.color },
+                ]}
               >
-                <Text style={styles.filterIcon}>{filter.icon}</Text>
+                <View style={[styles.filterIconContainer, { backgroundColor: filter.color + '20' }]}>
+                  <FilterIcon size={responsive.width(18, 22)} color={filter.color} />
+                </View>
                 <Text
                   style={[
                     styles.filterTitle,
-                    isSelected && styles.filterTitleSelected,
+                    isSelected && { color: colors.text.primary },
                   ]}
                 >
                   {filter.title}
                 </Text>
-                <Text style={styles.filterCount}>
+                <Text style={[styles.filterCount, { color: filter.color }]}>
                   {filterMastered}/{filterCards.length}
                 </Text>
-              </TouchableOpacity>
+              </Pressable>
             );
           })}
         </ScrollView>
+      </View>
 
-        {/* Cards Grid */}
-        <FlatList
-          data={cards}
-          renderItem={renderCard}
-          keyExtractor={(item) => item.id.toString()}
-          numColumns={2}
-          contentContainerStyle={styles.gridContent}
-          columnWrapperStyle={styles.gridRow}
-          showsVerticalScrollIndicator={false}
-        />
-      </SafeAreaView>
-    </View>
+      {/* Cards Grid */}
+      <FlatList
+        data={cards}
+        renderItem={renderCard}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={numColumns}
+        key={numColumns} // Force re-render when columns change
+        contentContainerStyle={styles.gridContent}
+        columnWrapperStyle={styles.gridRow}
+        showsVerticalScrollIndicator={false}
+        ListFooterComponent={<Spacer size={responsive.spacing(32, 48)} />}
+      />
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
+  headerContainer: {
+    paddingHorizontal: responsive.spacing(16, 24),
   },
-  backgroundGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  safeArea: {
-    flex: 1,
-  },
-
-  // Header
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background.tertiary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 20,
-    color: colors.text.primary,
+    marginBottom: responsive.spacing(16, 20),
   },
   headerTitle: {
-    fontSize: 22,
+    fontSize: responsive.fontSize(22, 26),
     fontWeight: '700',
     color: colors.text.primary,
-  },
-  placeholder: {
-    width: 40,
   },
 
   // Progress
   progressSection: {
-    paddingHorizontal: spacing.lg,
-    marginBottom: spacing.md,
+    marginBottom: responsive.spacing(16, 20),
   },
   progressLabel: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.tertiary,
-    marginBottom: spacing.xs,
+    marginBottom: responsive.spacing(8, 10),
   },
   progressBar: {
-    height: 6,
+    height: responsive.width(8, 10),
     backgroundColor: colors.background.tertiary,
-    borderRadius: 3,
+    borderRadius: responsive.width(4, 5),
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
     backgroundColor: colors.accent.gold,
-    borderRadius: 3,
+    borderRadius: responsive.width(4, 5),
   },
 
   // Filters
   filtersContainer: {
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.md,
+    paddingBottom: responsive.spacing(16, 20),
+    gap: responsive.spacing(10, 14),
   },
   filterTab: {
-    alignItems: 'center',
     backgroundColor: colors.background.secondary,
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
-    borderRadius: 14,
-    marginRight: spacing.sm,
-    minWidth: 70,
+    borderRadius: responsive.width(14, 18),
+    padding: responsive.spacing(10, 14),
+    minWidth: responsive.width(70, 90),
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'transparent',
+    marginRight: responsive.spacing(10, 14),
   },
-  filterTabSelected: {
-    backgroundColor: colors.accent.gold + '30',
-    borderWidth: 1,
-    borderColor: colors.accent.gold + '50',
-  },
-  filterIcon: {
-    fontSize: 20,
-    marginBottom: spacing.xs,
+  filterIconContainer: {
+    width: responsive.width(32, 40),
+    height: responsive.width(32, 40),
+    borderRadius: responsive.width(10, 12),
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: responsive.spacing(6, 8),
   },
   filterTitle: {
-    fontSize: 12,
-    fontWeight: '500',
-    color: colors.text.tertiary,
-  },
-  filterTitleSelected: {
-    color: colors.accent.gold,
+    fontSize: responsive.fontSize(12, 14),
     fontWeight: '600',
+    color: colors.text.tertiary,
+    marginBottom: 2,
   },
   filterCount: {
-    fontSize: 10,
-    color: colors.text.quaternary,
-    marginTop: 2,
+    fontSize: responsive.fontSize(10, 12),
+    fontWeight: '600',
   },
 
   // Grid
   gridContent: {
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.xxl,
+    paddingHorizontal: responsive.spacing(16, 24),
   },
   gridRow: {
-    justifyContent: 'space-between',
-    marginBottom: spacing.md,
+    justifyContent: 'flex-start',
+    gap: responsive.spacing(12, 16),
+    marginBottom: responsive.spacing(12, 16),
   },
 
   // Card Item
   cardItem: {
-    width: CARD_WIDTH,
-    borderRadius: 16,
-    overflow: 'hidden',
-    ...shadows.sm,
-  },
-  cardGradient: {
-    padding: spacing.md,
+    width: responsive.width(90, 110),
+    backgroundColor: colors.background.secondary,
+    borderRadius: responsive.width(14, 18),
+    padding: responsive.spacing(10, 14),
     alignItems: 'center',
-    minHeight: 120,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 16,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+    position: 'relative',
   },
-  cardSymbol: {
-    fontSize: 36,
-    marginBottom: spacing.sm,
+  cardItemMastered: {
+    borderColor: 'rgba(16, 185, 129, 0.3)',
+    backgroundColor: 'rgba(16, 185, 129, 0.08)',
+  },
+  cardItemLearning: {
+    borderColor: 'rgba(212, 175, 55, 0.3)',
+    backgroundColor: 'rgba(212, 175, 55, 0.08)',
+  },
+  cardItemPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.98 }],
+  },
+  cardImageContainer: {
+    marginBottom: responsive.spacing(8, 12),
   },
   cardName: {
-    fontSize: 13,
+    fontSize: responsive.fontSize(11, 13),
     fontWeight: '600',
     color: colors.text.primary,
     textAlign: 'center',
   },
   masteredBadge: {
     position: 'absolute',
-    top: 8,
-    right: 8,
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    top: responsive.spacing(6, 8),
+    right: responsive.spacing(6, 8),
+    width: responsive.width(20, 24),
+    height: responsive.width(20, 24),
+    borderRadius: responsive.width(10, 12),
     backgroundColor: '#10B981',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  masteredText: {
-    fontSize: 14,
-    color: colors.text.primary,
-    fontWeight: '700',
-  },
   learningBadge: {
     position: 'absolute',
-    top: 8,
-    right: 8,
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    backgroundColor: colors.accent.gold + '50',
+    top: responsive.spacing(6, 8),
+    right: responsive.spacing(6, 8),
+    width: responsive.width(20, 24),
+    height: responsive.width(20, 24),
+    borderRadius: responsive.width(10, 12),
+    backgroundColor: 'rgba(212, 175, 55, 0.3)',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  learningText: {
-    fontSize: 12,
-  },
 
   // Detail View
-  detailContent: {
-    paddingHorizontal: spacing.lg,
-  },
-  detailHeader: {
-    paddingVertical: spacing.md,
-  },
   detailCardContainer: {
-    borderRadius: 24,
-    overflow: 'hidden',
-    marginBottom: spacing.xl,
-    ...shadows.goldGlow,
-  },
-  detailCardGradient: {
-    padding: spacing.xl,
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: colors.accent.gold + '40',
-    borderRadius: 24,
   },
-  detailSymbol: {
-    fontSize: 80,
-    marginBottom: spacing.md,
+  detailCardWrapper: {
+    marginBottom: responsive.spacing(20, 28),
+    shadowColor: colors.accent.gold,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 10,
   },
   detailName: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(26, 32),
     fontWeight: '700',
     color: colors.accent.gold,
     textAlign: 'center',
-    marginBottom: spacing.md,
+    marginBottom: responsive.spacing(12, 16),
   },
   arcanaTag: {
     backgroundColor: colors.background.tertiary,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
-    borderRadius: 12,
-    marginBottom: spacing.md,
+    paddingHorizontal: responsive.spacing(14, 18),
+    paddingVertical: responsive.spacing(8, 10),
+    borderRadius: responsive.width(12, 14),
+    marginBottom: responsive.spacing(12, 16),
   },
   arcanaText: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.secondary,
+    fontWeight: '500',
   },
   masteryStatus: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#10B981' + '30',
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
-    borderRadius: 12,
-    gap: spacing.xs,
-  },
-  masteryIcon: {
-    fontSize: 16,
+    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+    paddingHorizontal: responsive.spacing(14, 18),
+    paddingVertical: responsive.spacing(8, 10),
+    borderRadius: responsive.width(12, 14),
+    gap: responsive.spacing(6, 8),
   },
   masteryText: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     fontWeight: '600',
     color: '#10B981',
   },
 
-  // Detail Sections
-  detailSection: {
-    marginBottom: spacing.lg,
-  },
-  sectionLabel: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: colors.text.secondary,
-    marginBottom: spacing.sm,
-  },
+  // Keywords
   keywordsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: spacing.sm,
+    gap: responsive.spacing(8, 12),
   },
   keywordPill: {
     backgroundColor: colors.background.secondary,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: 12,
+    paddingHorizontal: responsive.spacing(14, 18),
+    paddingVertical: responsive.spacing(10, 12),
+    borderRadius: responsive.width(12, 14),
   },
   keywordText: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.secondary,
   },
+
+  // Meaning
   meaningText: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     color: colors.text.secondary,
-    lineHeight: 26,
+    lineHeight: responsive.fontSize(26, 30),
   },
+
+  // Element
   elementContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.background.secondary,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: 12,
+    paddingHorizontal: responsive.spacing(14, 18),
+    paddingVertical: responsive.spacing(10, 14),
+    borderRadius: responsive.width(12, 14),
     alignSelf: 'flex-start',
-    gap: spacing.sm,
-  },
-  elementEmoji: {
-    fontSize: 20,
+    gap: responsive.spacing(10, 12),
   },
   elementText: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     color: colors.text.secondary,
   },
 });

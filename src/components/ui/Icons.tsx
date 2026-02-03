@@ -355,3 +355,41 @@ export const MinusIcon: React.FC<IconProps> = ({ size = 24, color = '#D4AF37', s
     <Line x1="5" y1="12" x2="19" y2="12" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" />
   </Svg>
 );
+
+// 多星闪烁图标 - 魔法/特殊 (SparklesIcon - 复数)
+export const SparklesIcon: React.FC<IconProps> = ({ size = 24, color = '#D4AF37', strokeWidth = 2 }) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Path d="M12 3L13.2 7.8L18 9L13.2 10.2L12 15L10.8 10.2L6 9L10.8 7.8L12 3Z" stroke={color} strokeWidth={strokeWidth} strokeLinejoin="round" />
+    <Path d="M5 16L5.6 18.4L8 19L5.6 19.6L5 22L4.4 19.6L2 19L4.4 18.4L5 16Z" stroke={color} strokeWidth={strokeWidth * 0.75} strokeLinejoin="round" />
+    <Path d="M19 14L19.6 16.4L22 17L19.6 17.6L19 20L18.4 17.6L16 17L18.4 16.4L19 14Z" stroke={color} strokeWidth={strokeWidth * 0.75} strokeLinejoin="round" />
+  </Svg>
+);
+
+// 水晶球图标 - 占卜/预测
+export const CrystalBallIcon: React.FC<IconProps> = ({ size = 24, color = '#D4AF37', strokeWidth = 2 }) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Circle cx="12" cy="10" r="7" stroke={color} strokeWidth={strokeWidth} />
+    <Path d="M8 20h8" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" />
+    <Path d="M10 17h4v3h-4z" stroke={color} strokeWidth={strokeWidth} strokeLinejoin="round" />
+    <Path d="M9 8c1.5-1.5 4-1.5 5.5 0" stroke={color} strokeWidth={strokeWidth * 0.75} strokeLinecap="round" />
+  </Svg>
+);
+
+// 警告图标
+export const AlertIcon: React.FC<IconProps> = ({ size = 24, color = '#D4AF37', strokeWidth = 2 }) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+    <Line x1="12" y1="9" x2="12" y2="13" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" />
+    <Line x1="12" y1="17" x2="12.01" y2="17" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" />
+  </Svg>
+);
+
+// 幼苗图标 - 成长/入门
+export const SeedlingIcon: React.FC<IconProps> = ({ size = 24, color = '#D4AF37', strokeWidth = 2 }) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Path d="M12 22V12" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" />
+    <Path d="M12 12c0-4.5-4-6-6-6 0 3 1.5 6 6 6z" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+    <Path d="M12 8c0-4-3.5-5-5-5 0 2.5 1.5 5 5 5z" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+    <Path d="M12 12c0-4.5 4-6 6-6 0 3-1.5 6-6 6z" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+  </Svg>
+);

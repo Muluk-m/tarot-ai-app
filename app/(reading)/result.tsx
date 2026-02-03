@@ -98,7 +98,7 @@ export default function Result() {
 
         {/* Title Section */}
         <View style={styles.titleSection}>
-          <Text style={styles.title}>Your Vision</Text>
+          <Text style={styles.title}>你的命运</Text>
           <Row align="center" gap={8}>
             {spreadType === 'single' ? (
               <StarIcon size={18} color={colors.accent.gold} />
@@ -106,7 +106,7 @@ export default function Result() {
               <SparklesIcon size={18} color={colors.accent.gold} />
             )}
             <Text style={styles.subtitle}>
-              {spreadType === 'single' ? 'Daily Celestial Guidance' : 'The Tri-Realm Revelation'}
+              {spreadType === 'single' ? '每日星象指引' : '三界启示录'}
             </Text>
           </Row>
         </View>
@@ -140,7 +140,7 @@ export default function Result() {
           {/* Interpretation Header */}
           <Row align="center" gap={10} style={styles.interpretationHeader}>
             <SparklesIcon size={22} color={colors.accent.gold} />
-            <Text style={styles.interpretationTitle}>Celestial Interpretation</Text>
+            <Text style={styles.interpretationTitle}>星象解读</Text>
           </Row>
 
           {/* Loading State */}
@@ -148,8 +148,8 @@ export default function Result() {
             <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" color={colors.accent.gold} />
               <Spacer size={16} />
-              <Text style={styles.loadingText}>Gazing into the celestial realm...</Text>
-              <Text style={styles.loadingSubtext}>Channeling cosmic wisdom...</Text>
+              <Text style={styles.loadingText}>正在凝视星象...</Text>
+              <Text style={styles.loadingSubtext}>引导宇宙智慧...</Text>
             </View>
           )}
 
@@ -177,7 +177,7 @@ export default function Result() {
               >
                 <Row align="center" gap={8}>
                   <RefreshIcon size={18} color={colors.background.primary} />
-                  <Text style={styles.retryButtonText}>Try Again</Text>
+                  <Text style={styles.retryButtonText}>重试</Text>
                 </Row>
               </Pressable>
             </View>
@@ -188,7 +188,7 @@ export default function Result() {
             <View style={styles.completionBadge}>
               <Row align="center" gap={6}>
                 <CheckIcon size={14} color={colors.accent.purple} />
-                <Text style={styles.completionText}>Vision Received</Text>
+                <Text style={styles.completionText}>解读完成</Text>
               </Row>
             </View>
           )}
@@ -215,7 +215,7 @@ export default function Result() {
               >
                 <Row align="center" gap={10}>
                   <SparklesIcon size={20} color={colors.background.primary} />
-                  <Text style={styles.primaryButtonText}>New Vision</Text>
+                  <Text style={styles.primaryButtonText}>新的解读</Text>
                 </Row>
               </LinearGradient>
             </Pressable>
@@ -236,7 +236,7 @@ export default function Result() {
               >
                 <Row align="center" gap={10}>
                   <BookIcon size={20} color={colors.accent.purple} />
-                  <Text style={styles.secondaryButtonText}>Past Visions</Text>
+                  <Text style={styles.secondaryButtonText}>历史记录</Text>
                 </Row>
               </LinearGradient>
             </Pressable>
@@ -247,7 +247,7 @@ export default function Result() {
 
         {/* Disclaimer */}
         <Text style={styles.disclaimer}>
-          This reading is for entertainment and self-reflection purposes only.
+          本解读仅供娱乐和自我反思参考。
         </Text>
 
         <Spacer size={responsive.spacing(32, 48)} />

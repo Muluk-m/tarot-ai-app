@@ -78,7 +78,7 @@ export default function Shuffle() {
             >
               <Row align="center" gap={responsive.spacing(10, 14)}>
                 <SparklesIcon size={responsive.width(20, 24)} color={colors.background.primary} />
-                <Text style={styles.continueButtonText}>Reveal Your Vision</Text>
+                <Text style={styles.continueButtonText}>揭示你的命运</Text>
                 <View style={styles.continueButtonArrow}>
                   <ChevronRightIcon size={18} color={colors.background.primary} />
                 </View>
@@ -88,7 +88,7 @@ export default function Shuffle() {
 
           <Spacer size={responsive.spacing(16, 20)} />
 
-          <Text style={styles.spreadInfo}>The celestial forces converge...</Text>
+          <Text style={styles.spreadInfo}>星象之力正在汇聚...</Text>
 
           <Row align="center" gap={8} style={styles.spreadTypeRow}>
             {spreadType === 'single' ? (
@@ -97,7 +97,7 @@ export default function Shuffle() {
               <SparklesIcon size={18} color={colors.accent.gold} />
             )}
             <Text style={styles.spreadType}>
-              {spreadType === 'single' ? 'Daily Vision' : 'Tri-Realm Spread'}
+              {spreadType === 'single' ? '每日一卡' : '三牌阵'}
             </Text>
           </Row>
         </View>
@@ -111,7 +111,7 @@ export default function Shuffle() {
           pressed && styles.skipButtonPressed,
         ]}
       >
-        <Text style={styles.skipButtonText}>Skip Animation</Text>
+        <Text style={styles.skipButtonText}>跳过动画</Text>
       </Pressable>
     </ScreenContainer>
   );

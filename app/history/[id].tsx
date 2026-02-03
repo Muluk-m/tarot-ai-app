@@ -47,8 +47,8 @@ export default function HistoryDetail() {
           <View style={styles.errorIconContainer}>
             <CrystalBallIcon size={responsive.width(60, 80)} color={colors.text.tertiary} />
           </View>
-          <Text style={styles.errorTitle}>Reading Not Found</Text>
-          <Text style={styles.errorSubtitle}>This reading may have been deleted</Text>
+          <Text style={styles.errorTitle}>记录未找到</Text>
+          <Text style={styles.errorSubtitle}>此解读可能已被删除</Text>
 
           <Spacer size={responsive.spacing(24, 32)} />
 
@@ -59,7 +59,7 @@ export default function HistoryDetail() {
               pressed && styles.errorButtonPressed,
             ]}
           >
-            <Text style={styles.errorButtonText}>Go Back</Text>
+            <Text style={styles.errorButtonText}>返回</Text>
           </Pressable>
         </View>
       </ScreenContainer>
@@ -116,7 +116,7 @@ export default function HistoryDetail() {
               <SparklesIcon size={responsive.width(24, 28)} color={colors.accent.gold} />
             )}
             <Text style={styles.title}>
-              {reading.spreadType === 'single' ? 'Daily Card' : 'Three Card Spread'}
+              {reading.spreadType === 'single' ? '每日一卡' : '三牌阵'}
             </Text>
           </Row>
           <Text style={styles.date}>{reading.dateFormatted}</Text>
@@ -150,7 +150,7 @@ export default function HistoryDetail() {
 
           <Row align="center" gap={10} style={styles.interpretationHeader}>
             <SparklesIcon size={22} color={colors.accent.gold} />
-            <Text style={styles.interpretationTitle}>Interpretation</Text>
+            <Text style={styles.interpretationTitle}>解读内容</Text>
           </Row>
 
           <Text style={styles.interpretationText}>{reading.interpretation}</Text>
@@ -176,7 +176,7 @@ export default function HistoryDetail() {
             >
               <Row align="center" gap={10}>
                 <SparklesIcon size={20} color={colors.background.primary} />
-                <Text style={styles.primaryButtonText}>New Reading</Text>
+                <Text style={styles.primaryButtonText}>新的解读</Text>
               </Row>
             </LinearGradient>
           </Pressable>
@@ -193,7 +193,7 @@ export default function HistoryDetail() {
           >
             <Row align="center" justify="center" gap={8}>
               <TrashIcon size={18} color={colors.error} />
-              <Text style={styles.deleteButtonText}>Delete Reading</Text>
+              <Text style={styles.deleteButtonText}>删除记录</Text>
             </Row>
           </Pressable>
         </View>

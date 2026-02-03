@@ -1,6 +1,6 @@
 /**
- * Courses Screen - 课程列表
- * iPad 和 iOS 适配
+ * Courses Screen - Course List
+ * iPad and iOS adaptive layout
  */
 
 import React, { useState } from 'react';
@@ -37,11 +37,11 @@ import {
 import { IconButton, Chip } from '@/components/ui/Buttons';
 
 // Stage configuration
-const STAGES: { key: Stage; title: string; titleZh: string; Icon: React.FC<any>; color: string }[] = [
-  { key: 'beginner', title: 'Beginner', titleZh: '入门', Icon: SeedlingIcon, color: '#10B981' },
-  { key: 'intermediate', title: 'Intermediate', titleZh: '进阶', Icon: BookIcon, color: colors.accent.purple },
-  { key: 'advanced', title: 'Advanced', titleZh: '高级', Icon: StarIcon, color: colors.accent.cyan },
-  { key: 'master', title: 'Master', titleZh: '大师', Icon: TrophyIcon, color: colors.accent.gold },
+const STAGES: { key: Stage; title: string; Icon: React.FC<any>; color: string }[] = [
+  { key: 'beginner', title: 'Beginner', Icon: SeedlingIcon, color: '#10B981' },
+  { key: 'intermediate', title: 'Intermediate', Icon: BookIcon, color: colors.accent.purple },
+  { key: 'advanced', title: 'Advanced', Icon: StarIcon, color: colors.accent.cyan },
+  { key: 'master', title: 'Master', Icon: TrophyIcon, color: colors.accent.gold },
 ];
 
 export default function CoursesScreen() {
@@ -77,7 +77,7 @@ export default function CoursesScreen() {
             variant="filled"
             size="md"
           />
-          <Text style={styles.headerTitle}>课程中心</Text>
+          <Text style={styles.headerTitle}>Courses</Text>
           <View style={{ width: responsive.width(40, 48) }} />
         </Row>
 
@@ -113,7 +113,7 @@ export default function CoursesScreen() {
                     isSelected && { color: colors.text.primary },
                   ]}
                 >
-                  {stage.titleZh}
+                  {stage.title}
                 </Text>
                 <Text style={[styles.tabProgress, { color: stage.color }]}>
                   {completedCount}/{stageCourses.length}
@@ -127,8 +127,8 @@ export default function CoursesScreen() {
 
         {/* Stage Header */}
         <SectionHeader
-          title={`${stageInfo.titleZh}阶段`}
-          subtitle={`${filteredCourses.length} 门课程`}
+          title={`${stageInfo.title} Stage`}
+          subtitle={`${filteredCourses.length} courses`}
         />
 
         {/* Course List */}
@@ -208,13 +208,13 @@ export default function CoursesScreen() {
                       <Row align="center" gap={4}>
                         <LayersIcon size={14} color={colors.text.quaternary} />
                         <Text style={styles.courseMetaText}>
-                          {course.lessons.length} 课时
+                          {course.lessons.length} lessons
                         </Text>
                       </Row>
                       <Row align="center" gap={4}>
                         <ClockIcon size={14} color={colors.text.quaternary} />
                         <Text style={styles.courseMetaText}>
-                          ~{course.estimatedTime}分钟
+                          ~{course.estimatedTime} min
                         </Text>
                       </Row>
                     </Row>

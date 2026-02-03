@@ -1,6 +1,6 @@
 /**
- * Flashcards Screen - 闪卡记忆
- * iPad 和 iOS 适配
+ * Flashcards Screen
+ * iPad and iOS adaptive layout
  */
 
 import React, { useState } from 'react';
@@ -191,15 +191,15 @@ export default function FlashcardsScreen() {
               <CardsIcon size={responsive.width(48, 60)} color={colors.accent.purple} />
             </View>
 
-            <Text style={styles.introTitle}>闪卡记忆</Text>
+            <Text style={styles.introTitle}>Flashcards</Text>
             <Text style={styles.introDescription}>
-              通过卡片复习加深记忆。看到卡牌图案，回忆卡牌名称和含义，然后翻转验证！
+              Strengthen memory through card review. See the card image, recall its name and meaning, then flip to verify!
             </Text>
 
             <StatCard
               items={[
-                { value: cardsDue.length, label: '待复习' },
-                { value: totalReviews, label: '总复习次数' },
+                { value: cardsDue.length, label: 'Due' },
+                { value: totalReviews, label: 'Total Reviews' },
               ]}
               style={styles.statsCard}
             />
@@ -217,7 +217,7 @@ export default function FlashcardsScreen() {
               style={styles.startGradient}
             >
               <PlayIcon size={20} color={colors.text.primary} />
-              <Text style={styles.startButtonText}>开始练习</Text>
+              <Text style={styles.startButtonText}>Start Practice</Text>
             </LinearGradient>
           </Pressable>
         </View>
@@ -248,7 +248,7 @@ export default function FlashcardsScreen() {
               )}
             </View>
 
-            <Text style={styles.resultTitle}>练习完成!</Text>
+            <Text style={styles.resultTitle}>Practice Complete!</Text>
 
             <Text
               style={[
@@ -260,16 +260,16 @@ export default function FlashcardsScreen() {
             </Text>
 
             <Text style={styles.resultSubtitle}>
-              {correctCount} / {cards.length} 正确
+              {correctCount} / {cards.length} correct
             </Text>
 
             <View style={styles.resultMessage}>
               <Text style={styles.resultMessageText}>
                 {accuracy >= 90
-                  ? '太棒了！你已经掌握了这些卡牌！'
+                  ? 'Excellent! You have mastered these cards!'
                   : accuracy >= 70
-                  ? '很好的进步！继续保持！'
-                  : '继续努力！多多练习就会进步！'}
+                  ? 'Great progress! Keep it up!'
+                  : 'Keep practicing! You will improve with more practice!'}
               </Text>
             </View>
           </View>
@@ -283,7 +283,7 @@ export default function FlashcardsScreen() {
               ]}
             >
               <RefreshIcon size={18} color={colors.text.secondary} />
-              <Text style={styles.retryButtonText}>再练一次</Text>
+              <Text style={styles.retryButtonText}>Try Again</Text>
             </Pressable>
 
             <Pressable
@@ -297,7 +297,7 @@ export default function FlashcardsScreen() {
                 colors={[colors.accent.purple, '#A78BFA']}
                 style={styles.doneGradient}
               >
-                <Text style={styles.doneButtonText}>完成</Text>
+                <Text style={styles.doneButtonText}>Done</Text>
               </LinearGradient>
             </Pressable>
           </View>
@@ -352,7 +352,7 @@ export default function FlashcardsScreen() {
               />
             </View>
             <View style={styles.tapHintContainer}>
-              <Text style={styles.tapHint}>点击翻转查看答案</Text>
+              <Text style={styles.tapHint}>Tap to flip and see the answer</Text>
             </View>
           </Animated.View>
 
@@ -371,7 +371,7 @@ export default function FlashcardsScreen() {
                 ))}
               </View>
               <Text style={styles.arcanaLabel}>
-                {currentCard?.arcana === 'major' ? '大阿卡纳' : currentCard?.suit}
+                {currentCard?.arcana === 'major' ? 'Major Arcana' : currentCard?.suit}
               </Text>
             </LinearGradient>
           </Animated.View>
@@ -389,7 +389,7 @@ export default function FlashcardsScreen() {
             ]}
           >
             <XIcon size={20} color={colors.error} />
-            <Text style={styles.wrongButtonText}>不记得</Text>
+            <Text style={styles.wrongButtonText}>{"Don't Remember"}</Text>
           </Pressable>
 
           <Pressable
@@ -404,7 +404,7 @@ export default function FlashcardsScreen() {
               style={styles.correctGradient}
             >
               <CheckIcon size={20} color={colors.text.primary} />
-              <Text style={styles.correctButtonText}>记得!</Text>
+              <Text style={styles.correctButtonText}>Remember!</Text>
             </LinearGradient>
           </Pressable>
         </View>

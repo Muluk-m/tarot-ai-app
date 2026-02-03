@@ -1,6 +1,6 @@
 /**
- * Lesson Screen - 课程内容
- * iPad 和 iOS 适配
+ * Lesson Screen
+ * iPad and iOS adaptive layout
  */
 
 import React, { useEffect, useState } from 'react';
@@ -167,9 +167,9 @@ export default function LessonScreen() {
         <SafeScrollView maxWidth="md">
           <View style={styles.errorContainer}>
             <BookIcon size={48} color={colors.text.quaternary} />
-            <Text style={styles.errorText}>课程内容不存在</Text>
+            <Text style={styles.errorText}>Lesson not found</Text>
             <Button
-              title="返回"
+              title="Go Back"
               onPress={() => router.back()}
               variant="outline"
             />
@@ -255,7 +255,7 @@ export default function LessonScreen() {
                 style={styles.navButton}
               >
                 <ChevronLeftIcon size={18} color={colors.text.tertiary} />
-                <Text style={styles.navButtonText}>上一课</Text>
+                <Text style={styles.navButtonText}>Previous</Text>
               </Pressable>
             )}
 
@@ -274,7 +274,7 @@ export default function LessonScreen() {
                   style={styles.completeGradient}
                 >
                   <CheckIcon size={18} color={colors.background.primary} />
-                  <Text style={styles.completeButtonText}>完成学习</Text>
+                  <Text style={styles.completeButtonText}>Mark Complete</Text>
                 </LinearGradient>
               </Pressable>
             ) : (
@@ -290,7 +290,7 @@ export default function LessonScreen() {
                   style={styles.completeGradient}
                 >
                   <Text style={styles.completeButtonText}>
-                    {nextLesson ? '下一课' : '返回课程'}
+                    {nextLesson ? 'Next Lesson' : 'Back to Course'}
                   </Text>
                   <ChevronRightIcon size={18} color={colors.background.primary} />
                 </LinearGradient>

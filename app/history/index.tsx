@@ -71,7 +71,7 @@ export default function History() {
                 <SparklesIcon size={16} color={colors.accent.gold} />
               )}
               <Text style={styles.spreadType}>
-                {item.spreadType === 'single' ? 'Daily Vision' : 'Tri-Realm Spread'}
+                {item.spreadType === 'single' ? '每日一卡' : '三牌阵'}
               </Text>
             </Row>
             <Text style={styles.date}>{item.dateFormatted}</Text>
@@ -101,9 +101,9 @@ export default function History() {
       <View style={styles.emptyIconContainer}>
         <CrystalBallIcon size={responsive.width(60, 80)} color={colors.accent.gold} />
       </View>
-      <Text style={styles.emptyTitle}>No Visions Yet</Text>
+      <Text style={styles.emptyTitle}>暂无记录</Text>
       <Text style={styles.emptySubtitle}>
-        Begin your celestial journey by gazing into the cosmic realm
+        开始你的星象之旅，探索宇宙的奥秘
       </Text>
 
       <Spacer size={responsive.spacing(24, 32)} />
@@ -123,7 +123,7 @@ export default function History() {
         >
           <Row align="center" gap={10}>
             <SparklesIcon size={20} color={colors.background.primary} />
-            <Text style={styles.emptyButtonText}>Receive Your First Vision</Text>
+            <Text style={styles.emptyButtonText}>开始第一次解读</Text>
           </Row>
         </LinearGradient>
       </Pressable>
@@ -158,10 +158,10 @@ export default function History() {
         <View style={styles.titleSection}>
           <Row align="center" gap={12}>
             <BookIcon size={responsive.width(28, 34)} color={colors.accent.gold} />
-            <Text style={styles.title}>Vision Archive</Text>
+            <Text style={styles.title}>解读档案</Text>
           </Row>
           <Text style={styles.subtitle}>
-            {readingHistory.length} {readingHistory.length === 1 ? 'vision' : 'visions'} preserved
+            共 {readingHistory.length} 条记录
           </Text>
         </View>
       </View>

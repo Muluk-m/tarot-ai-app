@@ -1,6 +1,6 @@
 /**
- * Quizzes Screen - 测验列表
- * iPad 和 iOS 适配
+ * Quizzes Screen - Quiz List
+ * iPad and iOS adaptive layout
  */
 
 import React from 'react';
@@ -17,14 +17,12 @@ import {
   Row,
   Spacer,
   responsive,
-  isTablet,
   SectionHeader,
   StatCard,
   ChevronLeftIcon,
   ChevronRightIcon,
   CheckIcon,
   TrophyIcon,
-  StarIcon,
   ZapIcon,
   BookIcon,
 } from '@/components/ui';
@@ -73,7 +71,7 @@ export default function QuizzesScreen() {
         <View style={styles.quizInfo}>
           <Text style={styles.quizTitle}>{quiz.title}</Text>
           <Text style={styles.quizMeta}>
-            {quiz.questions.length} 道题 · 通过分 {quiz.passingScore}%
+            {quiz.questions.length} questions · Pass {quiz.passingScore}%
           </Text>
           {bestScore !== null && (
             <Text
@@ -82,7 +80,7 @@ export default function QuizzesScreen() {
                 { color: passed ? '#10B981' : colors.text.tertiary },
               ]}
             >
-              最高分: {bestScore}%
+              Best: {bestScore}%
             </Text>
           )}
         </View>
@@ -105,16 +103,16 @@ export default function QuizzesScreen() {
             variant="filled"
             size="md"
           />
-          <Text style={styles.headerTitle}>知识测验</Text>
+          <Text style={styles.headerTitle}>Quizzes</Text>
           <View style={{ width: responsive.width(40, 48) }} />
         </Row>
 
         {/* Stats */}
         <StatCard
           items={[
-            { value: getTotalQuizzesPassed(), label: '已通过' },
-            { value: getPerfectScores(), label: '满分' },
-            { value: ALL_QUIZZES.length, label: '总测验' },
+            { value: getTotalQuizzesPassed(), label: 'Passed' },
+            { value: getPerfectScores(), label: 'Perfect' },
+            { value: ALL_QUIZZES.length, label: 'Total' },
           ]}
           style={styles.statsCard}
         />
@@ -125,8 +123,8 @@ export default function QuizzesScreen() {
         {dailyQuizzes.length > 0 && (
           <>
             <SectionHeader
-              title="每日挑战"
-              subtitle="每天一个小测验"
+              title="Daily Challenge"
+              subtitle="A quick quiz every day"
             />
             <View style={styles.quizList}>
               {dailyQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.gold, ZapIcon))}
@@ -139,8 +137,8 @@ export default function QuizzesScreen() {
         {courseQuizzes.length > 0 && (
           <>
             <SectionHeader
-              title="课程测验"
-              subtitle="与课程配套的测验"
+              title="Course Quizzes"
+              subtitle="Quizzes paired with courses"
             />
             <View style={styles.quizList}>
               {courseQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.purple, BookIcon))}
@@ -153,8 +151,8 @@ export default function QuizzesScreen() {
         {challengeQuizzes.length > 0 && (
           <>
             <SectionHeader
-              title="挑战测验"
-              subtitle="测试你的进阶知识"
+              title="Challenge Quizzes"
+              subtitle="Test your advanced knowledge"
             />
             <View style={styles.quizList}>
               {challengeQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.cyan, TrophyIcon))}

@@ -1,17 +1,12 @@
+/**
+ * Achievements Screen
+ * iPad and iOS adaptive layout
+ */
+
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
 import { useAchievementStore } from '@/stores/achievementStore';
 import { useLearningStore } from '@/stores/learningStore';
 import { useQuizStore } from '@/stores/quizStore';
@@ -24,13 +19,31 @@ import {
   type Achievement,
 } from '@/data/achievements';
 
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Spacer,
+  responsive,
+  SectionHeader,
+  ChevronLeftIcon,
+  TrophyIcon,
+  BookIcon,
+  CardsIcon,
+  StarIcon,
+  CheckIcon,
+  LockIcon,
+} from '@/components/ui';
+import { IconButton } from '@/components/ui/Buttons';
+
 type Category = 'all' | 'knowledge' | 'practice' | 'special';
 
-const CATEGORIES: { key: Category; title: string; icon: string }[] = [
-  { key: 'all', title: 'All', icon: '🏆' },
-  { key: 'knowledge', title: 'Knowledge', icon: '📚' },
-  { key: 'practice', title: 'Practice', icon: '🎴' },
-  { key: 'special', title: 'Special', icon: '⭐' },
+const CATEGORIES: { key: Category; title: string; Icon: React.FC<any>; color: string }[] = [
+  { key: 'all', title: 'All', Icon: TrophyIcon, color: colors.accent.gold },
+  { key: 'knowledge', title: 'Knowledge', Icon: BookIcon, color: '#10B981' },
+  { key: 'practice', title: 'Practice', Icon: CardsIcon, color: colors.accent.purple },
+  { key: 'special', title: 'Special', Icon: StarIcon, color: colors.accent.cyan },
 ];
 
 export default function AchievementsScreen() {
@@ -39,7 +52,6 @@ export default function AchievementsScreen() {
 
   const {
     isUnlocked,
-    getUnlockedAchievements,
     getTotalUnlocked,
     getUnlockPercentage,
   } = useAchievementStore();
@@ -122,397 +134,325 @@ export default function AchievementsScreen() {
 
   const achievements = getAchievements();
   const unlockedCount = achievements.filter((a) => isUnlocked(a.id)).length;
+  const totalUnlocked = getTotalUnlocked();
+  const unlockPercentage = getUnlockPercentage();
+  const categoryInfo = CATEGORIES.find((c) => c.key === selectedCategory)!;
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-        style={styles.backgroundGradient}
-      />
+    <ScreenContainer>
+      <SafeScrollView maxWidth="lg">
+        {/* Header */}
+        <Row justify="space-between" align="center" style={styles.header}>
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
+            onPress={() => router.back()}
+            variant="filled"
+            size="md"
+          />
+          <Text style={styles.headerTitle}>Achievements</Text>
+          <View style={{ width: responsive.width(40, 48) }} />
+        </Row>
 
-      <SafeAreaView style={styles.safeArea} edges={['top']}>
+        {/* Progress Card */}
+        <View style={styles.progressCard}>
+          <View style={styles.progressHeader}>
+            <View style={styles.trophyContainer}>
+              <TrophyIcon size={responsive.width(28, 32)} color={colors.background.primary} />
+            </View>
+            <View style={styles.progressInfo}>
+              <Text style={styles.progressTitle}>Your Progress</Text>
+              <Text style={styles.progressSubtitle}>
+                {totalUnlocked} achievements unlocked
+              </Text>
+            </View>
+            <Text style={styles.progressPercent}>{unlockPercentage}%</Text>
+          </View>
+
+          <View style={styles.progressBarContainer}>
+            <View style={styles.progressBar}>
+              <View
+                style={[
+                  styles.progressFill,
+                  { width: `${unlockPercentage}%` },
+                ]}
+              />
+            </View>
+          </View>
+        </View>
+
+        <Spacer size={responsive.spacing(20, 28)} />
+
+        {/* Category Tabs */}
         <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.tabsContainer}
         >
-          {/* Header */}
-          <View style={styles.header}>
-            <TouchableOpacity
-              onPress={() => router.back()}
-              style={styles.backButton}
-            >
-              <Text style={styles.backIcon}>←</Text>
-            </TouchableOpacity>
-            <Text style={styles.headerTitle}>Achievements</Text>
-            <View style={styles.placeholder} />
-          </View>
+          {CATEGORIES.map((cat) => {
+            const isSelected = selectedCategory === cat.key;
+            const CatIcon = cat.Icon;
 
-          {/* Progress Card */}
-          <View style={styles.progressCard}>
-            <LinearGradient
-              colors={[colors.accent.gold + '25', colors.accent.gold + '10']}
-              style={styles.progressGradient}
-            >
-              <View style={styles.progressHeader}>
-                <View style={styles.trophyContainer}>
-                  <Text style={styles.trophyEmoji}>🏆</Text>
+            return (
+              <Pressable
+                key={cat.key}
+                onPress={() => setSelectedCategory(cat.key)}
+                style={[
+                  styles.tab,
+                  isSelected && { borderColor: cat.color },
+                ]}
+              >
+                <View style={[styles.tabIconContainer, { backgroundColor: cat.color + '20' }]}>
+                  <CatIcon size={responsive.width(20, 24)} color={cat.color} />
                 </View>
-                <View style={styles.progressInfo}>
-                  <Text style={styles.progressTitle}>Your Progress</Text>
-                  <Text style={styles.progressSubtitle}>
-                    {getTotalUnlocked()} achievements unlocked
-                  </Text>
-                </View>
-                <Text style={styles.progressPercent}>{getUnlockPercentage()}%</Text>
-              </View>
-
-              <View style={styles.progressBarContainer}>
-                <View style={styles.progressBar}>
-                  <View
-                    style={[
-                      styles.progressFill,
-                      { width: `${getUnlockPercentage()}%` },
-                    ]}
-                  />
-                </View>
-              </View>
-            </LinearGradient>
-          </View>
-
-          {/* Category Tabs */}
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.tabsContainer}
-          >
-            {CATEGORIES.map((cat) => {
-              const isSelected = selectedCategory === cat.key;
-              return (
-                <TouchableOpacity
-                  key={cat.key}
-                  onPress={() => setSelectedCategory(cat.key)}
-                  style={[styles.tab, isSelected && styles.tabSelected]}
+                <Text
+                  style={[
+                    styles.tabTitle,
+                    isSelected && { color: colors.text.primary },
+                  ]}
                 >
-                  <Text style={styles.tabIcon}>{cat.icon}</Text>
+                  {cat.title}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </ScrollView>
+
+        <Spacer size={responsive.spacing(16, 24)} />
+
+        {/* Section Header */}
+        <SectionHeader
+          title={`${categoryInfo.title} Achievements`}
+          subtitle={`${unlockedCount} / ${achievements.length} unlocked`}
+        />
+
+        {/* Achievements List */}
+        <View style={styles.achievementsList}>
+          {achievements.map((achievement) => {
+            const unlocked = isUnlocked(achievement.id);
+            const progress = getProgress(achievement);
+            const hidden = achievement.hidden && !unlocked;
+
+            return (
+              <View
+                key={achievement.id}
+                style={[
+                  styles.achievementCard,
+                  unlocked && styles.achievementCardUnlocked,
+                  hidden && styles.achievementCardHidden,
+                ]}
+              >
+                <View
+                  style={[
+                    styles.achievementIcon,
+                    unlocked && styles.achievementIconUnlocked,
+                    hidden && styles.achievementIconHidden,
+                  ]}
+                >
+                  {hidden ? (
+                    <LockIcon size={20} color={colors.text.quaternary} />
+                  ) : unlocked ? (
+                    <Text style={styles.achievementEmoji}>{achievement.icon}</Text>
+                  ) : (
+                    <Text style={styles.achievementEmoji}>{achievement.icon}</Text>
+                  )}
+                </View>
+
+                <View style={styles.achievementInfo}>
                   <Text
                     style={[
-                      styles.tabTitle,
-                      isSelected && styles.tabTitleSelected,
+                      styles.achievementTitle,
+                      hidden && styles.hiddenText,
                     ]}
                   >
-                    {cat.title}
+                    {hidden ? 'Hidden Achievement' : achievement.title}
                   </Text>
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-
-          {/* Category Header */}
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>
-              {CATEGORIES.find((c) => c.key === selectedCategory)?.title} Achievements
-            </Text>
-            <Text style={styles.sectionCount}>
-              {unlockedCount} / {achievements.length}
-            </Text>
-          </View>
-
-          {/* Achievements List */}
-          <View style={styles.achievementsList}>
-            {achievements.map((achievement) => {
-              const unlocked = isUnlocked(achievement.id);
-              const progress = getProgress(achievement);
-              const hidden = achievement.hidden && !unlocked;
-
-              return (
-                <View key={achievement.id} style={styles.achievementCard}>
-                  <LinearGradient
-                    colors={
-                      unlocked
-                        ? [colors.accent.gold + '25', colors.accent.gold + '10']
-                        : hidden
-                        ? [colors.background.secondary + '80', colors.background.tertiary + '50']
-                        : [colors.background.secondary, colors.background.tertiary]
-                    }
-                    style={styles.achievementGradient}
+                  <Text
+                    style={[
+                      styles.achievementDescription,
+                      hidden && styles.hiddenText,
+                    ]}
                   >
-                    <View style={styles.achievementContent}>
-                      <View
-                        style={[
-                          styles.achievementIcon,
-                          unlocked && styles.achievementIconUnlocked,
-                          hidden && styles.achievementIconHidden,
-                        ]}
-                      >
-                        <Text style={styles.achievementEmoji}>
-                          {hidden ? '❓' : achievement.icon}
-                        </Text>
-                      </View>
+                    {hidden ? 'Keep learning to unlock!' : achievement.description}
+                  </Text>
 
-                      <View style={styles.achievementInfo}>
-                        <Text
+                  {!unlocked && !hidden && (
+                    <View style={styles.achievementProgress}>
+                      <View style={styles.miniProgressBar}>
+                        <View
                           style={[
-                            styles.achievementTitle,
-                            hidden && styles.hiddenText,
+                            styles.miniProgressFill,
+                            { width: `${progress}%` },
                           ]}
-                        >
-                          {hidden ? 'Hidden Achievement' : achievement.title}
-                        </Text>
-                        <Text
-                          style={[
-                            styles.achievementDescription,
-                            hidden && styles.hiddenText,
-                          ]}
-                        >
-                          {hidden ? 'Keep learning to unlock!' : achievement.description}
-                        </Text>
-
-                        {!unlocked && !hidden && (
-                          <View style={styles.achievementProgress}>
-                            <View style={styles.miniProgressBar}>
-                              <View
-                                style={[
-                                  styles.miniProgressFill,
-                                  { width: `${progress}%` },
-                                ]}
-                              />
-                            </View>
-                            <Text style={styles.progressTextSmall}>
-                              {getProgressText(achievement)}
-                            </Text>
-                          </View>
-                        )}
-
-                        {unlocked && (
-                          <View style={styles.unlockedBadge}>
-                            <Text style={styles.unlockedText}>✓ Unlocked</Text>
-                          </View>
-                        )}
+                        />
                       </View>
+                      <Text style={styles.progressTextSmall}>
+                        {getProgressText(achievement)}
+                      </Text>
                     </View>
-                  </LinearGradient>
-                </View>
-              );
-            })}
-          </View>
+                  )}
 
-          {/* Bottom spacing */}
-          <View style={{ height: spacing.xxl }} />
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+                  {unlocked && (
+                    <View style={styles.unlockedBadge}>
+                      <CheckIcon size={12} color={colors.accent.gold} />
+                      <Text style={styles.unlockedText}>Unlocked</Text>
+                    </View>
+                  )}
+                </View>
+              </View>
+            );
+          })}
+        </View>
+
+        <Spacer size={responsive.spacing(32, 48)} />
+      </SafeScrollView>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
-  backgroundGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  safeArea: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingHorizontal: spacing.lg,
-  },
-
-  // Header
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: spacing.lg,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background.tertiary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 20,
-    color: colors.text.primary,
+    marginBottom: responsive.spacing(20, 24),
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: responsive.fontSize(22, 26),
     fontWeight: '700',
     color: colors.text.primary,
-  },
-  placeholder: {
-    width: 40,
   },
 
   // Progress Card
   progressCard: {
-    marginBottom: spacing.lg,
-    borderRadius: 20,
-    overflow: 'hidden',
-    ...shadows.goldGlow,
-  },
-  progressGradient: {
-    padding: spacing.lg,
+    backgroundColor: 'rgba(212, 175, 55, 0.1)',
+    borderRadius: responsive.width(16, 20),
+    padding: responsive.spacing(16, 20),
     borderWidth: 1,
-    borderColor: colors.accent.gold + '40',
-    borderRadius: 20,
+    borderColor: 'rgba(212, 175, 55, 0.25)',
   },
   progressHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: spacing.md,
+    marginBottom: responsive.spacing(12, 16),
   },
   trophyContainer: {
-    width: 56,
-    height: 56,
-    borderRadius: 16,
+    width: responsive.width(52, 64),
+    height: responsive.width(52, 64),
+    borderRadius: responsive.width(16, 18),
     backgroundColor: colors.accent.gold,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: spacing.md,
-  },
-  trophyEmoji: {
-    fontSize: 28,
+    marginRight: responsive.spacing(14, 18),
   },
   progressInfo: {
     flex: 1,
   },
   progressTitle: {
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 22),
     fontWeight: '700',
     color: colors.text.primary,
   },
   progressSubtitle: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.tertiary,
+    marginTop: 2,
   },
   progressPercent: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(28, 34),
     fontWeight: '800',
     color: colors.accent.gold,
   },
   progressBarContainer: {
-    marginTop: spacing.sm,
+    marginTop: responsive.spacing(4, 8),
   },
   progressBar: {
-    height: 8,
+    height: responsive.width(8, 10),
     backgroundColor: colors.background.tertiary,
-    borderRadius: 4,
+    borderRadius: responsive.width(4, 5),
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
     backgroundColor: colors.accent.gold,
-    borderRadius: 4,
+    borderRadius: responsive.width(4, 5),
   },
 
   // Tabs
   tabsContainer: {
-    paddingBottom: spacing.md,
-    gap: spacing.sm,
+    paddingBottom: responsive.spacing(4, 8),
+    gap: responsive.spacing(10, 14),
   },
   tab: {
-    flexDirection: 'row',
-    alignItems: 'center',
     backgroundColor: colors.background.secondary,
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
-    borderRadius: 20,
-    gap: spacing.xs,
-    marginRight: spacing.sm,
+    borderRadius: responsive.width(14, 18),
+    padding: responsive.spacing(12, 16),
+    minWidth: responsive.width(80, 100),
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'transparent',
+    marginRight: responsive.spacing(10, 14),
   },
-  tabSelected: {
-    backgroundColor: colors.accent.gold + '30',
-    borderWidth: 1,
-    borderColor: colors.accent.gold + '50',
-  },
-  tabIcon: {
-    fontSize: 16,
+  tabIconContainer: {
+    width: responsive.width(36, 44),
+    height: responsive.width(36, 44),
+    borderRadius: responsive.width(10, 12),
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: responsive.spacing(6, 8),
   },
   tabTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: colors.text.tertiary,
-  },
-  tabTitleSelected: {
-    color: colors.accent.gold,
+    fontSize: responsive.fontSize(14, 16),
     fontWeight: '600',
-  },
-
-  // Section Header
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: spacing.md,
-    marginTop: spacing.sm,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: colors.text.secondary,
-  },
-  sectionCount: {
-    fontSize: 14,
     color: colors.text.tertiary,
   },
 
-  // Achievement Card
+  // Achievement List
   achievementsList: {
-    gap: spacing.sm,
+    gap: responsive.spacing(10, 14),
   },
   achievementCard: {
-    borderRadius: 16,
-    overflow: 'hidden',
-    ...shadows.sm,
-  },
-  achievementGradient: {
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 16,
-  },
-  achievementContent: {
     flexDirection: 'row',
-    padding: spacing.md,
+    backgroundColor: colors.background.secondary,
+    borderRadius: responsive.width(14, 18),
+    padding: responsive.spacing(14, 18),
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+  },
+  achievementCardUnlocked: {
+    borderColor: 'rgba(212, 175, 55, 0.25)',
+    backgroundColor: 'rgba(212, 175, 55, 0.06)',
+  },
+  achievementCardHidden: {
+    opacity: 0.6,
   },
   achievementIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 14,
+    width: responsive.width(48, 56),
+    height: responsive.width(48, 56),
+    borderRadius: responsive.width(14, 16),
     backgroundColor: colors.background.tertiary,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: spacing.md,
+    marginRight: responsive.spacing(12, 16),
   },
   achievementIconUnlocked: {
-    backgroundColor: colors.accent.gold + '40',
+    backgroundColor: 'rgba(212, 175, 55, 0.2)',
   },
   achievementIconHidden: {
-    backgroundColor: colors.background.tertiary + '80',
+    backgroundColor: colors.background.tertiary,
   },
   achievementEmoji: {
-    fontSize: 24,
+    fontSize: responsive.fontSize(22, 26),
   },
   achievementInfo: {
     flex: 1,
   },
   achievementTitle: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
     color: colors.text.primary,
     marginBottom: 2,
   },
   achievementDescription: {
-    fontSize: 13,
+    fontSize: responsive.fontSize(13, 15),
     color: colors.text.tertiary,
-    lineHeight: 18,
+    lineHeight: responsive.fontSize(18, 22),
   },
   hiddenText: {
     color: colors.text.quaternary,
@@ -520,37 +460,40 @@ const styles = StyleSheet.create({
   achievementProgress: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: spacing.sm,
-    gap: spacing.sm,
+    marginTop: responsive.spacing(8, 10),
+    gap: responsive.spacing(8, 10),
   },
   miniProgressBar: {
     flex: 1,
-    height: 4,
+    height: responsive.width(4, 6),
     backgroundColor: colors.background.tertiary,
-    borderRadius: 2,
+    borderRadius: responsive.width(2, 3),
     overflow: 'hidden',
   },
   miniProgressFill: {
     height: '100%',
     backgroundColor: colors.accent.gold,
-    borderRadius: 2,
+    borderRadius: responsive.width(2, 3),
   },
   progressTextSmall: {
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     color: colors.text.tertiary,
-    width: 50,
+    width: responsive.width(50, 60),
     textAlign: 'right',
   },
   unlockedBadge: {
-    marginTop: spacing.sm,
-    backgroundColor: colors.accent.gold + '30',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: responsive.spacing(8, 10),
+    backgroundColor: 'rgba(212, 175, 55, 0.15)',
     alignSelf: 'flex-start',
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 2,
-    borderRadius: 8,
+    paddingHorizontal: responsive.spacing(10, 12),
+    paddingVertical: responsive.spacing(4, 6),
+    borderRadius: responsive.width(8, 10),
+    gap: responsive.spacing(4, 6),
   },
   unlockedText: {
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     fontWeight: '600',
     color: colors.accent.gold,
   },

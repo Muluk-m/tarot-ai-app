@@ -1,24 +1,34 @@
+/**
+ * Quiz Screen
+ * iPad and iOS adaptive layout
+ */
+
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
 import { useQuizStore } from '@/stores/quizStore';
 import { useLearningStore } from '@/stores/learningStore';
-import { getQuizById, type QuizQuestion } from '@/data/quiz-questions';
+import { getQuizById } from '@/data/quiz-questions';
 import { v4 as uuidv4 } from '@/utils/uuid';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Spacer,
+  responsive,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CheckIcon,
+  XIcon,
+  TrophyIcon,
+  ZapIcon,
+  BookIcon,
+} from '@/components/ui';
+import { IconButton, Button } from '@/components/ui/Buttons';
 
 type QuizState = 'intro' | 'question' | 'result';
 
@@ -53,20 +63,24 @@ export default function QuizScreen() {
     return () => {
       clearCurrentQuiz();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!quiz) {
     return (
-      <View style={styles.container}>
-        <SafeAreaView style={styles.safeArea}>
+      <ScreenContainer>
+        <SafeScrollView maxWidth="md">
           <View style={styles.errorContainer}>
+            <BookIcon size={48} color={colors.text.quaternary} />
             <Text style={styles.errorText}>Quiz not found</Text>
-            <TouchableOpacity onPress={() => router.back()} style={styles.backLink}>
-              <Text style={styles.backLinkText}>← Go Back</Text>
-            </TouchableOpacity>
+            <Button
+              title="Go Back"
+              onPress={() => router.back()}
+              variant="outline"
+            />
           </View>
-        </SafeAreaView>
-      </View>
+        </SafeScrollView>
+      </ScreenContainer>
     );
   }
 
@@ -80,7 +94,7 @@ export default function QuizScreen() {
   };
 
   const handleSelectAnswer = (answerId: string) => {
-    if (showExplanation) return; // Can't change after confirming
+    if (showExplanation) return;
     setSelectedAnswer(answerId);
   };
 
@@ -150,253 +164,227 @@ export default function QuizScreen() {
   // Intro Screen
   if (quizState === 'intro') {
     return (
-      <View style={styles.container}>
-        <LinearGradient
-          colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-          style={styles.backgroundGradient}
-        />
-
-        <SafeAreaView style={styles.safeArea}>
-          <View style={styles.introContent}>
-            <TouchableOpacity
+      <ScreenContainer>
+        <SafeScrollView maxWidth="md">
+          {/* Header */}
+          <Row justify="flex-start" align="center" style={styles.header}>
+            <IconButton
+              icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
               onPress={() => router.back()}
-              style={styles.closeButton}
-            >
-              <Text style={styles.closeIcon}>×</Text>
-            </TouchableOpacity>
+              variant="filled"
+              size="md"
+            />
+          </Row>
 
-            <View style={styles.introCenter}>
-              <View style={styles.quizIconLarge}>
-                <Text style={styles.quizEmoji}>🧠</Text>
-              </View>
-
-              <Text style={styles.quizTitle}>{quiz.title}</Text>
-              <Text style={styles.quizDescription}>{quiz.description}</Text>
-
-              <View style={styles.infoCards}>
-                <View style={styles.infoCard}>
-                  <Text style={styles.infoValue}>{quiz.questions.length}</Text>
-                  <Text style={styles.infoLabel}>Questions</Text>
-                </View>
-                <View style={styles.infoCard}>
-                  <Text style={styles.infoValue}>{quiz.passingScore}%</Text>
-                  <Text style={styles.infoLabel}>To Pass</Text>
-                </View>
-              </View>
+          {/* Intro Content */}
+          <View style={styles.introContent}>
+            <View style={styles.quizIconLarge}>
+              <ZapIcon size={responsive.width(40, 52)} color={colors.accent.purple} />
             </View>
 
-            <TouchableOpacity
-              onPress={handleStartQuiz}
-              style={styles.startButton}
-            >
-              <LinearGradient
-                colors={[colors.accent.gold, colors.accent.goldLight]}
-                style={styles.startGradient}
-              >
-                <Text style={styles.startButtonText}>Start Quiz</Text>
-              </LinearGradient>
-            </TouchableOpacity>
+            <Text style={styles.quizTitle}>{quiz.title}</Text>
+            <Text style={styles.quizDescription}>{quiz.description}</Text>
+
+            <View style={styles.infoCards}>
+              <View style={styles.infoCard}>
+                <Text style={styles.infoValue}>{quiz.questions.length}</Text>
+                <Text style={styles.infoLabel}>Questions</Text>
+              </View>
+              <View style={styles.infoCard}>
+                <Text style={styles.infoValue}>{quiz.passingScore}%</Text>
+                <Text style={styles.infoLabel}>To Pass</Text>
+              </View>
+            </View>
           </View>
-        </SafeAreaView>
-      </View>
+
+          <Spacer size={responsive.spacing(32, 48)} />
+
+          {/* Start Button */}
+          <Pressable
+            onPress={handleStartQuiz}
+            style={({ pressed }) => [
+              styles.startButton,
+              pressed && styles.buttonPressed,
+            ]}
+          >
+            <LinearGradient
+              colors={[colors.accent.gold, '#E5C158']}
+              style={styles.startGradient}
+            >
+              <Text style={styles.startButtonText}>Start Quiz</Text>
+            </LinearGradient>
+          </Pressable>
+
+          <Spacer size={responsive.spacing(32, 48)} />
+        </SafeScrollView>
+      </ScreenContainer>
     );
   }
 
   // Results Screen
   if (quizState === 'result' && results) {
     return (
-      <View style={styles.container}>
-        <LinearGradient
-          colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-          style={styles.backgroundGradient}
-        />
-
-        <SafeAreaView style={styles.safeArea}>
-          <ScrollView contentContainerStyle={styles.resultContent}>
-            <View style={styles.resultCenter}>
-              <View
-                style={[
-                  styles.resultIcon,
-                  { backgroundColor: results.passed ? '#10B981' : colors.error },
-                ]}
-              >
-                <Text style={styles.resultEmoji}>
-                  {results.passed ? '🎉' : '💪'}
-                </Text>
-              </View>
-
-              <Text style={styles.resultTitle}>
-                {results.passed ? 'Congratulations!' : 'Keep Learning!'}
-              </Text>
-
-              <Text
-                style={[
-                  styles.resultScore,
-                  { color: results.passed ? '#10B981' : colors.error },
-                ]}
-              >
-                {results.score}%
-              </Text>
-
-              <Text style={styles.resultSubtitle}>
-                {results.correct} of {results.total} correct
-              </Text>
-
+      <ScreenContainer>
+        <SafeScrollView maxWidth="md">
+          {/* Result Content */}
+          <View style={styles.resultContent}>
+            <View
+              style={[
+                styles.resultIcon,
+                { backgroundColor: results.passed ? '#10B981' : colors.error },
+              ]}
+            >
               {results.passed ? (
-                <View style={styles.passBadge}>
-                  <Text style={styles.passBadgeText}>✓ Quiz Passed</Text>
-                </View>
+                <TrophyIcon size={responsive.width(40, 52)} color={colors.text.primary} />
               ) : (
-                <Text style={styles.failText}>
-                  You need {quiz.passingScore}% to pass. Study the lessons and try again!
-                </Text>
+                <BookIcon size={responsive.width(40, 52)} color={colors.text.primary} />
               )}
             </View>
 
-            <View style={styles.resultButtons}>
-              {!results.passed && (
-                <TouchableOpacity
-                  onPress={() => {
-                    clearCurrentQuiz();
-                    setQuizState('intro');
-                    setCurrentQuestionIndex(0);
-                    setSelectedAnswer(null);
-                    setShowExplanation(false);
-                    setResults(null);
-                  }}
-                  style={styles.retryButton}
-                >
-                  <Text style={styles.retryButtonText}>Try Again</Text>
-                </TouchableOpacity>
-              )}
+            <Text style={styles.resultTitle}>
+              {results.passed ? 'Congratulations!' : 'Keep Trying!'}
+            </Text>
 
-              <TouchableOpacity
-                onPress={() => router.back()}
-                style={styles.doneButton}
+            <Text
+              style={[
+                styles.resultScore,
+                { color: results.passed ? '#10B981' : colors.error },
+              ]}
+            >
+              {results.score}%
+            </Text>
+
+            <Text style={styles.resultSubtitle}>
+              {results.correct} / {results.total} correct
+            </Text>
+
+            {results.passed ? (
+              <View style={styles.passBadge}>
+                <CheckIcon size={16} color="#10B981" />
+                <Text style={styles.passBadgeText}>Quiz Passed</Text>
+              </View>
+            ) : (
+              <Text style={styles.failText}>
+                You need {quiz.passingScore}% to pass. Review the course and try again!
+              </Text>
+            )}
+          </View>
+
+          <Spacer size={responsive.spacing(32, 48)} />
+
+          {/* Action Buttons */}
+          <View style={styles.resultButtons}>
+            {!results.passed && (
+              <Pressable
+                onPress={() => {
+                  clearCurrentQuiz();
+                  setQuizState('intro');
+                  setCurrentQuestionIndex(0);
+                  setSelectedAnswer(null);
+                  setShowExplanation(false);
+                  setResults(null);
+                }}
+                style={styles.retryButton}
               >
-                <LinearGradient
-                  colors={
-                    results.passed
-                      ? ['#10B981', '#34D399']
-                      : [colors.accent.gold, colors.accent.goldLight]
-                  }
-                  style={styles.doneGradient}
-                >
-                  <Text style={styles.doneButtonText}>
-                    {results.passed ? 'Continue Learning' : 'Back to Quizzes'}
-                  </Text>
-                </LinearGradient>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        </SafeAreaView>
-      </View>
+                <Text style={styles.retryButtonText}>Try Again</Text>
+              </Pressable>
+            )}
+
+            <Pressable
+              onPress={() => router.back()}
+              style={({ pressed }) => [
+                styles.doneButton,
+                pressed && styles.buttonPressed,
+              ]}
+            >
+              <LinearGradient
+                colors={
+                  results.passed
+                    ? ['#10B981', '#34D399']
+                    : [colors.accent.gold, '#E5C158']
+                }
+                style={styles.doneGradient}
+              >
+                <Text style={styles.doneButtonText}>
+                  {results.passed ? 'Continue Learning' : 'Go Back'}
+                </Text>
+              </LinearGradient>
+            </Pressable>
+          </View>
+
+          <Spacer size={responsive.spacing(32, 48)} />
+        </SafeScrollView>
+      </ScreenContainer>
     );
   }
 
   // Question Screen
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-        style={styles.backgroundGradient}
-      />
+    <ScreenContainer>
+      {/* Header with Progress */}
+      <View style={styles.questionHeader}>
+        <IconButton
+          icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
+          onPress={() => {
+            clearCurrentQuiz();
+            router.back();
+          }}
+          variant="filled"
+          size="md"
+        />
 
-      <SafeAreaView style={styles.safeArea}>
-        {/* Header */}
-        <View style={styles.questionHeader}>
-          <TouchableOpacity
-            onPress={() => {
-              clearCurrentQuiz();
-              router.back();
-            }}
-            style={styles.closeButton}
-          >
-            <Text style={styles.closeIcon}>×</Text>
-          </TouchableOpacity>
+        <View style={styles.progressContainer}>
+          <View style={styles.progressBar}>
+            <View style={[styles.progressFill, { width: `${progress}%` }]} />
+          </View>
+          <Text style={styles.progressText}>
+            {currentQuestionIndex + 1} / {quiz.questions.length}
+          </Text>
+        </View>
+      </View>
 
-          <View style={styles.progressContainer}>
-            <View style={styles.progressBar}>
-              <View style={[styles.progressFill, { width: `${progress}%` }]} />
-            </View>
-            <Text style={styles.progressText}>
-              {currentQuestionIndex + 1} / {quiz.questions.length}
+      <ScrollView
+        contentContainerStyle={styles.questionScrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Question Card */}
+        <View style={styles.questionCard}>
+          <View style={styles.questionTypeTag}>
+            <Text style={styles.questionTypeText}>
+              {currentQuestion.type === 'true-false'
+                ? 'True/False'
+                : currentQuestion.type === 'scenario'
+                ? 'Scenario'
+                : 'Multiple Choice'}
             </Text>
           </View>
+
+          <Text style={styles.questionText}>{currentQuestion.question}</Text>
         </View>
 
-        <ScrollView
-          contentContainerStyle={styles.questionContent}
-          showsVerticalScrollIndicator={false}
-        >
-          {/* Question */}
-          <View style={styles.questionCard}>
-            <View style={styles.questionTypeTag}>
-              <Text style={styles.questionTypeText}>
-                {currentQuestion.type === 'true-false'
-                  ? 'True or False'
-                  : currentQuestion.type === 'scenario'
-                  ? 'Scenario'
-                  : 'Multiple Choice'}
-              </Text>
-            </View>
+        <Spacer size={responsive.spacing(16, 24)} />
 
-            <Text style={styles.questionText}>{currentQuestion.question}</Text>
-          </View>
-
-          {/* Options */}
-          <View style={styles.optionsContainer}>
-            {currentQuestion.type === 'true-false' ? (
-              <>
-                {['true', 'false'].map((option) => {
-                  const isSelected = selectedAnswer === option;
-                  const isCorrect = option === currentQuestion.correctAnswer;
-                  const showCorrect = showExplanation && isCorrect;
-                  const showWrong = showExplanation && isSelected && !isCorrect;
-
-                  return (
-                    <TouchableOpacity
-                      key={option}
-                      onPress={() => handleSelectAnswer(option)}
-                      disabled={showExplanation}
-                      style={[
-                        styles.optionButton,
-                        isSelected && !showExplanation && styles.optionSelected,
-                        showCorrect && styles.optionCorrect,
-                        showWrong && styles.optionWrong,
-                      ]}
-                    >
-                      <Text
-                        style={[
-                          styles.optionText,
-                          (isSelected || showCorrect) && styles.optionTextSelected,
-                        ]}
-                      >
-                        {option === 'true' ? 'True' : 'False'}
-                      </Text>
-                      {showCorrect && <Text style={styles.checkIcon}>✓</Text>}
-                      {showWrong && <Text style={styles.wrongIcon}>✕</Text>}
-                    </TouchableOpacity>
-                  );
-                })}
-              </>
-            ) : (
-              currentQuestion.options?.map((option) => {
-                const isSelected = selectedAnswer === option.id;
-                const isCorrect = option.isCorrect;
+        {/* Options */}
+        <View style={styles.optionsContainer}>
+          {currentQuestion.type === 'true-false' ? (
+            <>
+              {['true', 'false'].map((option) => {
+                const isSelected = selectedAnswer === option;
+                const isCorrect = option === currentQuestion.correctAnswer;
                 const showCorrect = showExplanation && isCorrect;
                 const showWrong = showExplanation && isSelected && !isCorrect;
 
                 return (
-                  <TouchableOpacity
-                    key={option.id}
-                    onPress={() => handleSelectAnswer(option.id)}
+                  <Pressable
+                    key={option}
+                    onPress={() => handleSelectAnswer(option)}
                     disabled={showExplanation}
-                    style={[
+                    style={({ pressed }) => [
                       styles.optionButton,
                       isSelected && !showExplanation && styles.optionSelected,
                       showCorrect && styles.optionCorrect,
                       showWrong && styles.optionWrong,
+                      pressed && !showExplanation && styles.optionPressed,
                     ]}
                   >
                     <Text
@@ -405,328 +393,332 @@ export default function QuizScreen() {
                         (isSelected || showCorrect) && styles.optionTextSelected,
                       ]}
                     >
-                      {option.text}
+                      {option === 'true' ? 'True' : 'False'}
                     </Text>
-                    {showCorrect && <Text style={styles.checkIcon}>✓</Text>}
-                    {showWrong && <Text style={styles.wrongIcon}>✕</Text>}
-                  </TouchableOpacity>
+                    {showCorrect && <CheckIcon size={20} color="#10B981" />}
+                    {showWrong && <XIcon size={20} color={colors.error} />}
+                  </Pressable>
                 );
-              })
-            )}
-          </View>
+              })}
+            </>
+          ) : (
+            currentQuestion.options?.map((option) => {
+              const isSelected = selectedAnswer === option.id;
+              const isCorrect = option.isCorrect;
+              const showCorrect = showExplanation && isCorrect;
+              const showWrong = showExplanation && isSelected && !isCorrect;
 
-          {/* Explanation */}
-          {showExplanation && (
+              return (
+                <Pressable
+                  key={option.id}
+                  onPress={() => handleSelectAnswer(option.id)}
+                  disabled={showExplanation}
+                  style={({ pressed }) => [
+                    styles.optionButton,
+                    isSelected && !showExplanation && styles.optionSelected,
+                    showCorrect && styles.optionCorrect,
+                    showWrong && styles.optionWrong,
+                    pressed && !showExplanation && styles.optionPressed,
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.optionText,
+                      (isSelected || showCorrect) && styles.optionTextSelected,
+                    ]}
+                  >
+                    {option.text}
+                  </Text>
+                  {showCorrect && <CheckIcon size={20} color="#10B981" />}
+                  {showWrong && <XIcon size={20} color={colors.error} />}
+                </Pressable>
+              );
+            })
+          )}
+        </View>
+
+        {/* Explanation */}
+        {showExplanation && (
+          <>
+            <Spacer size={responsive.spacing(16, 24)} />
             <View style={styles.explanationCard}>
               <Text style={styles.explanationTitle}>
-                {isCorrectAnswer(selectedAnswer!) ? '✓ Correct!' : '✕ Incorrect'}
+                {isCorrectAnswer(selectedAnswer!) ? 'Correct!' : 'Incorrect'}
               </Text>
               <Text style={styles.explanationText}>
                 {currentQuestion.explanation}
               </Text>
             </View>
+          </>
+        )}
+
+        <Spacer size={responsive.spacing(100, 120)} />
+      </ScrollView>
+
+      {/* Bottom Action */}
+      <View style={styles.bottomAction}>
+        <LinearGradient
+          colors={['transparent', colors.background.primary]}
+          style={styles.bottomGradient}
+        >
+          {!showExplanation ? (
+            <Pressable
+              onPress={handleConfirmAnswer}
+              disabled={!selectedAnswer}
+              style={({ pressed }) => [
+                styles.actionButton,
+                !selectedAnswer && styles.actionButtonDisabled,
+                pressed && selectedAnswer && styles.buttonPressed,
+              ]}
+            >
+              <LinearGradient
+                colors={
+                  selectedAnswer
+                    ? [colors.accent.gold, '#E5C158']
+                    : [colors.background.tertiary, colors.background.tertiary]
+                }
+                style={styles.actionGradient}
+              >
+                <Text
+                  style={[
+                    styles.actionButtonText,
+                    !selectedAnswer && styles.actionButtonTextDisabled,
+                  ]}
+                >
+                  Confirm Answer
+                </Text>
+              </LinearGradient>
+            </Pressable>
+          ) : (
+            <Pressable
+              onPress={handleNextQuestion}
+              style={({ pressed }) => [
+                styles.actionButton,
+                pressed && styles.buttonPressed,
+              ]}
+            >
+              <LinearGradient
+                colors={['#10B981', '#34D399']}
+                style={styles.actionGradient}
+              >
+                <Text style={styles.actionButtonText}>
+                  {currentQuestionIndex < quiz.questions.length - 1
+                    ? 'Next Question'
+                    : 'View Results'}
+                </Text>
+                <ChevronRightIcon size={18} color={colors.background.primary} />
+              </LinearGradient>
+            </Pressable>
           )}
-
-          {/* Bottom spacing */}
-          <View style={{ height: 100 }} />
-        </ScrollView>
-
-        {/* Bottom Action */}
-        <View style={styles.bottomAction}>
-          <LinearGradient
-            colors={['transparent', colors.background.primary]}
-            style={styles.bottomGradient}
-          >
-            {!showExplanation ? (
-              <TouchableOpacity
-                onPress={handleConfirmAnswer}
-                disabled={!selectedAnswer}
-                style={[
-                  styles.actionButton,
-                  !selectedAnswer && styles.actionButtonDisabled,
-                ]}
-              >
-                <LinearGradient
-                  colors={
-                    selectedAnswer
-                      ? [colors.accent.gold, colors.accent.goldLight]
-                      : [colors.background.tertiary, colors.background.tertiary]
-                  }
-                  style={styles.actionGradient}
-                >
-                  <Text
-                    style={[
-                      styles.actionButtonText,
-                      !selectedAnswer && styles.actionButtonTextDisabled,
-                    ]}
-                  >
-                    Check Answer
-                  </Text>
-                </LinearGradient>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                onPress={handleNextQuestion}
-                style={styles.actionButton}
-              >
-                <LinearGradient
-                  colors={['#10B981', '#34D399']}
-                  style={styles.actionGradient}
-                >
-                  <Text style={styles.actionButtonText}>
-                    {currentQuestionIndex < quiz.questions.length - 1
-                      ? 'Next Question →'
-                      : 'See Results'}
-                  </Text>
-                </LinearGradient>
-              </TouchableOpacity>
-            )}
-          </LinearGradient>
-        </View>
-      </SafeAreaView>
-    </View>
+        </LinearGradient>
+      </View>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
-  backgroundGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  safeArea: {
-    flex: 1,
+  header: {
+    marginBottom: responsive.spacing(16, 20),
   },
   errorContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: responsive.spacing(24, 32),
+    gap: responsive.spacing(16, 20),
   },
   errorText: {
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 22),
     color: colors.text.secondary,
-    marginBottom: spacing.md,
-  },
-  backLink: {
-    padding: spacing.md,
-  },
-  backLinkText: {
-    fontSize: 16,
-    color: colors.accent.gold,
   },
 
   // Intro Screen
   introContent: {
-    flex: 1,
-    padding: spacing.lg,
-  },
-  closeButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background.tertiary,
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  closeIcon: {
-    fontSize: 24,
-    color: colors.text.secondary,
-    marginTop: -2,
-  },
-  introCenter: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: responsive.spacing(40, 60),
   },
   quizIconLarge: {
-    width: 100,
-    height: 100,
-    borderRadius: 30,
-    backgroundColor: colors.accent.purple + '30',
+    width: responsive.width(100, 130),
+    height: responsive.width(100, 130),
+    borderRadius: responsive.width(30, 40),
+    backgroundColor: 'rgba(139, 92, 246, 0.15)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: spacing.lg,
-  },
-  quizEmoji: {
-    fontSize: 48,
+    marginBottom: responsive.spacing(24, 32),
   },
   quizTitle: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(28, 34),
     fontWeight: '700',
     color: colors.text.primary,
     textAlign: 'center',
-    marginBottom: spacing.md,
+    marginBottom: responsive.spacing(12, 16),
   },
   quizDescription: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     color: colors.text.tertiary,
     textAlign: 'center',
-    lineHeight: 24,
-    marginBottom: spacing.xl,
-    paddingHorizontal: spacing.lg,
+    lineHeight: responsive.fontSize(24, 28),
+    marginBottom: responsive.spacing(32, 40),
+    paddingHorizontal: responsive.spacing(16, 24),
   },
   infoCards: {
     flexDirection: 'row',
-    gap: spacing.lg,
+    gap: responsive.spacing(20, 28),
   },
   infoCard: {
     backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-    padding: spacing.lg,
+    borderRadius: responsive.width(16, 20),
+    padding: responsive.spacing(20, 28),
     alignItems: 'center',
-    minWidth: 100,
+    minWidth: responsive.width(100, 130),
   },
   infoValue: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(28, 34),
     fontWeight: '700',
     color: colors.accent.gold,
   },
   infoLabel: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.tertiary,
-    marginTop: spacing.xs,
+    marginTop: responsive.spacing(4, 6),
   },
   startButton: {
-    borderRadius: 16,
+    borderRadius: responsive.width(16, 20),
     overflow: 'hidden',
-    ...shadows.goldGlow,
+    shadowColor: colors.accent.gold,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
+    marginHorizontal: responsive.spacing(16, 24),
   },
   startGradient: {
-    paddingVertical: spacing.lg,
+    paddingVertical: responsive.spacing(18, 22),
     alignItems: 'center',
-    borderRadius: 16,
+    borderRadius: responsive.width(16, 20),
   },
   startButtonText: {
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 22),
     fontWeight: '700',
     color: colors.background.primary,
+  },
+  buttonPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.99 }],
   },
 
   // Question Screen
   questionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: spacing.lg,
-    gap: spacing.md,
+    paddingHorizontal: responsive.spacing(16, 24),
+    paddingVertical: responsive.spacing(12, 16),
+    gap: responsive.spacing(12, 16),
   },
   progressContainer: {
     flex: 1,
-    gap: spacing.xs,
+    gap: responsive.spacing(6, 8),
   },
   progressBar: {
-    height: 6,
+    height: responsive.width(8, 10),
     backgroundColor: colors.background.tertiary,
-    borderRadius: 3,
+    borderRadius: responsive.width(4, 5),
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
     backgroundColor: colors.accent.gold,
-    borderRadius: 3,
+    borderRadius: responsive.width(4, 5),
   },
   progressText: {
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     color: colors.text.tertiary,
     textAlign: 'right',
   },
-  questionContent: {
-    padding: spacing.lg,
+  questionScrollContent: {
+    paddingHorizontal: responsive.spacing(16, 24),
   },
   questionCard: {
     backgroundColor: colors.background.secondary,
-    borderRadius: 20,
-    padding: spacing.lg,
-    marginBottom: spacing.lg,
+    borderRadius: responsive.width(18, 22),
+    padding: responsive.spacing(20, 28),
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   questionTypeTag: {
-    backgroundColor: colors.accent.purple + '30',
+    backgroundColor: 'rgba(139, 92, 246, 0.2)',
     alignSelf: 'flex-start',
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
-    borderRadius: 8,
-    marginBottom: spacing.md,
+    paddingHorizontal: responsive.spacing(12, 16),
+    paddingVertical: responsive.spacing(6, 8),
+    borderRadius: responsive.width(8, 10),
+    marginBottom: responsive.spacing(14, 18),
   },
   questionTypeText: {
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     fontWeight: '600',
     color: colors.accent.purple,
-    textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   questionText: {
-    fontSize: 20,
+    fontSize: responsive.fontSize(18, 22),
     fontWeight: '600',
     color: colors.text.primary,
-    lineHeight: 30,
+    lineHeight: responsive.fontSize(28, 34),
   },
   optionsContainer: {
-    gap: spacing.md,
+    gap: responsive.spacing(12, 16),
   },
   optionButton: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.background.secondary,
-    borderRadius: 14,
-    padding: spacing.lg,
+    borderRadius: responsive.width(14, 18),
+    padding: responsive.spacing(16, 20),
     borderWidth: 2,
     borderColor: colors.background.tertiary,
   },
   optionSelected: {
     borderColor: colors.accent.gold,
-    backgroundColor: colors.accent.gold + '15',
+    backgroundColor: 'rgba(212, 175, 55, 0.1)',
   },
   optionCorrect: {
     borderColor: '#10B981',
-    backgroundColor: '#10B981' + '20',
+    backgroundColor: 'rgba(16, 185, 129, 0.15)',
   },
   optionWrong: {
     borderColor: colors.error,
-    backgroundColor: colors.error + '20',
+    backgroundColor: 'rgba(239, 68, 68, 0.15)',
+  },
+  optionPressed: {
+    opacity: 0.9,
   },
   optionText: {
     flex: 1,
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     color: colors.text.secondary,
-    lineHeight: 22,
+    lineHeight: responsive.fontSize(24, 28),
   },
   optionTextSelected: {
     color: colors.text.primary,
     fontWeight: '500',
   },
-  checkIcon: {
-    fontSize: 20,
-    color: '#10B981',
-    fontWeight: '700',
-  },
-  wrongIcon: {
-    fontSize: 20,
-    color: colors.error,
-    fontWeight: '700',
-  },
   explanationCard: {
     backgroundColor: colors.background.tertiary,
-    borderRadius: 16,
-    padding: spacing.lg,
-    marginTop: spacing.lg,
+    borderRadius: responsive.width(14, 18),
+    padding: responsive.spacing(16, 20),
     borderLeftWidth: 4,
     borderLeftColor: colors.accent.gold,
   },
   explanationTitle: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '700',
     color: colors.text.primary,
-    marginBottom: spacing.sm,
+    marginBottom: responsive.spacing(8, 10),
   },
   explanationText: {
-    fontSize: 15,
+    fontSize: responsive.fontSize(15, 17),
     color: colors.text.secondary,
-    lineHeight: 24,
+    lineHeight: responsive.fontSize(24, 28),
   },
 
   // Bottom Action
@@ -737,25 +729,33 @@ const styles = StyleSheet.create({
     right: 0,
   },
   bottomGradient: {
-    paddingTop: spacing.xl,
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.xl,
+    paddingTop: responsive.spacing(32, 40),
+    paddingHorizontal: responsive.spacing(16, 24),
+    paddingBottom: responsive.spacing(32, 40),
   },
   actionButton: {
-    borderRadius: 14,
+    borderRadius: responsive.width(14, 18),
     overflow: 'hidden',
-    ...shadows.md,
+    shadowColor: colors.accent.gold,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
   },
   actionButtonDisabled: {
-    opacity: 0.7,
+    shadowOpacity: 0,
+    elevation: 0,
   },
   actionGradient: {
-    paddingVertical: spacing.lg,
+    flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 14,
+    justifyContent: 'center',
+    paddingVertical: responsive.spacing(16, 20),
+    borderRadius: responsive.width(14, 18),
+    gap: responsive.spacing(8, 10),
   },
   actionButtonText: {
-    fontSize: 17,
+    fontSize: responsive.fontSize(17, 20),
     fontWeight: '700',
     color: colors.background.primary,
   },
@@ -765,84 +765,85 @@ const styles = StyleSheet.create({
 
   // Results Screen
   resultContent: {
-    flex: 1,
-    padding: spacing.lg,
-    justifyContent: 'center',
-  },
-  resultCenter: {
     alignItems: 'center',
-    marginBottom: spacing.xxl,
+    paddingTop: responsive.spacing(60, 80),
   },
   resultIcon: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: responsive.width(100, 130),
+    height: responsive.width(100, 130),
+    borderRadius: responsive.width(50, 65),
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: spacing.lg,
-  },
-  resultEmoji: {
-    fontSize: 48,
+    marginBottom: responsive.spacing(24, 32),
   },
   resultTitle: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(28, 34),
     fontWeight: '700',
     color: colors.text.primary,
-    marginBottom: spacing.sm,
+    marginBottom: responsive.spacing(12, 16),
   },
   resultScore: {
-    fontSize: 64,
+    fontSize: responsive.fontSize(64, 80),
     fontWeight: '800',
-    marginBottom: spacing.sm,
+    marginBottom: responsive.spacing(12, 16),
   },
   resultSubtitle: {
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 22),
     color: colors.text.tertiary,
-    marginBottom: spacing.lg,
+    marginBottom: responsive.spacing(20, 28),
   },
   passBadge: {
-    backgroundColor: '#10B981' + '30',
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.sm,
-    borderRadius: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+    paddingHorizontal: responsive.spacing(20, 28),
+    paddingVertical: responsive.spacing(12, 16),
+    borderRadius: responsive.width(20, 24),
+    gap: responsive.spacing(8, 10),
   },
   passBadgeText: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
     color: '#10B981',
   },
   failText: {
-    fontSize: 15,
+    fontSize: responsive.fontSize(15, 17),
     color: colors.text.tertiary,
     textAlign: 'center',
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: responsive.spacing(24, 32),
+    lineHeight: responsive.fontSize(22, 26),
   },
   resultButtons: {
-    gap: spacing.md,
+    gap: responsive.spacing(12, 16),
+    paddingHorizontal: responsive.spacing(16, 24),
   },
   retryButton: {
     backgroundColor: colors.background.secondary,
-    borderRadius: 14,
-    paddingVertical: spacing.lg,
+    borderRadius: responsive.width(14, 18),
+    paddingVertical: responsive.spacing(16, 20),
     alignItems: 'center',
   },
   retryButtonText: {
-    fontSize: 17,
+    fontSize: responsive.fontSize(17, 20),
     fontWeight: '600',
     color: colors.text.secondary,
   },
   doneButton: {
-    borderRadius: 14,
+    borderRadius: responsive.width(14, 18),
     overflow: 'hidden',
-    ...shadows.md,
+    shadowColor: '#10B981',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
   },
   doneGradient: {
-    paddingVertical: spacing.lg,
+    paddingVertical: responsive.spacing(16, 20),
     alignItems: 'center',
-    borderRadius: 14,
+    borderRadius: responsive.width(14, 18),
   },
   doneButtonText: {
-    fontSize: 17,
+    fontSize: responsive.fontSize(17, 20),
     fontWeight: '700',
     color: colors.background.primary,
   },

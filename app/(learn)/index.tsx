@@ -1,6 +1,6 @@
 /**
- * Learning Hub - 学习中心
- * iPad 和 iOS 适配
+ * Learning Hub
+ * iPad and iOS adaptive layout
  */
 
 import React from 'react';
@@ -81,28 +81,28 @@ export default function LearnHub() {
             variant="filled"
             size="md"
           />
-          <Text style={styles.headerTitle}>学习中心</Text>
+          <Text style={styles.headerTitle}>Learning Hub</Text>
           <View style={{ width: responsive.width(40, 48) }} />
         </Row>
 
         {/* Level Progress Hero */}
         <HeroCard
           title={levelInfo.title}
-          subtitle={`Level ${levelInfo.level} · ${masteredCards.length}/${cardsForNextLevel} 卡牌已掌握`}
+          subtitle={`Level ${levelInfo.level} · ${masteredCards.length}/${cardsForNextLevel} cards mastered`}
           icon={<AwardIcon size={responsive.width(28, 32)} color="#D4AF37" />}
           onPress={() => router.push('/(learn)/achievements')}
           progress={levelProgress}
           progressLabel={`${experiencePoints} XP`}
-          actionText="查看成就"
+          actionText="View Achievements"
           theme="dark"
         />
 
         {/* Quick Stats */}
         <StatCard
           items={[
-            { value: studyStreak, label: '连续学习' },
-            { value: completedLessons.length, label: '已完成课程' },
-            { value: `${overallProgress}%`, label: '总进度' },
+            { value: studyStreak, label: 'Day Streak' },
+            { value: completedLessons.length, label: 'Completed' },
+            { value: `${overallProgress}%`, label: 'Progress' },
           ]}
           style={styles.statsCard}
         />
@@ -110,19 +110,19 @@ export default function LearnHub() {
         <Spacer size={responsive.spacing(20, 28)} />
 
         {/* Quick Access - Grid for tablets, column for phones */}
-        <SectionHeader title="快速开始" subtitle="继续你的学习之旅" />
+        <SectionHeader title="Quick Start" subtitle="Continue your learning journey" />
 
         <Row gap={responsive.spacing(12, 16)} style={styles.quickGrid}>
           <QuickCard
-            title="课程学习"
-            subtitle={`${completedCourses.length}/13 已完成`}
+            title="Courses"
+            subtitle={`${completedCourses.length}/13 completed`}
             icon={<BookIcon size={responsive.width(24, 28)} color="#10B981" />}
             onPress={() => router.push('/(learn)/courses')}
             theme="green"
           />
           <QuickCard
-            title="闪卡记忆"
-            subtitle={cardsDue > 0 ? `${cardsDue} 张待复习` : '随时练习'}
+            title="Flashcards"
+            subtitle={cardsDue > 0 ? `${cardsDue} cards due` : 'Practice anytime'}
             icon={<CardsIcon size={responsive.width(24, 28)} color="#8B5CF6" />}
             onPress={() => router.push('/(learn)/flashcards')}
             theme="purple"
@@ -132,15 +132,15 @@ export default function LearnHub() {
         {isTablet && (
           <Row gap={responsive.spacing(12, 16)} style={styles.quickGrid}>
             <QuickCard
-              title="知识测验"
-              subtitle="检验学习成果"
+              title="Quizzes"
+              subtitle="Test your knowledge"
               icon={<TrophyIcon size={responsive.width(24, 28)} color="#22D3EE" />}
               onPress={() => router.push('/(learn)/quizzes')}
               theme="cyan"
             />
             <QuickCard
-              title="卡牌百科"
-              subtitle={`${masteredCards.length}/78 已掌握`}
+              title="Encyclopedia"
+              subtitle={`${masteredCards.length}/78 mastered`}
               icon={<GridIcon size={responsive.width(24, 28)} color="#D4AF37" />}
               onPress={() => router.push('/(learn)/encyclopedia')}
               theme="gold"
@@ -152,9 +152,9 @@ export default function LearnHub() {
 
         {/* Learning Modules */}
         <SectionHeader
-          title="学习模块"
+          title="Learning Modules"
           action={{
-            label: '查看全部',
+            label: 'View All',
             onPress: () => router.push('/(learn)/courses'),
           }}
         />
@@ -163,8 +163,8 @@ export default function LearnHub() {
           {!isTablet && (
             <>
               <ListCard
-                title="知识测验"
-                subtitle="检验你的塔罗知识"
+                title="Quizzes"
+                subtitle="Test your tarot knowledge"
                 icon={<TrophyIcon size={22} color="#22D3EE" />}
                 onPress={() => router.push('/(learn)/quizzes')}
                 theme="cyan"
@@ -174,8 +174,8 @@ export default function LearnHub() {
           )}
 
           <ListCard
-            title="成就系统"
-            subtitle={`${getTotalUnlocked()} 个已解锁 (${getUnlockPercentage()}%)`}
+            title="Achievements"
+            subtitle={`${getTotalUnlocked()} unlocked (${getUnlockPercentage()}%)`}
             icon={<AwardIcon size={22} color="#D4AF37" />}
             onPress={() => router.push('/(learn)/achievements')}
             theme="gold"
@@ -187,8 +187,8 @@ export default function LearnHub() {
           <Spacer size={responsive.spacing(10, 12)} />
 
           <ListCard
-            title="学习日记"
-            subtitle="记录你的学习心得"
+            title="Journal"
+            subtitle="Record your learning insights"
             icon={<EditIcon size={22} color="#F472B6" />}
             onPress={() => router.push('/(learn)/journal')}
             theme="purple"
@@ -198,8 +198,8 @@ export default function LearnHub() {
 
           {!isTablet && (
             <ListCard
-              title="卡牌百科"
-              subtitle={`${masteredCards.length}/78 张卡牌已掌握`}
+              title="Encyclopedia"
+              subtitle={`${masteredCards.length}/78 cards mastered`}
               icon={<GridIcon size={22} color="#D4AF37" />}
               onPress={() => router.push('/(learn)/encyclopedia')}
               theme="gold"
@@ -216,8 +216,8 @@ export default function LearnHub() {
               <TargetIcon size={24} color="#F59E0B" />
             </View>
             <View style={styles.dailyGoalText}>
-              <Text style={styles.dailyGoalTitle}>今日目标</Text>
-              <Text style={styles.dailyGoalSubtitle}>完成 3 张卡牌学习</Text>
+              <Text style={styles.dailyGoalTitle}>Daily Goal</Text>
+              <Text style={styles.dailyGoalSubtitle}>Complete 3 card lessons</Text>
             </View>
             <View style={styles.dailyGoalProgress}>
               <ProgressRing progress={66} size={48} strokeWidth={4} color="#F59E0B" />

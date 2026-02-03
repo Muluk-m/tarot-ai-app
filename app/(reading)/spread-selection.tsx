@@ -82,16 +82,16 @@ export default function SpreadSelection() {
 
         {/* Title Section */}
         <View style={styles.titleSection}>
-          <Text style={styles.title}>Select Your Spread</Text>
+          <Text style={styles.title}>选择牌阵</Text>
           <Text style={styles.subtitle}>
-            Choose a reading type to begin your journey
+            选择一种解读方式开始你的旅程
           </Text>
         </View>
 
         {/* Unlimited Badge */}
         <View style={styles.unlimitedBadge}>
           <SparklesIcon size={16} color="#D4AF37" />
-          <Text style={styles.unlimitedText}>Unlimited Readings</Text>
+          <Text style={styles.unlimitedText}>无限次解读</Text>
         </View>
 
         <Spacer size={responsive.spacing(24, 32)} />
@@ -139,7 +139,7 @@ export default function SpreadSelection() {
 
               {/* Card Count Badge */}
               <Badge
-                text={`${option.config.cardCount} ${option.config.cardCount === 1 ? 'Card' : 'Cards'}`}
+                text={`${option.config.cardCount} 张牌`}
                 theme={option.key === 'single' ? 'gold' : 'purple'}
               />
 
@@ -159,7 +159,7 @@ export default function SpreadSelection() {
         <Spacer size={responsive.spacing(24, 32)} />
 
         {/* Disclaimer */}
-        <Text style={styles.disclaimer}>For entertainment purposes only</Text>
+        <Text style={styles.disclaimer}>仅供娱乐参考</Text>
 
         <Spacer size={responsive.spacing(32, 48)} />
       </SafeScrollView>

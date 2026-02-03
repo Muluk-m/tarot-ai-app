@@ -1,6 +1,6 @@
 /**
- * Course Detail Screen - 课程详情
- * iPad 和 iOS 适配
+ * Course Detail Screen
+ * iPad and iOS adaptive layout
  */
 
 import React from 'react';
@@ -43,10 +43,10 @@ const STAGE_COLORS: Record<string, string> = {
 };
 
 const STAGE_NAMES: Record<string, string> = {
-  beginner: '入门',
-  intermediate: '进阶',
-  advanced: '高级',
-  master: '大师',
+  beginner: 'Beginner',
+  intermediate: 'Intermediate',
+  advanced: 'Advanced',
+  master: 'Master',
 };
 
 export default function CourseDetailScreen() {
@@ -64,9 +64,9 @@ export default function CourseDetailScreen() {
       <ScreenContainer>
         <SafeScrollView maxWidth="md">
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>课程不存在</Text>
+            <Text style={styles.errorText}>Course not found</Text>
             <Button
-              title="返回"
+              title="Go Back"
               onPress={() => router.back()}
               variant="outline"
             />
@@ -106,7 +106,7 @@ export default function CourseDetailScreen() {
           {/* Stage Tag */}
           <View style={[styles.stageTag, { backgroundColor: stageColor + '20' }]}>
             <Text style={[styles.stageTagText, { color: stageColor }]}>
-              {stageName}阶段
+              {stageName}
             </Text>
           </View>
 
@@ -121,9 +121,9 @@ export default function CourseDetailScreen() {
           {/* Course Stats */}
           <StatCard
             items={[
-              { value: course.lessons.length, label: '课时' },
-              { value: `~${course.estimatedTime}`, label: '分钟' },
-              { value: `${course.requiredScore}%`, label: '通过分' },
+              { value: course.lessons.length, label: 'Lessons' },
+              { value: `~${course.estimatedTime}`, label: 'Minutes' },
+              { value: `${course.requiredScore}%`, label: 'Pass Score' },
             ]}
             style={styles.statsCard}
           />
@@ -131,9 +131,9 @@ export default function CourseDetailScreen() {
           {/* Progress Bar */}
           <View style={styles.progressSection}>
             <Row justify="space-between" style={styles.progressHeader}>
-              <Text style={styles.progressLabel}>学习进度</Text>
+              <Text style={styles.progressLabel}>Progress</Text>
               <Text style={[styles.progressValue, { color: stageColor }]}>
-                {completedCount}/{course.lessons.length} 课时
+                {completedCount}/{course.lessons.length} lessons
               </Text>
             </Row>
             <View style={styles.progressBar}>
@@ -150,13 +150,13 @@ export default function CourseDetailScreen() {
         <Spacer size={responsive.spacing(24, 32)} />
 
         {/* Lessons Section */}
-        <SectionHeader title="课程内容" subtitle={`共 ${course.lessons.length} 课时`} />
+        <SectionHeader title="Course Content" subtitle={`${course.lessons.length} lessons`} />
 
         {course.lessons.length === 0 ? (
           <View style={styles.emptyState}>
             <BookIcon size={48} color={colors.text.quaternary} />
-            <Text style={styles.emptyText}>课程内容准备中...</Text>
-            <Text style={styles.emptySubtext}>敬请期待</Text>
+            <Text style={styles.emptyText}>Content coming soon...</Text>
+            <Text style={styles.emptySubtext}>Stay tuned</Text>
           </View>
         ) : (
           <View style={styles.lessonList}>
@@ -205,10 +205,10 @@ export default function CourseDetailScreen() {
                   <View style={styles.lessonInfo}>
                     <Text style={styles.lessonTitle}>{lesson.title}</Text>
                     {isFirstIncomplete && (
-                      <Text style={styles.continueLabel}>继续学习</Text>
+                      <Text style={styles.continueLabel}>Continue</Text>
                     )}
                     {completed && (
-                      <Text style={styles.completedLabel}>已完成</Text>
+                      <Text style={styles.completedLabel}>Completed</Text>
                     )}
                   </View>
 
@@ -230,7 +230,7 @@ export default function CourseDetailScreen() {
           <>
             <Spacer size={responsive.spacing(24, 32)} />
 
-            <SectionHeader title="课程测验" />
+            <SectionHeader title="Course Quiz" />
 
             <Pressable
               onPress={() => {
@@ -261,7 +261,7 @@ export default function CourseDetailScreen() {
               <View style={styles.quizInfo}>
                 <Text style={styles.quizTitle}>{quiz.title}</Text>
                 <Text style={styles.quizMeta}>
-                  {quiz.questions.length} 道题 · 通过分 {quiz.passingScore}%
+                  {quiz.questions.length} questions · Pass {quiz.passingScore}%
                 </Text>
                 {quizBestScore !== null && (
                   <Text
@@ -270,7 +270,7 @@ export default function CourseDetailScreen() {
                       { color: quizPassed ? '#10B981' : colors.text.tertiary },
                     ]}
                   >
-                    最高分: {quizBestScore}%
+                    Best: {quizBestScore}%
                   </Text>
                 )}
               </View>
