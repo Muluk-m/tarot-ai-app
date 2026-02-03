@@ -98,7 +98,7 @@ export default function Index() {
             </LinearGradient>
           </TouchableOpacity>
 
-          {/* Secondary Cards Grid */}
+          {/* Secondary Cards Grid - Row 1 */}
           <View style={styles.secondaryCardsGrid}>
             {/* History Card */}
             <TouchableOpacity
@@ -138,6 +138,37 @@ export default function Index() {
                 <Text style={styles.secondaryCardSubtitle}>Past Present Future</Text>
               </LinearGradient>
             </TouchableOpacity>
+          </View>
+
+          {/* Secondary Cards Grid - Row 2 */}
+          <View style={[styles.secondaryCardsGrid, { marginTop: spacing.md }]}>
+            {/* Learn Tarot Card */}
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={() => router.push('/(learn)')}
+              style={styles.secondaryCard}
+            >
+              <LinearGradient
+                colors={['#10B981' + '20', '#10B981' + '10']}
+                style={styles.secondaryCardGradient}
+              >
+                <Text style={styles.secondaryCardIcon}>📚</Text>
+                <Text style={styles.secondaryCardTitle}>Learn Tarot</Text>
+                <Text style={styles.secondaryCardSubtitle}>Master the cards</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+
+            {/* Placeholder for future feature */}
+            <View style={[styles.secondaryCard, { opacity: 0.5 }]}>
+              <LinearGradient
+                colors={[colors.accent.goldDark + '15', colors.accent.goldDark + '08']}
+                style={styles.secondaryCardGradient}
+              >
+                <Text style={styles.secondaryCardIcon}>🔮</Text>
+                <Text style={styles.secondaryCardTitle}>Coming Soon</Text>
+                <Text style={styles.secondaryCardSubtitle}>More features</Text>
+              </LinearGradient>
+            </View>
           </View>
         </View>
 
