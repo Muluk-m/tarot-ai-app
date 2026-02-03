@@ -233,6 +233,33 @@ export default function LearnHub() {
             </LinearGradient>
           </TouchableOpacity>
 
+          {/* Journal Card */}
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => router.push('/(learn)/journal')}
+            style={styles.actionCard}
+          >
+            <LinearGradient
+              colors={['#F472B6' + '20', '#F472B6' + '08']}
+              style={styles.actionCardGradient}
+            >
+              <View style={styles.actionCardContent}>
+                <View style={[styles.actionIconContainer, { backgroundColor: '#F472B6' }]}>
+                  <Text style={styles.actionIcon}>📝</Text>
+                </View>
+                <View style={styles.actionTextContainer}>
+                  <Text style={styles.actionTitle}>Journal</Text>
+                  <Text style={styles.actionSubtitle}>
+                    Record your learning journey
+                  </Text>
+                </View>
+                <View style={styles.actionArrow}>
+                  <Text style={styles.arrowIcon}>→</Text>
+                </View>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+
           {/* Card Encyclopedia */}
           <TouchableOpacity
             activeOpacity={0.9}

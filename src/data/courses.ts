@@ -436,6 +436,809 @@ export const COURSE_2: Course = {
 // Course 3: Minor Arcana - Number Cards
 // ----------------------------------------------------------------------------
 
+const course3Lessons: Lesson[] = [
+  {
+    id: 'c3-l1',
+    courseId: 'course-3',
+    title: 'Introduction to Minor Arcana',
+    order: 1,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# Introduction to Minor Arcana
+
+The Minor Arcana consists of **56 cards** divided into four suits. Unlike the Major Arcana which represents major life themes, the Minor Arcana deals with day-to-day experiences.
+
+## The Four Suits
+
+Each suit corresponds to an **element** and area of life:
+
+### 🔥 Wands (Fire)
+- **Energy**: Passion, creativity, action
+- **Life Area**: Career, ambition, inspiration
+- **Season**: Spring
+- **Direction**: South
+
+### 💧 Cups (Water)
+- **Energy**: Emotions, intuition, relationships
+- **Life Area**: Love, feelings, dreams
+- **Season**: Summer
+- **Direction**: West
+
+### ⚔️ Swords (Air)
+- **Energy**: Thoughts, communication, conflict
+- **Life Area**: Decisions, truth, challenges
+- **Season**: Autumn
+- **Direction**: East
+
+### 🪙 Pentacles (Earth)
+- **Energy**: Material, practical, stable
+- **Life Area**: Money, health, work
+- **Season**: Winter
+- **Direction**: North
+
+## Card Structure
+
+Each suit contains:
+- **Ace through Ten** (10 number cards)
+- **Page, Knight, Queen, King** (4 court cards)
+
+This course focuses on the number cards (Ace-10).`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l2',
+    courseId: 'course-3',
+    title: 'Numerology in Tarot',
+    order: 2,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# Numerology in Tarot
+
+Each number from Ace to Ten carries specific meaning that combines with the suit's element.
+
+## The Numbers
+
+### Ace (1) - Beginnings
+- Pure potential, new starts
+- Seed of the element's energy
+- Gift, opportunity, breakthrough
+
+### Two - Balance
+- Partnership, duality, choice
+- Cooperation or conflict
+- Balance between opposites
+
+### Three - Growth
+- Expansion, creativity, groups
+- First fruits of effort
+- Collaboration, expression
+
+### Four - Stability
+- Foundation, structure, rest
+- Security, boundaries
+- Can be stagnation if overdone
+
+### Five - Conflict
+- Challenge, change, instability
+- Loss, struggle, adaptation
+- Necessary disruption for growth
+
+### Six - Harmony
+- Balance restored, giving/receiving
+- Communication, fairness
+- Victory through cooperation
+
+### Seven - Reflection
+- Assessment, introspection
+- Spiritual seeking, patience
+- Waiting for the right moment
+
+### Eight - Mastery
+- Power, movement, achievement
+- Rapid progress or restriction
+- Taking control of situation
+
+### Nine - Completion
+- Near-end of cycle
+- Fulfillment or anxiety
+- Wisdom gained through experience
+
+### Ten - Culmination
+- End of cycle, maximum expression
+- Can be overwhelm or success
+- Transition to new beginning
+
+## Combining Number + Suit
+
+The magic happens when you combine:
+- **Number meaning** (the "what")
+- **Suit energy** (the "how")
+
+Example: **Three of Wands**
+- Three = growth, expansion
+- Wands = fire, action, ambition
+- Meaning = expanding horizons, planning ahead`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l3',
+    courseId: 'course-3',
+    title: 'Aces - Seeds of Potential',
+    order: 3,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# The Aces - Seeds of Potential
+
+Aces represent **pure potential** - the gift of each element in its purest form.
+
+## Ace of Wands 🔥
+**New Inspiration**
+- A spark of creativity
+- New project or venture
+- Burst of enthusiasm
+- Sexual energy, attraction
+- *Question: What ignites your passion?*
+
+## Ace of Cups 💧
+**New Love**
+- Emotional new beginning
+- Deep connection, compassion
+- Intuitive opening
+- Spiritual gift
+- *Question: What does your heart want?*
+
+## Ace of Swords ⚔️
+**New Clarity**
+- Mental breakthrough
+- Truth revealed
+- Sharp focus, decision
+- Victory through intellect
+- *Question: What truth needs acknowledgment?*
+
+## Ace of Pentacles 🪙
+**New Opportunity**
+- Financial prospect
+- Physical manifestation
+- Practical gift
+- Health improvement
+- *Question: What opportunity is presenting itself?*
+
+## Reading Aces
+
+When an Ace appears:
+1. **Pay attention** - Something new is emerging
+2. **Accept the gift** - Don't let it pass by
+3. **Plant the seed** - Take initial action
+4. **Trust potential** - Growth takes time
+
+## Aces in Combinations
+
+- **Multiple Aces**: Major new beginnings
+- **Ace + Court Card**: A person bringing opportunity
+- **Ace + Major Arcana**: Significant life change starting`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l4',
+    courseId: 'course-3',
+    title: 'Twos - Choices and Balance',
+    order: 4,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# The Twos - Choices and Balance
+
+Twos represent **duality** - the first step after the Ace where we encounter choice.
+
+## Two of Wands 🔥
+**Planning & Vision**
+- Looking to the future
+- Making plans, weighing options
+- Holding potential in your hands
+- Personal power, ambition
+- *Key: Consider your next move*
+
+## Two of Cups 💧
+**Partnership**
+- Mutual attraction, connection
+- Balance in relationships
+- Agreement, unity
+- Deep emotional bond
+- *Key: Heart meeting heart*
+
+## Two of Swords ⚔️
+**Indecision**
+- Blocked emotions, denial
+- Difficult choice to make
+- Temporary peace through avoidance
+- Need for balance
+- *Key: Remove the blindfold*
+
+## Two of Pentacles 🪙
+**Balance & Juggling**
+- Managing multiple responsibilities
+- Financial decisions
+- Flexibility, adaptation
+- Time management
+- *Key: Keep things moving*
+
+## The Theme of Duality
+
+All Twos deal with:
+- **Choice** between options
+- **Balance** between forces
+- **Partnership** with others or self
+- **Harmony** or its disruption
+
+## Reading Twos
+
+When a Two appears, ask:
+- What choice am I facing?
+- Where do I need balance?
+- Is there a partnership to consider?
+- Am I avoiding a decision?`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l5',
+    courseId: 'course-3',
+    title: 'Threes - Creation and Growth',
+    order: 5,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# The Threes - Creation and Growth
+
+Threes represent **expansion** - when two energies combine to create something new.
+
+## Three of Wands 🔥
+**Expansion & Progress**
+- Plans coming to fruition
+- Looking beyond current horizons
+- Waiting for ships to come in
+- Leadership, enterprise
+- *Key: Your vision is manifesting*
+
+## Three of Cups 💧
+**Celebration**
+- Joy, friendship, community
+- Emotional abundance
+- Creative collaboration
+- Reunion, parties
+- *Key: Celebrate with others*
+
+## Three of Swords 💔
+**Heartbreak**
+- Sorrow, grief, betrayal
+- Painful truth revealed
+- Necessary release
+- Clearing through tears
+- *Key: Feel it to heal it*
+
+## Three of Pentacles 🪙
+**Collaboration**
+- Teamwork, skill development
+- Recognition for work
+- Building something lasting
+- Apprenticeship, learning
+- *Key: Many hands make light work*
+
+## The Creative Power of Three
+
+In numerology, three is:
+- The first "whole" number
+- Birth from the union of two
+- Creative expression
+- Communication and growth
+
+## Positive vs Challenging Threes
+
+- **Wands, Cups, Pentacles**: Generally positive growth
+- **Swords**: The necessary pain of growth
+
+The Three of Swords reminds us that some growth comes through difficulty.`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l6',
+    courseId: 'course-3',
+    title: 'Fours - Stability and Structure',
+    order: 6,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# The Fours - Stability and Structure
+
+Fours represent **foundation** - creating stability and sometimes limitation.
+
+## Four of Wands 🔥
+**Celebration & Home**
+- Joyous celebration
+- Home, community
+- Milestone achieved
+- Stability in projects
+- *Key: Celebrate your foundation*
+
+## Four of Cups 💧
+**Contemplation**
+- Emotional withdrawal
+- Boredom, apathy
+- Missing an opportunity
+- Need for reflection
+- *Key: Look at what's being offered*
+
+## Four of Swords ⚔️
+**Rest & Recovery**
+- Mental rest, recuperation
+- Meditation, sanctuary
+- Stepping back
+- Necessary pause
+- *Key: Rest before battle*
+
+## Four of Pentacles 🪙
+**Security & Possession**
+- Material security
+- Holding tight to resources
+- Fear of loss
+- Boundaries around wealth
+- *Key: Balance security with flow*
+
+## The Stability of Four
+
+Four represents:
+- Four elements
+- Four directions
+- Four seasons
+- Solid foundation (like a table)
+
+## When Stability Becomes Limitation
+
+- **Four of Wands**: Healthy stability
+- **Four of Cups**: Stuck in contemplation
+- **Four of Swords**: Necessary pause
+- **Four of Pentacles**: Holding too tight
+
+Ask: Is this stability supporting me or constraining me?`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l7',
+    courseId: 'course-3',
+    title: 'Fives - Challenge and Change',
+    order: 7,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# The Fives - Challenge and Change
+
+Fives represent **disruption** - breaking through the stability of Four.
+
+## Five of Wands 🔥
+**Competition & Conflict**
+- Healthy competition
+- Scattered energy
+- Multiple opinions clashing
+- Creative tension
+- *Key: Channel the chaos*
+
+## Five of Cups 💧
+**Loss & Grief**
+- Mourning what was lost
+- Disappointment
+- Focusing on the negative
+- But hope remains
+- *Key: See the cups still standing*
+
+## Five of Swords ⚔️
+**Defeat & Conflict**
+- Hollow victory
+- Win at any cost
+- Conflict, betrayal
+- Walking away
+- *Key: Choose your battles*
+
+## Five of Pentacles 🪙
+**Hardship**
+- Financial difficulty
+- Feeling left out
+- Material struggle
+- Help is available
+- *Key: Look for the light*
+
+## Why Fives Are Challenging
+
+After Four's stability, Five:
+- Introduces necessary change
+- Breaks old patterns
+- Forces growth through difficulty
+- Creates space for new
+
+## Working With Fives
+
+All Fives carry a hidden gift:
+- **Wands**: Learn to work with others
+- **Cups**: Appreciate what remains
+- **Swords**: Know when to walk away
+- **Pentacles**: Find community support
+
+Fives are uncomfortable but essential for growth.`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l8',
+    courseId: 'course-3',
+    title: 'Sixes - Harmony Restored',
+    order: 8,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# The Sixes - Harmony Restored
+
+Sixes represent **balance** - harmony after the disruption of Five.
+
+## Six of Wands 🔥
+**Victory & Recognition**
+- Public recognition
+- Success, achievement
+- Leadership acknowledged
+- Confidence, pride
+- *Key: Accept the praise*
+
+## Six of Cups 💧
+**Nostalgia & Innocence**
+- Happy memories
+- Childhood, innocence
+- Gifts given freely
+- Past connections
+- *Key: Honor your history*
+
+## Six of Swords ⚔️
+**Transition**
+- Moving to calmer waters
+- Leaving difficulty behind
+- Gradual healing
+- Journey to peace
+- *Key: Better times ahead*
+
+## Six of Pentacles 🪙
+**Generosity**
+- Giving and receiving
+- Charity, balance
+- Fair exchange
+- Power dynamics
+- *Key: Balance the scales*
+
+## The Harmony of Six
+
+Six brings:
+- Resolution after conflict
+- Balance between giving and receiving
+- Recognition of efforts
+- Movement toward peace
+
+## Giving and Receiving
+
+A key theme in all Sixes:
+- **Wands**: Receiving recognition
+- **Cups**: Giving innocence/receiving memories
+- **Swords**: Receiving help for transition
+- **Pentacles**: Balance of giving and receiving
+
+Ask: What can I give? What am I ready to receive?`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l9',
+    courseId: 'course-3',
+    title: 'Sevens - Reflection and Assessment',
+    order: 9,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# The Sevens - Reflection and Assessment
+
+Sevens represent **introspection** - pausing to evaluate before the final push.
+
+## Seven of Wands 🔥
+**Standing Your Ground**
+- Defense, perseverance
+- Maintaining position
+- Challenge from others
+- Holding your own
+- *Key: Defend what you believe in*
+
+## Seven of Cups 💧
+**Fantasy & Choice**
+- Many options, illusions
+- Wishful thinking
+- Imagination running wild
+- Need to choose wisely
+- *Key: Discern real from fantasy*
+
+## Seven of Swords ⚔️
+**Strategy & Stealth**
+- Acting alone
+- Cunning, strategy
+- Getting away with something
+- Partial victory
+- *Key: Consider the consequences*
+
+## Seven of Pentacles 🪙
+**Patience & Evaluation**
+- Assessing progress
+- Long-term vision
+- Waiting for harvest
+- Investment review
+- *Key: Trust the process*
+
+## The Spiritual Number Seven
+
+Seven is:
+- Days of creation
+- Chakras
+- Musical notes
+- A mystical number
+
+At Seven, we reflect on our journey so far.
+
+## Questions at Seven
+
+- Where have I come from?
+- What have I learned?
+- Is this path still right?
+- What needs adjustment?
+
+Sevens invite pause before the intensity of Eight.`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l10',
+    courseId: 'course-3',
+    title: 'Eights - Power and Movement',
+    order: 10,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# The Eights - Power and Movement
+
+Eights represent **mastery** - rapid movement and taking control.
+
+## Eight of Wands 🔥
+**Swift Action**
+- Rapid movement
+- Messages, travel
+- Things happening fast
+- Momentum, progress
+- *Key: Act now, think later*
+
+## Eight of Cups 💧
+**Walking Away**
+- Emotional departure
+- Seeking deeper meaning
+- Leaving behind what worked
+- Spiritual journey
+- *Key: Trust your need for more*
+
+## Eight of Swords ⚔️
+**Restriction**
+- Feeling trapped
+- Self-imposed limitations
+- Fear blocking action
+- Blindfolded to options
+- *Key: The bonds are loose*
+
+## Eight of Pentacles 🪙
+**Skill & Dedication**
+- Hard work, mastery
+- Apprenticeship
+- Attention to detail
+- Craftsmanship
+- *Key: Practice makes perfect*
+
+## The Power of Eight
+
+Eight is:
+- Infinity on its side (∞)
+- Balance of power
+- Karmic number
+- Material success
+
+## Active vs Passive Eights
+
+- **Wands**: Pure forward motion
+- **Cups**: Choosing to move on
+- **Swords**: Frozen by mental prison
+- **Pentacles**: Active skill-building
+
+The Eight of Swords reminds us that sometimes our restrictions are self-created.`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l11',
+    courseId: 'course-3',
+    title: 'Nines - Near Completion',
+    order: 11,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# The Nines - Near Completion
+
+Nines represent **fulfillment** - the final stage before completion.
+
+## Nine of Wands 🔥
+**Resilience**
+- Persistent despite wounds
+- One more challenge
+- Strength through adversity
+- Defensive stance
+- *Key: You've come too far to quit*
+
+## Nine of Cups 💧
+**Wish Fulfilled**
+- Emotional satisfaction
+- Contentment, joy
+- Dreams coming true
+- Gratitude
+- *Key: Enjoy this moment*
+
+## Nine of Swords ⚔️
+**Anxiety & Nightmares**
+- Worry, guilt, fear
+- Sleepless nights
+- Mental anguish
+- Often worse than reality
+- *Key: Face your fears*
+
+## Nine of Pentacles 🪙
+**Abundance**
+- Material comfort
+- Self-sufficiency
+- Enjoying fruits of labor
+- Independence
+- *Key: Appreciate what you've built*
+
+## The Completion Energy of Nine
+
+Nine is:
+- Three times three
+- Wisdom number
+- Achievement through experience
+- Final integration
+
+## The Spectrum of Nines
+
+- **Cups & Pentacles**: Positive fulfillment
+- **Wands**: Challenging but triumphant
+- **Swords**: Mental culmination (often anxiety)
+
+The Nine of Swords shows that our minds can create suffering even when things are nearly complete.`,
+        },
+      },
+    ],
+  },
+  {
+    id: 'c3-l12',
+    courseId: 'course-3',
+    title: 'Tens - Completion and Transition',
+    order: 12,
+    completed: false,
+    content: [
+      {
+        type: 'text',
+        data: {
+          markdown: `# The Tens - Completion and Transition
+
+Tens represent **culmination** - the end of a cycle and beginning of the next.
+
+## Ten of Wands 🔥
+**Burden**
+- Heavy responsibilities
+- Overcommitment
+- Carrying too much
+- Near the finish line
+- *Key: Delegate or let go*
+
+## Ten of Cups 💧
+**Emotional Fulfillment**
+- Family happiness
+- Lasting joy
+- Rainbow promise
+- Harmonious home
+- *Key: This is what it's all for*
+
+## Ten of Swords ⚔️
+**Rock Bottom**
+- Complete ending
+- Darkest hour
+- Betrayal, defeat
+- But: dawn approaches
+- *Key: The only way is up*
+
+## Ten of Pentacles 🪙
+**Legacy**
+- Generational wealth
+- Family heritage
+- Long-term security
+- Tradition, roots
+- *Key: Build for the future*
+
+## Endings as Beginnings
+
+All Tens contain seeds of new Aces:
+- **Wands**: Burden releases new energy
+- **Cups**: Fulfillment creates new desires
+- **Swords**: Rock bottom births new clarity
+- **Pentacles**: Legacy inspires new growth
+
+## Reading Tens
+
+When a Ten appears:
+1. Acknowledge completion
+2. Release what's ending
+3. Look for new beginnings
+4. Honor the journey
+
+## Course Summary
+
+You've learned all 40 number cards!
+
+Remember:
+- Numbers provide the "what"
+- Suits provide the "how"
+- Context provides the "why"
+
+Practice combining these elements in your readings.`,
+        },
+      },
+    ],
+  },
+];
+
 export const COURSE_3: Course = {
   id: 'course-3',
   title: 'Minor Arcana - Number Cards',
@@ -443,7 +1246,7 @@ export const COURSE_3: Course = {
     'Learn the 40 numbered cards (Ace through Ten) across all four suits. Understand how numerology and elements combine.',
   stage: 'beginner',
   order: 3,
-  lessons: [], // To be populated
+  lessons: course3Lessons,
   requiredScore: 80,
   unlockRequirement: 'course-2',
   estimatedTime: 120,

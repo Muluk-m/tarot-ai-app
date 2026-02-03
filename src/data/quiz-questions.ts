@@ -503,12 +503,171 @@ export const ELEMENTS_QUIZ: Quiz = {
 };
 
 // ============================================================================
+// COURSE 3 QUIZ: Minor Arcana Number Cards
+// ============================================================================
+
+const course3Questions: QuizQuestion[] = [
+  {
+    id: 'c3-q1',
+    type: 'multiple-choice',
+    question: 'What do Aces represent in tarot?',
+    options: [
+      { id: 'a', text: 'Endings and completion', isCorrect: false },
+      { id: 'b', text: 'Pure potential and new beginnings', isCorrect: true },
+      { id: 'c', text: 'Conflict and challenge', isCorrect: false },
+      { id: 'd', text: 'Balance and harmony', isCorrect: false },
+    ],
+    correctAnswer: 'b',
+    explanation:
+      'Aces represent pure potential - the seed of each element in its purest form, signaling new beginnings and opportunities.',
+    difficulty: 'easy',
+  },
+  {
+    id: 'c3-q2',
+    type: 'multiple-choice',
+    question: 'Which number cards typically represent challenge and disruption?',
+    options: [
+      { id: 'a', text: 'Threes', isCorrect: false },
+      { id: 'b', text: 'Fours', isCorrect: false },
+      { id: 'c', text: 'Fives', isCorrect: true },
+      { id: 'd', text: 'Sixes', isCorrect: false },
+    ],
+    correctAnswer: 'c',
+    explanation:
+      'Fives represent disruption and challenge - they break through the stability of Fours to force necessary growth.',
+    difficulty: 'easy',
+  },
+  {
+    id: 'c3-q3',
+    type: 'scenario',
+    question: 'You draw the Nine of Cups. What is the most likely interpretation?',
+    options: [
+      { id: 'a', text: 'Financial difficulty ahead', isCorrect: false },
+      { id: 'b', text: 'Emotional satisfaction and wishes fulfilled', isCorrect: true },
+      { id: 'c', text: 'Conflict with family members', isCorrect: false },
+      { id: 'd', text: 'Need to start over from scratch', isCorrect: false },
+    ],
+    correctAnswer: 'b',
+    explanation:
+      'The Nine of Cups is known as the "wish card" - it represents emotional fulfillment, contentment, and dreams coming true.',
+    relatedCards: ['44'],
+    difficulty: 'medium',
+  },
+  {
+    id: 'c3-q4',
+    type: 'true-false',
+    question: 'Fours represent stability and foundation in tarot.',
+    correctAnswer: 'true',
+    explanation:
+      'True! Fours represent stability, structure, and foundation - like a table with four legs, they provide a solid base.',
+    difficulty: 'easy',
+  },
+  {
+    id: 'c3-q5',
+    type: 'multiple-choice',
+    question: 'What is the main theme of Tens in tarot?',
+    options: [
+      { id: 'a', text: 'New beginnings', isCorrect: false },
+      { id: 'b', text: 'Partnership and balance', isCorrect: false },
+      { id: 'c', text: 'Completion and transition to new cycle', isCorrect: true },
+      { id: 'd', text: 'Reflection and assessment', isCorrect: false },
+    ],
+    correctAnswer: 'c',
+    explanation:
+      'Tens represent the culmination of a cycle - the maximum expression of the suit energy, and the transition to a new beginning.',
+    difficulty: 'easy',
+  },
+  {
+    id: 'c3-q6',
+    type: 'scenario',
+    question: 'The Eight of Swords appears. What does this typically indicate?',
+    options: [
+      { id: 'a', text: 'Rapid movement and progress', isCorrect: false },
+      { id: 'b', text: 'Feeling trapped by self-imposed limitations', isCorrect: true },
+      { id: 'c', text: 'Financial abundance', isCorrect: false },
+      { id: 'd', text: 'Celebration and recognition', isCorrect: false },
+    ],
+    correctAnswer: 'b',
+    explanation:
+      'The Eight of Swords represents feeling restricted or trapped, but the bonds are often self-created mental limitations that can be overcome.',
+    relatedCards: ['57'],
+    difficulty: 'medium',
+  },
+  {
+    id: 'c3-q7',
+    type: 'multiple-choice',
+    question: 'Which card represents harmony restored after the disruption of Fives?',
+    options: [
+      { id: 'a', text: 'The Fours', isCorrect: false },
+      { id: 'b', text: 'The Sixes', isCorrect: true },
+      { id: 'c', text: 'The Sevens', isCorrect: false },
+      { id: 'd', text: 'The Eights', isCorrect: false },
+    ],
+    correctAnswer: 'b',
+    explanation:
+      'Sixes represent balance and harmony restored after the disruption of Fives. They deal with giving/receiving and moving toward peace.',
+    difficulty: 'medium',
+  },
+  {
+    id: 'c3-q8',
+    type: 'true-false',
+    question: 'The Three of Swords always indicates betrayal by another person.',
+    correctAnswer: 'false',
+    explanation:
+      "False! While Three of Swords can indicate betrayal, it more broadly represents heartbreak, grief, and painful truths - which can come from many sources including self-realization.",
+    relatedCards: ['52'],
+    difficulty: 'medium',
+  },
+  {
+    id: 'c3-q9',
+    type: 'multiple-choice',
+    question: 'What do Sevens represent in the tarot journey?',
+    options: [
+      { id: 'a', text: 'Rapid action and movement', isCorrect: false },
+      { id: 'b', text: 'Final completion', isCorrect: false },
+      { id: 'c', text: 'Reflection and assessment', isCorrect: true },
+      { id: 'd', text: 'Pure new beginnings', isCorrect: false },
+    ],
+    correctAnswer: 'c',
+    explanation:
+      'Sevens represent introspection and assessment - a pause to evaluate progress before the final push toward completion.',
+    difficulty: 'easy',
+  },
+  {
+    id: 'c3-q10',
+    type: 'scenario',
+    question: 'Multiple Aces appear in a reading. What does this suggest?',
+    options: [
+      { id: 'a', text: 'Major endings in multiple life areas', isCorrect: false },
+      { id: 'b', text: 'Major new beginnings and opportunities', isCorrect: true },
+      { id: 'c', text: 'A period of stagnation', isCorrect: false },
+      { id: 'd', text: 'Need to release the past', isCorrect: false },
+    ],
+    correctAnswer: 'b',
+    explanation:
+      'Multiple Aces indicate powerful new beginnings and fresh opportunities in various areas of life. This is a highly auspicious combination.',
+    difficulty: 'medium',
+  },
+];
+
+export const COURSE_3_QUIZ: Quiz = {
+  id: 'quiz-course-3',
+  courseId: 'course-3',
+  title: 'Minor Arcana Number Cards Quiz',
+  description: 'Test your knowledge of the number cards (Ace through Ten) and numerology in tarot.',
+  questions: course3Questions,
+  passingScore: 80,
+  category: 'course',
+};
+
+// ============================================================================
 // EXPORTS
 // ============================================================================
 
 export const ALL_QUIZZES: Quiz[] = [
   COURSE_1_QUIZ,
   COURSE_2_QUIZ,
+  COURSE_3_QUIZ,
   DAILY_CHALLENGE_QUIZ,
   ELEMENTS_QUIZ,
 ];
