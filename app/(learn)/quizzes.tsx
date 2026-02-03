@@ -1,19 +1,34 @@
+/**
+ * Quizzes Screen - 测验列表
+ * iPad 和 iOS 适配
+ */
+
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
 import { useQuizStore } from '@/stores/quizStore';
 import { ALL_QUIZZES, type Quiz } from '@/data/quiz-questions';
+
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Spacer,
+  responsive,
+  isTablet,
+  SectionHeader,
+  StatCard,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CheckIcon,
+  TrophyIcon,
+  StarIcon,
+  ZapIcon,
+  BookIcon,
+} from '@/components/ui';
+import { IconButton } from '@/components/ui/Buttons';
 
 export default function QuizzesScreen() {
   const router = useRouter();
@@ -23,281 +38,202 @@ export default function QuizzesScreen() {
   const dailyQuizzes = ALL_QUIZZES.filter((q) => q.category === 'daily');
   const challengeQuizzes = ALL_QUIZZES.filter((q) => q.category === 'challenge');
 
-  const renderQuizCard = (quiz: Quiz, color: string) => {
+  const renderQuizCard = (quiz: Quiz, color: string, Icon: React.FC<any>) => {
     const passed = hasPassedQuiz(quiz.id);
     const bestScore = getBestScore(quiz.id);
 
     return (
-      <TouchableOpacity
+      <Pressable
         key={quiz.id}
-        activeOpacity={0.9}
         onPress={() => {
           router.push({
             pathname: '/(learn)/quiz/[quizId]',
             params: { quizId: quiz.id },
           });
         }}
-        style={styles.quizCard}
+        style={({ pressed }) => [
+          styles.quizCard,
+          passed && styles.quizCardPassed,
+          pressed && styles.quizCardPressed,
+        ]}
       >
-        <LinearGradient
-          colors={
-            passed
-              ? ['#10B981' + '25', '#10B981' + '10']
-              : [color + '20', color + '10']
-          }
-          style={styles.quizGradient}
+        <View
+          style={[
+            styles.quizIcon,
+            { backgroundColor: passed ? '#10B981' : color },
+          ]}
         >
-          <View style={styles.quizContent}>
-            <View
+          {passed ? (
+            <CheckIcon size={22} color={colors.text.primary} />
+          ) : (
+            <Icon size={22} color={colors.text.primary} />
+          )}
+        </View>
+
+        <View style={styles.quizInfo}>
+          <Text style={styles.quizTitle}>{quiz.title}</Text>
+          <Text style={styles.quizMeta}>
+            {quiz.questions.length} 道题 · 通过分 {quiz.passingScore}%
+          </Text>
+          {bestScore !== null && (
+            <Text
               style={[
-                styles.quizIcon,
-                { backgroundColor: passed ? '#10B981' : color },
+                styles.quizScore,
+                { color: passed ? '#10B981' : colors.text.tertiary },
               ]}
             >
-              <Text style={styles.quizIconText}>
-                {passed ? '✓' : '🧠'}
-              </Text>
-            </View>
+              最高分: {bestScore}%
+            </Text>
+          )}
+        </View>
 
-            <View style={styles.quizInfo}>
-              <Text style={styles.quizTitle}>{quiz.title}</Text>
-              <Text style={styles.quizMeta}>
-                {quiz.questions.length} questions • Pass: {quiz.passingScore}%
-              </Text>
-              {bestScore !== null && (
-                <Text
-                  style={[
-                    styles.quizScore,
-                    { color: passed ? '#10B981' : colors.text.tertiary },
-                  ]}
-                >
-                  Best: {bestScore}%
-                </Text>
-              )}
-            </View>
-
-            <View style={styles.quizArrow}>
-              <Text style={styles.arrowIcon}>→</Text>
-            </View>
-          </View>
-        </LinearGradient>
-      </TouchableOpacity>
+        <View style={styles.quizArrow}>
+          <ChevronRightIcon size={20} color={colors.text.secondary} />
+        </View>
+      </Pressable>
     );
   };
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-        style={styles.backgroundGradient}
-      />
+    <ScreenContainer>
+      <SafeScrollView maxWidth="lg">
+        {/* Header */}
+        <Row justify="space-between" align="center" style={styles.header}>
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
+            onPress={() => router.back()}
+            variant="filled"
+            size="md"
+          />
+          <Text style={styles.headerTitle}>知识测验</Text>
+          <View style={{ width: responsive.width(40, 48) }} />
+        </Row>
 
-      <SafeAreaView style={styles.safeArea} edges={['top']}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
-          {/* Header */}
-          <View style={styles.header}>
-            <TouchableOpacity
-              onPress={() => router.back()}
-              style={styles.backButton}
-            >
-              <Text style={styles.backIcon}>←</Text>
-            </TouchableOpacity>
-            <Text style={styles.headerTitle}>Quizzes</Text>
-            <View style={styles.placeholder} />
-          </View>
+        {/* Stats */}
+        <StatCard
+          items={[
+            { value: getTotalQuizzesPassed(), label: '已通过' },
+            { value: getPerfectScores(), label: '满分' },
+            { value: ALL_QUIZZES.length, label: '总测验' },
+          ]}
+          style={styles.statsCard}
+        />
 
-          {/* Stats */}
-          <View style={styles.statsRow}>
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{getTotalQuizzesPassed()}</Text>
-              <Text style={styles.statLabel}>Passed</Text>
-            </View>
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{getPerfectScores()}</Text>
-              <Text style={styles.statLabel}>Perfect</Text>
-            </View>
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{ALL_QUIZZES.length}</Text>
-              <Text style={styles.statLabel}>Total</Text>
-            </View>
-          </View>
+        <Spacer size={responsive.spacing(24, 32)} />
 
-          {/* Daily Challenge */}
-          {dailyQuizzes.length > 0 && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Daily Challenge</Text>
-              {dailyQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.gold))}
+        {/* Daily Challenge */}
+        {dailyQuizzes.length > 0 && (
+          <>
+            <SectionHeader
+              title="每日挑战"
+              subtitle="每天一个小测验"
+            />
+            <View style={styles.quizList}>
+              {dailyQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.gold, ZapIcon))}
             </View>
-          )}
+            <Spacer size={responsive.spacing(24, 32)} />
+          </>
+        )}
 
-          {/* Course Quizzes */}
-          {courseQuizzes.length > 0 && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Course Quizzes</Text>
-              {courseQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.purple))}
+        {/* Course Quizzes */}
+        {courseQuizzes.length > 0 && (
+          <>
+            <SectionHeader
+              title="课程测验"
+              subtitle="与课程配套的测验"
+            />
+            <View style={styles.quizList}>
+              {courseQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.purple, BookIcon))}
             </View>
-          )}
+            <Spacer size={responsive.spacing(24, 32)} />
+          </>
+        )}
 
-          {/* Challenge Quizzes */}
-          {challengeQuizzes.length > 0 && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Challenge Quizzes</Text>
-              {challengeQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.cyan))}
+        {/* Challenge Quizzes */}
+        {challengeQuizzes.length > 0 && (
+          <>
+            <SectionHeader
+              title="挑战测验"
+              subtitle="测试你的进阶知识"
+            />
+            <View style={styles.quizList}>
+              {challengeQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.cyan, TrophyIcon))}
             </View>
-          )}
+          </>
+        )}
 
-          {/* Bottom spacing */}
-          <View style={{ height: spacing.xxl }} />
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+        <Spacer size={responsive.spacing(32, 48)} />
+      </SafeScrollView>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
-  backgroundGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  safeArea: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingHorizontal: spacing.lg,
-  },
-
-  // Header
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: spacing.lg,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background.tertiary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 20,
-    color: colors.text.primary,
+    marginBottom: responsive.spacing(20, 24),
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: responsive.fontSize(22, 26),
     fontWeight: '700',
     color: colors.text.primary,
   },
-  placeholder: {
-    width: 40,
+  statsCard: {
+    marginTop: responsive.spacing(4, 8),
   },
 
-  // Stats
-  statsRow: {
-    flexDirection: 'row',
-    gap: spacing.md,
-    marginBottom: spacing.xl,
+  // Quiz List
+  quizList: {
+    gap: responsive.spacing(12, 16),
   },
-  statCard: {
-    flex: 1,
-    backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-    padding: spacing.md,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: colors.background.tertiary,
-  },
-  statNumber: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: colors.accent.gold,
-  },
-  statLabel: {
-    fontSize: 12,
-    color: colors.text.tertiary,
-    marginTop: spacing.xs,
-  },
-
-  // Section
-  section: {
-    marginBottom: spacing.xl,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: colors.text.secondary,
-    marginBottom: spacing.md,
-  },
-
-  // Quiz Card
   quizCard: {
-    marginBottom: spacing.md,
-    borderRadius: 16,
-    overflow: 'hidden',
-    ...shadows.md,
-  },
-  quizGradient: {
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 16,
-  },
-  quizContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: spacing.md,
+    backgroundColor: colors.background.secondary,
+    borderRadius: responsive.width(16, 20),
+    padding: responsive.spacing(14, 18),
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+  },
+  quizCardPassed: {
+    borderColor: 'rgba(16, 185, 129, 0.25)',
+    backgroundColor: 'rgba(16, 185, 129, 0.06)',
+  },
+  quizCardPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.99 }],
   },
   quizIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 14,
+    width: responsive.width(48, 56),
+    height: responsive.width(48, 56),
+    borderRadius: responsive.width(14, 16),
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: spacing.md,
-  },
-  quizIconText: {
-    fontSize: 22,
+    marginRight: responsive.spacing(14, 18),
   },
   quizInfo: {
     flex: 1,
   },
   quizTitle: {
-    fontSize: 17,
+    fontSize: responsive.fontSize(17, 19),
     fontWeight: '600',
     color: colors.text.primary,
     marginBottom: 2,
   },
   quizMeta: {
-    fontSize: 13,
+    fontSize: responsive.fontSize(13, 15),
     color: colors.text.tertiary,
   },
   quizScore: {
-    fontSize: 13,
+    fontSize: responsive.fontSize(13, 15),
     fontWeight: '600',
     marginTop: 2,
   },
   quizArrow: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    width: responsive.width(36, 44),
+    height: responsive.width(36, 44),
+    borderRadius: responsive.width(11, 13),
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  arrowIcon: {
-    fontSize: 16,
-    color: colors.text.secondary,
-    fontWeight: 'bold',
   },
 });

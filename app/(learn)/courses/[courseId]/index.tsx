@@ -1,27 +1,52 @@
+/**
+ * Course Detail Screen - 课程详情
+ * iPad 和 iOS 适配
+ */
+
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
 import { useLearningStore } from '@/stores/learningStore';
 import { useQuizStore } from '@/stores/quizStore';
 import { getCourseById } from '@/data/courses';
 import { getQuizByCourseId } from '@/data/quiz-questions';
+
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Spacer,
+  responsive,
+  isTablet,
+  SectionHeader,
+  Badge,
+  StatCard,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CheckIcon,
+  ClockIcon,
+  LayersIcon,
+  TargetIcon,
+  TrophyIcon,
+  BookIcon,
+  PlayIcon,
+} from '@/components/ui';
+import { IconButton, Button } from '@/components/ui/Buttons';
 
 const STAGE_COLORS: Record<string, string> = {
   beginner: '#10B981',
   intermediate: colors.accent.purple,
   advanced: colors.accent.cyan,
   master: colors.accent.gold,
+};
+
+const STAGE_NAMES: Record<string, string> = {
+  beginner: '入门',
+  intermediate: '进阶',
+  advanced: '高级',
+  master: '大师',
 };
 
 export default function CourseDetailScreen() {
@@ -36,20 +61,23 @@ export default function CourseDetailScreen() {
 
   if (!course) {
     return (
-      <View style={styles.container}>
-        <SafeAreaView style={styles.safeArea}>
+      <ScreenContainer>
+        <SafeScrollView maxWidth="md">
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>Course not found</Text>
-            <TouchableOpacity onPress={() => router.back()} style={styles.backLink}>
-              <Text style={styles.backLinkText}>← Go Back</Text>
-            </TouchableOpacity>
+            <Text style={styles.errorText}>课程不存在</Text>
+            <Button
+              title="返回"
+              onPress={() => router.back()}
+              variant="outline"
+            />
           </View>
-        </SafeAreaView>
-      </View>
+        </SafeScrollView>
+      </ScreenContainer>
     );
   }
 
   const stageColor = STAGE_COLORS[course.stage] || colors.accent.gold;
+  const stageName = STAGE_NAMES[course.stage] || course.stage;
   const completedCount = course.lessons.filter((l) =>
     isLessonCompleted(l.id)
   ).length;
@@ -61,338 +89,264 @@ export default function CourseDetailScreen() {
   const quizBestScore = quiz ? getBestScore(quiz.id) : null;
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-        style={styles.backgroundGradient}
-      />
+    <ScreenContainer>
+      <SafeScrollView maxWidth="md">
+        {/* Header */}
+        <Row justify="flex-start" align="center" style={styles.header}>
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
+            onPress={() => router.back()}
+            variant="filled"
+            size="md"
+          />
+        </Row>
 
-      <SafeAreaView style={styles.safeArea} edges={['top']}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
-          {/* Header */}
-          <View style={styles.header}>
-            <TouchableOpacity
-              onPress={() => router.back()}
-              style={styles.backButton}
-            >
-              <Text style={styles.backIcon}>←</Text>
-            </TouchableOpacity>
+        {/* Course Info */}
+        <View style={styles.courseHeader}>
+          {/* Stage Tag */}
+          <View style={[styles.stageTag, { backgroundColor: stageColor + '20' }]}>
+            <Text style={[styles.stageTagText, { color: stageColor }]}>
+              {stageName}阶段
+            </Text>
           </View>
 
-          {/* Course Info */}
-          <View style={styles.courseHeader}>
-            <View style={[styles.stageTag, { backgroundColor: stageColor + '30' }]}>
-              <Text style={[styles.stageTagText, { color: stageColor }]}>
-                {course.stage.toUpperCase()}
+          {/* Course Icon */}
+          <View style={[styles.courseIconContainer, { borderColor: stageColor }]}>
+            <BookIcon size={responsive.width(36, 44)} color={stageColor} />
+          </View>
+
+          <Text style={styles.courseTitle}>{course.title}</Text>
+          <Text style={styles.courseDescription}>{course.description}</Text>
+
+          {/* Course Stats */}
+          <StatCard
+            items={[
+              { value: course.lessons.length, label: '课时' },
+              { value: `~${course.estimatedTime}`, label: '分钟' },
+              { value: `${course.requiredScore}%`, label: '通过分' },
+            ]}
+            style={styles.statsCard}
+          />
+
+          {/* Progress Bar */}
+          <View style={styles.progressSection}>
+            <Row justify="space-between" style={styles.progressHeader}>
+              <Text style={styles.progressLabel}>学习进度</Text>
+              <Text style={[styles.progressValue, { color: stageColor }]}>
+                {completedCount}/{course.lessons.length} 课时
               </Text>
+            </Row>
+            <View style={styles.progressBar}>
+              <View
+                style={[
+                  styles.progressFill,
+                  { width: `${progress}%`, backgroundColor: stageColor },
+                ]}
+              />
             </View>
+          </View>
+        </View>
 
-            <Text style={styles.courseIcon}>{course.icon}</Text>
-            <Text style={styles.courseTitle}>{course.title}</Text>
-            <Text style={styles.courseDescription}>{course.description}</Text>
+        <Spacer size={responsive.spacing(24, 32)} />
 
-            {/* Course Meta */}
-            <View style={styles.metaRow}>
-              <View style={styles.metaItem}>
-                <Text style={styles.metaValue}>{course.lessons.length}</Text>
-                <Text style={styles.metaLabel}>Lessons</Text>
-              </View>
-              <View style={styles.metaDivider} />
-              <View style={styles.metaItem}>
-                <Text style={styles.metaValue}>~{course.estimatedTime}</Text>
-                <Text style={styles.metaLabel}>Minutes</Text>
-              </View>
-              <View style={styles.metaDivider} />
-              <View style={styles.metaItem}>
-                <Text style={styles.metaValue}>{course.requiredScore}%</Text>
-                <Text style={styles.metaLabel}>Pass Score</Text>
-              </View>
-            </View>
+        {/* Lessons Section */}
+        <SectionHeader title="课程内容" subtitle={`共 ${course.lessons.length} 课时`} />
 
-            {/* Progress Bar */}
-            <View style={styles.progressSection}>
-              <View style={styles.progressHeader}>
-                <Text style={styles.progressLabel}>Progress</Text>
-                <Text style={[styles.progressValue, { color: stageColor }]}>
-                  {completedCount}/{course.lessons.length} lessons
-                </Text>
-              </View>
-              <View style={styles.progressBar}>
-                <View
-                  style={[
-                    styles.progressFill,
-                    { width: `${progress}%`, backgroundColor: stageColor },
+        {course.lessons.length === 0 ? (
+          <View style={styles.emptyState}>
+            <BookIcon size={48} color={colors.text.quaternary} />
+            <Text style={styles.emptyText}>课程内容准备中...</Text>
+            <Text style={styles.emptySubtext}>敬请期待</Text>
+          </View>
+        ) : (
+          <View style={styles.lessonList}>
+            {course.lessons.map((lesson, index) => {
+              const completed = isLessonCompleted(lesson.id);
+              const isFirstIncomplete = !completed &&
+                course.lessons.slice(0, index).every((l) => isLessonCompleted(l.id));
+
+              return (
+                <Pressable
+                  key={lesson.id}
+                  onPress={() => {
+                    router.push({
+                      pathname: '/(learn)/courses/[courseId]/[lessonId]',
+                      params: { courseId: course.id, lessonId: lesson.id },
+                    });
+                  }}
+                  style={({ pressed }) => [
+                    styles.lessonCard,
+                    completed && styles.lessonCompleted,
+                    isFirstIncomplete && styles.lessonCurrent,
+                    pressed && styles.lessonPressed,
                   ]}
-                />
-              </View>
-            </View>
-          </View>
-
-          {/* Lessons Section */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Lessons</Text>
-
-            {course.lessons.length === 0 ? (
-              <View style={styles.emptyState}>
-                <Text style={styles.emptyIcon}>📝</Text>
-                <Text style={styles.emptyText}>
-                  Lessons are being prepared...
-                </Text>
-                <Text style={styles.emptySubtext}>
-                  Check back soon!
-                </Text>
-              </View>
-            ) : (
-              course.lessons.map((lesson, index) => {
-                const completed = isLessonCompleted(lesson.id);
-                const isFirstIncomplete = !completed &&
-                  course.lessons.slice(0, index).every((l) => isLessonCompleted(l.id));
-
-                return (
-                  <TouchableOpacity
-                    key={lesson.id}
-                    activeOpacity={0.9}
-                    onPress={() => {
-                      router.push({
-                        pathname: '/(learn)/courses/[courseId]/[lessonId]',
-                        params: { courseId: course.id, lessonId: lesson.id },
-                      });
-                    }}
-                    style={styles.lessonCard}
-                  >
-                    <LinearGradient
-                      colors={
-                        completed
-                          ? [stageColor + '20', stageColor + '10']
-                          : isFirstIncomplete
-                          ? [colors.accent.gold + '15', colors.accent.gold + '08']
-                          : [colors.background.tertiary, colors.background.secondary]
-                      }
-                      style={styles.lessonGradient}
-                    >
-                      <View style={styles.lessonContent}>
-                        <View
-                          style={[
-                            styles.lessonNumber,
-                            completed && { backgroundColor: stageColor },
-                            isFirstIncomplete && { backgroundColor: colors.accent.gold },
-                          ]}
-                        >
-                          {completed ? (
-                            <Text style={styles.checkmark}>✓</Text>
-                          ) : (
-                            <Text
-                              style={[
-                                styles.lessonNumberText,
-                                isFirstIncomplete && { color: colors.background.primary },
-                              ]}
-                            >
-                              {lesson.order}
-                            </Text>
-                          )}
-                        </View>
-
-                        <View style={styles.lessonInfo}>
-                          <Text style={styles.lessonTitle}>{lesson.title}</Text>
-                          {isFirstIncomplete && (
-                            <Text style={styles.continueLabel}>Continue →</Text>
-                          )}
-                          {completed && (
-                            <Text style={styles.completedLabel}>Completed</Text>
-                          )}
-                        </View>
-                      </View>
-                    </LinearGradient>
-                  </TouchableOpacity>
-                );
-              })
-            )}
-          </View>
-
-          {/* Quiz Section */}
-          {quiz && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Course Quiz</Text>
-
-              <TouchableOpacity
-                activeOpacity={0.9}
-                onPress={() => {
-                  router.push({
-                    pathname: '/(learn)/quiz/[quizId]',
-                    params: { quizId: quiz.id },
-                  });
-                }}
-                style={styles.quizCard}
-              >
-                <LinearGradient
-                  colors={
-                    quizPassed
-                      ? ['#10B981' + '25', '#10B981' + '10']
-                      : [colors.accent.purple + '20', colors.accent.purple + '10']
-                  }
-                  style={styles.quizGradient}
                 >
-                  <View style={styles.quizContent}>
-                    <View
-                      style={[
-                        styles.quizIcon,
-                        quizPassed && { backgroundColor: '#10B981' },
-                      ]}
-                    >
-                      <Text style={styles.quizIconText}>
-                        {quizPassed ? '✓' : '🧠'}
+                  <View
+                    style={[
+                      styles.lessonNumber,
+                      completed && { backgroundColor: stageColor },
+                      isFirstIncomplete && { backgroundColor: colors.accent.gold },
+                    ]}
+                  >
+                    {completed ? (
+                      <CheckIcon size={16} color={colors.text.primary} />
+                    ) : (
+                      <Text
+                        style={[
+                          styles.lessonNumberText,
+                          (completed || isFirstIncomplete) && { color: colors.background.primary },
+                        ]}
+                      >
+                        {lesson.order}
                       </Text>
-                    </View>
-
-                    <View style={styles.quizInfo}>
-                      <Text style={styles.quizTitle}>{quiz.title}</Text>
-                      <Text style={styles.quizMeta}>
-                        {quiz.questions.length} questions • Pass: {quiz.passingScore}%
-                      </Text>
-                      {quizBestScore !== null && (
-                        <Text
-                          style={[
-                            styles.quizScore,
-                            { color: quizPassed ? '#10B981' : colors.text.tertiary },
-                          ]}
-                        >
-                          Best score: {quizBestScore}%
-                        </Text>
-                      )}
-                    </View>
-
-                    <View style={styles.quizArrow}>
-                      <Text style={styles.arrowIcon}>→</Text>
-                    </View>
+                    )}
                   </View>
-                </LinearGradient>
-              </TouchableOpacity>
-            </View>
-          )}
 
-          {/* Bottom spacing */}
-          <View style={{ height: spacing.xxl }} />
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+                  <View style={styles.lessonInfo}>
+                    <Text style={styles.lessonTitle}>{lesson.title}</Text>
+                    {isFirstIncomplete && (
+                      <Text style={styles.continueLabel}>继续学习</Text>
+                    )}
+                    {completed && (
+                      <Text style={styles.completedLabel}>已完成</Text>
+                    )}
+                  </View>
+
+                  <View style={styles.lessonArrow}>
+                    {isFirstIncomplete ? (
+                      <PlayIcon size={16} color={colors.accent.gold} />
+                    ) : (
+                      <ChevronRightIcon size={18} color={colors.text.tertiary} />
+                    )}
+                  </View>
+                </Pressable>
+              );
+            })}
+          </View>
+        )}
+
+        {/* Quiz Section */}
+        {quiz && (
+          <>
+            <Spacer size={responsive.spacing(24, 32)} />
+
+            <SectionHeader title="课程测验" />
+
+            <Pressable
+              onPress={() => {
+                router.push({
+                  pathname: '/(learn)/quiz/[quizId]',
+                  params: { quizId: quiz.id },
+                });
+              }}
+              style={({ pressed }) => [
+                styles.quizCard,
+                quizPassed && styles.quizPassed,
+                pressed && styles.quizPressed,
+              ]}
+            >
+              <View
+                style={[
+                  styles.quizIcon,
+                  quizPassed && { backgroundColor: '#10B981' },
+                ]}
+              >
+                {quizPassed ? (
+                  <CheckIcon size={22} color={colors.text.primary} />
+                ) : (
+                  <TrophyIcon size={22} color={colors.accent.purple} />
+                )}
+              </View>
+
+              <View style={styles.quizInfo}>
+                <Text style={styles.quizTitle}>{quiz.title}</Text>
+                <Text style={styles.quizMeta}>
+                  {quiz.questions.length} 道题 · 通过分 {quiz.passingScore}%
+                </Text>
+                {quizBestScore !== null && (
+                  <Text
+                    style={[
+                      styles.quizScore,
+                      { color: quizPassed ? '#10B981' : colors.text.tertiary },
+                    ]}
+                  >
+                    最高分: {quizBestScore}%
+                  </Text>
+                )}
+              </View>
+
+              <View style={styles.quizArrow}>
+                <ChevronRightIcon size={20} color={colors.text.secondary} />
+              </View>
+            </Pressable>
+          </>
+        )}
+
+        <Spacer size={responsive.spacing(32, 48)} />
+      </SafeScrollView>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
-  backgroundGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  safeArea: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingHorizontal: spacing.lg,
+  header: {
+    marginBottom: responsive.spacing(16, 20),
   },
   errorContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: responsive.spacing(24, 32),
+    gap: responsive.spacing(16, 20),
   },
   errorText: {
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 22),
     color: colors.text.secondary,
-    marginBottom: spacing.md,
-  },
-  backLink: {
-    padding: spacing.md,
-  },
-  backLinkText: {
-    fontSize: 16,
-    color: colors.accent.gold,
-  },
-
-  // Header
-  header: {
-    paddingVertical: spacing.md,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background.tertiary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 20,
-    color: colors.text.primary,
   },
 
   // Course Header
   courseHeader: {
     alignItems: 'center',
-    marginBottom: spacing.xl,
   },
   stageTag: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
-    borderRadius: 12,
-    marginBottom: spacing.md,
+    paddingHorizontal: responsive.spacing(12, 16),
+    paddingVertical: responsive.spacing(6, 8),
+    borderRadius: responsive.width(12, 14),
+    marginBottom: responsive.spacing(16, 20),
   },
   stageTagText: {
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     fontWeight: '700',
     letterSpacing: 1,
   },
-  courseIcon: {
-    fontSize: 64,
-    marginBottom: spacing.md,
+  courseIconContainer: {
+    width: responsive.width(80, 100),
+    height: responsive.width(80, 100),
+    borderRadius: responsive.width(24, 30),
+    borderWidth: 2,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: responsive.spacing(16, 20),
   },
   courseTitle: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(26, 32),
     fontWeight: '700',
     color: colors.text.primary,
     textAlign: 'center',
-    marginBottom: spacing.sm,
+    marginBottom: responsive.spacing(8, 12),
   },
   courseDescription: {
-    fontSize: 15,
+    fontSize: responsive.fontSize(15, 17),
     color: colors.text.tertiary,
     textAlign: 'center',
-    lineHeight: 22,
-    marginBottom: spacing.lg,
-    paddingHorizontal: spacing.md,
+    lineHeight: responsive.fontSize(22, 26),
+    marginBottom: responsive.spacing(20, 24),
+    paddingHorizontal: responsive.spacing(16, 24),
   },
-  metaRow: {
-    flexDirection: 'row',
-    backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-    padding: spacing.md,
-    marginBottom: spacing.lg,
-  },
-  metaItem: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  metaValue: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: colors.text.primary,
-  },
-  metaLabel: {
-    fontSize: 12,
-    color: colors.text.tertiary,
-    marginTop: spacing.xs,
-  },
-  metaDivider: {
-    width: 1,
-    backgroundColor: colors.background.tertiary,
+  statsCard: {
+    width: '100%',
+    marginBottom: responsive.spacing(20, 24),
   },
 
   // Progress
@@ -400,175 +354,163 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   progressHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: spacing.sm,
+    marginBottom: responsive.spacing(8, 10),
   },
   progressLabel: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.tertiary,
   },
   progressValue: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     fontWeight: '600',
   },
   progressBar: {
-    height: 8,
+    height: responsive.width(8, 10),
     backgroundColor: colors.background.tertiary,
-    borderRadius: 4,
+    borderRadius: responsive.width(4, 5),
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
-    borderRadius: 4,
-  },
-
-  // Section
-  section: {
-    marginBottom: spacing.xl,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: colors.text.secondary,
-    marginBottom: spacing.md,
+    borderRadius: responsive.width(4, 5),
   },
 
   // Empty State
   emptyState: {
     alignItems: 'center',
-    padding: spacing.xl,
+    padding: responsive.spacing(32, 40),
     backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-  },
-  emptyIcon: {
-    fontSize: 48,
-    marginBottom: spacing.md,
+    borderRadius: responsive.width(16, 20),
+    gap: responsive.spacing(8, 12),
   },
   emptyText: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
     color: colors.text.secondary,
-    marginBottom: spacing.xs,
   },
   emptySubtext: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.tertiary,
   },
 
-  // Lesson Card
+  // Lesson List
+  lessonList: {
+    gap: responsive.spacing(10, 14),
+  },
   lessonCard: {
-    marginBottom: spacing.sm,
-    borderRadius: 12,
-    overflow: 'hidden',
-    ...shadows.sm,
-  },
-  lessonGradient: {
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 12,
-  },
-  lessonContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: spacing.md,
+    backgroundColor: colors.background.secondary,
+    borderRadius: responsive.width(14, 18),
+    padding: responsive.spacing(14, 18),
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.06)',
+  },
+  lessonCompleted: {
+    borderColor: 'rgba(16, 185, 129, 0.2)',
+    backgroundColor: 'rgba(16, 185, 129, 0.06)',
+  },
+  lessonCurrent: {
+    borderColor: 'rgba(212, 175, 55, 0.3)',
+    backgroundColor: 'rgba(212, 175, 55, 0.08)',
+  },
+  lessonPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.99 }],
   },
   lessonNumber: {
-    width: 36,
-    height: 36,
-    borderRadius: 10,
+    width: responsive.width(36, 44),
+    height: responsive.width(36, 44),
+    borderRadius: responsive.width(10, 12),
     backgroundColor: colors.background.tertiary,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: spacing.md,
+    marginRight: responsive.spacing(12, 16),
   },
   lessonNumberText: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
     color: colors.text.secondary,
-  },
-  checkmark: {
-    fontSize: 16,
-    color: colors.text.primary,
-    fontWeight: '700',
   },
   lessonInfo: {
     flex: 1,
   },
   lessonTitle: {
-    fontSize: 15,
+    fontSize: responsive.fontSize(15, 17),
     fontWeight: '500',
     color: colors.text.primary,
   },
   continueLabel: {
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     color: colors.accent.gold,
     fontWeight: '600',
     marginTop: 2,
   },
   completedLabel: {
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     color: '#10B981',
     marginTop: 2,
+  },
+  lessonArrow: {
+    width: responsive.width(32, 40),
+    height: responsive.width(32, 40),
+    borderRadius: responsive.width(10, 12),
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   // Quiz Card
   quizCard: {
-    borderRadius: 16,
-    overflow: 'hidden',
-    ...shadows.md,
-  },
-  quizGradient: {
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 16,
-  },
-  quizContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: spacing.lg,
+    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+    borderRadius: responsive.width(16, 20),
+    padding: responsive.spacing(16, 20),
+    borderWidth: 1,
+    borderColor: 'rgba(139, 92, 246, 0.2)',
+  },
+  quizPassed: {
+    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+    borderColor: 'rgba(16, 185, 129, 0.2)',
+  },
+  quizPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.99 }],
   },
   quizIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 14,
+    width: responsive.width(48, 56),
+    height: responsive.width(48, 56),
+    borderRadius: responsive.width(14, 16),
     backgroundColor: colors.accent.purple,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: spacing.md,
-  },
-  quizIconText: {
-    fontSize: 22,
+    marginRight: responsive.spacing(14, 18),
   },
   quizInfo: {
     flex: 1,
   },
   quizTitle: {
-    fontSize: 17,
+    fontSize: responsive.fontSize(17, 19),
     fontWeight: '600',
     color: colors.text.primary,
     marginBottom: 2,
   },
   quizMeta: {
-    fontSize: 13,
+    fontSize: responsive.fontSize(13, 15),
     color: colors.text.tertiary,
   },
   quizScore: {
-    fontSize: 13,
+    fontSize: responsive.fontSize(13, 15),
     fontWeight: '600',
     marginTop: 2,
   },
   quizArrow: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    width: responsive.width(36, 44),
+    height: responsive.width(36, 44),
+    borderRadius: responsive.width(11, 13),
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  arrowIcon: {
-    fontSize: 16,
-    color: colors.text.secondary,
-    fontWeight: 'bold',
   },
 });

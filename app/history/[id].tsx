@@ -1,14 +1,30 @@
+/**
+ * History Detail Screen - 历史详情
+ * iPad 和 iOS 适配
+ */
+
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useReadingStore } from '@/stores/readingStore';
 import { TarotCardDisplay } from '@/components/tarot/TarotCardDisplay';
 import { colors } from '@/theme/colors';
 
-/**
- * History Detail Screen
- * Displays full reading details including cards and interpretation
- */
+// UI Components
+import {
+  ScreenContainer,
+  Row,
+  Spacer,
+  responsive,
+  isTablet,
+  ChevronLeftIcon,
+  SparklesIcon,
+  StarIcon,
+  TrashIcon,
+  CrystalBallIcon,
+} from '@/components/ui';
+import { IconButton } from '@/components/ui/Buttons';
 
 export default function HistoryDetail() {
   const router = useRouter();
@@ -19,20 +35,34 @@ export default function HistoryDetail() {
 
   if (!reading) {
     return (
-      <View style={styles.container}>
+      <ScreenContainer>
+        <LinearGradient
+          colors={['#0A0E1A', '#1A0E2E', '#2E1A47', '#1E2638']}
+          style={styles.backgroundGradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+        />
+
         <View style={styles.errorContainer}>
-          <Text style={styles.errorIcon}>🔮</Text>
+          <View style={styles.errorIconContainer}>
+            <CrystalBallIcon size={responsive.width(60, 80)} color={colors.text.tertiary} />
+          </View>
           <Text style={styles.errorTitle}>Reading Not Found</Text>
           <Text style={styles.errorSubtitle}>This reading may have been deleted</Text>
-          <TouchableOpacity
-            style={styles.errorButton}
+
+          <Spacer size={responsive.spacing(24, 32)} />
+
+          <Pressable
             onPress={() => router.back()}
-            activeOpacity={0.8}
+            style={({ pressed }) => [
+              styles.errorButton,
+              pressed && styles.errorButtonPressed,
+            ]}
           >
             <Text style={styles.errorButtonText}>Go Back</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
-      </View>
+      </ScreenContainer>
     );
   }
 
@@ -43,39 +73,59 @@ export default function HistoryDetail() {
   };
 
   const handleDelete = () => {
-    // TODO: Add confirmation dialog
     deleteFromHistory(id);
     router.back();
   };
 
   return (
-    <View style={styles.container}>
+    <ScreenContainer>
+      <LinearGradient
+        colors={['#0A0E1A', '#1A0E2E', '#2E1A47', '#1E2638']}
+        style={styles.backgroundGradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      />
+
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <View style={styles.headerTop}>
-            <View>
-              <Text style={styles.title}>
-                {reading.spreadType === 'single' ? '🌟 Daily Card' : '✨ Three Card Spread'}
-              </Text>
-              <Text style={styles.date}>{reading.dateFormatted}</Text>
-            </View>
+        <Row justify="space-between" align="center" style={styles.header}>
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
+            onPress={() => router.back()}
+            variant="filled"
+            size="md"
+          />
+          <Text style={styles.headerTitle}>解读详情</Text>
+          <IconButton
+            icon={<StarIcon size={20} color={reading.favorite ? '#FFD700' : colors.text.secondary} />}
+            onPress={handleToggleFavorite}
+            variant="filled"
+            size="md"
+          />
+        </Row>
 
-            <TouchableOpacity
-              onPress={handleToggleFavorite}
-              style={styles.favoriteButton}
-              activeOpacity={0.7}
-            >
-              <Text style={styles.favoriteIcon}>{reading.favorite ? '⭐' : '☆'}</Text>
-            </TouchableOpacity>
-          </View>
+        {/* Title Section */}
+        <View style={styles.titleSection}>
+          <Row align="center" gap={10}>
+            {reading.spreadType === 'single' ? (
+              <StarIcon size={responsive.width(24, 28)} color={colors.accent.gold} />
+            ) : (
+              <SparklesIcon size={responsive.width(24, 28)} color={colors.accent.gold} />
+            )}
+            <Text style={styles.title}>
+              {reading.spreadType === 'single' ? 'Daily Card' : 'Three Card Spread'}
+            </Text>
+          </Row>
+          <Text style={styles.date}>{reading.dateFormatted}</Text>
         </View>
 
+        <Spacer size={responsive.spacing(24, 32)} />
+
         {/* Cards Display */}
-        <View style={styles.cardsContainer}>
+        <View style={[styles.cardsContainer, isTablet && styles.cardsContainerTablet]}>
           {reading.cards.map((cardData, index) => (
             <TarotCardDisplay
               key={cardData.card.id}
@@ -89,201 +139,231 @@ export default function HistoryDetail() {
           ))}
         </View>
 
-        {/* Interpretation */}
+        <Spacer size={responsive.spacing(24, 32)} />
+
+        {/* Interpretation Section */}
         <View style={styles.interpretationContainer}>
-          <View style={styles.interpretationHeader}>
-            <Text style={styles.interpretationTitle}>✨ Interpretation</Text>
-          </View>
+          <LinearGradient
+            colors={['rgba(212, 175, 55, 0.08)', 'rgba(139, 92, 246, 0.05)']}
+            style={styles.interpretationGradient}
+          />
+
+          <Row align="center" gap={10} style={styles.interpretationHeader}>
+            <SparklesIcon size={22} color={colors.accent.gold} />
+            <Text style={styles.interpretationTitle}>Interpretation</Text>
+          </Row>
+
           <Text style={styles.interpretationText}>{reading.interpretation}</Text>
         </View>
 
-        {/* Actions */}
+        <Spacer size={responsive.spacing(24, 32)} />
+
+        {/* Action Buttons */}
         <View style={styles.actionsContainer}>
-          <TouchableOpacity
-            style={styles.newReadingButton}
+          {/* New Reading Button */}
+          <Pressable
             onPress={() => router.push('/')}
-            activeOpacity={0.8}
+            style={({ pressed }) => [
+              styles.primaryButton,
+              pressed && styles.primaryButtonPressed,
+            ]}
           >
-            <Text style={styles.newReadingButtonText}>✨ New Reading</Text>
-          </TouchableOpacity>
+            <LinearGradient
+              colors={[colors.accent.gold, colors.accent.goldLight]}
+              style={styles.primaryButtonGradient}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            >
+              <Row align="center" gap={10}>
+                <SparklesIcon size={20} color={colors.background.primary} />
+                <Text style={styles.primaryButtonText}>New Reading</Text>
+              </Row>
+            </LinearGradient>
+          </Pressable>
 
-          <TouchableOpacity
-            style={styles.deleteButton}
+          <Spacer size={responsive.spacing(12, 16)} />
+
+          {/* Delete Button */}
+          <Pressable
             onPress={handleDelete}
-            activeOpacity={0.8}
+            style={({ pressed }) => [
+              styles.deleteButton,
+              pressed && styles.deleteButtonPressed,
+            ]}
           >
-            <Text style={styles.deleteButtonText}>🗑️ Delete Reading</Text>
-          </TouchableOpacity>
+            <Row align="center" justify="center" gap={8}>
+              <TrashIcon size={18} color={colors.error} />
+              <Text style={styles.deleteButtonText}>Delete Reading</Text>
+            </Row>
+          </Pressable>
         </View>
-      </ScrollView>
 
-      {/* Back button */}
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.back()}
-        activeOpacity={0.7}
-      >
-        <Text style={styles.backButtonText}>← Back</Text>
-      </TouchableOpacity>
-    </View>
+        <Spacer size={responsive.spacing(32, 48)} />
+      </ScrollView>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
+  backgroundGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
   scrollContent: {
-    paddingTop: 80,
-    paddingBottom: 40,
-    paddingHorizontal: 24,
+    paddingHorizontal: responsive.spacing(20, 32),
+    paddingTop: responsive.spacing(16, 24),
+    paddingBottom: responsive.spacing(24, 40),
   },
   header: {
-    marginBottom: 24,
+    marginBottom: responsive.spacing(20, 24),
   },
-  headerTop: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+  headerTitle: {
+    fontSize: responsive.fontSize(18, 20),
+    fontWeight: '600',
+    color: colors.text.primary,
+  },
+  titleSection: {
+    alignItems: 'center',
   },
   title: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(28, 34),
     fontWeight: '700',
     color: colors.accent.gold,
-    marginBottom: 8,
+    textShadowColor: 'rgba(212, 175, 55, 0.4)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
   },
   date: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.secondary,
-  },
-  favoriteButton: {
-    padding: 8,
-  },
-  favoriteIcon: {
-    fontSize: 32,
+    marginTop: responsive.spacing(8, 10),
   },
   cardsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: 16,
-    marginBottom: 32,
+    gap: responsive.spacing(16, 24),
+  },
+  cardsContainerTablet: {
+    gap: responsive.spacing(24, 36),
   },
   interpretationContainer: {
-    backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: colors.accent.gold + '40',
-    shadowColor: colors.accent.gold,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.2,
-    shadowRadius: 10,
-    elevation: 5,
-    marginBottom: 24,
+    borderRadius: responsive.width(20, 24),
+    borderWidth: 2,
+    borderColor: 'rgba(212, 175, 55, 0.3)',
+    overflow: 'hidden',
+    backgroundColor: 'rgba(10, 14, 26, 0.8)',
+  },
+  interpretationGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
   interpretationHeader: {
-    marginBottom: 16,
-    paddingBottom: 12,
+    padding: responsive.spacing(16, 20),
     borderBottomWidth: 1,
-    borderBottomColor: colors.accent.gold + '30',
+    borderBottomColor: 'rgba(212, 175, 55, 0.2)',
   },
   interpretationTitle: {
-    fontSize: 20,
-    fontWeight: '600',
+    fontSize: responsive.fontSize(20, 24),
+    fontWeight: '700',
     color: colors.accent.gold,
+    letterSpacing: 0.3,
   },
   interpretationText: {
-    fontSize: 16,
-    lineHeight: 26,
+    padding: responsive.spacing(16, 24),
+    fontSize: responsive.fontSize(16, 18),
+    lineHeight: responsive.fontSize(26, 30),
     color: colors.text.primary,
     letterSpacing: 0.3,
   },
   actionsContainer: {
-    gap: 12,
-    marginBottom: 24,
+    paddingHorizontal: responsive.spacing(8, 24),
   },
-  newReadingButton: {
-    backgroundColor: colors.accent.gold,
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 12,
+  primaryButton: {
+    borderRadius: responsive.width(16, 20),
+    overflow: 'hidden',
     shadowColor: colors.accent.gold,
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.6,
-    shadowRadius: 15,
-    elevation: 10,
+    shadowOpacity: 0.4,
+    shadowRadius: 12,
+    elevation: 8,
   },
-  newReadingButtonText: {
+  primaryButtonPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.98 }],
+  },
+  primaryButtonGradient: {
+    paddingVertical: responsive.spacing(16, 20),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  primaryButtonText: {
     color: colors.background.primary,
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 22),
     fontWeight: '700',
-    textAlign: 'center',
     letterSpacing: 0.5,
   },
   deleteButton: {
-    backgroundColor: colors.background.tertiary,
-    paddingVertical: 14,
-    paddingHorizontal: 32,
-    borderRadius: 12,
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    paddingVertical: responsive.spacing(14, 18),
+    borderRadius: responsive.width(12, 16),
     borderWidth: 1,
-    borderColor: colors.error,
+    borderColor: 'rgba(239, 68, 68, 0.3)',
+  },
+  deleteButtonPressed: {
+    opacity: 0.8,
+    transform: [{ scale: 0.98 }],
   },
   deleteButtonText: {
     color: colors.error,
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
-    textAlign: 'center',
   },
   errorContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 40,
+    paddingHorizontal: responsive.spacing(40, 80),
   },
-  errorIcon: {
-    fontSize: 80,
-    marginBottom: 24,
+  errorIconContainer: {
+    width: responsive.width(100, 130),
+    height: responsive.width(100, 130),
+    borderRadius: responsive.width(50, 65),
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: responsive.spacing(24, 32),
   },
   errorTitle: {
-    fontSize: 24,
+    fontSize: responsive.fontSize(24, 30),
     fontWeight: '700',
     color: colors.text.primary,
-    marginBottom: 12,
+    marginBottom: responsive.spacing(12, 16),
   },
   errorSubtitle: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.secondary,
     textAlign: 'center',
-    marginBottom: 32,
   },
   errorButton: {
     backgroundColor: colors.accent.gold,
-    paddingVertical: 14,
-    paddingHorizontal: 32,
-    borderRadius: 12,
+    paddingVertical: responsive.spacing(14, 18),
+    paddingHorizontal: responsive.spacing(32, 40),
+    borderRadius: responsive.width(12, 16),
+  },
+  errorButtonPressed: {
+    opacity: 0.8,
+    transform: [{ scale: 0.98 }],
   },
   errorButtonText: {
     color: colors.background.primary,
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
-  },
-  backButton: {
-    position: 'absolute',
-    top: 50,
-    left: 20,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: colors.background.tertiary,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: colors.accent.gold,
-    opacity: 0.7,
-  },
-  backButtonText: {
-    color: colors.accent.gold,
-    fontSize: 14,
-    fontWeight: '500',
   },
 });

@@ -1,14 +1,12 @@
+/**
+ * Flashcards Screen - 闪卡记忆
+ * iPad 和 iOS 适配
+ */
+
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -16,12 +14,29 @@ import Animated, {
   interpolate,
 } from 'react-native-reanimated';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
 import { useFlashcardStore } from '@/stores/flashcardStore';
 import { useLearningStore } from '@/stores/learningStore';
 import { TAROT_DECK } from '@/data/tarot-deck';
+import { TarotCardSVG } from '@/components/cards/svg';
 import type { TarotCard } from '@/types/tarot.types';
+
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Spacer,
+  responsive,
+  isTablet,
+  StatCard,
+  ChevronLeftIcon,
+  CardsIcon,
+  CheckIcon,
+  XIcon,
+  RefreshIcon,
+  PlayIcon,
+} from '@/components/ui';
+import { IconButton, Button } from '@/components/ui/Buttons';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -160,60 +175,53 @@ export default function FlashcardsScreen() {
   // Intro Screen
   if (sessionState === 'intro') {
     return (
-      <View style={styles.container}>
-        <LinearGradient
-          colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-          style={styles.backgroundGradient}
-        />
-
-        <SafeAreaView style={styles.safeArea}>
-          <View style={styles.introContent}>
-            <TouchableOpacity
+      <ScreenContainer>
+        <View style={styles.introContent}>
+          <Row justify="flex-start" style={styles.header}>
+            <IconButton
+              icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
               onPress={() => router.back()}
-              style={styles.backButton}
-            >
-              <Text style={styles.backIcon}>←</Text>
-            </TouchableOpacity>
+              variant="filled"
+              size="md"
+            />
+          </Row>
 
-            <View style={styles.introCenter}>
-              <View style={styles.flashcardIcon}>
-                <Text style={styles.flashcardEmoji}>🎴</Text>
-              </View>
-
-              <Text style={styles.introTitle}>Flashcard Practice</Text>
-              <Text style={styles.introDescription}>
-                Review tarot cards to strengthen your memory. See the symbol,
-                guess the card name and meaning, then flip to check!
-              </Text>
-
-              <View style={styles.statsRow}>
-                <View style={styles.statCard}>
-                  <Text style={styles.statNumber}>{cardsDue.length}</Text>
-                  <Text style={styles.statLabel}>Cards Due</Text>
-                </View>
-                <View style={styles.statCard}>
-                  <Text style={styles.statNumber}>{totalReviews}</Text>
-                  <Text style={styles.statLabel}>Total Reviews</Text>
-                </View>
-              </View>
+          <View style={styles.introCenter}>
+            <View style={styles.flashcardIcon}>
+              <CardsIcon size={responsive.width(48, 60)} color={colors.accent.purple} />
             </View>
 
-            <TouchableOpacity
-              onPress={handleStartSession}
-              style={styles.startButton}
-            >
-              <LinearGradient
-                colors={[colors.accent.purple, colors.accent.purpleLight]}
-                style={styles.startGradient}
-              >
-                <Text style={styles.startButtonText}>
-                  Start Practice Session
-                </Text>
-              </LinearGradient>
-            </TouchableOpacity>
+            <Text style={styles.introTitle}>闪卡记忆</Text>
+            <Text style={styles.introDescription}>
+              通过卡片复习加深记忆。看到卡牌图案，回忆卡牌名称和含义，然后翻转验证！
+            </Text>
+
+            <StatCard
+              items={[
+                { value: cardsDue.length, label: '待复习' },
+                { value: totalReviews, label: '总复习次数' },
+              ]}
+              style={styles.statsCard}
+            />
           </View>
-        </SafeAreaView>
-      </View>
+
+          <Pressable
+            onPress={handleStartSession}
+            style={({ pressed }) => [
+              styles.startButton,
+              pressed && styles.buttonPressed,
+            ]}
+          >
+            <LinearGradient
+              colors={[colors.accent.purple, '#A78BFA']}
+              style={styles.startGradient}
+            >
+              <PlayIcon size={20} color={colors.text.primary} />
+              <Text style={styles.startButtonText}>开始练习</Text>
+            </LinearGradient>
+          </Pressable>
+        </View>
+      </ScreenContainer>
     );
   }
 
@@ -222,209 +230,197 @@ export default function FlashcardsScreen() {
     const accuracy = cards.length > 0 ? Math.round((correctCount / cards.length) * 100) : 0;
 
     return (
-      <View style={styles.container}>
-        <LinearGradient
-          colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-          style={styles.backgroundGradient}
-        />
-
-        <SafeAreaView style={styles.safeArea}>
-          <View style={styles.resultContent}>
-            <View style={styles.resultCenter}>
-              <View
-                style={[
-                  styles.resultIcon,
-                  { backgroundColor: accuracy >= 70 ? '#10B981' : colors.accent.gold },
-                ]}
-              >
-                <Text style={styles.resultEmoji}>
-                  {accuracy >= 90 ? '🌟' : accuracy >= 70 ? '✨' : '💪'}
-                </Text>
-              </View>
-
-              <Text style={styles.resultTitle}>Session Complete!</Text>
-
-              <Text
-                style={[
-                  styles.resultScore,
-                  { color: accuracy >= 70 ? '#10B981' : colors.accent.gold },
-                ]}
-              >
-                {accuracy}%
-              </Text>
-
-              <Text style={styles.resultSubtitle}>
-                {correctCount} of {cards.length} correct
-              </Text>
-
-              <View style={styles.resultMessage}>
-                <Text style={styles.resultMessageText}>
-                  {accuracy >= 90
-                    ? "Excellent! You're mastering these cards!"
-                    : accuracy >= 70
-                    ? 'Great progress! Keep practicing!'
-                    : 'Keep studying! Practice makes perfect.'}
-                </Text>
-              </View>
+      <ScreenContainer>
+        <View style={styles.resultContent}>
+          <View style={styles.resultCenter}>
+            <View
+              style={[
+                styles.resultIcon,
+                { backgroundColor: accuracy >= 70 ? '#10B981' : colors.accent.gold },
+              ]}
+            >
+              {accuracy >= 90 ? (
+                <Text style={styles.resultEmoji}>🌟</Text>
+              ) : accuracy >= 70 ? (
+                <Text style={styles.resultEmoji}>✨</Text>
+              ) : (
+                <Text style={styles.resultEmoji}>💪</Text>
+              )}
             </View>
 
-            <View style={styles.resultButtons}>
-              <TouchableOpacity
-                onPress={handleStartSession}
-                style={styles.retryButton}
-              >
-                <Text style={styles.retryButtonText}>Practice Again</Text>
-              </TouchableOpacity>
+            <Text style={styles.resultTitle}>练习完成!</Text>
 
-              <TouchableOpacity
-                onPress={() => router.back()}
-                style={styles.doneButton}
-              >
-                <LinearGradient
-                  colors={[colors.accent.purple, colors.accent.purpleLight]}
-                  style={styles.doneGradient}
-                >
-                  <Text style={styles.doneButtonText}>Done</Text>
-                </LinearGradient>
-              </TouchableOpacity>
+            <Text
+              style={[
+                styles.resultScore,
+                { color: accuracy >= 70 ? '#10B981' : colors.accent.gold },
+              ]}
+            >
+              {accuracy}%
+            </Text>
+
+            <Text style={styles.resultSubtitle}>
+              {correctCount} / {cards.length} 正确
+            </Text>
+
+            <View style={styles.resultMessage}>
+              <Text style={styles.resultMessageText}>
+                {accuracy >= 90
+                  ? '太棒了！你已经掌握了这些卡牌！'
+                  : accuracy >= 70
+                  ? '很好的进步！继续保持！'
+                  : '继续努力！多多练习就会进步！'}
+              </Text>
             </View>
           </View>
-        </SafeAreaView>
-      </View>
+
+          <View style={styles.resultButtons}>
+            <Pressable
+              onPress={handleStartSession}
+              style={({ pressed }) => [
+                styles.retryButton,
+                pressed && styles.buttonPressed,
+              ]}
+            >
+              <RefreshIcon size={18} color={colors.text.secondary} />
+              <Text style={styles.retryButtonText}>再练一次</Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() => router.back()}
+              style={({ pressed }) => [
+                styles.doneButton,
+                pressed && styles.buttonPressed,
+              ]}
+            >
+              <LinearGradient
+                colors={[colors.accent.purple, '#A78BFA']}
+                style={styles.doneGradient}
+              >
+                <Text style={styles.doneButtonText}>完成</Text>
+              </LinearGradient>
+            </Pressable>
+          </View>
+        </View>
+      </ScreenContainer>
     );
   }
 
   // Practice Screen
+  const cardWidth = isTablet ? SCREEN_WIDTH * 0.5 : SCREEN_WIDTH - responsive.spacing(32, 48) * 2;
+  const cardHeight = cardWidth / 0.667;
+
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-        style={styles.backgroundGradient}
-      />
+    <ScreenContainer>
+      {/* Header */}
+      <View style={styles.practiceHeader}>
+        <IconButton
+          icon={<XIcon size={20} color={colors.text.secondary} />}
+          onPress={() => {
+            setSessionState('intro');
+            setCards([]);
+          }}
+          variant="filled"
+          size="md"
+        />
 
-      <SafeAreaView style={styles.safeArea}>
-        {/* Header */}
-        <View style={styles.practiceHeader}>
-          <TouchableOpacity
-            onPress={() => {
-              setSessionState('intro');
-              setCards([]);
-            }}
-            style={styles.closeButton}
-          >
-            <Text style={styles.closeIcon}>×</Text>
-          </TouchableOpacity>
+        <View style={styles.progressContainer}>
+          <View style={styles.progressBar}>
+            <View style={[styles.progressFill, { width: `${progress}%` }]} />
+          </View>
+          <Text style={styles.progressText}>
+            {currentIndex + 1} / {cards.length}
+          </Text>
+        </View>
+      </View>
 
-          <View style={styles.progressContainer}>
-            <View style={styles.progressBar}>
-              <View style={[styles.progressFill, { width: `${progress}%` }]} />
+      {/* Flashcard */}
+      <View style={styles.cardContainer}>
+        <Pressable
+          onPress={handleFlip}
+          style={[styles.cardTouchable, { width: cardWidth, height: cardHeight }]}
+        >
+          {/* Front of card - SVG */}
+          <Animated.View style={[styles.cardFace, styles.cardFront, frontAnimatedStyle]}>
+            <View style={styles.cardSvgWrapper}>
+              <TarotCardSVG
+                cardId={currentCard?.id || 0}
+                width={cardWidth}
+                height={cardHeight}
+                size={isTablet ? 'large' : 'medium'}
+                showNumber={true}
+              />
             </View>
-            <Text style={styles.progressText}>
-              {currentIndex + 1} / {cards.length}
-            </Text>
-          </View>
-        </View>
+            <View style={styles.tapHintContainer}>
+              <Text style={styles.tapHint}>点击翻转查看答案</Text>
+            </View>
+          </Animated.View>
 
-        {/* Flashcard */}
-        <View style={styles.cardContainer}>
-          <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={handleFlip}
-            style={styles.cardTouchable}
+          {/* Back of card - Answer */}
+          <Animated.View style={[styles.cardFace, styles.cardBack, backAnimatedStyle]}>
+            <LinearGradient
+              colors={[colors.accent.gold + '30', colors.accent.gold + '15']}
+              style={styles.cardBackGradient}
+            >
+              <Text style={styles.cardName}>{currentCard?.name}</Text>
+              <View style={styles.keywordsContainer}>
+                {currentCard?.uprightKeywords.slice(0, 4).map((keyword, i) => (
+                  <View key={i} style={styles.keywordPill}>
+                    <Text style={styles.keywordText}>{keyword}</Text>
+                  </View>
+                ))}
+              </View>
+              <Text style={styles.arcanaLabel}>
+                {currentCard?.arcana === 'major' ? '大阿卡纳' : currentCard?.suit}
+              </Text>
+            </LinearGradient>
+          </Animated.View>
+        </Pressable>
+      </View>
+
+      {/* Answer Buttons */}
+      {isFlipped && (
+        <View style={styles.answerButtons}>
+          <Pressable
+            onPress={() => handleAnswer(false)}
+            style={({ pressed }) => [
+              styles.wrongButton,
+              pressed && styles.buttonPressed,
+            ]}
           >
-            {/* Front of card */}
-            <Animated.View style={[styles.cardFace, styles.cardFront, frontAnimatedStyle]}>
-              <LinearGradient
-                colors={[colors.accent.purple + '30', colors.accent.purple + '10']}
-                style={styles.cardGradient}
-              >
-                <Text style={styles.cardSymbol}>{currentCard?.symbolEmoji}</Text>
-                <Text style={styles.tapHint}>Tap to reveal</Text>
-              </LinearGradient>
-            </Animated.View>
+            <XIcon size={20} color={colors.error} />
+            <Text style={styles.wrongButtonText}>不记得</Text>
+          </Pressable>
 
-            {/* Back of card */}
-            <Animated.View style={[styles.cardFace, styles.cardBack, backAnimatedStyle]}>
-              <LinearGradient
-                colors={[colors.accent.gold + '30', colors.accent.gold + '15']}
-                style={styles.cardGradient}
-              >
-                <Text style={styles.cardName}>{currentCard?.name}</Text>
-                <View style={styles.keywordsContainer}>
-                  {currentCard?.uprightKeywords.slice(0, 4).map((keyword, i) => (
-                    <View key={i} style={styles.keywordPill}>
-                      <Text style={styles.keywordText}>{keyword}</Text>
-                    </View>
-                  ))}
-                </View>
-                <Text style={styles.arcanaLabel}>
-                  {currentCard?.arcana === 'major' ? 'Major Arcana' : currentCard?.suit}
-                </Text>
-              </LinearGradient>
-            </Animated.View>
-          </TouchableOpacity>
+          <Pressable
+            onPress={() => handleAnswer(true)}
+            style={({ pressed }) => [
+              styles.correctButton,
+              pressed && styles.buttonPressed,
+            ]}
+          >
+            <LinearGradient
+              colors={['#10B981', '#34D399']}
+              style={styles.correctGradient}
+            >
+              <CheckIcon size={20} color={colors.text.primary} />
+              <Text style={styles.correctButtonText}>记得!</Text>
+            </LinearGradient>
+          </Pressable>
         </View>
-
-        {/* Answer Buttons */}
-        {isFlipped && (
-          <View style={styles.answerButtons}>
-            <TouchableOpacity
-              onPress={() => handleAnswer(false)}
-              style={styles.wrongButton}
-            >
-              <Text style={styles.answerButtonText}>{"✕ Didn't Know"}</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => handleAnswer(true)}
-              style={styles.correctButton}
-            >
-              <LinearGradient
-                colors={['#10B981', '#34D399']}
-                style={styles.correctGradient}
-              >
-                <Text style={styles.answerButtonTextWhite}>✓ Got It!</Text>
-              </LinearGradient>
-            </TouchableOpacity>
-          </View>
-        )}
-      </SafeAreaView>
-    </View>
+      )}
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
-  backgroundGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  safeArea: {
-    flex: 1,
-  },
-
   // Intro
   introContent: {
     flex: 1,
-    padding: spacing.lg,
+    padding: responsive.spacing(20, 28),
   },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background.tertiary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 20,
-    color: colors.text.primary,
+  header: {
+    marginBottom: responsive.spacing(16, 24),
   },
   introCenter: {
     flex: 1,
@@ -432,106 +428,84 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   flashcardIcon: {
-    width: 100,
-    height: 100,
-    borderRadius: 30,
-    backgroundColor: colors.accent.purple + '30',
+    width: responsive.width(100, 120),
+    height: responsive.width(100, 120),
+    borderRadius: responsive.width(30, 36),
+    backgroundColor: colors.accent.purple + '20',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: spacing.lg,
-  },
-  flashcardEmoji: {
-    fontSize: 48,
+    marginBottom: responsive.spacing(20, 28),
   },
   introTitle: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(28, 34),
     fontWeight: '700',
     color: colors.text.primary,
     textAlign: 'center',
-    marginBottom: spacing.md,
+    marginBottom: responsive.spacing(12, 16),
   },
   introDescription: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     color: colors.text.tertiary,
     textAlign: 'center',
-    lineHeight: 24,
-    marginBottom: spacing.xl,
-    paddingHorizontal: spacing.lg,
+    lineHeight: responsive.fontSize(24, 28),
+    marginBottom: responsive.spacing(24, 32),
+    paddingHorizontal: responsive.spacing(20, 40),
   },
-  statsRow: {
-    flexDirection: 'row',
-    gap: spacing.lg,
-  },
-  statCard: {
-    backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-    padding: spacing.lg,
-    alignItems: 'center',
-    minWidth: 100,
-  },
-  statNumber: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: colors.accent.purple,
-  },
-  statLabel: {
-    fontSize: 14,
-    color: colors.text.tertiary,
-    marginTop: spacing.xs,
+  statsCard: {
+    width: '100%',
+    maxWidth: responsive.width(320, 400),
   },
   startButton: {
-    borderRadius: 16,
+    borderRadius: responsive.width(16, 20),
     overflow: 'hidden',
-    ...shadows.md,
+    shadowColor: colors.accent.purple,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
   },
   startGradient: {
-    paddingVertical: spacing.lg,
+    flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 16,
+    justifyContent: 'center',
+    paddingVertical: responsive.spacing(16, 20),
+    borderRadius: responsive.width(16, 20),
+    gap: responsive.spacing(10, 12),
   },
   startButtonText: {
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 20),
     fontWeight: '700',
     color: colors.text.primary,
+  },
+  buttonPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.98 }],
   },
 
   // Practice
   practiceHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: spacing.lg,
-    gap: spacing.md,
-  },
-  closeButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background.tertiary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  closeIcon: {
-    fontSize: 24,
-    color: colors.text.secondary,
-    marginTop: -2,
+    padding: responsive.spacing(20, 28),
+    gap: responsive.spacing(12, 16),
   },
   progressContainer: {
     flex: 1,
-    gap: spacing.xs,
+    gap: responsive.spacing(6, 8),
   },
   progressBar: {
-    height: 6,
+    height: responsive.width(6, 8),
     backgroundColor: colors.background.tertiary,
-    borderRadius: 3,
+    borderRadius: responsive.width(3, 4),
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
     backgroundColor: colors.accent.purple,
-    borderRadius: 3,
+    borderRadius: responsive.width(3, 4),
   },
   progressText: {
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     color: colors.text.tertiary,
     textAlign: 'right',
   },
@@ -541,19 +515,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: responsive.spacing(20, 28),
   },
   cardTouchable: {
-    width: SCREEN_WIDTH - spacing.lg * 4,
-    aspectRatio: 0.7,
+    position: 'relative',
   },
   cardFace: {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    borderRadius: 24,
+    borderRadius: responsive.width(20, 28),
     overflow: 'hidden',
-    ...shadows.goldGlow,
   },
   cardFront: {
     zIndex: 2,
@@ -561,50 +533,62 @@ const styles = StyleSheet.create({
   cardBack: {
     zIndex: 1,
   },
-  cardGradient: {
+  cardSvgWrapper: {
+    flex: 1,
+    borderRadius: responsive.width(20, 28),
+    overflow: 'hidden',
+  },
+  tapHintContainer: {
+    position: 'absolute',
+    bottom: responsive.spacing(16, 24),
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
+  tapHint: {
+    fontSize: responsive.fontSize(14, 16),
+    color: colors.text.tertiary,
+    fontStyle: 'italic',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    paddingHorizontal: responsive.spacing(12, 16),
+    paddingVertical: responsive.spacing(6, 8),
+    borderRadius: responsive.width(8, 10),
+  },
+  cardBackGradient: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: spacing.xl,
+    padding: responsive.spacing(24, 32),
     borderWidth: 2,
     borderColor: colors.accent.gold + '40',
-    borderRadius: 24,
-  },
-  cardSymbol: {
-    fontSize: 100,
-    marginBottom: spacing.lg,
-  },
-  tapHint: {
-    fontSize: 16,
-    color: colors.text.tertiary,
-    fontStyle: 'italic',
+    borderRadius: responsive.width(20, 28),
   },
   cardName: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(28, 34),
     fontWeight: '700',
     color: colors.accent.gold,
     textAlign: 'center',
-    marginBottom: spacing.lg,
+    marginBottom: responsive.spacing(20, 28),
   },
   keywordsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: spacing.sm,
-    marginBottom: spacing.lg,
+    gap: responsive.spacing(10, 14),
+    marginBottom: responsive.spacing(20, 28),
   },
   keywordPill: {
     backgroundColor: colors.background.tertiary,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
-    borderRadius: 12,
+    paddingHorizontal: responsive.spacing(14, 18),
+    paddingVertical: responsive.spacing(8, 10),
+    borderRadius: responsive.width(12, 14),
   },
   keywordText: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.secondary,
   },
   arcanaLabel: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.tertiary,
     textTransform: 'capitalize',
   },
@@ -612,36 +596,46 @@ const styles = StyleSheet.create({
   // Answer Buttons
   answerButtons: {
     flexDirection: 'row',
-    padding: spacing.lg,
-    gap: spacing.md,
+    padding: responsive.spacing(20, 28),
+    gap: responsive.spacing(12, 16),
   },
   wrongButton: {
     flex: 1,
-    backgroundColor: colors.background.secondary,
-    borderRadius: 14,
-    paddingVertical: spacing.lg,
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.background.secondary,
+    borderRadius: responsive.width(14, 18),
+    paddingVertical: responsive.spacing(16, 20),
     borderWidth: 2,
     borderColor: colors.error + '40',
+    gap: responsive.spacing(8, 10),
   },
-  correctButton: {
-    flex: 1,
-    borderRadius: 14,
-    overflow: 'hidden',
-    ...shadows.md,
-  },
-  correctGradient: {
-    paddingVertical: spacing.lg,
-    alignItems: 'center',
-    borderRadius: 14,
-  },
-  answerButtonText: {
-    fontSize: 16,
+  wrongButtonText: {
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
     color: colors.text.secondary,
   },
-  answerButtonTextWhite: {
-    fontSize: 16,
+  correctButton: {
+    flex: 1,
+    borderRadius: responsive.width(14, 18),
+    overflow: 'hidden',
+    shadowColor: '#10B981',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  correctGradient: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: responsive.spacing(16, 20),
+    borderRadius: responsive.width(14, 18),
+    gap: responsive.spacing(8, 10),
+  },
+  correctButtonText: {
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '700',
     color: colors.text.primary,
   },
@@ -649,76 +643,83 @@ const styles = StyleSheet.create({
   // Result
   resultContent: {
     flex: 1,
-    padding: spacing.lg,
+    padding: responsive.spacing(20, 28),
     justifyContent: 'center',
   },
   resultCenter: {
     alignItems: 'center',
-    marginBottom: spacing.xxl,
+    marginBottom: responsive.spacing(40, 56),
   },
   resultIcon: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: responsive.width(100, 120),
+    height: responsive.width(100, 120),
+    borderRadius: responsive.width(50, 60),
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: spacing.lg,
+    marginBottom: responsive.spacing(20, 28),
   },
   resultEmoji: {
-    fontSize: 48,
+    fontSize: responsive.fontSize(48, 60),
   },
   resultTitle: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(28, 34),
     fontWeight: '700',
     color: colors.text.primary,
-    marginBottom: spacing.sm,
+    marginBottom: responsive.spacing(8, 12),
   },
   resultScore: {
-    fontSize: 64,
+    fontSize: responsive.fontSize(64, 80),
     fontWeight: '800',
-    marginBottom: spacing.sm,
+    marginBottom: responsive.spacing(8, 12),
   },
   resultSubtitle: {
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 22),
     color: colors.text.tertiary,
-    marginBottom: spacing.lg,
+    marginBottom: responsive.spacing(20, 28),
   },
   resultMessage: {
     backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-    padding: spacing.lg,
+    borderRadius: responsive.width(16, 20),
+    padding: responsive.spacing(16, 22),
   },
   resultMessageText: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     color: colors.text.secondary,
     textAlign: 'center',
   },
   resultButtons: {
-    gap: spacing.md,
+    gap: responsive.spacing(12, 16),
   },
   retryButton: {
-    backgroundColor: colors.background.secondary,
-    borderRadius: 14,
-    paddingVertical: spacing.lg,
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.background.secondary,
+    borderRadius: responsive.width(14, 18),
+    paddingVertical: responsive.spacing(16, 20),
+    gap: responsive.spacing(8, 10),
   },
   retryButtonText: {
-    fontSize: 17,
+    fontSize: responsive.fontSize(17, 19),
     fontWeight: '600',
     color: colors.text.secondary,
   },
   doneButton: {
-    borderRadius: 14,
+    borderRadius: responsive.width(14, 18),
     overflow: 'hidden',
-    ...shadows.md,
+    shadowColor: colors.accent.purple,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
   },
   doneGradient: {
-    paddingVertical: spacing.lg,
+    paddingVertical: responsive.spacing(16, 20),
     alignItems: 'center',
-    borderRadius: 14,
+    borderRadius: responsive.width(14, 18),
   },
   doneButtonText: {
-    fontSize: 17,
+    fontSize: responsive.fontSize(17, 19),
     fontWeight: '700',
     color: colors.text.primary,
   },

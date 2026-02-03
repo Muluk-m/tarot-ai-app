@@ -1,5 +1,11 @@
+/**
+ * Draw Screen - 抽卡
+ * iPad 和 iOS 适配
+ */
+
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { CardDrawInteraction } from '@/components/reading/CardDrawInteraction';
 import { useCardStore } from '@/stores/cardStore';
@@ -9,16 +15,19 @@ import type { TarotCard } from '@/types/tarot.types';
 import { colors } from '@/theme/colors';
 import { v4 as uuidv4 } from '@/utils/uuid';
 
-/**
- * Draw Screen
- * User taps cards to reveal them and proceeds to AI interpretation
- *
- * Flow:
- * 1. Display card backs based on spread type
- * 2. User taps to flip and reveal cards
- * 3. All cards revealed → "Get Reading" button appears
- * 4. Create reading record and navigate to result screen
- */
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Spacer,
+  responsive,
+  isTablet,
+  ChevronLeftIcon,
+  SparklesIcon,
+  ChevronRightIcon,
+} from '@/components/ui';
+import { IconButton } from '@/components/ui/Buttons';
 
 export default function Draw() {
   const router = useRouter();
@@ -33,7 +42,6 @@ export default function Draw() {
   const positions = spreadType === 'three' ? (['past', 'present', 'future'] as const) : undefined;
 
   useEffect(() => {
-    // Draw cards from shuffled deck
     drawCards(cardCount);
     const cards = deck.slice(0, cardCount);
     setDrawnCards(cards);
@@ -46,10 +54,9 @@ export default function Draw() {
     }
   };
 
-  const allCardsRevealed = revealedCards.size === drawnCards.length;
+  const allCardsRevealed = revealedCards.size === drawnCards.length && drawnCards.length > 0;
 
   const handleGetReading = () => {
-    // Create reading record
     const reading = {
       id: uuidv4(),
       timestamp: Date.now(),
@@ -59,26 +66,33 @@ export default function Draw() {
         card,
         position: positions ? positions[index] : undefined,
       })),
-      interpretation: '', // Will be filled by AI
+      interpretation: '',
     };
 
-    // Update stores
     setCurrentReading(reading);
     incrementDailyUsage();
     incrementTotalReadings();
 
-    // Navigate to result screen
     router.push('/(reading)/result');
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+    <ScreenContainer>
+      <SafeScrollView maxWidth="lg">
         {/* Header */}
-        <View style={styles.header}>
+        <Row justify="space-between" align="center" style={styles.header}>
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
+            onPress={() => router.back()}
+            variant="filled"
+            size="md"
+          />
+          <Text style={styles.headerTitle}>抽取卡牌</Text>
+          <View style={{ width: responsive.width(40, 48) }} />
+        </Row>
+
+        {/* Title Section */}
+        <View style={styles.titleSection}>
           <Text style={styles.title}>Draw Your Cards</Text>
           <Text style={styles.subtitle}>
             {spreadType === 'single'
@@ -87,8 +101,10 @@ export default function Draw() {
           </Text>
         </View>
 
-        {/* Cards */}
-        <View style={styles.cardsContainer}>
+        <Spacer size={responsive.spacing(24, 36)} />
+
+        {/* Cards Container */}
+        <View style={[styles.cardsContainer, isTablet && styles.cardsContainerTablet]}>
           {drawnCards.map((card, index) => (
             <CardDrawInteraction
               key={card.id}
@@ -100,132 +116,164 @@ export default function Draw() {
           ))}
         </View>
 
-        {/* Progress indicator */}
-        {!allCardsRevealed && (
+        {/* Progress Indicator */}
+        {!allCardsRevealed && drawnCards.length > 0 && (
           <View style={styles.progressContainer}>
             <Text style={styles.progressText}>
               {revealedCards.size} / {drawnCards.length} cards revealed
             </Text>
+            <View style={styles.progressBar}>
+              <View
+                style={[
+                  styles.progressFill,
+                  { width: `${(revealedCards.size / drawnCards.length) * 100}%` },
+                ]}
+              />
+            </View>
           </View>
         )}
 
-        {/* Get Reading button */}
+        {/* Get Reading Button */}
         {allCardsRevealed && (
           <View style={styles.actionContainer}>
-            <TouchableOpacity
-              style={styles.getReadingButton}
+            <Pressable
               onPress={handleGetReading}
-              activeOpacity={0.8}
+              style={({ pressed }) => [
+                styles.getReadingButton,
+                pressed && styles.getReadingButtonPressed,
+              ]}
             >
-              <Text style={styles.getReadingButtonText}>✨ Get AI Reading</Text>
-            </TouchableOpacity>
+              <LinearGradient
+                colors={[colors.accent.gold, colors.accent.goldLight]}
+                style={styles.getReadingButtonGradient}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
+                <Row align="center" gap={responsive.spacing(10, 14)}>
+                  <SparklesIcon size={responsive.width(20, 24)} color={colors.background.primary} />
+                  <Text style={styles.getReadingButtonText}>Get AI Reading</Text>
+                  <View style={styles.buttonArrow}>
+                    <ChevronRightIcon size={18} color={colors.background.primary} />
+                  </View>
+                </Row>
+              </LinearGradient>
+            </Pressable>
 
             <Text style={styles.actionHint}>
               Your personalized interpretation awaits...
             </Text>
           </View>
         )}
-      </ScrollView>
 
-      {/* Back button */}
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.back()}
-        activeOpacity={0.7}
-      >
-        <Text style={styles.backButtonText}>← Back</Text>
-      </TouchableOpacity>
-    </View>
+        <Spacer size={responsive.spacing(32, 48)} />
+      </SafeScrollView>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
-  scrollContent: {
-    paddingTop: 80,
-    paddingBottom: 40,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-  },
   header: {
+    marginBottom: responsive.spacing(20, 24),
+  },
+  headerTitle: {
+    fontSize: responsive.fontSize(18, 20),
+    fontWeight: '600',
+    color: colors.text.primary,
+  },
+  titleSection: {
     alignItems: 'center',
-    marginBottom: 40,
   },
   title: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(28, 34),
     fontWeight: '700',
     color: colors.accent.gold,
-    marginBottom: 8,
-    letterSpacing: 1,
+    marginBottom: responsive.spacing(8, 12),
+    textAlign: 'center',
+    letterSpacing: 0.5,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.secondary,
     textAlign: 'center',
-    maxWidth: 280,
-    lineHeight: 20,
+    maxWidth: 300,
+    lineHeight: responsive.fontSize(20, 24),
   },
   cardsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: 20,
-    marginBottom: 30,
+    gap: responsive.spacing(20, 32),
+    marginBottom: responsive.spacing(24, 36),
+  },
+  cardsContainerTablet: {
+    gap: responsive.spacing(32, 48),
   },
   progressContainer: {
-    marginBottom: 20,
+    alignItems: 'center',
+    marginBottom: responsive.spacing(24, 32),
+    paddingHorizontal: responsive.spacing(24, 48),
   },
   progressText: {
     color: colors.text.tertiary,
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     fontStyle: 'italic',
+    marginBottom: responsive.spacing(12, 16),
+  },
+  progressBar: {
+    width: '100%',
+    maxWidth: 200,
+    height: 4,
+    backgroundColor: 'rgba(212, 175, 55, 0.2)',
+    borderRadius: 2,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: colors.accent.gold,
+    borderRadius: 2,
   },
   actionContainer: {
     alignItems: 'center',
-    marginTop: 20,
   },
   getReadingButton: {
-    backgroundColor: colors.accent.gold,
-    paddingVertical: 16,
-    paddingHorizontal: 40,
-    borderRadius: 12,
+    borderRadius: responsive.width(16, 20),
+    overflow: 'hidden',
     shadowColor: colors.accent.gold,
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.6,
+    shadowOpacity: 0.5,
     shadowRadius: 15,
     elevation: 10,
+    minWidth: responsive.width(260, 320),
+  },
+  getReadingButtonPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.98 }],
+  },
+  getReadingButtonGradient: {
+    paddingVertical: responsive.spacing(16, 20),
+    paddingHorizontal: responsive.spacing(28, 36),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   getReadingButtonText: {
     color: colors.background.primary,
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 22),
     fontWeight: '700',
     letterSpacing: 0.5,
   },
+  buttonArrow: {
+    width: responsive.width(28, 34),
+    height: responsive.width(28, 34),
+    borderRadius: responsive.width(14, 17),
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   actionHint: {
     color: colors.text.secondary,
-    fontSize: 12,
-    marginTop: 12,
+    fontSize: responsive.fontSize(12, 14),
+    marginTop: responsive.spacing(12, 16),
     fontStyle: 'italic',
     opacity: 0.8,
-  },
-  backButton: {
-    position: 'absolute',
-    top: 50,
-    left: 20,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: colors.background.tertiary,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: colors.accent.gold,
-    opacity: 0.7,
-  },
-  backButtonText: {
-    color: colors.accent.gold,
-    fontSize: 14,
-    fontWeight: '500',
   },
 });

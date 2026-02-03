@@ -1,24 +1,44 @@
+/**
+ * Learning Hub - 学习中心
+ * iPad 和 iOS 适配
+ */
+
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
 import { useLearningStore } from '@/stores/learningStore';
 import { useAchievementStore } from '@/stores/achievementStore';
 import { useFlashcardStore } from '@/stores/flashcardStore';
 import { getLevelInfo, getNextLevelInfo, LEVEL_THRESHOLDS } from '@/data/achievements';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Spacer,
+  responsive,
+  isTablet,
+  HeroCard,
+  QuickCard,
+  ListCard,
+  StatCard,
+  SectionHeader,
+  Badge,
+  ProgressRing,
+  BookIcon,
+  CardsIcon,
+  TrophyIcon,
+  GridIcon,
+  AwardIcon,
+  EditIcon,
+  ChevronLeftIcon,
+  ZapIcon,
+  TargetIcon,
+  LayersIcon,
+} from '@/components/ui';
+import { IconButton } from '@/components/ui/Buttons';
 
 export default function LearnHub() {
   const router = useRouter();
@@ -31,6 +51,9 @@ export default function LearnHub() {
     studyStreak,
     currentLevel,
     experiencePoints,
+    currentStage,
+    stageProgress,
+    totalXp,
   } = useLearningStore();
 
   const { getTotalUnlocked, getUnlockPercentage } = useAchievementStore();
@@ -45,481 +68,227 @@ export default function LearnHub() {
     : 100;
 
   const cardsDue = getCardsDueForReview().length;
+  const overallProgress = Math.min(Math.round((currentStage / 5) * 100 + stageProgress / 5), 100);
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-        style={styles.backgroundGradient}
-      />
+    <ScreenContainer>
+      <SafeScrollView maxWidth="lg">
+        {/* Header */}
+        <Row justify="space-between" align="center" style={styles.header}>
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
+            onPress={() => router.back()}
+            variant="filled"
+            size="md"
+          />
+          <Text style={styles.headerTitle}>学习中心</Text>
+          <View style={{ width: responsive.width(40, 48) }} />
+        </Row>
 
-      <SafeAreaView style={styles.safeArea} edges={['top']}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
-          {/* Header */}
-          <View style={styles.header}>
-            <TouchableOpacity
-              onPress={() => router.back()}
-              style={styles.backButton}
-            >
-              <Text style={styles.backIcon}>←</Text>
-            </TouchableOpacity>
-            <Text style={styles.headerTitle}>Learn Tarot</Text>
-            <View style={styles.placeholder} />
-          </View>
+        {/* Level Progress Hero */}
+        <HeroCard
+          title={levelInfo.title}
+          subtitle={`Level ${levelInfo.level} · ${masteredCards.length}/${cardsForNextLevel} 卡牌已掌握`}
+          icon={<AwardIcon size={responsive.width(28, 32)} color="#D4AF37" />}
+          onPress={() => router.push('/(learn)/achievements')}
+          progress={levelProgress}
+          progressLabel={`${experiencePoints} XP`}
+          actionText="查看成就"
+          theme="dark"
+        />
 
-          {/* Level Card */}
-          <View style={styles.levelCard}>
-            <LinearGradient
-              colors={[colors.accent.gold + '20', colors.accent.gold + '08']}
-              style={styles.levelGradient}
-            >
-              <View style={styles.levelHeader}>
-                <View style={styles.levelIconContainer}>
-                  <Text style={styles.levelIcon}>{levelInfo.icon}</Text>
-                </View>
-                <View style={styles.levelInfo}>
-                  <Text style={styles.levelLabel}>Level {levelInfo.level}</Text>
-                  <Text style={styles.levelTitle}>{levelInfo.title}</Text>
-                </View>
-                <View style={styles.xpBadge}>
-                  <Text style={styles.xpText}>{experiencePoints} XP</Text>
-                </View>
-              </View>
+        {/* Quick Stats */}
+        <StatCard
+          items={[
+            { value: studyStreak, label: '连续学习' },
+            { value: completedLessons.length, label: '已完成课程' },
+            { value: `${overallProgress}%`, label: '总进度' },
+          ]}
+          style={styles.statsCard}
+        />
 
-              {/* Progress bar */}
-              <View style={styles.progressContainer}>
-                <View style={styles.progressBar}>
-                  <View style={[styles.progressFill, { width: `${Math.min(levelProgress, 100)}%` }]} />
-                </View>
-                <Text style={styles.progressText}>
-                  {masteredCards.length} / {cardsForNextLevel} cards mastered
-                </Text>
-              </View>
-            </LinearGradient>
-          </View>
+        <Spacer size={responsive.spacing(20, 28)} />
 
-          {/* Quick Stats */}
-          <View style={styles.statsRow}>
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{studyStreak}</Text>
-              <Text style={styles.statLabel}>Day Streak</Text>
-            </View>
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{completedLessons.length}</Text>
-              <Text style={styles.statLabel}>Lessons</Text>
-            </View>
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{completedCourses.length}</Text>
-              <Text style={styles.statLabel}>Courses</Text>
-            </View>
-          </View>
+        {/* Quick Access - Grid for tablets, column for phones */}
+        <SectionHeader title="快速开始" subtitle="继续你的学习之旅" />
 
-          {/* Action Cards */}
-          <View style={styles.sectionTitle}>
-            <Text style={styles.sectionTitleText}>Continue Learning</Text>
-          </View>
-
-          {/* Courses Card */}
-          <TouchableOpacity
-            activeOpacity={0.9}
+        <Row gap={responsive.spacing(12, 16)} style={styles.quickGrid}>
+          <QuickCard
+            title="课程学习"
+            subtitle={`${completedCourses.length}/13 已完成`}
+            icon={<BookIcon size={responsive.width(24, 28)} color="#10B981" />}
             onPress={() => router.push('/(learn)/courses')}
-            style={styles.actionCard}
-          >
-            <LinearGradient
-              colors={['#10B981' + '20', '#10B981' + '08']}
-              style={styles.actionCardGradient}
-            >
-              <View style={styles.actionCardContent}>
-                <View style={[styles.actionIconContainer, { backgroundColor: '#10B981' }]}>
-                  <Text style={styles.actionIcon}>📚</Text>
-                </View>
-                <View style={styles.actionTextContainer}>
-                  <Text style={styles.actionTitle}>Courses</Text>
-                  <Text style={styles.actionSubtitle}>
-                    {completedCourses.length} of 13 completed
-                  </Text>
-                </View>
-                <View style={styles.actionArrow}>
-                  <Text style={styles.arrowIcon}>→</Text>
-                </View>
-              </View>
-            </LinearGradient>
-          </TouchableOpacity>
-
-          {/* Flashcards Card */}
-          <TouchableOpacity
-            activeOpacity={0.9}
+            theme="green"
+          />
+          <QuickCard
+            title="闪卡记忆"
+            subtitle={cardsDue > 0 ? `${cardsDue} 张待复习` : '随时练习'}
+            icon={<CardsIcon size={responsive.width(24, 28)} color="#8B5CF6" />}
             onPress={() => router.push('/(learn)/flashcards')}
-            style={styles.actionCard}
-          >
-            <LinearGradient
-              colors={[colors.accent.purple + '20', colors.accent.purple + '08']}
-              style={styles.actionCardGradient}
-            >
-              <View style={styles.actionCardContent}>
-                <View style={[styles.actionIconContainer, { backgroundColor: colors.accent.purple }]}>
-                  <Text style={styles.actionIcon}>🎴</Text>
-                </View>
-                <View style={styles.actionTextContainer}>
-                  <Text style={styles.actionTitle}>Flashcards</Text>
-                  <Text style={styles.actionSubtitle}>
-                    {cardsDue > 0 ? `${cardsDue} cards due for review` : 'Practice card recognition'}
-                  </Text>
-                </View>
-                {cardsDue > 0 && (
-                  <View style={styles.badge}>
-                    <Text style={styles.badgeText}>{cardsDue}</Text>
-                  </View>
-                )}
-                <View style={styles.actionArrow}>
-                  <Text style={styles.arrowIcon}>→</Text>
-                </View>
-              </View>
-            </LinearGradient>
-          </TouchableOpacity>
+            theme="purple"
+          />
+        </Row>
 
-          {/* Quiz Card */}
-          <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={() => router.push('/(learn)/quizzes')}
-            style={styles.actionCard}
-          >
-            <LinearGradient
-              colors={[colors.accent.cyan + '20', colors.accent.cyan + '08']}
-              style={styles.actionCardGradient}
-            >
-              <View style={styles.actionCardContent}>
-                <View style={[styles.actionIconContainer, { backgroundColor: colors.accent.cyan }]}>
-                  <Text style={styles.actionIcon}>🧠</Text>
-                </View>
-                <View style={styles.actionTextContainer}>
-                  <Text style={styles.actionTitle}>Quizzes</Text>
-                  <Text style={styles.actionSubtitle}>Test your knowledge</Text>
-                </View>
-                <View style={styles.actionArrow}>
-                  <Text style={styles.arrowIcon}>→</Text>
-                </View>
-              </View>
-            </LinearGradient>
-          </TouchableOpacity>
+        {isTablet && (
+          <Row gap={responsive.spacing(12, 16)} style={styles.quickGrid}>
+            <QuickCard
+              title="知识测验"
+              subtitle="检验学习成果"
+              icon={<TrophyIcon size={responsive.width(24, 28)} color="#22D3EE" />}
+              onPress={() => router.push('/(learn)/quizzes')}
+              theme="cyan"
+            />
+            <QuickCard
+              title="卡牌百科"
+              subtitle={`${masteredCards.length}/78 已掌握`}
+              icon={<GridIcon size={responsive.width(24, 28)} color="#D4AF37" />}
+              onPress={() => router.push('/(learn)/encyclopedia')}
+              theme="gold"
+            />
+          </Row>
+        )}
 
-          {/* Achievements Card */}
-          <TouchableOpacity
-            activeOpacity={0.9}
+        <Spacer size={responsive.spacing(20, 28)} />
+
+        {/* Learning Modules */}
+        <SectionHeader
+          title="学习模块"
+          action={{
+            label: '查看全部',
+            onPress: () => router.push('/(learn)/courses'),
+          }}
+        />
+
+        <View style={styles.listContainer}>
+          {!isTablet && (
+            <>
+              <ListCard
+                title="知识测验"
+                subtitle="检验你的塔罗知识"
+                icon={<TrophyIcon size={22} color="#22D3EE" />}
+                onPress={() => router.push('/(learn)/quizzes')}
+                theme="cyan"
+              />
+              <Spacer size={responsive.spacing(10, 12)} />
+            </>
+          )}
+
+          <ListCard
+            title="成就系统"
+            subtitle={`${getTotalUnlocked()} 个已解锁 (${getUnlockPercentage()}%)`}
+            icon={<AwardIcon size={22} color="#D4AF37" />}
             onPress={() => router.push('/(learn)/achievements')}
-            style={styles.actionCard}
-          >
-            <LinearGradient
-              colors={[colors.accent.gold + '20', colors.accent.gold + '08']}
-              style={styles.actionCardGradient}
-            >
-              <View style={styles.actionCardContent}>
-                <View style={[styles.actionIconContainer, { backgroundColor: colors.accent.gold }]}>
-                  <Text style={styles.actionIcon}>🏆</Text>
-                </View>
-                <View style={styles.actionTextContainer}>
-                  <Text style={styles.actionTitle}>Achievements</Text>
-                  <Text style={styles.actionSubtitle}>
-                    {getTotalUnlocked()} unlocked ({getUnlockPercentage()}%)
-                  </Text>
-                </View>
-                <View style={styles.actionArrow}>
-                  <Text style={styles.arrowIcon}>→</Text>
-                </View>
-              </View>
-            </LinearGradient>
-          </TouchableOpacity>
+            theme="gold"
+            rightElement={
+              <Badge text={`${getTotalUnlocked()}`} theme="gold" />
+            }
+          />
 
-          {/* Journal Card */}
-          <TouchableOpacity
-            activeOpacity={0.9}
+          <Spacer size={responsive.spacing(10, 12)} />
+
+          <ListCard
+            title="学习日记"
+            subtitle="记录你的学习心得"
+            icon={<EditIcon size={22} color="#F472B6" />}
             onPress={() => router.push('/(learn)/journal')}
-            style={styles.actionCard}
-          >
-            <LinearGradient
-              colors={['#F472B6' + '20', '#F472B6' + '08']}
-              style={styles.actionCardGradient}
-            >
-              <View style={styles.actionCardContent}>
-                <View style={[styles.actionIconContainer, { backgroundColor: '#F472B6' }]}>
-                  <Text style={styles.actionIcon}>📝</Text>
-                </View>
-                <View style={styles.actionTextContainer}>
-                  <Text style={styles.actionTitle}>Journal</Text>
-                  <Text style={styles.actionSubtitle}>
-                    Record your learning journey
-                  </Text>
-                </View>
-                <View style={styles.actionArrow}>
-                  <Text style={styles.arrowIcon}>→</Text>
-                </View>
-              </View>
-            </LinearGradient>
-          </TouchableOpacity>
+            theme="purple"
+          />
 
-          {/* Card Encyclopedia */}
-          <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={() => router.push('/(learn)/encyclopedia')}
-            style={styles.actionCard}
-          >
-            <LinearGradient
-              colors={[colors.accent.goldLight + '15', colors.accent.goldLight + '05']}
-              style={styles.actionCardGradient}
-            >
-              <View style={styles.actionCardContent}>
-                <View style={[styles.actionIconContainer, { backgroundColor: colors.accent.goldLight }]}>
-                  <Text style={styles.actionIcon}>🔮</Text>
-                </View>
-                <View style={styles.actionTextContainer}>
-                  <Text style={styles.actionTitle}>Card Encyclopedia</Text>
-                  <Text style={styles.actionSubtitle}>
-                    {masteredCards.length} of 78 cards mastered
-                  </Text>
-                </View>
-                <View style={styles.actionArrow}>
-                  <Text style={styles.arrowIcon}>→</Text>
-                </View>
-              </View>
-            </LinearGradient>
-          </TouchableOpacity>
+          <Spacer size={responsive.spacing(10, 12)} />
 
-          {/* Bottom spacing */}
-          <View style={{ height: spacing.xxl }} />
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+          {!isTablet && (
+            <ListCard
+              title="卡牌百科"
+              subtitle={`${masteredCards.length}/78 张卡牌已掌握`}
+              icon={<GridIcon size={22} color="#D4AF37" />}
+              onPress={() => router.push('/(learn)/encyclopedia')}
+              theme="gold"
+            />
+          )}
+        </View>
+
+        <Spacer size={responsive.spacing(24, 32)} />
+
+        {/* Daily Goal */}
+        <View style={styles.dailyGoalCard}>
+          <Row align="center" gap={responsive.spacing(12, 16)}>
+            <View style={styles.dailyGoalIcon}>
+              <TargetIcon size={24} color="#F59E0B" />
+            </View>
+            <View style={styles.dailyGoalText}>
+              <Text style={styles.dailyGoalTitle}>今日目标</Text>
+              <Text style={styles.dailyGoalSubtitle}>完成 3 张卡牌学习</Text>
+            </View>
+            <View style={styles.dailyGoalProgress}>
+              <ProgressRing progress={66} size={48} strokeWidth={4} color="#F59E0B" />
+              <Text style={styles.dailyGoalProgressText}>2/3</Text>
+            </View>
+          </Row>
+        </View>
+
+        <Spacer size={responsive.spacing(32, 48)} />
+      </SafeScrollView>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
-  backgroundGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  safeArea: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.xxl,
-  },
-
-  // Header
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: spacing.lg,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background.tertiary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 20,
-    color: colors.text.primary,
+    marginBottom: responsive.spacing(20, 24),
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: responsive.fontSize(22, 26),
     fontWeight: '700',
     color: colors.text.primary,
   },
-  placeholder: {
-    width: 40,
+  statsCard: {
+    marginTop: responsive.spacing(8, 12),
   },
-
-  // Level Card
-  levelCard: {
-    marginBottom: spacing.lg,
-    borderRadius: 20,
-    overflow: 'hidden',
-    ...shadows.goldGlow,
+  quickGrid: {
+    marginBottom: responsive.spacing(12, 16),
   },
-  levelGradient: {
-    padding: spacing.lg,
+  listContainer: {
+    marginBottom: responsive.spacing(8, 12),
+  },
+  dailyGoalCard: {
+    backgroundColor: 'rgba(245, 158, 11, 0.08)',
+    borderRadius: responsive.width(16, 20),
+    padding: responsive.spacing(16, 20),
     borderWidth: 1,
-    borderColor: colors.accent.gold + '40',
-    borderRadius: 20,
+    borderColor: 'rgba(245, 158, 11, 0.2)',
   },
-  levelHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: spacing.md,
-  },
-  levelIconContainer: {
-    width: 56,
-    height: 56,
-    borderRadius: 16,
-    backgroundColor: colors.accent.gold,
+  dailyGoalIcon: {
+    width: responsive.width(44, 52),
+    height: responsive.width(44, 52),
+    borderRadius: responsive.width(12, 14),
+    backgroundColor: 'rgba(245, 158, 11, 0.15)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: spacing.md,
   },
-  levelIcon: {
-    fontSize: 28,
-  },
-  levelInfo: {
+  dailyGoalText: {
     flex: 1,
   },
-  levelLabel: {
-    fontSize: 12,
-    color: colors.text.tertiary,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  levelTitle: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: colors.text.primary,
-  },
-  xpBadge: {
-    backgroundColor: colors.accent.gold,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
-    borderRadius: 12,
-  },
-  xpText: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: colors.background.primary,
-  },
-  progressContainer: {
-    marginTop: spacing.sm,
-  },
-  progressBar: {
-    height: 8,
-    backgroundColor: colors.background.tertiary,
-    borderRadius: 4,
-    overflow: 'hidden',
-    marginBottom: spacing.xs,
-  },
-  progressFill: {
-    height: '100%',
-    backgroundColor: colors.accent.gold,
-    borderRadius: 4,
-  },
-  progressText: {
-    fontSize: 12,
-    color: colors.text.tertiary,
-    textAlign: 'right',
-  },
-
-  // Stats Row
-  statsRow: {
-    flexDirection: 'row',
-    gap: spacing.md,
-    marginBottom: spacing.xl,
-  },
-  statCard: {
-    flex: 1,
-    backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-    padding: spacing.md,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: colors.background.tertiary,
-  },
-  statNumber: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: colors.accent.gold,
-  },
-  statLabel: {
-    fontSize: 12,
-    color: colors.text.tertiary,
-    marginTop: spacing.xs,
-  },
-
-  // Section Title
-  sectionTitle: {
-    marginBottom: spacing.md,
-  },
-  sectionTitleText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: colors.text.secondary,
-  },
-
-  // Action Cards
-  actionCard: {
-    marginBottom: spacing.md,
-    borderRadius: 16,
-    overflow: 'hidden',
-    ...shadows.md,
-  },
-  actionCardGradient: {
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 16,
-  },
-  actionCardContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: spacing.md,
-  },
-  actionIconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: spacing.md,
-  },
-  actionIcon: {
-    fontSize: 24,
-  },
-  actionTextContainer: {
-    flex: 1,
-  },
-  actionTitle: {
-    fontSize: 18,
+  dailyGoalTitle: {
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
     color: colors.text.primary,
     marginBottom: 2,
   },
-  actionSubtitle: {
-    fontSize: 14,
+  dailyGoalSubtitle: {
+    fontSize: responsive.fontSize(13, 15),
     color: colors.text.tertiary,
   },
-  actionArrow: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  dailyGoalProgress: {
     alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: spacing.sm,
+    position: 'relative',
   },
-  arrowIcon: {
-    fontSize: 16,
-    color: colors.text.secondary,
-    fontWeight: 'bold',
-  },
-  badge: {
-    backgroundColor: colors.accent.purple,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 10,
-    marginRight: spacing.sm,
-  },
-  badgeText: {
-    fontSize: 12,
+  dailyGoalProgressText: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: [{ translateX: -10 }, { translateY: -8 }],
+    fontSize: responsive.fontSize(12, 14),
     fontWeight: '700',
-    color: colors.text.primary,
+    color: '#F59E0B',
   },
 });

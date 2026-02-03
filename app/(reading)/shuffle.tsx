@@ -1,23 +1,26 @@
+/**
+ * Shuffle Screen - 洗牌动画
+ * iPad 和 iOS 适配
+ */
+
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { ShuffleAnimation } from '@/components/reading/ShuffleAnimation';
 import { useCardStore } from '@/stores/cardStore';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
 
-/**
- * Shuffle Screen
- * Displays card shuffle animation and proceeds to draw screen when complete
- *
- * Flow:
- * 1. Auto-starts shuffle animation on mount
- * 2. Shuffles deck in Zustand store
- * 3. Shows "Tap to Continue" after animation completes
- * 4. Navigates to draw screen
- */
+// UI Components
+import {
+  ScreenContainer,
+  Row,
+  Spacer,
+  responsive,
+  StarIcon,
+  SparklesIcon,
+  ChevronRightIcon,
+} from '@/components/ui';
 
 export default function Shuffle() {
   const router = useRouter();
@@ -25,7 +28,6 @@ export default function Shuffle() {
   const [shuffleComplete, setShuffleComplete] = useState(false);
 
   const handleShuffleComplete = () => {
-    // Shuffle the deck in store
     shuffleDeck();
     setShuffleComplete(true);
   };
@@ -34,8 +36,13 @@ export default function Shuffle() {
     router.push('/(reading)/draw-simple');
   };
 
+  const handleSkip = () => {
+    shuffleDeck();
+    router.push('/(reading)/draw-simple');
+  };
+
   return (
-    <View style={styles.container}>
+    <ScreenContainer>
       {/* Aurora Background Gradient */}
       <LinearGradient
         colors={['#0A0E1A', '#1A0E2E', '#2E1A47', '#1E2638']}
@@ -44,20 +51,24 @@ export default function Shuffle() {
         end={{ x: 1, y: 1 }}
       />
 
-      {/* Shuffle animation */}
-      <ShuffleAnimation
-        onComplete={handleShuffleComplete}
-        autoStart={true}
-        hideTextOnComplete={true}
-      />
+      {/* Shuffle Animation */}
+      <View style={styles.animationContainer}>
+        <ShuffleAnimation
+          onComplete={handleShuffleComplete}
+          autoStart={true}
+          hideTextOnComplete={true}
+        />
+      </View>
 
-      {/* Continue button (appears after shuffle completes) */}
+      {/* Continue Section */}
       {shuffleComplete && (
         <View style={styles.continueContainer}>
-          <TouchableOpacity
-            style={styles.continueButton}
+          <Pressable
             onPress={handleContinue}
-            activeOpacity={0.9}
+            style={({ pressed }) => [
+              styles.continueButton,
+              pressed && styles.continueButtonPressed,
+            ]}
           >
             <LinearGradient
               colors={[colors.accent.gold, colors.accent.goldLight]}
@@ -65,42 +76,48 @@ export default function Shuffle() {
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
-              <Text style={styles.continueButtonText}>✨ Reveal Your Vision</Text>
-              <View style={styles.continueButtonArrow}>
-                <Text style={styles.continueButtonArrowText}>→</Text>
-              </View>
+              <Row align="center" gap={responsive.spacing(10, 14)}>
+                <SparklesIcon size={responsive.width(20, 24)} color={colors.background.primary} />
+                <Text style={styles.continueButtonText}>Reveal Your Vision</Text>
+                <View style={styles.continueButtonArrow}>
+                  <ChevronRightIcon size={18} color={colors.background.primary} />
+                </View>
+              </Row>
             </LinearGradient>
-          </TouchableOpacity>
+          </Pressable>
 
-          <Text style={styles.spreadInfo}>
-            The celestial forces converge...
-          </Text>
-          <Text style={styles.spreadType}>
-            {spreadType === 'single' ? '🌟 Daily Vision' : '✨ Tri-Realm Spread'}
-          </Text>
+          <Spacer size={responsive.spacing(16, 20)} />
+
+          <Text style={styles.spreadInfo}>The celestial forces converge...</Text>
+
+          <Row align="center" gap={8} style={styles.spreadTypeRow}>
+            {spreadType === 'single' ? (
+              <StarIcon size={18} color={colors.accent.gold} />
+            ) : (
+              <SparklesIcon size={18} color={colors.accent.gold} />
+            )}
+            <Text style={styles.spreadType}>
+              {spreadType === 'single' ? 'Daily Vision' : 'Tri-Realm Spread'}
+            </Text>
+          </Row>
         </View>
       )}
 
-      {/* Skip button (appears immediately) */}
-      <TouchableOpacity
-        style={styles.skipButton}
-        onPress={() => {
-          shuffleDeck();
-          router.push('/(reading)/draw-simple');
-        }}
-        activeOpacity={0.7}
+      {/* Skip Button */}
+      <Pressable
+        onPress={handleSkip}
+        style={({ pressed }) => [
+          styles.skipButton,
+          pressed && styles.skipButtonPressed,
+        ]}
       >
         <Text style={styles.skipButtonText}>Skip Animation</Text>
-      </TouchableOpacity>
-    </View>
+      </Pressable>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
   backgroundGradient: {
     position: 'absolute',
     left: 0,
@@ -108,79 +125,89 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
   },
+  animationContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   continueContainer: {
     position: 'absolute',
-    bottom: spacing.xxxl,
+    bottom: responsive.spacing(60, 80),
     left: 0,
     right: 0,
     alignItems: 'center',
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: responsive.spacing(24, 48),
   },
   continueButton: {
-    borderRadius: 16,
+    borderRadius: responsive.width(16, 20),
     overflow: 'hidden',
-    ...shadows.goldGlow,
-    minWidth: 280,
+    shadowColor: colors.accent.gold,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 15,
+    elevation: 10,
+    minWidth: responsive.width(280, 340),
+  },
+  continueButtonPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.98 }],
   },
   continueButtonGradient: {
-    flexDirection: 'row',
+    paddingVertical: responsive.spacing(16, 20),
+    paddingHorizontal: responsive.spacing(28, 36),
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: spacing.lg,
-    paddingHorizontal: spacing.xl,
-    gap: spacing.md,
   },
   continueButtonText: {
     color: colors.background.primary,
-    fontSize: 20,
-    fontWeight: '800',
+    fontSize: responsive.fontSize(18, 22),
+    fontWeight: '700',
     letterSpacing: 0.5,
   },
   continueButtonArrow: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: responsive.width(28, 34),
+    height: responsive.width(28, 34),
+    borderRadius: responsive.width(14, 17),
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  continueButtonArrowText: {
-    color: colors.background.primary,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
   spreadInfo: {
     color: colors.text.secondary,
-    fontSize: 14,
-    marginTop: spacing.md,
-    opacity: 0.8,
+    fontSize: responsive.fontSize(14, 16),
     fontStyle: 'italic',
     textAlign: 'center',
+    opacity: 0.8,
+  },
+  spreadTypeRow: {
+    marginTop: responsive.spacing(8, 12),
   },
   spreadType: {
     color: colors.accent.gold,
-    fontSize: 16,
-    marginTop: spacing.sm,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
-    textAlign: 'center',
-    textShadowColor: colors.accent.gold + '40',
+    textShadowColor: 'rgba(212, 175, 55, 0.4)',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
   },
   skipButton: {
     position: 'absolute',
-    top: 60,
-    right: spacing.lg,
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
-    backgroundColor: colors.background.tertiary + 'CC',
-    borderRadius: 12,
+    top: responsive.spacing(60, 70),
+    right: responsive.spacing(20, 32),
+    paddingVertical: responsive.spacing(10, 12),
+    paddingHorizontal: responsive.spacing(16, 20),
+    backgroundColor: 'rgba(42, 47, 62, 0.85)',
+    borderRadius: responsive.width(12, 14),
     borderWidth: 1,
-    borderColor: colors.accent.gold + '40',
+    borderColor: 'rgba(212, 175, 55, 0.3)',
+  },
+  skipButtonPressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.98 }],
   },
   skipButtonText: {
     color: colors.accent.gold,
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     fontWeight: '600',
   },
 });

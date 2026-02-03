@@ -1,23 +1,32 @@
+/**
+ * Lesson Screen - 课程内容
+ * iPad 和 iOS 适配
+ */
+
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
 import { useLearningStore } from '@/stores/learningStore';
 import { getCourseById, type Lesson } from '@/data/courses';
 import { TAROT_DECK } from '@/data/tarot-deck';
+import { TarotCardSVG } from '@/components/cards/svg';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Spacer,
+  responsive,
+  isTablet,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CheckIcon,
+  BookIcon,
+} from '@/components/ui';
+import { IconButton, Button } from '@/components/ui/Buttons';
 
 // Simple markdown-like text renderer
 function RenderContent({ content }: { content: { type: string; data: any } }) {
@@ -31,20 +40,23 @@ function RenderContent({ content }: { content: { type: string; data: any } }) {
 
     return (
       <View style={styles.cardDisplay}>
-        <LinearGradient
-          colors={[colors.accent.gold + '20', colors.accent.gold + '08']}
-          style={styles.cardGradient}
-        >
-          <Text style={styles.cardSymbol}>{card.symbolEmoji}</Text>
-          <Text style={styles.cardName}>{card.name}</Text>
-          <View style={styles.keywordsContainer}>
-            {card.uprightKeywords.slice(0, 4).map((keyword, i) => (
-              <View key={i} style={styles.keywordPill}>
-                <Text style={styles.keywordText}>{keyword}</Text>
-              </View>
-            ))}
-          </View>
-        </LinearGradient>
+        <View style={styles.cardWrapper}>
+          <TarotCardSVG
+            cardId={card.id}
+            width={responsive.width(120, 160)}
+            height={responsive.width(180, 240)}
+            size={isTablet ? 'large' : 'medium'}
+            showNumber={true}
+          />
+        </View>
+        <Text style={styles.cardName}>{card.name}</Text>
+        <View style={styles.keywordsContainer}>
+          {card.uprightKeywords.slice(0, 4).map((keyword, i) => (
+            <View key={i} style={styles.keywordPill}>
+              <Text style={styles.keywordText}>{keyword}</Text>
+            </View>
+          ))}
+        </View>
       </View>
     );
   }
@@ -151,16 +163,19 @@ export default function LessonScreen() {
 
   if (!course || !lesson) {
     return (
-      <View style={styles.container}>
-        <SafeAreaView style={styles.safeArea}>
+      <ScreenContainer>
+        <SafeScrollView maxWidth="md">
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>Lesson not found</Text>
-            <TouchableOpacity onPress={() => router.back()} style={styles.backLink}>
-              <Text style={styles.backLinkText}>← Go Back</Text>
-            </TouchableOpacity>
+            <BookIcon size={48} color={colors.text.quaternary} />
+            <Text style={styles.errorText}>课程内容不存在</Text>
+            <Button
+              title="返回"
+              onPress={() => router.back()}
+              variant="outline"
+            />
           </View>
-        </SafeAreaView>
-      </View>
+        </SafeScrollView>
+      </ScreenContainer>
     );
   }
 
@@ -182,21 +197,16 @@ export default function LessonScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-        style={styles.backgroundGradient}
-      />
-
-      <SafeAreaView style={styles.safeArea} edges={['top']}>
+    <ScreenContainer>
+      <SafeScrollView maxWidth="md" style={styles.scrollView}>
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity
+        <Row justify="space-between" align="center" style={styles.header}>
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
             onPress={() => router.back()}
-            style={styles.backButton}
-          >
-            <Text style={styles.backIcon}>←</Text>
-          </TouchableOpacity>
+            variant="filled"
+            size="md"
+          />
 
           <View style={styles.lessonIndicator}>
             <Text style={styles.lessonCounter}>
@@ -204,284 +214,250 @@ export default function LessonScreen() {
             </Text>
           </View>
 
-          <View style={styles.placeholder} />
+          <View style={{ width: responsive.width(40, 48) }} />
+        </Row>
+
+        {/* Lesson Title */}
+        <View style={styles.lessonHeader}>
+          <Row align="center" gap={8} style={styles.courseLabel}>
+            <BookIcon size={16} color={colors.text.tertiary} />
+            <Text style={styles.courseLabelText}>{course.title}</Text>
+          </Row>
+          <Text style={styles.lessonTitle}>{lesson.title}</Text>
         </View>
 
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+        {/* Lesson Content */}
+        <View style={styles.content}>
+          {lesson.content.map((item, index) => (
+            <RenderContent key={index} content={item} />
+          ))}
+        </View>
+
+        {/* Bottom spacing for button */}
+        <Spacer size={responsive.spacing(100, 120)} />
+      </SafeScrollView>
+
+      {/* Bottom Action Bar */}
+      <View style={styles.bottomBar}>
+        <LinearGradient
+          colors={['transparent', colors.background.primary]}
+          style={styles.bottomGradient}
         >
-          {/* Lesson Title */}
-          <View style={styles.lessonHeader}>
-            <Text style={styles.courseLabel}>{course.icon} {course.title}</Text>
-            <Text style={styles.lessonTitle}>{lesson.title}</Text>
-          </View>
+          <Row align="center" style={styles.navigationButtons}>
+            {previousLesson && (
+              <Pressable
+                onPress={() => {
+                  router.replace({
+                    pathname: '/(learn)/courses/[courseId]/[lessonId]',
+                    params: { courseId, lessonId: previousLesson.id },
+                  });
+                }}
+                style={styles.navButton}
+              >
+                <ChevronLeftIcon size={18} color={colors.text.tertiary} />
+                <Text style={styles.navButtonText}>上一课</Text>
+              </Pressable>
+            )}
 
-          {/* Lesson Content */}
-          <View style={styles.content}>
-            {lesson.content.map((item, index) => (
-              <RenderContent key={index} content={item} />
-            ))}
-          </View>
+            <View style={{ flex: 1 }} />
 
-          {/* Bottom spacing for button */}
-          <View style={{ height: 100 }} />
-        </ScrollView>
-
-        {/* Bottom Action Bar */}
-        <View style={styles.bottomBar}>
-          <LinearGradient
-            colors={['transparent', colors.background.primary]}
-            style={styles.bottomGradient}
-          >
-            <View style={styles.navigationButtons}>
-              {previousLesson && (
-                <TouchableOpacity
-                  onPress={() => {
-                    router.replace({
-                      pathname: '/(learn)/courses/[courseId]/[lessonId]',
-                      params: { courseId, lessonId: previousLesson.id },
-                    });
-                  }}
-                  style={styles.navButton}
+            {!completed ? (
+              <Pressable
+                onPress={handleComplete}
+                style={({ pressed }) => [
+                  styles.completeButton,
+                  pressed && styles.buttonPressed,
+                ]}
+              >
+                <LinearGradient
+                  colors={[colors.accent.gold, '#E5C158']}
+                  style={styles.completeGradient}
                 >
-                  <Text style={styles.navButtonText}>← Previous</Text>
-                </TouchableOpacity>
-              )}
-
-              <View style={{ flex: 1 }} />
-
-              {!completed ? (
-                <TouchableOpacity
-                  onPress={handleComplete}
-                  style={styles.completeButton}
+                  <CheckIcon size={18} color={colors.background.primary} />
+                  <Text style={styles.completeButtonText}>完成学习</Text>
+                </LinearGradient>
+              </Pressable>
+            ) : (
+              <Pressable
+                onPress={handleNext}
+                style={({ pressed }) => [
+                  styles.nextButton,
+                  pressed && styles.buttonPressed,
+                ]}
+              >
+                <LinearGradient
+                  colors={['#10B981', '#34D399']}
+                  style={styles.completeGradient}
                 >
-                  <LinearGradient
-                    colors={[colors.accent.gold, colors.accent.goldLight]}
-                    style={styles.completeGradient}
-                  >
-                    <Text style={styles.completeButtonText}>
-                      Complete Lesson ✓
-                    </Text>
-                  </LinearGradient>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  onPress={handleNext}
-                  style={styles.nextButton}
-                >
-                  <LinearGradient
-                    colors={['#10B981', '#34D399']}
-                    style={styles.completeGradient}
-                  >
-                    <Text style={styles.completeButtonText}>
-                      {nextLesson ? 'Next Lesson →' : 'Back to Course'}
-                    </Text>
-                  </LinearGradient>
-                </TouchableOpacity>
-              )}
-            </View>
-          </LinearGradient>
-        </View>
-      </SafeAreaView>
-    </View>
+                  <Text style={styles.completeButtonText}>
+                    {nextLesson ? '下一课' : '返回课程'}
+                  </Text>
+                  <ChevronRightIcon size={18} color={colors.background.primary} />
+                </LinearGradient>
+              </Pressable>
+            )}
+          </Row>
+        </LinearGradient>
+      </View>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
-  backgroundGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  safeArea: {
+  scrollView: {
     flex: 1,
   },
-  scrollContent: {
-    paddingHorizontal: spacing.lg,
+  header: {
+    marginBottom: responsive.spacing(16, 20),
+  },
+  lessonIndicator: {
+    backgroundColor: colors.background.tertiary,
+    paddingHorizontal: responsive.spacing(14, 18),
+    paddingVertical: responsive.spacing(8, 10),
+    borderRadius: responsive.width(12, 14),
+  },
+  lessonCounter: {
+    fontSize: responsive.fontSize(14, 16),
+    fontWeight: '600',
+    color: colors.text.secondary,
   },
   errorContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: responsive.spacing(24, 32),
+    gap: responsive.spacing(16, 20),
   },
   errorText: {
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 22),
     color: colors.text.secondary,
-    marginBottom: spacing.md,
-  },
-  backLink: {
-    padding: spacing.md,
-  },
-  backLinkText: {
-    fontSize: 16,
-    color: colors.accent.gold,
-  },
-
-  // Header
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background.tertiary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 20,
-    color: colors.text.primary,
-  },
-  lessonIndicator: {
-    backgroundColor: colors.background.tertiary,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: 12,
-  },
-  lessonCounter: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: colors.text.secondary,
-  },
-  placeholder: {
-    width: 40,
   },
 
   // Lesson Header
   lessonHeader: {
-    marginBottom: spacing.xl,
+    marginBottom: responsive.spacing(24, 32),
   },
   courseLabel: {
-    fontSize: 14,
+    marginBottom: responsive.spacing(8, 12),
+  },
+  courseLabelText: {
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.tertiary,
-    marginBottom: spacing.sm,
   },
   lessonTitle: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(26, 32),
     fontWeight: '700',
     color: colors.text.primary,
-    lineHeight: 36,
+    lineHeight: responsive.fontSize(34, 42),
   },
 
   // Content
   content: {
-    marginBottom: spacing.xl,
+    marginBottom: responsive.spacing(24, 32),
   },
 
   // Text rendering
   textContainer: {
-    marginBottom: spacing.md,
+    marginBottom: responsive.spacing(12, 16),
   },
   heading1: {
-    fontSize: 26,
+    fontSize: responsive.fontSize(24, 28),
     fontWeight: '700',
     color: colors.accent.gold,
-    marginTop: spacing.lg,
-    marginBottom: spacing.md,
+    marginTop: responsive.spacing(20, 28),
+    marginBottom: responsive.spacing(12, 16),
   },
   heading2: {
-    fontSize: 20,
+    fontSize: responsive.fontSize(20, 24),
     fontWeight: '700',
     color: colors.text.primary,
-    marginTop: spacing.lg,
-    marginBottom: spacing.sm,
+    marginTop: responsive.spacing(16, 24),
+    marginBottom: responsive.spacing(10, 14),
   },
   heading3: {
-    fontSize: 17,
+    fontSize: responsive.fontSize(17, 20),
     fontWeight: '600',
     color: colors.text.primary,
-    marginTop: spacing.md,
-    marginBottom: spacing.sm,
+    marginTop: responsive.spacing(12, 18),
+    marginBottom: responsive.spacing(8, 12),
   },
   paragraph: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     color: colors.text.secondary,
-    lineHeight: 26,
-    marginBottom: spacing.sm,
+    lineHeight: responsive.fontSize(26, 30),
+    marginBottom: responsive.spacing(10, 14),
   },
   bulletItem: {
     flexDirection: 'row',
-    marginBottom: spacing.sm,
-    paddingLeft: spacing.sm,
+    marginBottom: responsive.spacing(8, 12),
+    paddingLeft: responsive.spacing(8, 12),
   },
   bulletDot: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     color: colors.accent.gold,
-    marginRight: spacing.sm,
-    width: 16,
+    marginRight: responsive.spacing(10, 14),
+    width: responsive.width(16, 20),
   },
   bulletText: {
     flex: 1,
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     color: colors.text.secondary,
-    lineHeight: 24,
+    lineHeight: responsive.fontSize(24, 28),
   },
   numberedItem: {
     flexDirection: 'row',
-    marginBottom: spacing.sm,
-    paddingLeft: spacing.sm,
+    marginBottom: responsive.spacing(8, 12),
+    paddingLeft: responsive.spacing(8, 12),
   },
   numberText: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
     color: colors.accent.gold,
-    marginRight: spacing.sm,
-    width: 24,
+    marginRight: responsive.spacing(10, 14),
+    width: responsive.width(24, 30),
   },
   spacer: {
-    height: spacing.md,
+    height: responsive.spacing(12, 18),
   },
 
   // Card display
   cardDisplay: {
-    marginVertical: spacing.lg,
-    borderRadius: 20,
-    overflow: 'hidden',
-    ...shadows.goldGlow,
-  },
-  cardGradient: {
-    padding: spacing.xl,
     alignItems: 'center',
+    marginVertical: responsive.spacing(24, 32),
+    padding: responsive.spacing(20, 28),
+    backgroundColor: 'rgba(212, 175, 55, 0.08)',
+    borderRadius: responsive.width(20, 24),
     borderWidth: 1,
-    borderColor: colors.accent.gold + '40',
-    borderRadius: 20,
+    borderColor: 'rgba(212, 175, 55, 0.2)',
   },
-  cardSymbol: {
-    fontSize: 64,
-    marginBottom: spacing.md,
+  cardWrapper: {
+    marginBottom: responsive.spacing(16, 20),
+    shadowColor: colors.accent.gold,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
+    elevation: 8,
   },
   cardName: {
-    fontSize: 24,
+    fontSize: responsive.fontSize(22, 26),
     fontWeight: '700',
     color: colors.accent.gold,
-    marginBottom: spacing.md,
+    marginBottom: responsive.spacing(12, 16),
   },
   keywordsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: spacing.sm,
+    gap: responsive.spacing(8, 12),
   },
   keywordPill: {
     backgroundColor: colors.background.tertiary,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
-    borderRadius: 12,
+    paddingHorizontal: responsive.spacing(12, 16),
+    paddingVertical: responsive.spacing(6, 8),
+    borderRadius: responsive.width(12, 14),
   },
   keywordText: {
-    fontSize: 13,
+    fontSize: responsive.fontSize(13, 15),
     color: colors.text.secondary,
   },
 
@@ -493,40 +469,57 @@ const styles = StyleSheet.create({
     right: 0,
   },
   bottomGradient: {
-    paddingTop: spacing.xl,
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.xl,
+    paddingTop: responsive.spacing(32, 40),
+    paddingHorizontal: responsive.spacing(20, 28),
+    paddingBottom: responsive.spacing(32, 40),
   },
   navigationButtons: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    gap: responsive.spacing(12, 16),
   },
   navButton: {
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: responsive.spacing(12, 16),
+    paddingHorizontal: responsive.spacing(16, 20),
+    gap: responsive.spacing(6, 8),
   },
   navButtonText: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     color: colors.text.tertiary,
     fontWeight: '500',
   },
   completeButton: {
-    borderRadius: 14,
+    borderRadius: responsive.width(14, 18),
     overflow: 'hidden',
-    ...shadows.goldGlow,
+    shadowColor: colors.accent.gold,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
   },
   nextButton: {
-    borderRadius: 14,
+    borderRadius: responsive.width(14, 18),
     overflow: 'hidden',
-    ...shadows.md,
+    shadowColor: '#10B981',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  buttonPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.98 }],
   },
   completeGradient: {
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.xl,
-    borderRadius: 14,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: responsive.spacing(14, 18),
+    paddingHorizontal: responsive.spacing(24, 32),
+    borderRadius: responsive.width(14, 18),
+    gap: responsive.spacing(8, 10),
   },
   completeButtonText: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '700',
     color: colors.background.primary,
   },

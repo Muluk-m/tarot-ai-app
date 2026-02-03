@@ -1,27 +1,47 @@
+/**
+ * Courses Screen - 课程列表
+ * iPad 和 iOS 适配
+ */
+
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
 import { useLearningStore } from '@/stores/learningStore';
 import { ALL_COURSES, getCoursesByStage, type Course } from '@/data/courses';
 import type { Stage } from '@/types/learning.types';
 
-const STAGES: { key: Stage; title: string; icon: string; color: string }[] = [
-  { key: 'beginner', title: 'Beginner', icon: '🌱', color: '#10B981' },
-  { key: 'intermediate', title: 'Intermediate', icon: '📖', color: colors.accent.purple },
-  { key: 'advanced', title: 'Advanced', icon: '⭐', color: colors.accent.cyan },
-  { key: 'master', title: 'Master', icon: '🏆', color: colors.accent.gold },
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Grid,
+  Spacer,
+  responsive,
+  isTablet,
+  isLargeTablet,
+  SectionHeader,
+  Badge,
+  SeedlingIcon,
+  BookIcon,
+  StarIcon,
+  TrophyIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  LockIcon,
+  CheckIcon,
+  ClockIcon,
+  LayersIcon,
+} from '@/components/ui';
+import { IconButton, Chip } from '@/components/ui/Buttons';
+
+// Stage configuration
+const STAGES: { key: Stage; title: string; titleZh: string; Icon: React.FC<any>; color: string }[] = [
+  { key: 'beginner', title: 'Beginner', titleZh: '入门', Icon: SeedlingIcon, color: '#10B981' },
+  { key: 'intermediate', title: 'Intermediate', titleZh: '进阶', Icon: BookIcon, color: colors.accent.purple },
+  { key: 'advanced', title: 'Advanced', titleZh: '高级', Icon: StarIcon, color: colors.accent.cyan },
+  { key: 'master', title: 'Master', titleZh: '大师', Icon: TrophyIcon, color: colors.accent.gold },
 ];
 
 export default function CoursesScreen() {
@@ -47,24 +67,19 @@ export default function CoursesScreen() {
   const stageInfo = STAGES.find((s) => s.key === selectedStage)!;
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['#0A0E1A', '#1A0E2E', '#0A0E1A']}
-        style={styles.backgroundGradient}
-      />
-
-      <SafeAreaView style={styles.safeArea} edges={['top']}>
+    <ScreenContainer>
+      <SafeScrollView maxWidth="lg">
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity
+        <Row justify="space-between" align="center" style={styles.header}>
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
             onPress={() => router.back()}
-            style={styles.backButton}
-          >
-            <Text style={styles.backIcon}>←</Text>
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Courses</Text>
-          <View style={styles.placeholder} />
-        </View>
+            variant="filled"
+            size="md"
+          />
+          <Text style={styles.headerTitle}>课程中心</Text>
+          <View style={{ width: responsive.width(40, 48) }} />
+        </Row>
 
         {/* Stage Tabs */}
         <ScrollView
@@ -78,9 +93,10 @@ export default function CoursesScreen() {
             const completedCount = stageCourses.filter((c) =>
               isCourseCompleted(c.id)
             ).length;
+            const StageIcon = stage.Icon;
 
             return (
-              <TouchableOpacity
+              <Pressable
                 key={stage.key}
                 onPress={() => setSelectedStage(stage.key)}
                 style={[
@@ -88,46 +104,43 @@ export default function CoursesScreen() {
                   isSelected && { borderColor: stage.color },
                 ]}
               >
-                <Text style={styles.tabIcon}>{stage.icon}</Text>
+                <View style={[styles.tabIconContainer, { backgroundColor: stage.color + '20' }]}>
+                  <StageIcon size={responsive.width(22, 26)} color={stage.color} />
+                </View>
                 <Text
                   style={[
                     styles.tabTitle,
                     isSelected && { color: colors.text.primary },
                   ]}
                 >
-                  {stage.title}
+                  {stage.titleZh}
                 </Text>
-                <Text style={styles.tabProgress}>
+                <Text style={[styles.tabProgress, { color: stage.color }]}>
                   {completedCount}/{stageCourses.length}
                 </Text>
-              </TouchableOpacity>
+              </Pressable>
             );
           })}
         </ScrollView>
 
-        {/* Course List */}
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
-          <View style={styles.stageHeader}>
-            <Text style={[styles.stageTitle, { color: stageInfo.color }]}>
-              {stageInfo.icon} {stageInfo.title} Stage
-            </Text>
-            <Text style={styles.stageSubtitle}>
-              {filteredCourses.length} courses
-            </Text>
-          </View>
+        <Spacer size={responsive.spacing(16, 24)} />
 
+        {/* Stage Header */}
+        <SectionHeader
+          title={`${stageInfo.titleZh}阶段`}
+          subtitle={`${filteredCourses.length} 门课程`}
+        />
+
+        {/* Course List */}
+        <View style={styles.courseList}>
           {filteredCourses.map((course, index) => {
             const unlocked = isUnlocked(course);
             const progress = getProgress(course);
             const completed = isCourseCompleted(course.id);
 
             return (
-              <TouchableOpacity
+              <Pressable
                 key={course.id}
-                activeOpacity={unlocked ? 0.9 : 1}
                 onPress={() => {
                   if (unlocked) {
                     router.push({
@@ -136,283 +149,249 @@ export default function CoursesScreen() {
                     });
                   }
                 }}
-                style={[styles.courseCard, !unlocked && styles.lockedCard]}
+                style={({ pressed }) => [
+                  styles.courseCard,
+                  !unlocked && styles.lockedCard,
+                  pressed && unlocked && styles.cardPressed,
+                ]}
               >
-                <LinearGradient
-                  colors={
-                    completed
-                      ? [stageInfo.color + '30', stageInfo.color + '15']
-                      : unlocked
-                      ? [colors.background.tertiary, colors.background.secondary]
-                      : [colors.background.secondary + '50', colors.background.primary + '50']
-                  }
-                  style={styles.courseGradient}
-                >
-                  <View style={styles.courseContent}>
-                    <View style={styles.courseNumber}>
+                <View style={styles.courseContent}>
+                  {/* Course Number */}
+                  <View
+                    style={[
+                      styles.courseNumber,
+                      completed && { backgroundColor: stageInfo.color },
+                    ]}
+                  >
+                    {completed ? (
+                      <CheckIcon size={18} color={colors.text.primary} />
+                    ) : (
                       <Text
                         style={[
                           styles.courseNumberText,
-                          completed && { color: stageInfo.color },
+                          completed && { color: colors.text.primary },
                         ]}
                       >
                         {course.order}
                       </Text>
-                    </View>
+                    )}
+                  </View>
 
-                    <View style={styles.courseInfo}>
-                      <View style={styles.courseHeader}>
-                        <Text
-                          style={[
-                            styles.courseTitle,
-                            !unlocked && styles.lockedText,
-                          ]}
-                        >
-                          {course.icon} {course.title}
-                        </Text>
-                        {completed && (
-                          <Text style={styles.completedBadge}>✓</Text>
-                        )}
-                        {!unlocked && (
-                          <Text style={styles.lockIcon}>🔒</Text>
-                        )}
-                      </View>
-
+                  {/* Course Info */}
+                  <View style={styles.courseInfo}>
+                    <Row align="center" gap={8}>
                       <Text
                         style={[
-                          styles.courseDescription,
+                          styles.courseTitle,
                           !unlocked && styles.lockedText,
                         ]}
-                        numberOfLines={2}
+                        numberOfLines={1}
                       >
-                        {course.description}
+                        {course.title}
                       </Text>
+                      {!unlocked && (
+                        <LockIcon size={14} color={colors.text.quaternary} />
+                      )}
+                    </Row>
 
-                      <View style={styles.courseMeta}>
+                    <Text
+                      style={[
+                        styles.courseDescription,
+                        !unlocked && styles.lockedText,
+                      ]}
+                      numberOfLines={2}
+                    >
+                      {course.description}
+                    </Text>
+
+                    <Row gap={responsive.spacing(12, 16)} style={styles.courseMeta}>
+                      <Row align="center" gap={4}>
+                        <LayersIcon size={14} color={colors.text.quaternary} />
                         <Text style={styles.courseMetaText}>
-                          📚 {course.lessons.length} lessons
+                          {course.lessons.length} 课时
                         </Text>
+                      </Row>
+                      <Row align="center" gap={4}>
+                        <ClockIcon size={14} color={colors.text.quaternary} />
                         <Text style={styles.courseMetaText}>
-                          ⏱️ ~{course.estimatedTime} min
+                          ~{course.estimatedTime}分钟
+                        </Text>
+                      </Row>
+                    </Row>
+
+                    {unlocked && progress > 0 && !completed && (
+                      <View style={styles.progressContainer}>
+                        <View style={styles.progressBar}>
+                          <View
+                            style={[
+                              styles.progressFill,
+                              { width: `${progress}%`, backgroundColor: stageInfo.color },
+                            ]}
+                          />
+                        </View>
+                        <Text style={[styles.progressText, { color: stageInfo.color }]}>
+                          {progress}%
                         </Text>
                       </View>
-
-                      {unlocked && progress > 0 && !completed && (
-                        <View style={styles.progressContainer}>
-                          <View style={styles.progressBar}>
-                            <View
-                              style={[
-                                styles.progressFill,
-                                { width: `${progress}%`, backgroundColor: stageInfo.color },
-                              ]}
-                            />
-                          </View>
-                          <Text style={styles.progressText}>{progress}%</Text>
-                        </View>
-                      )}
-                    </View>
+                    )}
                   </View>
-                </LinearGradient>
-              </TouchableOpacity>
+
+                  {/* Arrow */}
+                  {unlocked && (
+                    <View style={styles.arrowContainer}>
+                      <ChevronRightIcon size={20} color={colors.text.tertiary} />
+                    </View>
+                  )}
+                </View>
+              </Pressable>
             );
           })}
+        </View>
 
-          {/* Bottom spacing */}
-          <View style={{ height: spacing.xxl }} />
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+        <Spacer size={responsive.spacing(32, 48)} />
+      </SafeScrollView>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
-  backgroundGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  safeArea: {
-    flex: 1,
-  },
-
-  // Header
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background.tertiary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backIcon: {
-    fontSize: 20,
-    color: colors.text.primary,
+    marginBottom: responsive.spacing(20, 24),
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: responsive.fontSize(22, 26),
     fontWeight: '700',
     color: colors.text.primary,
-  },
-  placeholder: {
-    width: 40,
   },
 
   // Tabs
   tabsContainer: {
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.md,
-    gap: spacing.sm,
+    paddingBottom: responsive.spacing(4, 8),
+    gap: responsive.spacing(10, 14),
   },
   tab: {
     backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-    padding: spacing.md,
-    minWidth: 100,
+    borderRadius: responsive.width(16, 20),
+    padding: responsive.spacing(12, 16),
+    minWidth: responsive.width(90, 110),
     alignItems: 'center',
     borderWidth: 2,
     borderColor: 'transparent',
-    marginRight: spacing.sm,
+    marginRight: responsive.spacing(10, 14),
   },
-  tabIcon: {
-    fontSize: 24,
-    marginBottom: spacing.xs,
+  tabIconContainer: {
+    width: responsive.width(40, 48),
+    height: responsive.width(40, 48),
+    borderRadius: responsive.width(12, 14),
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: responsive.spacing(8, 10),
   },
   tabTitle: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     fontWeight: '600',
     color: colors.text.tertiary,
-    marginBottom: spacing.xs,
+    marginBottom: responsive.spacing(4, 6),
   },
   tabProgress: {
-    fontSize: 12,
-    color: colors.text.tertiary,
+    fontSize: responsive.fontSize(12, 14),
+    fontWeight: '600',
   },
 
-  // Content
-  scrollContent: {
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing.md,
+  // Course List
+  courseList: {
+    gap: responsive.spacing(12, 16),
   },
-  stageHeader: {
-    marginBottom: spacing.lg,
-  },
-  stageTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    marginBottom: spacing.xs,
-  },
-  stageSubtitle: {
-    fontSize: 14,
-    color: colors.text.tertiary,
-  },
-
-  // Course Card
   courseCard: {
-    marginBottom: spacing.md,
-    borderRadius: 16,
+    backgroundColor: colors.background.secondary,
+    borderRadius: responsive.width(16, 20),
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
     overflow: 'hidden',
-    ...shadows.md,
   },
   lockedCard: {
     opacity: 0.6,
   },
-  courseGradient: {
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 16,
+  cardPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.99 }],
   },
   courseContent: {
     flexDirection: 'row',
-    padding: spacing.md,
+    padding: responsive.spacing(14, 18),
+    alignItems: 'flex-start',
   },
   courseNumber: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
+    width: responsive.width(40, 48),
+    height: responsive.width(40, 48),
+    borderRadius: responsive.width(12, 14),
     backgroundColor: colors.background.tertiary,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: spacing.md,
+    marginRight: responsive.spacing(12, 16),
   },
   courseNumberText: {
-    fontSize: 18,
+    fontSize: responsive.fontSize(18, 22),
     fontWeight: '700',
     color: colors.text.secondary,
   },
   courseInfo: {
     flex: 1,
   },
-  courseHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: spacing.xs,
-  },
   courseTitle: {
-    fontSize: 16,
+    fontSize: responsive.fontSize(16, 18),
     fontWeight: '600',
     color: colors.text.primary,
     flex: 1,
   },
-  completedBadge: {
-    fontSize: 16,
-    color: '#10B981',
-    marginLeft: spacing.sm,
-  },
-  lockIcon: {
-    fontSize: 14,
-    marginLeft: spacing.sm,
-  },
   courseDescription: {
-    fontSize: 13,
+    fontSize: responsive.fontSize(13, 15),
     color: colors.text.tertiary,
-    lineHeight: 18,
-    marginBottom: spacing.sm,
+    lineHeight: responsive.fontSize(18, 22),
+    marginTop: responsive.spacing(4, 6),
+    marginBottom: responsive.spacing(8, 10),
   },
   lockedText: {
     color: colors.text.quaternary,
   },
   courseMeta: {
-    flexDirection: 'row',
-    gap: spacing.md,
+    marginTop: responsive.spacing(4, 6),
   },
   courseMetaText: {
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     color: colors.text.quaternary,
   },
   progressContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: spacing.sm,
-    gap: spacing.sm,
+    marginTop: responsive.spacing(10, 12),
+    gap: responsive.spacing(8, 10),
   },
   progressBar: {
     flex: 1,
-    height: 6,
+    height: responsive.width(6, 8),
     backgroundColor: colors.background.tertiary,
-    borderRadius: 3,
+    borderRadius: responsive.width(3, 4),
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
-    borderRadius: 3,
+    borderRadius: responsive.width(3, 4),
   },
   progressText: {
-    fontSize: 12,
-    color: colors.text.tertiary,
-    width: 36,
+    fontSize: responsive.fontSize(12, 14),
+    fontWeight: '600',
+    width: responsive.width(36, 44),
     textAlign: 'right',
+  },
+  arrowContainer: {
+    width: responsive.width(32, 40),
+    height: responsive.width(32, 40),
+    borderRadius: responsive.width(10, 12),
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: responsive.spacing(8, 12),
+    alignSelf: 'center',
   },
 });

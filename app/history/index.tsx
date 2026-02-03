@@ -1,12 +1,31 @@
-import React, { useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+/**
+ * History List Screen - 历史记录列表
+ * iPad 和 iOS 适配
+ */
+
+import React from 'react';
+import { View, Text, FlatList, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useReadingStore } from '@/stores/readingStore';
 import { TarotCardDisplay } from '@/components/tarot/TarotCardDisplay';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
-import { shadows } from '@/theme/shadows';
+
+// UI Components
+import {
+  ScreenContainer,
+  Row,
+  Spacer,
+  responsive,
+  isTablet,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  SparklesIcon,
+  StarIcon,
+  BookIcon,
+  CrystalBallIcon,
+} from '@/components/ui';
+import { IconButton } from '@/components/ui/Buttons';
 
 export default function History() {
   const router = useRouter();
@@ -18,19 +37,20 @@ export default function History() {
 
   const renderHistoryItem = ({ item }: { item: any }) => {
     const firstCard = item.cards[0]?.card;
-    const cardCount = item.cards.length;
 
     return (
-      <TouchableOpacity
-        style={styles.historyItem}
+      <Pressable
         onPress={() => handleReadingPress(item.id)}
-        activeOpacity={0.9}
+        style={({ pressed }) => [
+          styles.historyItem,
+          pressed && styles.historyItemPressed,
+        ]}
       >
         <LinearGradient
-          colors={[colors.accent.gold + '15', colors.accent.purple + '10']}
+          colors={['rgba(212, 175, 55, 0.08)', 'rgba(139, 92, 246, 0.05)']}
           style={styles.historyItemGradient}
         >
-          {/* Card preview */}
+          {/* Card Preview */}
           <View style={styles.cardPreview}>
             {firstCard && (
               <TarotCardDisplay
@@ -42,39 +62,58 @@ export default function History() {
             )}
           </View>
 
-          {/* Reading info */}
+          {/* Reading Info */}
           <View style={styles.readingInfo}>
-            <Text style={styles.spreadType}>
-              {item.spreadType === 'single' ? '🌟 Daily Vision' : '✨ Tri-Realm Spread'}
-            </Text>
+            <Row align="center" gap={8}>
+              {item.spreadType === 'single' ? (
+                <StarIcon size={16} color={colors.accent.gold} />
+              ) : (
+                <SparklesIcon size={16} color={colors.accent.gold} />
+              )}
+              <Text style={styles.spreadType}>
+                {item.spreadType === 'single' ? 'Daily Vision' : 'Tri-Realm Spread'}
+              </Text>
+            </Row>
             <Text style={styles.date}>{item.dateFormatted}</Text>
             <Text style={styles.preview} numberOfLines={2}>
-              {item.interpretation.substring(0, 100)}...
+              {item.interpretation?.substring(0, 100)}...
             </Text>
           </View>
 
-          {/* Favorite indicator */}
+          {/* Arrow */}
+          <View style={styles.arrowContainer}>
+            <ChevronRightIcon size={20} color={colors.text.tertiary} />
+          </View>
+
+          {/* Favorite Indicator */}
           {item.favorite && (
             <View style={styles.favoriteIndicator}>
-              <Text style={styles.favoriteIcon}>⭐</Text>
+              <StarIcon size={20} color="#FFD700" />
             </View>
           )}
         </LinearGradient>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
-      <Text style={styles.emptyIcon}>🔮</Text>
+      <View style={styles.emptyIconContainer}>
+        <CrystalBallIcon size={responsive.width(60, 80)} color={colors.accent.gold} />
+      </View>
       <Text style={styles.emptyTitle}>No Visions Yet</Text>
       <Text style={styles.emptySubtitle}>
         Begin your celestial journey by gazing into the cosmic realm
       </Text>
-      <TouchableOpacity
-        style={styles.emptyButton}
+
+      <Spacer size={responsive.spacing(24, 32)} />
+
+      <Pressable
         onPress={() => router.push('/')}
-        activeOpacity={0.9}
+        style={({ pressed }) => [
+          styles.emptyButton,
+          pressed && styles.emptyButtonPressed,
+        ]}
       >
         <LinearGradient
           colors={[colors.accent.gold, colors.accent.goldLight]}
@@ -82,14 +121,17 @@ export default function History() {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
         >
-          <Text style={styles.emptyButtonText}>✨ Receive Your First Vision</Text>
+          <Row align="center" gap={10}>
+            <SparklesIcon size={20} color={colors.background.primary} />
+            <Text style={styles.emptyButtonText}>Receive Your First Vision</Text>
+          </Row>
         </LinearGradient>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 
   return (
-    <View style={styles.container}>
+    <ScreenContainer>
       {/* Aurora Background Gradient */}
       <LinearGradient
         colors={['#0A0E1A', '#1A0E2E', '#2E1A47', '#1E2638']}
@@ -100,39 +142,50 @@ export default function History() {
 
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.title}>📖 Vision Archive</Text>
-        <Text style={styles.subtitle}>
-          {readingHistory.length} {readingHistory.length === 1 ? 'vision' : 'visions'} preserved
-        </Text>
+        <Row justify="space-between" align="center">
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
+            onPress={() => router.back()}
+            variant="filled"
+            size="md"
+          />
+          <Text style={styles.headerTitle}>历史记录</Text>
+          <View style={{ width: responsive.width(40, 48) }} />
+        </Row>
+
+        <Spacer size={responsive.spacing(16, 20)} />
+
+        <View style={styles.titleSection}>
+          <Row align="center" gap={12}>
+            <BookIcon size={responsive.width(28, 34)} color={colors.accent.gold} />
+            <Text style={styles.title}>Vision Archive</Text>
+          </Row>
+          <Text style={styles.subtitle}>
+            {readingHistory.length} {readingHistory.length === 1 ? 'vision' : 'visions'} preserved
+          </Text>
+        </View>
       </View>
 
-      {/* History list */}
+      {/* History List */}
       <FlatList
         data={readingHistory}
         renderItem={renderHistoryItem}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.listContent}
+        contentContainerStyle={[
+          styles.listContent,
+          readingHistory.length === 0 && styles.listContentEmpty,
+        ]}
         ListEmptyComponent={renderEmptyState}
         showsVerticalScrollIndicator={false}
+        numColumns={isTablet ? 2 : 1}
+        key={isTablet ? 'tablet' : 'phone'}
+        columnWrapperStyle={isTablet ? styles.columnWrapper : undefined}
       />
-
-      {/* Back button */}
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.back()}
-        activeOpacity={0.7}
-      >
-        <Text style={styles.backButtonText}>← Back</Text>
-      </TouchableOpacity>
-    </View>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
   backgroundGradient: {
     position: 'absolute',
     left: 0,
@@ -141,129 +194,141 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   header: {
-    paddingTop: spacing.xxxl,
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.lg,
-    borderBottomWidth: 2,
-    borderBottomColor: colors.accent.gold + '30',
+    paddingTop: responsive.spacing(16, 24),
+    paddingHorizontal: responsive.spacing(20, 32),
+    paddingBottom: responsive.spacing(16, 20),
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(212, 175, 55, 0.2)',
+  },
+  headerTitle: {
+    fontSize: responsive.fontSize(18, 20),
+    fontWeight: '600',
+    color: colors.text.primary,
+  },
+  titleSection: {
+    alignItems: 'center',
   },
   title: {
-    fontSize: 32,
+    fontSize: responsive.fontSize(28, 34),
     fontWeight: '800',
     color: colors.accent.gold,
-    marginBottom: spacing.xs,
-    textShadowColor: colors.accent.gold + '40',
+    textShadowColor: 'rgba(212, 175, 55, 0.4)',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 15,
   },
   subtitle: {
-    fontSize: 15,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.secondary,
+    marginTop: responsive.spacing(6, 8),
   },
   listContent: {
-    padding: spacing.lg,
-    flexGrow: 1,
+    padding: responsive.spacing(16, 24),
+  },
+  listContentEmpty: {
+    flex: 1,
+  },
+  columnWrapper: {
+    gap: responsive.spacing(16, 20),
   },
   historyItem: {
-    borderRadius: 20,
-    marginBottom: spacing.md,
+    flex: isTablet ? 1 : undefined,
+    borderRadius: responsive.width(16, 20),
+    marginBottom: responsive.spacing(12, 16),
     overflow: 'hidden',
     borderWidth: 2,
-    borderColor: colors.accent.gold + '40',
-    ...shadows.md,
+    borderColor: 'rgba(212, 175, 55, 0.25)',
+  },
+  historyItemPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.99 }],
   },
   historyItemGradient: {
     flexDirection: 'row',
-    padding: spacing.lg,
+    padding: responsive.spacing(16, 20),
+    alignItems: 'center',
   },
   cardPreview: {
-    marginRight: spacing.md,
+    marginRight: responsive.spacing(14, 18),
   },
   readingInfo: {
     flex: 1,
     justifyContent: 'center',
   },
   spreadType: {
-    fontSize: 15,
+    fontSize: responsive.fontSize(15, 17),
     fontWeight: '700',
     color: colors.accent.gold,
-    marginBottom: spacing.xs,
   },
   date: {
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     color: colors.text.tertiary,
-    marginBottom: spacing.sm,
+    marginTop: responsive.spacing(4, 6),
+    marginBottom: responsive.spacing(8, 10),
   },
   preview: {
-    fontSize: 13,
+    fontSize: responsive.fontSize(13, 15),
     color: colors.text.secondary,
-    lineHeight: 19,
+    lineHeight: responsive.fontSize(18, 22),
+  },
+  arrowContainer: {
+    marginLeft: responsive.spacing(8, 12),
   },
   favoriteIndicator: {
     position: 'absolute',
-    top: spacing.md,
-    right: spacing.md,
-  },
-  favoriteIcon: {
-    fontSize: 24,
+    top: responsive.spacing(12, 16),
+    right: responsive.spacing(12, 16),
   },
   emptyContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: spacing.xxl,
-    paddingTop: 100,
+    paddingHorizontal: responsive.spacing(32, 64),
   },
-  emptyIcon: {
-    fontSize: 80,
-    marginBottom: spacing.xl,
+  emptyIconContainer: {
+    width: responsive.width(100, 130),
+    height: responsive.width(100, 130),
+    borderRadius: responsive.width(50, 65),
+    backgroundColor: 'rgba(212, 175, 55, 0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: responsive.spacing(24, 32),
   },
   emptyTitle: {
-    fontSize: 28,
+    fontSize: responsive.fontSize(26, 32),
     fontWeight: '800',
     color: colors.accent.gold,
-    marginBottom: spacing.md,
-    textShadowColor: colors.accent.gold + '40',
+    marginBottom: responsive.spacing(12, 16),
+    textShadowColor: 'rgba(212, 175, 55, 0.4)',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
   },
   emptySubtitle: {
-    fontSize: 15,
+    fontSize: responsive.fontSize(15, 17),
     color: colors.text.secondary,
     textAlign: 'center',
-    lineHeight: 22,
-    marginBottom: spacing.xxl,
+    lineHeight: responsive.fontSize(22, 26),
   },
   emptyButton: {
-    borderRadius: 16,
+    borderRadius: responsive.width(16, 20),
     overflow: 'hidden',
-    ...shadows.goldGlow,
+    shadowColor: colors.accent.gold,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.4,
+    shadowRadius: 12,
+    elevation: 8,
+  },
+  emptyButtonPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.98 }],
   },
   emptyButtonGradient: {
-    paddingVertical: spacing.lg,
-    paddingHorizontal: spacing.xl,
+    paddingVertical: responsive.spacing(16, 20),
+    paddingHorizontal: responsive.spacing(28, 36),
     alignItems: 'center',
   },
   emptyButtonText: {
     color: colors.background.primary,
-    fontSize: 18,
-    fontWeight: '800',
-  },
-  backButton: {
-    position: 'absolute',
-    top: 50,
-    left: spacing.lg,
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
-    backgroundColor: colors.background.tertiary + 'CC',
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: colors.accent.gold + '40',
-  },
-  backButtonText: {
-    color: colors.accent.gold,
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: responsive.fontSize(16, 20),
+    fontWeight: '700',
   },
 });
-

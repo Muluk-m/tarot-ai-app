@@ -1,185 +1,272 @@
-import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
+/**
+ * Spread Selection Screen - 牌阵选择
+ * iPad 和 iOS 适配
+ */
+
+import React from 'react';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useCardStore } from '@/stores/cardStore';
 import { useReadingStore } from '@/stores/readingStore';
-import { useUserStore } from '@/stores/userStore';
 import { SPREADS } from '@/data/spreads';
 import { colors } from '@/theme/colors';
+
+// UI Components
+import {
+  ScreenContainer,
+  SafeScrollView,
+  Row,
+  Spacer,
+  responsive,
+  isTablet,
+  StarIcon,
+  SparklesIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  Badge,
+} from '@/components/ui';
+import { IconButton } from '@/components/ui/Buttons';
+
+type SpreadKey = 'single' | 'three';
+
+interface SpreadOption {
+  key: SpreadKey;
+  config: typeof SPREADS.single;
+  Icon: React.FC<{ size?: number; color?: string }>;
+  primaryColor: string;
+  bgColor: string;
+}
 
 export default function SpreadSelection() {
   const router = useRouter();
   const { setSpreadType } = useCardStore();
   const { clearCurrentReading } = useReadingStore();
 
-  const handleSelectSpread = (spreadKey: 'single' | 'three') => {
-    // Clear any previous reading to ensure fresh start
+  const handleSelectSpread = (spreadKey: SpreadKey) => {
     clearCurrentReading();
     setSpreadType(spreadKey);
     router.push('/(reading)/shuffle');
   };
 
-  const spreadOptions = [
+  const spreadOptions: SpreadOption[] = [
     {
-      key: 'single' as const,
+      key: 'single',
       config: SPREADS.single,
-      icon: '🌟',
+      Icon: StarIcon,
       primaryColor: '#D4AF37',
+      bgColor: 'rgba(212, 175, 55, 0.1)',
     },
     {
-      key: 'three' as const,
+      key: 'three',
       config: SPREADS.three,
-      icon: '✨',
+      Icon: SparklesIcon,
       primaryColor: '#8B5CF6',
+      bgColor: 'rgba(139, 92, 246, 0.1)',
     },
   ];
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.title}>Select Your Spread</Text>
-        <Text style={styles.subtitle}>
-          Choose a reading type to begin your journey
-        </Text>
+    <ScreenContainer>
+      <SafeScrollView maxWidth="md">
+        {/* Header */}
+        <Row justify="space-between" align="center" style={styles.header}>
+          <IconButton
+            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
+            onPress={() => router.back()}
+            variant="filled"
+            size="md"
+          />
+          <Text style={styles.headerTitle}>选择牌阵</Text>
+          <View style={{ width: responsive.width(40, 48) }} />
+        </Row>
 
-        {/* Unlimited badge */}
-        <View style={styles.unlimitedBadge}>
-          <Text style={styles.unlimitedText}>✨ Unlimited Readings</Text>
+        {/* Title Section */}
+        <View style={styles.titleSection}>
+          <Text style={styles.title}>Select Your Spread</Text>
+          <Text style={styles.subtitle}>
+            Choose a reading type to begin your journey
+          </Text>
         </View>
 
-        <View style={styles.optionsContainer}>
+        {/* Unlimited Badge */}
+        <View style={styles.unlimitedBadge}>
+          <SparklesIcon size={16} color="#D4AF37" />
+          <Text style={styles.unlimitedText}>Unlimited Readings</Text>
+        </View>
+
+        <Spacer size={responsive.spacing(24, 32)} />
+
+        {/* Spread Options */}
+        <View style={[styles.optionsContainer, isTablet && styles.optionsContainerTablet]}>
           {spreadOptions.map((option) => (
             <Pressable
               key={option.key}
               onPress={() => handleSelectSpread(option.key)}
               style={({ pressed }) => [
                 styles.optionCard,
+                isTablet && styles.optionCardTablet,
                 {
-                  shadowColor: option.primaryColor,
-                  opacity: pressed ? 0.8 : 1,
+                  backgroundColor: option.bgColor,
+                  borderColor: pressed
+                    ? option.primaryColor
+                    : `${option.primaryColor}40`,
                   transform: [{ scale: pressed ? 0.98 : 1 }],
                 },
               ]}
             >
-              <View style={styles.iconContainer}>
-                <Text style={styles.icon}>{option.icon}</Text>
+              {/* Icon */}
+              <View
+                style={[
+                  styles.iconContainer,
+                  { backgroundColor: `${option.primaryColor}20` },
+                ]}
+              >
+                <option.Icon
+                  size={responsive.width(36, 44)}
+                  color={option.primaryColor}
+                />
               </View>
 
-              <Text style={styles.optionTitle}>{option.config.name}</Text>
+              {/* Title */}
+              <Text style={[styles.optionTitle, { color: option.primaryColor }]}>
+                {option.config.name}
+              </Text>
 
+              {/* Description */}
               <Text style={styles.optionDescription}>
                 {option.config.description}
               </Text>
 
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>
-                  {option.config.cardCount}{' '}
-                  {option.config.cardCount === 1 ? 'Card' : 'Cards'}
-                </Text>
+              {/* Card Count Badge */}
+              <Badge
+                text={`${option.config.cardCount} ${option.config.cardCount === 1 ? 'Card' : 'Cards'}`}
+                theme={option.key === 'single' ? 'gold' : 'purple'}
+              />
+
+              {/* Arrow Indicator */}
+              <View
+                style={[
+                  styles.arrowContainer,
+                  { backgroundColor: `${option.primaryColor}15` },
+                ]}
+              >
+                <ChevronRightIcon size={20} color={option.primaryColor} />
               </View>
             </Pressable>
           ))}
         </View>
 
-        <Text style={styles.disclaimer}>
-          For entertainment purposes only
-        </Text>
-      </View>
-    </ScrollView>
+        <Spacer size={responsive.spacing(24, 32)} />
+
+        {/* Disclaimer */}
+        <Text style={styles.disclaimer}>For entertainment purposes only</Text>
+
+        <Spacer size={responsive.spacing(32, 48)} />
+      </SafeScrollView>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
+  header: {
+    marginBottom: responsive.spacing(20, 24),
   },
-  content: {
+  headerTitle: {
+    fontSize: responsive.fontSize(18, 20),
+    fontWeight: '600',
+    color: colors.text.primary,
+  },
+  titleSection: {
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 64,
-    paddingHorizontal: 24,
+    marginBottom: responsive.spacing(16, 20),
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: responsive.fontSize(28, 34),
+    fontWeight: '700',
     color: colors.accent.gold,
-    marginBottom: 12,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: colors.text.secondary,
-    marginBottom: 20,
+    marginBottom: responsive.spacing(8, 12),
     textAlign: 'center',
   },
+  subtitle: {
+    fontSize: responsive.fontSize(14, 16),
+    color: colors.text.secondary,
+    textAlign: 'center',
+    maxWidth: 300,
+    lineHeight: responsive.fontSize(20, 24),
+  },
   unlimitedBadge: {
-    backgroundColor: 'rgba(212, 175, 55, 0.15)',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 20,
-    marginBottom: 32,
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'center',
+    backgroundColor: 'rgba(212, 175, 55, 0.12)',
+    paddingHorizontal: responsive.spacing(16, 20),
+    paddingVertical: responsive.spacing(10, 12),
+    borderRadius: responsive.width(20, 24),
     borderWidth: 1,
-    borderColor: 'rgba(212, 175, 55, 0.4)',
+    borderColor: 'rgba(212, 175, 55, 0.3)',
+    gap: responsive.spacing(8, 10),
   },
   unlimitedText: {
     color: colors.accent.gold,
-    fontSize: 14,
-    fontWeight: '700',
-    letterSpacing: 0.5,
+    fontSize: responsive.fontSize(14, 16),
+    fontWeight: '600',
+    letterSpacing: 0.3,
   },
   optionsContainer: {
-    width: '100%',
-    maxWidth: 448,
-    gap: 16,
+    gap: responsive.spacing(16, 20),
+  },
+  optionsContainerTablet: {
+    flexDirection: 'row',
   },
   optionCard: {
-    backgroundColor: colors.background.secondary,
-    borderRadius: 16,
-    padding: 24,
+    flex: isTablet ? 1 : undefined,
+    borderRadius: responsive.width(20, 24),
+    padding: responsive.spacing(24, 32),
     borderWidth: 2,
-    borderColor: 'rgba(212, 175, 55, 0.4)',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 5,
-    marginBottom: 16,
+    alignItems: 'center',
+  },
+  optionCardTablet: {
+    minHeight: 280,
+    justifyContent: 'center',
   },
   iconContainer: {
+    width: responsive.width(72, 88),
+    height: responsive.width(72, 88),
+    borderRadius: responsive.width(36, 44),
     alignItems: 'center',
-    marginBottom: 12,
-  },
-  icon: {
-    fontSize: 48,
+    justifyContent: 'center',
+    marginBottom: responsive.spacing(16, 20),
   },
   optionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: colors.accent.gold,
+    fontSize: responsive.fontSize(22, 26),
+    fontWeight: '700',
     textAlign: 'center',
-    marginBottom: 8,
+    marginBottom: responsive.spacing(8, 12),
+    letterSpacing: 0.3,
   },
   optionDescription: {
-    fontSize: 14,
+    fontSize: responsive.fontSize(14, 16),
     color: colors.text.secondary,
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: responsive.spacing(16, 20),
+    lineHeight: responsive.fontSize(20, 24),
+    maxWidth: 260,
   },
-  badge: {
-    alignSelf: 'center',
-    backgroundColor: 'rgba(139, 92, 246, 0.2)',
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 999,
-  },
-  badgeText: {
-    color: colors.accent.purple,
-    fontSize: 12,
-    fontWeight: '600',
+  arrowContainer: {
+    position: 'absolute',
+    right: responsive.spacing(16, 20),
+    top: '50%',
+    marginTop: -16,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   disclaimer: {
     color: colors.text.tertiary,
-    fontSize: 12,
+    fontSize: responsive.fontSize(12, 14),
     textAlign: 'center',
-    marginTop: 32,
     opacity: 0.6,
   },
 });
