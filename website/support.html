@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Celestial Eye Support - Get help, report issues, and find answers to common questions about our tarot app.">
+    <title>Support - Celestial Eye</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #CBD5E1;
+            background: linear-gradient(135deg, #0A0E1A 0%, #1A0E2E 25%, #2E1A47 75%, #1E2638 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(30, 38, 56, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #D4AF37;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        h2 {
+            color: #D4AF37;
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        h3 {
+            color: #8B5CF6;
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #CBD5E1;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #CBD5E1;
+        }
+
+        a {
+            color: #8B5CF6;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #A78BFA;
+        }
+
+        strong {
+            color: #D4AF37;
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: rgba(139, 92, 246, 0.1);
+            border-left: 4px solid #8B5CF6;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #D4AF37;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .contact-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10B981;
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .contact-box a.email-link {
+            display: inline-block;
+            background: linear-gradient(90deg, #10B981, #34D399);
+            color: #0A0E1A;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .contact-box a.email-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .faq-item {
+            background: rgba(30, 38, 56, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .faq-question {
+            color: #D4AF37;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-answer {
+            color: #CBD5E1;
+            padding-left: 28px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(90deg, #D4AF37, #E8C85D);
+            color: #0A0E1A;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 30px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            margin: 30px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(212, 175, 55, 0.2);
+            color: #94A3B8;
+            font-size: 14px;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .quick-link {
+            background: rgba(30, 38, 56, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+            text-decoration: none;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-3px);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+
+        .quick-link-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .quick-link-title {
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .quick-link-desc {
+            color: #94A3B8;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🔮</div>
+            <h1>Support Center</h1>
+            <p style="color: #8B5CF6; font-size: 18px; margin-bottom: 10px;">Celestial Eye</p>
+            <p style="color: #94A3B8;">We're here to help you on your mystical journey</p>
+        </div>
+
+        <!-- Quick Contact -->
+        <div class="contact-box">
+            <h3 style="color: #10B981; margin-top: 0;">📧 Contact Us</h3>
+            <p>Have a question, issue, or feedback? We'd love to hear from you!</p>
+            <p><strong>Email:</strong> support@celestial-eye.app</p>
+            <p><strong>Response Time:</strong> We typically respond within 24-48 hours</p>
+            <a href="mailto:support@celestial-eye.app?subject=Celestial Eye Support Request" class="email-link">
+                Send Support Email
+            </a>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Quick Links -->
+        <h2>Quick Links</h2>
+        <div class="quick-links">
+            <a href="#faq" class="quick-link">
+                <div class="quick-link-icon">❓</div>
+                <div class="quick-link-title">FAQ</div>
+                <div class="quick-link-desc">Common questions answered</div>
+            </a>
+            <a href="#troubleshooting" class="quick-link">
+                <div class="quick-link-icon">🔧</div>
+                <div class="quick-link-title">Troubleshooting</div>
+                <div class="quick-link-desc">Fix common issues</div>
+            </a>
+            <a href="#how-to-use" class="quick-link">
+                <div class="quick-link-icon">📖</div>
+                <div class="quick-link-title">How to Use</div>
+                <div class="quick-link-desc">App guide and tips</div>
+            </a>
+            <a href="#feedback" class="quick-link">
+                <div class="quick-link-icon">💬</div>
+                <div class="quick-link-title">Feedback</div>
+                <div class="quick-link-desc">Share your thoughts</div>
+            </a>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- FAQ Section -->
+        <h2 id="faq">Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">❓ What is Celestial Eye?</div>
+            <div class="faq-answer">
+                Celestial Eye is a tarot card reading app that combines ancient tarot wisdom with modern AI technology. It offers single-card daily readings and three-card spreads with AI-powered interpretations for guidance and self-reflection.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">❓ Is the app free to use?</div>
+            <div class="faq-answer">
+                Yes! Celestial Eye is completely free to download and use. There are no hidden fees, subscriptions, or in-app purchases required to access all features.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">❓ How do I get a tarot reading?</div>
+            <div class="faq-answer">
+                Simply open the app, choose between a single card (Daily Vision) or three-card spread (Past, Present, Future), then tap to shuffle and draw your cards. The AI will provide a personalized interpretation of your reading.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">❓ Are my readings private?</div>
+            <div class="faq-answer">
+                Yes, absolutely! All your readings are stored locally on your device. We don't collect personal information, and your spiritual journey remains completely private.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">❓ Can I save my readings?</div>
+            <div class="faq-answer">
+                Yes! All your readings are automatically saved to your History. You can revisit past readings anytime by tapping the History button on the home screen.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">❓ How accurate are the readings?</div>
+            <div class="faq-answer">
+                Celestial Eye is designed for entertainment and self-reflection purposes. The AI interpretations are meant to inspire thought and provide guidance, not predict the future. Always use your own judgment for important life decisions.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">❓ Does the app work offline?</div>
+            <div class="faq-answer">
+                You can view your saved readings offline, but generating new AI interpretations requires an internet connection. The card drawing and shuffle animations work offline.
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Troubleshooting -->
+        <h2 id="troubleshooting">Troubleshooting</h2>
+
+        <h3>App Not Loading or Crashing</h3>
+        <div class="info-box">
+            <p><strong>Try these steps:</strong></p>
+            <ol>
+                <li>Close the app completely and reopen it</li>
+                <li>Check your internet connection</li>
+                <li>Update to the latest version from the App Store</li>
+                <li>Restart your device</li>
+                <li>If the issue persists, try uninstalling and reinstalling the app</li>
+            </ol>
+        </div>
+
+        <h3>AI Interpretation Not Loading</h3>
+        <div class="info-box">
+            <p><strong>This usually happens due to network issues:</strong></p>
+            <ol>
+                <li>Check your internet connection (Wi-Fi or cellular data)</li>
+                <li>Wait a few moments and try again</li>
+                <li>If using VPN, try disabling it temporarily</li>
+                <li>The AI service may be temporarily busy - please retry in a few minutes</li>
+            </ol>
+        </div>
+
+        <h3>Reading History Not Showing</h3>
+        <div class="info-box">
+            <p><strong>If your saved readings aren't appearing:</strong></p>
+            <ol>
+                <li>Make sure you completed the reading (saw the interpretation)</li>
+                <li>Pull down to refresh the History screen</li>
+                <li>Close and reopen the app</li>
+                <li>Note: Uninstalling the app will delete all saved readings</li>
+            </ol>
+        </div>
+
+        <h3>Cards Not Shuffling or Drawing</h3>
+        <div class="info-box">
+            <p><strong>If the card animations aren't working:</strong></p>
+            <ol>
+                <li>Wait for any current animation to complete</li>
+                <li>Try tapping the screen gently (don't hold)</li>
+                <li>Close and reopen the app</li>
+                <li>Make sure your device has enough storage space</li>
+            </ol>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- How to Use -->
+        <h2 id="how-to-use">How to Use Celestial Eye</h2>
+
+        <h3>Getting Your First Reading</h3>
+        <div class="highlight-box">
+            <ol>
+                <li><strong>Open the App:</strong> Launch Celestial Eye from your home screen</li>
+                <li><strong>Choose a Spread:</strong> Tap "Daily Vision" for one card or "Tri-Realm Spread" for three cards</li>
+                <li><strong>Shuffle the Deck:</strong> Watch the mystical shuffle animation</li>
+                <li><strong>Draw Your Cards:</strong> Tap to reveal your cards one by one</li>
+                <li><strong>Read Your Interpretation:</strong> The AI will provide a personalized reading</li>
+                <li><strong>Save or Share:</strong> Your reading is automatically saved to History</li>
+            </ol>
+        </div>
+
+        <h3>Understanding Card Positions (Three-Card Spread)</h3>
+        <ul>
+            <li><strong>Left Card (Past):</strong> Influences from your past affecting your current situation</li>
+            <li><strong>Center Card (Present):</strong> Your current circumstances and challenges</li>
+            <li><strong>Right Card (Future):</strong> Potential outcomes and guidance for moving forward</li>
+        </ul>
+
+        <h3>Tips for Better Readings</h3>
+        <div class="info-box">
+            <ul>
+                <li>Find a quiet moment to focus before your reading</li>
+                <li>Think about a question or area of life you want guidance on</li>
+                <li>Keep an open mind when interpreting the results</li>
+                <li>Use readings for self-reflection, not literal predictions</li>
+                <li>Journal about your readings to track patterns over time</li>
+            </ul>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Feedback -->
+        <h2 id="feedback">Share Your Feedback</h2>
+
+        <p>We're constantly working to improve Celestial Eye and would love to hear from you!</p>
+
+        <div class="highlight-box">
+            <p><strong>Ways to share feedback:</strong></p>
+            <ul>
+                <li><strong>Email Us:</strong> <a href="mailto:support@celestial-eye.app?subject=Celestial Eye Feedback">support@celestial-eye.app</a></li>
+                <li><strong>App Store Review:</strong> Leave a review on the App Store to help others discover Celestial Eye</li>
+                <li><strong>Feature Requests:</strong> Tell us what features you'd like to see in future updates</li>
+                <li><strong>Bug Reports:</strong> Help us fix issues by describing what went wrong</li>
+            </ul>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Contact Information -->
+        <h2>Contact Information</h2>
+
+        <div class="contact-box">
+            <p><strong>Developer:</strong> Qlj</p>
+            <p><strong>App Name:</strong> Celestial Eye</p>
+            <p><strong>Support Email:</strong> <a href="mailto:support@celestial-eye.app">support@celestial-eye.app</a></p>
+            <p><strong>Website:</strong> <a href="https://celestial-eye.pages.dev">https://celestial-eye.pages.dev</a></p>
+            <br>
+            <p><strong>Response Time:</strong> We aim to respond to all inquiries within 24-48 hours during business days.</p>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Additional Resources -->
+        <h2>Additional Resources</h2>
+
+        <div class="quick-links">
+            <a href="privacy-policy.html" class="quick-link">
+                <div class="quick-link-icon">🔒</div>
+                <div class="quick-link-title">Privacy Policy</div>
+                <div class="quick-link-desc">How we protect your data</div>
+            </a>
+            <a href="terms-of-service.html" class="quick-link">
+                <div class="quick-link-icon">📋</div>
+                <div class="quick-link-title">Terms of Service</div>
+                <div class="quick-link-desc">Usage terms and conditions</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Celestial Eye. All rights reserved.</p>
+            <p style="margin-top: 10px;">For entertainment and self-reflection purposes only.</p>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-button">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
