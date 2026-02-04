@@ -294,7 +294,7 @@ export default function FlashcardsScreen() {
   return (
     <ScreenContainer>
       {/* Header */}
-      <View style={styles.practiceHeader}>
+      <View style={[styles.practiceHeader, { paddingTop: insets.top + responsive.spacing(8, 12) }]}>
         <IconButton
           icon={<XIcon size={20} color={colors.text.secondary} />}
           onPress={() => {
