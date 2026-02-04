@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -51,6 +52,7 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export default function FlashcardsScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   const {
     initializeCard,
@@ -357,12 +359,20 @@ export default function FlashcardsScreen() {
 
       {/* Answer Buttons */}
       {isFlipped && (
-        <View style={styles.answerButtons}>
+        <View
+          style={[
+            styles.answerButtons,
+            {
+              paddingBottom: Math.max(insets.bottom, 20) + responsive.spacing(16, 20),
+            },
+          ]}>
           <Pressable
             onPress={() => handleAnswer(false)}
             style={({ pressed }) => [styles.wrongButton, pressed && styles.buttonPressed]}>
-            <XIcon size={20} color={colors.error} />
-            <Text style={styles.wrongButtonText}>{"Don't Remember"}</Text>
+            <View style={styles.buttonContent}>
+              <XIcon size={20} color={colors.error} />
+              <Text style={styles.wrongButtonText}>Forgot</Text>
+            </View>
           </Pressable>
 
           <Pressable
@@ -370,7 +380,7 @@ export default function FlashcardsScreen() {
             style={({ pressed }) => [styles.correctButton, pressed && styles.buttonPressed]}>
             <LinearGradient colors={['#10B981', '#34D399']} style={styles.correctGradient}>
               <CheckIcon size={20} color={colors.text.primary} />
-              <Text style={styles.correctButtonText}>Remember!</Text>
+              <Text style={styles.correctButtonText}>Remember</Text>
             </LinearGradient>
           </Pressable>
         </View>
@@ -562,19 +572,25 @@ const styles = StyleSheet.create({
   // Answer Buttons
   answerButtons: {
     flexDirection: 'row',
-    padding: responsive.spacing(20, 28),
+    paddingHorizontal: responsive.spacing(20, 28),
+    paddingTop: responsive.spacing(20, 28),
     gap: responsive.spacing(12, 16),
   },
   wrongButton: {
     flex: 1,
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.background.secondary,
     borderRadius: responsive.width(14, 18),
     paddingVertical: responsive.spacing(16, 20),
+    paddingHorizontal: responsive.spacing(16, 20),
     borderWidth: 2,
     borderColor: colors.error + '40',
+  },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: responsive.spacing(8, 10),
   },
   wrongButtonText: {
@@ -597,6 +613,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: responsive.spacing(16, 20),
+    paddingHorizontal: responsive.spacing(16, 20),
     borderRadius: responsive.width(14, 18),
     gap: responsive.spacing(8, 10),
   },

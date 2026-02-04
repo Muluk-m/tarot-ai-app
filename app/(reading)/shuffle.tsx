@@ -20,7 +20,9 @@ import {
   StarIcon,
   SparklesIcon,
   ChevronRightIcon,
+  XIcon,
 } from '@/components/ui';
+import { IconButton } from '@/components/ui/Buttons';
 
 export default function Shuffle() {
   const router = useRouter();
@@ -100,6 +102,16 @@ export default function Shuffle() {
           </Row>
         </View>
       )}
+
+      {/* Close Button - Return to Home */}
+      <View style={styles.closeButtonContainer}>
+        <IconButton
+          icon={<XIcon size={20} color={colors.text.primary} />}
+          onPress={() => router.replace('/')}
+          variant="filled"
+          size="md"
+        />
+      </View>
 
       {/* Skip Button */}
       <Pressable
@@ -183,6 +195,11 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(212, 175, 55, 0.4)',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
+  },
+  closeButtonContainer: {
+    position: 'absolute',
+    top: responsive.spacing(60, 70),
+    left: responsive.spacing(20, 32),
   },
   skipButton: {
     position: 'absolute',

@@ -4,12 +4,14 @@
  */
 
 import React from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import Svg, { Path, Circle, Rect, Line, Polyline } from 'react-native-svg';
 
 export interface IconProps {
   size?: number;
   color?: string;
   strokeWidth?: number;
+  style?: StyleProp<ViewStyle>;
 }
 
 // Default props for icons
@@ -206,8 +208,9 @@ export const CloseIcon: React.FC<IconProps> = ({
   size = 24,
   color = '#D4AF37',
   strokeWidth = 2,
+  style,
 }) => (
-  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={style}>
     <Path
       d="M18 6L6 18M6 6l12 12"
       stroke={color}
@@ -226,8 +229,9 @@ export const CheckIcon: React.FC<IconProps> = ({
   size = 24,
   color = '#D4AF37',
   strokeWidth = 2,
+  style,
 }) => (
-  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={style}>
     <Path
       d="M20 6L9 17l-5-5"
       stroke={color}

@@ -4,9 +4,10 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CardDrawInteraction } from '@/components/reading/CardDrawInteraction';
 import { useCardStore } from '@/stores/cardStore';
 import { useReadingStore } from '@/stores/readingStore';
@@ -18,12 +19,11 @@ import { v4 as uuidv4 } from '@/utils/uuid';
 // UI Components
 import {
   ScreenContainer,
-  SafeScrollView,
   Row,
   Spacer,
   responsive,
   isTablet,
-  ChevronLeftIcon,
+  XIcon,
   SparklesIcon,
   ChevronRightIcon,
 } from '@/components/ui';
@@ -31,6 +31,7 @@ import { IconButton } from '@/components/ui/Buttons';
 
 export default function Draw() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const { deck, spreadType, drawCards } = useCardStore();
   const { setCurrentReading } = useReadingStore();
   const { incrementDailyUsage, incrementTotalReadings } = useUserStore();
@@ -79,19 +80,29 @@ export default function Draw() {
 
   return (
     <ScreenContainer>
-      <SafeScrollView maxWidth="lg">
-        {/* Header */}
+      {/* Fixed Header with Safe Area */}
+      <View
+        style={[styles.headerContainer, { paddingTop: insets.top + responsive.spacing(8, 12) }]}>
         <Row justify="space-between" align="center" style={styles.header}>
           <IconButton
-            icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
-            onPress={() => router.back()}
+            icon={<XIcon size={20} color={colors.text.primary} />}
+            onPress={() => router.replace('/')}
             variant="filled"
             size="md"
           />
           <Text style={styles.headerTitle}>Draw Cards</Text>
           <View style={{ width: responsive.width(40, 48) }} />
         </Row>
+      </View>
 
+      {/* Scrollable Content */}
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={[
+          styles.scrollContent,
+          { paddingBottom: insets.bottom + responsive.spacing(24, 32) },
+        ]}
+        showsVerticalScrollIndicator={false}>
         {/* Title Section */}
         <View style={styles.titleSection}>
           <Text style={styles.title}>Draw Cards</Text>
@@ -163,19 +174,31 @@ export default function Draw() {
         )}
 
         <Spacer size={responsive.spacing(32, 48)} />
-      </SafeScrollView>
+      </ScrollView>
     </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    paddingHorizontal: responsive.spacing(16, 24),
+    paddingBottom: responsive.spacing(8, 12),
+    zIndex: 10,
+  },
   header: {
-    marginBottom: responsive.spacing(20, 24),
+    // No marginBottom needed, handled by headerContainer padding
   },
   headerTitle: {
     fontSize: responsive.fontSize(18, 20),
     fontWeight: '600',
     color: colors.text.primary,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingHorizontal: responsive.spacing(16, 24),
+    flexGrow: 1,
   },
   titleSection: {
     alignItems: 'center',

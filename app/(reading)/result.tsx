@@ -7,6 +7,7 @@ import React, { useEffect, useRef } from 'react';
 import { View, Text, ScrollView, StyleSheet, Pressable, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Markdown from 'react-native-markdown-display';
 import { TarotCardDisplay } from '@/components/tarot/TarotCardDisplay';
 import { useReadingStore } from '@/stores/readingStore';
@@ -32,6 +33,7 @@ import { IconButton } from '@/components/ui/Buttons';
 
 export default function Result() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const scrollViewRef = useRef<ScrollView>(null);
 
   const { spreadType, drawnCards } = useCardStore();
@@ -74,12 +76,10 @@ export default function Result() {
         end={{ x: 1, y: 1 }}
       />
 
-      <ScrollView
-        ref={scrollViewRef}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        <Row justify="space-between" align="center" style={styles.header}>
+      {/* Fixed Header with Safe Area */}
+      <View
+        style={[styles.headerContainer, { paddingTop: insets.top + responsive.spacing(8, 12) }]}>
+        <Row justify="space-between" align="center">
           <IconButton
             icon={<ChevronLeftIcon size={20} color={colors.text.primary} />}
             onPress={() => router.back()}
@@ -89,7 +89,15 @@ export default function Result() {
           <Text style={styles.headerTitle}>Reading Result</Text>
           <View style={{ width: responsive.width(40, 48) }} />
         </Row>
+      </View>
 
+      <ScrollView
+        ref={scrollViewRef}
+        contentContainerStyle={[
+          styles.scrollContent,
+          { paddingBottom: insets.bottom + responsive.spacing(24, 40) },
+        ]}
+        showsVerticalScrollIndicator={false}>
         {/* Title Section */}
         <View style={styles.titleSection}>
           <Text style={styles.title}>Your Destiny</Text>
@@ -250,13 +258,13 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
   },
+  headerContainer: {
+    paddingHorizontal: responsive.spacing(20, 32),
+    paddingBottom: responsive.spacing(8, 12),
+    zIndex: 10,
+  },
   scrollContent: {
     paddingHorizontal: responsive.spacing(20, 32),
-    paddingTop: responsive.spacing(16, 24),
-    paddingBottom: responsive.spacing(24, 40),
-  },
-  header: {
-    marginBottom: responsive.spacing(16, 20),
   },
   headerTitle: {
     fontSize: responsive.fontSize(18, 20),

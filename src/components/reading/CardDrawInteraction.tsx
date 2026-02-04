@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useCardFlip } from '@/hooks/useCardFlip';
@@ -36,15 +36,18 @@ export const CardDrawInteraction: React.FC<CardDrawInteractionProps> = ({
   size = 'medium',
   disabled = false,
 }) => {
-  const { flipProgress, isFlipped, flipCard, getFrontRotation, getBackRotation } = useCardFlip();
+  const { flipProgress, flipCard, getFrontRotation, getBackRotation } = useCardFlip();
+  // Track flipped state in React state for proper re-renders
+  const [hasFlipped, setHasFlipped] = useState(false);
 
   const handlePress = async () => {
-    if (disabled || isFlipped.value) return;
+    if (disabled || hasFlipped) return;
 
     // Haptic feedback (optional)
     // await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
 
     flipCard();
+    setHasFlipped(true);
     onReveal?.(card);
   };
 
@@ -87,7 +90,7 @@ export const CardDrawInteraction: React.FC<CardDrawInteractionProps> = ({
       <TouchableOpacity
         activeOpacity={0.9}
         onPress={handlePress}
-        disabled={disabled || isFlipped.value}
+        disabled={disabled || hasFlipped}
         style={[styles.cardContainer, { width: currentSize.width, height: currentSize.height }]}>
         {/* Front face - Card back */}
         <Animated.View style={[styles.cardFace, frontAnimatedStyle]}>
@@ -100,7 +103,7 @@ export const CardDrawInteraction: React.FC<CardDrawInteractionProps> = ({
         </Animated.View>
 
         {/* Tap hint (only show if not flipped) */}
-        {!isFlipped.value && (
+        {!hasFlipped && (
           <Animated.View style={[styles.tapHint, { opacity: flipProgress.value === 0 ? 1 : 0 }]}>
             <Text style={styles.tapHintText}>Tap to reveal</Text>
           </Animated.View>
