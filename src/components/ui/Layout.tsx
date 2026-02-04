@@ -96,7 +96,7 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = ({
     <View style={[styles.screenContainer, style]}>
       {gradient && (
         <LinearGradient
-          colors={gradientColors}
+          colors={gradientColors as [string, string, string]}
           style={StyleSheet.absoluteFillObject}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}

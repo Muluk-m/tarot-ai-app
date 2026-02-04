@@ -1043,3 +1043,96 @@ export const SeedlingIcon: React.FC<IconProps> = ({
     />
   </Svg>
 );
+
+// 火焰图标 - 火元素
+export const FlameIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = '#EF4444',
+  strokeWidth = 2,
+}) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Path
+      d="M12 22c4.97 0 9-4.03 9-9 0-2.39-.94-4.68-2.64-6.36C16.64 5.06 14.97 2 12 2c0 3-2.5 5-5 7 0 1.5.5 3 1.5 4.5C7.09 13.91 6 15.31 6 17c0 3 2.69 5 6 5z"
+      stroke={color}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M12 22c-1.66 0-3-1.34-3-3 0-1.09.59-2.04 1.47-2.55C11.1 16.1 12 15.5 12 14c0 .5 2 2 2 4.5 0 1.93-1.57 3.5-2 3.5z"
+      stroke={color}
+      strokeWidth={strokeWidth * 0.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
+// 水滴图标 - 水元素
+export const DropletIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = '#22D3EE',
+  strokeWidth = 2,
+}) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Path
+      d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"
+      stroke={color}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
+// 风图标 - 风元素
+export const WindIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = '#94A3B8',
+  strokeWidth = 2,
+}) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Path
+      d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"
+      stroke={color}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
+// 山图标 - 土元素
+export const MountainIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = '#10B981',
+  strokeWidth = 2,
+}) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Path
+      d="M8 3l4 8 5-5 5 15H2L8 3z"
+      stroke={color}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
+// 搜索图标
+export const SearchIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = '#D4AF37',
+  strokeWidth = 2,
+}) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Circle cx="11" cy="11" r="8" stroke={color} strokeWidth={strokeWidth} />
+    <Path
+      d="M21 21l-4.35-4.35"
+      stroke={color}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);

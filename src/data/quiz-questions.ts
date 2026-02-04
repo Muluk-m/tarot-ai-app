@@ -4,6 +4,7 @@
  */
 
 import type { Quiz, QuizQuestion } from '@/types/learning.types';
+export type { Quiz, QuizQuestion } from '@/types/learning.types';
 
 // ============================================================================
 // COURSE 1 QUIZ: Tarot Basics

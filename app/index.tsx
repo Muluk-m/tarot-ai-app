@@ -160,14 +160,18 @@ const ProgressRing = ({
 
 export default function Index() {
   const router = useRouter();
-  const { currentStage, stageProgress, totalXp } = useLearningStore();
+  const { currentStage, experiencePoints, currentLevel } = useLearningStore();
+
+  // Map stage to index for progress calculation
+  const stageIndex = { beginner: 1, intermediate: 2, advanced: 3, master: 4 }[currentStage] || 1;
+  const stageProgress = ((currentLevel - 1) % 5) * 20; // Progress within current level (0-100)
 
   // Calculate overall learning progress
-  const overallProgress = Math.min(Math.round((currentStage / 5) * 100 + stageProgress / 5), 100);
+  const overallProgress = Math.min(Math.round((stageIndex / 5) * 100 + stageProgress / 5), 100);
 
   // Stage names
   const stageNames = ['Apprentice', 'Initiate', 'Seeker', 'Adept', 'Master'];
-  const currentStageName = stageNames[Math.min(currentStage - 1, 4)] || 'Apprentice';
+  const currentStageName = stageNames[Math.min(stageIndex - 1, 4)] || 'Apprentice';
 
   return (
     <View style={styles.container}>
@@ -190,7 +194,7 @@ export default function Index() {
             </View>
           </View>
           <View style={styles.xpContainer}>
-            <Text style={styles.xpValue}>{totalXp}</Text>
+            <Text style={styles.xpValue}>{experiencePoints}</Text>
             <Text style={styles.xpLabel}>XP</Text>
           </View>
         </View>

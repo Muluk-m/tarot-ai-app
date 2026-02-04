@@ -10,9 +10,9 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
     "web": "expo start --web",
-    "update:dev": "eas update --branch development --message",
-    "update:preview": "eas update --branch preview --message",
-    "update:prod": "eas update --branch production --message",
+    "update:dev": "eas update --branch development",
+    "update:preview": "eas update --branch preview",
+    "update:prod": "eas update --branch production",
     "update:auto": "eas update --auto"
   },
   "dependencies": {

@@ -4,6 +4,7 @@
  */
 
 import type { Course, Lesson, Stage } from '@/types/learning.types';
+export type { Course, Lesson } from '@/types/learning.types';
 
 // ============================================================================
 // STAGE 1: BEGINNER

@@ -4,8 +4,9 @@
  */
 
 // Configuration
-export { SUIT_COLORS, CARD_DIMENSIONS } from './config';
-export type { SVGSize, SVGDimensions } from './types';
+export { SVG_CONFIG, CARD_COLORS, CARD_SIZES, getSuitColor, getSuitGradient } from './config';
+export type { CardSize, SuitType } from './config';
+export type { CardSVGProps, CardFrameProps, MajorArcanaCardProps, MinorArcanaCardProps } from './types';
 
 // Card Frame
 export { CardFrame } from './CardFrame';

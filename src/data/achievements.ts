@@ -4,6 +4,7 @@
  */
 
 import type { Achievement } from '@/types/learning.types';
+export type { Achievement } from '@/types/learning.types';
 
 // ============================================================================
 // KNOWLEDGE ACHIEVEMENTS

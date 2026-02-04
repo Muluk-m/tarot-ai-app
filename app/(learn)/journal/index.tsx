@@ -150,7 +150,7 @@ export default function JournalScreen() {
           <IconButton
             icon={<PlusIcon size={20} color={colors.background.primary} />}
             onPress={() => router.push('/(learn)/journal/new')}
-            variant="primary"
+            variant="filled"
             size="md"
           />
         </Row>

@@ -49,8 +49,8 @@ export function useTypewriter(fullText: string, options: TypewriterOptions = {})
 
   const fullTextRef = useRef(fullText);
   const currentIndexRef = useRef(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const startTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const startTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Update fullText ref when it changes
   useEffect(() => {

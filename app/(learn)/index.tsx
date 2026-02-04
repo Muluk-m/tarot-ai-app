@@ -50,11 +50,14 @@ export default function LearnHub() {
     currentLevel,
     experiencePoints,
     currentStage,
-    stageProgress,
   } = useLearningStore();
 
   const { getTotalUnlocked, getUnlockPercentage } = useAchievementStore();
   const { getCardsDueForReview } = useFlashcardStore();
+
+  // Map stage to index for progress calculation
+  const stageIndex = { beginner: 1, intermediate: 2, advanced: 3, master: 4 }[currentStage] || 1;
+  const stageProgress = ((currentLevel - 1) % 5) * 20; // Progress within current level (0-100)
 
   // Calculate level progress
   const levelInfo = getLevelInfo(masteredCards.length);
@@ -67,7 +70,7 @@ export default function LearnHub() {
     : 100;
 
   const cardsDue = getCardsDueForReview().length;
-  const overallProgress = Math.min(Math.round((currentStage / 5) * 100 + stageProgress / 5), 100);
+  const overallProgress = Math.min(Math.round((stageIndex / 5) * 100 + stageProgress / 5), 100);
 
   return (
     <ScreenContainer>

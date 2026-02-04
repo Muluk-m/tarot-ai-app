@@ -145,7 +145,7 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled || loading}
       style={[fullWidth && { width: '100%' }, { opacity: variantStyles.opacity }, style]}>
       <LinearGradient
-        colors={variantStyles.gradient}
+        colors={variantStyles.gradient as [string, string]}
         style={[
           styles.button,
           {
