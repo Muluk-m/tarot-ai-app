@@ -1,6 +1,6 @@
 /**
- * Result Screen - AI 解读结果
- * iPad 和 iOS 适配
+ * Result Screen - AI Reading Result
+ * iPad and iOS compatible
  */
 
 import React, { useEffect, useRef } from 'react';
@@ -92,13 +92,13 @@ export default function Result() {
             variant="filled"
             size="md"
           />
-          <Text style={styles.headerTitle}>解读结果</Text>
+          <Text style={styles.headerTitle}>Reading Result</Text>
           <View style={{ width: responsive.width(40, 48) }} />
         </Row>
 
         {/* Title Section */}
         <View style={styles.titleSection}>
-          <Text style={styles.title}>你的命运</Text>
+          <Text style={styles.title}>Your Destiny</Text>
           <Row align="center" gap={8}>
             {spreadType === 'single' ? (
               <StarIcon size={18} color={colors.accent.gold} />
@@ -106,7 +106,7 @@ export default function Result() {
               <SparklesIcon size={18} color={colors.accent.gold} />
             )}
             <Text style={styles.subtitle}>
-              {spreadType === 'single' ? '每日星象指引' : '三界启示录'}
+              {spreadType === 'single' ? 'Daily Celestial Guidance' : 'Three Realms Revelation'}
             </Text>
           </Row>
         </View>
@@ -140,7 +140,7 @@ export default function Result() {
           {/* Interpretation Header */}
           <Row align="center" gap={10} style={styles.interpretationHeader}>
             <SparklesIcon size={22} color={colors.accent.gold} />
-            <Text style={styles.interpretationTitle}>星象解读</Text>
+            <Text style={styles.interpretationTitle}>Celestial Reading</Text>
           </Row>
 
           {/* Loading State */}
@@ -148,8 +148,8 @@ export default function Result() {
             <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" color={colors.accent.gold} />
               <Spacer size={16} />
-              <Text style={styles.loadingText}>正在凝视星象...</Text>
-              <Text style={styles.loadingSubtext}>引导宇宙智慧...</Text>
+              <Text style={styles.loadingText}>Gazing into the stars...</Text>
+              <Text style={styles.loadingSubtext}>Channeling cosmic wisdom...</Text>
             </View>
           )}
 
@@ -177,7 +177,7 @@ export default function Result() {
               >
                 <Row align="center" gap={8}>
                   <RefreshIcon size={18} color={colors.background.primary} />
-                  <Text style={styles.retryButtonText}>重试</Text>
+                  <Text style={styles.retryButtonText}>Retry</Text>
                 </Row>
               </Pressable>
             </View>
@@ -188,7 +188,7 @@ export default function Result() {
             <View style={styles.completionBadge}>
               <Row align="center" gap={6}>
                 <CheckIcon size={14} color={colors.accent.purple} />
-                <Text style={styles.completionText}>解读完成</Text>
+                <Text style={styles.completionText}>Reading Complete</Text>
               </Row>
             </View>
           )}
@@ -215,7 +215,7 @@ export default function Result() {
               >
                 <Row align="center" gap={10}>
                   <SparklesIcon size={20} color={colors.background.primary} />
-                  <Text style={styles.primaryButtonText}>新的解读</Text>
+                  <Text style={styles.primaryButtonText}>New Reading</Text>
                 </Row>
               </LinearGradient>
             </Pressable>
@@ -236,7 +236,7 @@ export default function Result() {
               >
                 <Row align="center" gap={10}>
                   <BookIcon size={20} color={colors.accent.purple} />
-                  <Text style={styles.secondaryButtonText}>历史记录</Text>
+                  <Text style={styles.secondaryButtonText}>View History</Text>
                 </Row>
               </LinearGradient>
             </Pressable>
@@ -247,7 +247,7 @@ export default function Result() {
 
         {/* Disclaimer */}
         <Text style={styles.disclaimer}>
-          本解读仅供娱乐和自我反思参考。
+          This reading is for entertainment and self-reflection only.
         </Text>
 
         <Spacer size={responsive.spacing(32, 48)} />

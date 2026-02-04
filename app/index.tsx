@@ -143,8 +143,8 @@ export default function Index() {
   const overallProgress = Math.min(Math.round((currentStage / 5) * 100 + stageProgress / 5), 100);
 
   // Stage names
-  const stageNames = ['入门学徒', '塔罗见习', '神秘探索者', '星象解读师', '大师'];
-  const currentStageName = stageNames[Math.min(currentStage - 1, 4)] || '入门学徒';
+  const stageNames = ['Apprentice', 'Initiate', 'Seeker', 'Adept', 'Master'];
+  const currentStageName = stageNames[Math.min(currentStage - 1, 4)] || 'Apprentice';
 
   return (
     <View style={styles.container}>
@@ -197,9 +197,9 @@ export default function Index() {
                   <BookIcon size={32} color="#D4AF37" />
                 </View>
                 <View style={styles.heroTextContainer}>
-                  <Text style={styles.heroTitle}>继续学习之旅</Text>
+                  <Text style={styles.heroTitle}>Continue Learning</Text>
                   <Text style={styles.heroSubtitle}>
-                    掌握78张塔罗牌的奥秘
+                    Master the wisdom of 78 tarot cards
                   </Text>
                   <View style={styles.heroProgressContainer}>
                     <View style={styles.heroProgressBar}>
@@ -211,13 +211,13 @@ export default function Index() {
               </View>
               <View style={styles.heroRight}>
                 <ProgressRing progress={overallProgress} size={70} strokeWidth={5} />
-                <Text style={styles.heroStageText}>第 {currentStage} 阶段</Text>
+                <Text style={styles.heroStageText}>Stage {currentStage}</Text>
               </View>
             </View>
 
             {/* Action hint */}
             <View style={styles.heroAction}>
-              <Text style={styles.heroActionText}>立即开始</Text>
+              <Text style={styles.heroActionText}>Start Now</Text>
               <ChevronRightIcon size={16} color="#D4AF37" />
             </View>
           </LinearGradient>
@@ -225,7 +225,7 @@ export default function Index() {
 
         {/* Quick Access Section */}
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>快速开始</Text>
+          <Text style={styles.sectionTitle}>Quick Start</Text>
         </View>
 
         <View style={styles.quickAccessGrid}>
@@ -242,8 +242,8 @@ export default function Index() {
               <View style={styles.quickCardIcon}>
                 <CardsIcon size={28} color="#D4AF37" />
               </View>
-              <Text style={styles.quickCardTitle}>闪卡记忆</Text>
-              <Text style={styles.quickCardSubtitle}>快速复习卡牌</Text>
+              <Text style={styles.quickCardTitle}>Flashcards</Text>
+              <Text style={styles.quickCardSubtitle}>Quick card review</Text>
             </LinearGradient>
           </TouchableOpacity>
 
@@ -260,16 +260,16 @@ export default function Index() {
               <View style={styles.quickCardIcon}>
                 <TrophyIcon size={28} color="#8B5CF6" />
               </View>
-              <Text style={styles.quickCardTitle}>知识测验</Text>
-              <Text style={styles.quickCardSubtitle}>检验学习成果</Text>
+              <Text style={styles.quickCardTitle}>Quizzes</Text>
+              <Text style={styles.quickCardSubtitle}>Test your knowledge</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>
 
         {/* Practice Section */}
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>实践练习</Text>
-          <Text style={styles.sectionSubtitle}>运用所学知识</Text>
+          <Text style={styles.sectionTitle}>Practice</Text>
+          <Text style={styles.sectionSubtitle}>Apply what you've learned</Text>
         </View>
 
         {/* Practice Cards */}
@@ -295,8 +295,8 @@ export default function Index() {
                   <SparkleIcon size={24} color="#22D3EE" />
                 </View>
                 <View style={styles.practiceCardText}>
-                  <Text style={styles.practiceCardTitle}>单牌解读</Text>
-                  <Text style={styles.practiceCardSubtitle}>每日一卡，深入理解</Text>
+                  <Text style={styles.practiceCardTitle}>Single Card</Text>
+                  <Text style={styles.practiceCardSubtitle}>Daily guidance</Text>
                 </View>
                 <ChevronRightIcon size={20} color="#22D3EE" />
               </View>
@@ -324,8 +324,8 @@ export default function Index() {
                   <CardsIcon size={24} color="#10B981" />
                 </View>
                 <View style={styles.practiceCardText}>
-                  <Text style={styles.practiceCardTitle}>三牌阵练习</Text>
-                  <Text style={styles.practiceCardSubtitle}>过去·现在·未来</Text>
+                  <Text style={styles.practiceCardTitle}>Three Card Spread</Text>
+                  <Text style={styles.practiceCardSubtitle}>Past · Present · Future</Text>
                 </View>
                 <ChevronRightIcon size={20} color="#10B981" />
               </View>
@@ -347,8 +347,8 @@ export default function Index() {
                   <HistoryIcon size={24} color="#94A3B8" />
                 </View>
                 <View style={styles.practiceCardText}>
-                  <Text style={styles.practiceCardTitle}>解读历史</Text>
-                  <Text style={styles.practiceCardSubtitle}>回顾过往记录</Text>
+                  <Text style={styles.practiceCardTitle}>Reading History</Text>
+                  <Text style={styles.practiceCardSubtitle}>Review past readings</Text>
                 </View>
                 <ChevronRightIcon size={20} color="#94A3B8" />
               </View>
@@ -360,23 +360,23 @@ export default function Index() {
         <View style={styles.statsCard}>
           <View style={styles.statItem}>
             <Text style={styles.statValue}>78</Text>
-            <Text style={styles.statLabel}>卡牌总数</Text>
+            <Text style={styles.statLabel}>Total Cards</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
             <Text style={styles.statValue}>5</Text>
-            <Text style={styles.statLabel}>学习阶段</Text>
+            <Text style={styles.statLabel}>Stages</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
             <Text style={styles.statValue}>{totalXp}</Text>
-            <Text style={styles.statLabel}>累计经验</Text>
+            <Text style={styles.statLabel}>Total XP</Text>
           </View>
         </View>
 
         {/* Footer */}
         <Text style={styles.footer}>
-          学习塔罗，探索自我
+          Learn Tarot, Explore Yourself
         </Text>
       </ScrollView>
     </View>

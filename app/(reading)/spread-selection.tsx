@@ -1,6 +1,6 @@
 /**
- * Spread Selection Screen - 牌阵选择
- * iPad 和 iOS 适配
+ * Spread Selection Screen
+ * iPad and iOS compatible
  */
 
 import React from 'react';
@@ -76,22 +76,22 @@ export default function SpreadSelection() {
             variant="filled"
             size="md"
           />
-          <Text style={styles.headerTitle}>选择牌阵</Text>
+          <Text style={styles.headerTitle}>Choose Spread</Text>
           <View style={{ width: responsive.width(40, 48) }} />
         </Row>
 
         {/* Title Section */}
         <View style={styles.titleSection}>
-          <Text style={styles.title}>选择牌阵</Text>
+          <Text style={styles.title}>Choose Spread</Text>
           <Text style={styles.subtitle}>
-            选择一种解读方式开始你的旅程
+            Select a reading style to begin your journey
           </Text>
         </View>
 
         {/* Unlimited Badge */}
         <View style={styles.unlimitedBadge}>
           <SparklesIcon size={16} color="#D4AF37" />
-          <Text style={styles.unlimitedText}>无限次解读</Text>
+          <Text style={styles.unlimitedText}>Unlimited Readings</Text>
         </View>
 
         <Spacer size={responsive.spacing(24, 32)} />
@@ -139,7 +139,7 @@ export default function SpreadSelection() {
 
               {/* Card Count Badge */}
               <Badge
-                text={`${option.config.cardCount} 张牌`}
+                text={`${option.config.cardCount} Card${option.config.cardCount > 1 ? 's' : ''}`}
                 theme={option.key === 'single' ? 'gold' : 'purple'}
               />
 
@@ -159,7 +159,7 @@ export default function SpreadSelection() {
         <Spacer size={responsive.spacing(24, 32)} />
 
         {/* Disclaimer */}
-        <Text style={styles.disclaimer}>仅供娱乐参考</Text>
+        <Text style={styles.disclaimer}>For entertainment purposes only</Text>
 
         <Spacer size={responsive.spacing(32, 48)} />
       </SafeScrollView>

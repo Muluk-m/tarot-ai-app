@@ -1,6 +1,6 @@
 /**
- * Draw Screen - 抽卡
- * iPad 和 iOS 适配
+ * Draw Screen
+ * iPad and iOS compatible
  */
 
 import React, { useEffect, useState } from 'react';
@@ -87,17 +87,17 @@ export default function Draw() {
             variant="filled"
             size="md"
           />
-          <Text style={styles.headerTitle}>抽取卡牌</Text>
+          <Text style={styles.headerTitle}>Draw Cards</Text>
           <View style={{ width: responsive.width(40, 48) }} />
         </Row>
 
         {/* Title Section */}
         <View style={styles.titleSection}>
-          <Text style={styles.title}>抽取卡牌</Text>
+          <Text style={styles.title}>Draw Cards</Text>
           <Text style={styles.subtitle}>
             {spreadType === 'single'
-              ? '点击卡牌揭示你的指引'
-              : '依次点击每张卡牌揭示解读'}
+              ? 'Tap the card to reveal your guidance'
+              : 'Tap each card to reveal your reading'}
           </Text>
         </View>
 
@@ -120,7 +120,7 @@ export default function Draw() {
         {!allCardsRevealed && drawnCards.length > 0 && (
           <View style={styles.progressContainer}>
             <Text style={styles.progressText}>
-              已揭示 {revealedCards.size} / {drawnCards.length} 张卡牌
+              Revealed {revealedCards.size} / {drawnCards.length} cards
             </Text>
             <View style={styles.progressBar}>
               <View
@@ -151,7 +151,7 @@ export default function Draw() {
               >
                 <Row align="center" gap={responsive.spacing(10, 14)}>
                   <SparklesIcon size={responsive.width(20, 24)} color={colors.background.primary} />
-                  <Text style={styles.getReadingButtonText}>获取 AI 解读</Text>
+                  <Text style={styles.getReadingButtonText}>Get AI Reading</Text>
                   <View style={styles.buttonArrow}>
                     <ChevronRightIcon size={18} color={colors.background.primary} />
                   </View>
@@ -160,7 +160,7 @@ export default function Draw() {
             </Pressable>
 
             <Text style={styles.actionHint}>
-              你的专属解读即将呈现...
+              Your personalized reading awaits...
             </Text>
           </View>
         )}

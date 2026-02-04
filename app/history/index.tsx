@@ -1,6 +1,6 @@
 /**
- * History List Screen - 历史记录列表
- * iPad 和 iOS 适配
+ * History List Screen
+ * iPad and iOS compatible
  */
 
 import React from 'react';
@@ -71,7 +71,7 @@ export default function History() {
                 <SparklesIcon size={16} color={colors.accent.gold} />
               )}
               <Text style={styles.spreadType}>
-                {item.spreadType === 'single' ? '每日一卡' : '三牌阵'}
+                {item.spreadType === 'single' ? 'Daily Card' : 'Three Card Spread'}
               </Text>
             </Row>
             <Text style={styles.date}>{item.dateFormatted}</Text>
@@ -101,9 +101,9 @@ export default function History() {
       <View style={styles.emptyIconContainer}>
         <CrystalBallIcon size={responsive.width(60, 80)} color={colors.accent.gold} />
       </View>
-      <Text style={styles.emptyTitle}>暂无记录</Text>
+      <Text style={styles.emptyTitle}>No Records Yet</Text>
       <Text style={styles.emptySubtitle}>
-        开始你的星象之旅，探索宇宙的奥秘
+        Begin your celestial journey and explore the mysteries of the cosmos
       </Text>
 
       <Spacer size={responsive.spacing(24, 32)} />
@@ -123,7 +123,7 @@ export default function History() {
         >
           <Row align="center" gap={10}>
             <SparklesIcon size={20} color={colors.background.primary} />
-            <Text style={styles.emptyButtonText}>开始第一次解读</Text>
+            <Text style={styles.emptyButtonText}>Start Your First Reading</Text>
           </Row>
         </LinearGradient>
       </Pressable>
@@ -149,7 +149,7 @@ export default function History() {
             variant="filled"
             size="md"
           />
-          <Text style={styles.headerTitle}>历史记录</Text>
+          <Text style={styles.headerTitle}>History</Text>
           <View style={{ width: responsive.width(40, 48) }} />
         </Row>
 
@@ -158,10 +158,10 @@ export default function History() {
         <View style={styles.titleSection}>
           <Row align="center" gap={12}>
             <BookIcon size={responsive.width(28, 34)} color={colors.accent.gold} />
-            <Text style={styles.title}>解读档案</Text>
+            <Text style={styles.title}>Reading Archives</Text>
           </Row>
           <Text style={styles.subtitle}>
-            共 {readingHistory.length} 条记录
+            {readingHistory.length} {readingHistory.length === 1 ? 'record' : 'records'}
           </Text>
         </View>
       </View>

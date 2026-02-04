@@ -133,7 +133,7 @@ export const HeroCard: React.FC<HeroCardProps> = ({
   onPress,
   progress,
   progressLabel,
-  actionText = '立即开始',
+  actionText = 'Start Now',
   theme = 'dark',
   style,
 }) => {
