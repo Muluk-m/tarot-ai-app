@@ -50,11 +50,7 @@ export default function AchievementsScreen() {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<Category>('all');
 
-  const {
-    isUnlocked,
-    getTotalUnlocked,
-    getUnlockPercentage,
-  } = useAchievementStore();
+  const { isUnlocked, getTotalUnlocked, getUnlockPercentage } = useAchievementStore();
 
   const { masteredCards, completedCourses, completedLessons, studyStreak } = useLearningStore();
   const { getPerfectScores } = useQuizStore();
@@ -124,11 +120,7 @@ export default function AchievementsScreen() {
       case 'special':
         return SPECIAL_ACHIEVEMENTS;
       default:
-        return [
-          ...KNOWLEDGE_ACHIEVEMENTS,
-          ...PRACTICE_ACHIEVEMENTS,
-          ...SPECIAL_ACHIEVEMENTS,
-        ];
+        return [...KNOWLEDGE_ACHIEVEMENTS, ...PRACTICE_ACHIEVEMENTS, ...SPECIAL_ACHIEVEMENTS];
     }
   };
 
@@ -161,21 +153,14 @@ export default function AchievementsScreen() {
             </View>
             <View style={styles.progressInfo}>
               <Text style={styles.progressTitle}>Your Progress</Text>
-              <Text style={styles.progressSubtitle}>
-                {totalUnlocked} achievements unlocked
-              </Text>
+              <Text style={styles.progressSubtitle}>{totalUnlocked} achievements unlocked</Text>
             </View>
             <Text style={styles.progressPercent}>{unlockPercentage}%</Text>
           </View>
 
           <View style={styles.progressBarContainer}>
             <View style={styles.progressBar}>
-              <View
-                style={[
-                  styles.progressFill,
-                  { width: `${unlockPercentage}%` },
-                ]}
-              />
+              <View style={[styles.progressFill, { width: `${unlockPercentage}%` }]} />
             </View>
           </View>
         </View>
@@ -186,8 +171,7 @@ export default function AchievementsScreen() {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.tabsContainer}
-        >
+          contentContainerStyle={styles.tabsContainer}>
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat.key;
             const CatIcon = cat.Icon;
@@ -196,20 +180,11 @@ export default function AchievementsScreen() {
               <Pressable
                 key={cat.key}
                 onPress={() => setSelectedCategory(cat.key)}
-                style={[
-                  styles.tab,
-                  isSelected && { borderColor: cat.color },
-                ]}
-              >
+                style={[styles.tab, isSelected && { borderColor: cat.color }]}>
                 <View style={[styles.tabIconContainer, { backgroundColor: cat.color + '20' }]}>
                   <CatIcon size={responsive.width(20, 24)} color={cat.color} />
                 </View>
-                <Text
-                  style={[
-                    styles.tabTitle,
-                    isSelected && { color: colors.text.primary },
-                  ]}
-                >
+                <Text style={[styles.tabTitle, isSelected && { color: colors.text.primary }]}>
                   {cat.title}
                 </Text>
               </Pressable>
@@ -239,15 +214,13 @@ export default function AchievementsScreen() {
                   styles.achievementCard,
                   unlocked && styles.achievementCardUnlocked,
                   hidden && styles.achievementCardHidden,
-                ]}
-              >
+                ]}>
                 <View
                   style={[
                     styles.achievementIcon,
                     unlocked && styles.achievementIconUnlocked,
                     hidden && styles.achievementIconHidden,
-                  ]}
-                >
+                  ]}>
                   {hidden ? (
                     <LockIcon size={20} color={colors.text.quaternary} />
                   ) : unlocked ? (
@@ -258,36 +231,19 @@ export default function AchievementsScreen() {
                 </View>
 
                 <View style={styles.achievementInfo}>
-                  <Text
-                    style={[
-                      styles.achievementTitle,
-                      hidden && styles.hiddenText,
-                    ]}
-                  >
+                  <Text style={[styles.achievementTitle, hidden && styles.hiddenText]}>
                     {hidden ? 'Hidden Achievement' : achievement.title}
                   </Text>
-                  <Text
-                    style={[
-                      styles.achievementDescription,
-                      hidden && styles.hiddenText,
-                    ]}
-                  >
+                  <Text style={[styles.achievementDescription, hidden && styles.hiddenText]}>
                     {hidden ? 'Keep learning to unlock!' : achievement.description}
                   </Text>
 
                   {!unlocked && !hidden && (
                     <View style={styles.achievementProgress}>
                       <View style={styles.miniProgressBar}>
-                        <View
-                          style={[
-                            styles.miniProgressFill,
-                            { width: `${progress}%` },
-                          ]}
-                        />
+                        <View style={[styles.miniProgressFill, { width: `${progress}%` }]} />
                       </View>
-                      <Text style={styles.progressTextSmall}>
-                        {getProgressText(achievement)}
-                      </Text>
+                      <Text style={styles.progressTextSmall}>{getProgressText(achievement)}</Text>
                     </View>
                   )}
 

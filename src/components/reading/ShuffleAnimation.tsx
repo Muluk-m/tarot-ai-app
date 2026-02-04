@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-import { useShuffleAnimation } from '@/hooks/useShuffleAnimation';
+import { useShuffleAnimation, type CardAnimationValues } from '@/hooks/useShuffleAnimation';
 import { CardBack } from '@/components/tarot/CardBack';
 import { colors } from '@/theme/colors';
 
@@ -23,6 +23,35 @@ interface ShuffleAnimationProps {
   hideTextOnComplete?: boolean;
 }
 
+interface AnimatedCardProps {
+  card: CardAnimationValues;
+  index: number;
+}
+
+// Separate component for animated card to avoid hooks in callback
+const AnimatedCard: React.FC<AnimatedCardProps> = ({ card, index }) => {
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: card.translateX.value },
+        { translateY: card.translateY.value },
+        { perspective: 1000 },
+        { rotateY: `${card.rotateY.value}deg` },
+        { rotateZ: `${card.rotateZ.value}deg` },
+        { scale: card.scale.value },
+      ],
+      opacity: card.opacity.value,
+      zIndex: index,
+    };
+  });
+
+  return (
+    <Animated.View style={[styles.card, animatedStyle]}>
+      <CardBack width={120} height={180} />
+    </Animated.View>
+  );
+};
+
 export const ShuffleAnimation: React.FC<ShuffleAnimationProps> = ({
   onComplete,
   autoStart = true,
@@ -35,7 +64,7 @@ export const ShuffleAnimation: React.FC<ShuffleAnimationProps> = ({
     onComplete?.();
   };
 
-  const { cards, startShuffle } = useShuffleAnimation(20, handleComplete);
+  const { cards, startShuffle } = useShuffleAnimation(handleComplete);
 
   useEffect(() => {
     if (autoStart) {
@@ -45,7 +74,7 @@ export const ShuffleAnimation: React.FC<ShuffleAnimationProps> = ({
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [autoStart]);
+  }, [autoStart, startShuffle]);
 
   return (
     <View style={styles.container}>
@@ -56,32 +85,9 @@ export const ShuffleAnimation: React.FC<ShuffleAnimationProps> = ({
 
       {/* Animated cards */}
       <View style={styles.cardsContainer}>
-        {cards.map((card, index) => {
-          // Create animated style for each card
-          const animatedStyle = useAnimatedStyle(() => {
-            return {
-              transform: [
-                { translateX: card.translateX.value },
-                { translateY: card.translateY.value },
-                { perspective: 1000 },
-                { rotateY: `${card.rotateY.value}deg` },
-                { rotateZ: `${card.rotateZ.value}deg` },
-                { scale: card.scale.value },
-              ],
-              opacity: card.opacity.value,
-              zIndex: index,
-            };
-          });
-
-          return (
-            <Animated.View
-              key={`card-${index}`}
-              style={[styles.card, animatedStyle]}
-            >
-              <CardBack width={120} height={180} />
-            </Animated.View>
-          );
-        })}
+        {cards.map((card, index) => (
+          <AnimatedCard key={`card-${index}`} card={card} index={index} />
+        ))}
       </View>
 
       {/* Shuffle text indicator */}

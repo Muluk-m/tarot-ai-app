@@ -45,6 +45,7 @@ export default function Draw() {
     drawCards(cardCount);
     const cards = deck.slice(0, cardCount);
     setDrawnCards(cards);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCardReveal = (card: TarotCard) => {
@@ -141,14 +142,12 @@ export default function Draw() {
               style={({ pressed }) => [
                 styles.getReadingButton,
                 pressed && styles.getReadingButtonPressed,
-              ]}
-            >
+              ]}>
               <LinearGradient
                 colors={[colors.accent.gold, colors.accent.goldLight]}
                 style={styles.getReadingButtonGradient}
                 start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              >
+                end={{ x: 1, y: 0 }}>
                 <Row align="center" gap={responsive.spacing(10, 14)}>
                   <SparklesIcon size={responsive.width(20, 24)} color={colors.background.primary} />
                   <Text style={styles.getReadingButtonText}>Get AI Reading</Text>
@@ -159,9 +158,7 @@ export default function Draw() {
               </LinearGradient>
             </Pressable>
 
-            <Text style={styles.actionHint}>
-              Your personalized reading awaits...
-            </Text>
+            <Text style={styles.actionHint}>Your personalized reading awaits...</Text>
           </View>
         )}
 

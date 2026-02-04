@@ -3,7 +3,7 @@
  * Structured learning path from beginner to master
  */
 
-import type { Course, Lesson, LessonContent, Stage } from '@/types/learning.types';
+import type { Course, Lesson, Stage } from '@/types/learning.types';
 
 // ============================================================================
 // STAGE 1: BEGINNER

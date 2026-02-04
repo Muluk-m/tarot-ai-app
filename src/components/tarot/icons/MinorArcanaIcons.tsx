@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, { Path, Circle, Rect, Polygon, Line, G } from 'react-native-svg';
+import { Path, Circle, Rect, Polygon, Line, G } from 'react-native-svg';
 import { CardIconBase, CardIconProps } from './MajorArcanaIcons';
 
 /**
@@ -85,7 +85,7 @@ export const PentacleSymbol: React.FC<CardIconProps & { count?: number }> = ({ c
 };
 
 // Helper function to calculate symbol positions based on count
-function getSymbolPositions(count: number): Array<{ x: number; y: number }> {
+function getSymbolPositions(count: number): { x: number; y: number }[] {
   const baseX = 60;
   const baseY = 60;
 

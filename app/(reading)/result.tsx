@@ -35,13 +35,7 @@ export default function Result() {
   const scrollViewRef = useRef<ScrollView>(null);
 
   const { spreadType, drawnCards } = useCardStore();
-  const {
-    currentReading,
-    isGenerating,
-    streamingText,
-    error,
-    generateReading,
-  } = useReadingStore();
+  const { currentReading, isGenerating, streamingText, error, generateReading } = useReadingStore();
 
   const positions = spreadType === 'three' ? (['past', 'present', 'future'] as const) : undefined;
 
@@ -49,6 +43,7 @@ export default function Result() {
     if (drawnCards.length > 0 && !isGenerating) {
       generateReading(spreadType, drawnCards);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -82,8 +77,7 @@ export default function Result() {
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {/* Header */}
         <Row justify="space-between" align="center" style={styles.header}>
           <IconButton
@@ -170,11 +164,7 @@ export default function Result() {
               <Spacer size={16} />
               <Pressable
                 onPress={handleRetry}
-                style={({ pressed }) => [
-                  styles.retryButton,
-                  pressed && styles.retryButtonPressed,
-                ]}
-              >
+                style={({ pressed }) => [styles.retryButton, pressed && styles.retryButtonPressed]}>
                 <Row align="center" gap={8}>
                   <RefreshIcon size={18} color={colors.background.primary} />
                   <Text style={styles.retryButtonText}>Retry</Text>
@@ -205,14 +195,12 @@ export default function Result() {
               style={({ pressed }) => [
                 styles.primaryButton,
                 pressed && styles.primaryButtonPressed,
-              ]}
-            >
+              ]}>
               <LinearGradient
                 colors={[colors.accent.gold, colors.accent.goldLight]}
                 style={styles.primaryButtonGradient}
                 start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              >
+                end={{ x: 1, y: 0 }}>
                 <Row align="center" gap={10}>
                   <SparklesIcon size={20} color={colors.background.primary} />
                   <Text style={styles.primaryButtonText}>New Reading</Text>
@@ -228,12 +216,10 @@ export default function Result() {
               style={({ pressed }) => [
                 styles.secondaryButton,
                 pressed && styles.secondaryButtonPressed,
-              ]}
-            >
+              ]}>
               <LinearGradient
                 colors={['rgba(139, 92, 246, 0.15)', 'rgba(139, 92, 246, 0.08)']}
-                style={styles.secondaryButtonGradient}
-              >
+                style={styles.secondaryButtonGradient}>
                 <Row align="center" gap={10}>
                   <BookIcon size={20} color={colors.accent.purple} />
                   <Text style={styles.secondaryButtonText}>View History</Text>

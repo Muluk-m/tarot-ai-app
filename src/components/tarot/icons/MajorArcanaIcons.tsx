@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, { Path, Circle, Rect, Polygon, Line, G } from 'react-native-svg';
+import Svg, { Path, Circle, Rect, Polygon, Line } from 'react-native-svg';
 
 /**
  * Base Card Icon Component

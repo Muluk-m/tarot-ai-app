@@ -1,5 +1,12 @@
-import { useEffect } from 'react';
-import { useSharedValue, withTiming, withSequence, withDelay, Easing } from 'react-native-reanimated';
+import { useMemo } from 'react';
+import {
+  useSharedValue,
+  withTiming,
+  withSequence,
+  withDelay,
+  Easing,
+  type SharedValue,
+} from 'react-native-reanimated';
 import { Dimensions } from 'react-native';
 
 /**
@@ -21,27 +28,96 @@ const SHUFFLE_DURATION = 2500;
 const CARD_COUNT = 20; // Animate subset for performance
 
 export interface CardAnimationValues {
-  translateX: any; // Reanimated SharedValue
-  translateY: any;
-  rotateZ: any;
-  rotateY: any;
-  scale: any;
-  opacity: any;
+  translateX: SharedValue<number>;
+  translateY: SharedValue<number>;
+  rotateZ: SharedValue<number>;
+  rotateY: SharedValue<number>;
+  scale: SharedValue<number>;
+  opacity: SharedValue<number>;
 }
 
-export function useShuffleAnimation(
-  cardCount: number = CARD_COUNT,
-  onComplete?: () => void
-) {
-  // Create shared values for each card
-  const cards: CardAnimationValues[] = Array.from({ length: cardCount }, () => ({
+// Helper hook to create animation values for a single card
+function useCardAnimationValues(): CardAnimationValues {
+  return {
     translateX: useSharedValue(0),
     translateY: useSharedValue(0),
     rotateZ: useSharedValue(0),
     rotateY: useSharedValue(0),
     scale: useSharedValue(1),
     opacity: useSharedValue(1),
-  }));
+  };
+}
+
+export function useShuffleAnimation(onComplete?: () => void) {
+  // Create shared values for each card at the top level (hooks must be called unconditionally)
+  // We use a fixed count of CARD_COUNT since hooks cannot be called dynamically
+  const card0 = useCardAnimationValues();
+  const card1 = useCardAnimationValues();
+  const card2 = useCardAnimationValues();
+  const card3 = useCardAnimationValues();
+  const card4 = useCardAnimationValues();
+  const card5 = useCardAnimationValues();
+  const card6 = useCardAnimationValues();
+  const card7 = useCardAnimationValues();
+  const card8 = useCardAnimationValues();
+  const card9 = useCardAnimationValues();
+  const card10 = useCardAnimationValues();
+  const card11 = useCardAnimationValues();
+  const card12 = useCardAnimationValues();
+  const card13 = useCardAnimationValues();
+  const card14 = useCardAnimationValues();
+  const card15 = useCardAnimationValues();
+  const card16 = useCardAnimationValues();
+  const card17 = useCardAnimationValues();
+  const card18 = useCardAnimationValues();
+  const card19 = useCardAnimationValues();
+
+  const cards: CardAnimationValues[] = useMemo(
+    () => [
+      card0,
+      card1,
+      card2,
+      card3,
+      card4,
+      card5,
+      card6,
+      card7,
+      card8,
+      card9,
+      card10,
+      card11,
+      card12,
+      card13,
+      card14,
+      card15,
+      card16,
+      card17,
+      card18,
+      card19,
+    ],
+    [
+      card0,
+      card1,
+      card2,
+      card3,
+      card4,
+      card5,
+      card6,
+      card7,
+      card8,
+      card9,
+      card10,
+      card11,
+      card12,
+      card13,
+      card14,
+      card15,
+      card16,
+      card17,
+      card18,
+      card19,
+    ]
+  );
 
   const isShuffling = useSharedValue(false);
 
@@ -57,7 +133,7 @@ export function useShuffleAnimation(
       const randomScale = 0.8 + Math.random() * 0.4; // 0.8 - 1.2
 
       // Staggered delay for each card
-      const delay = index * (SHUFFLE_DURATION / cardCount / 2);
+      const delay = index * (SHUFFLE_DURATION / CARD_COUNT / 2);
 
       // Animate to random position
       card.translateX.value = withDelay(

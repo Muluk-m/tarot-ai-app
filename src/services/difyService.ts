@@ -4,7 +4,7 @@
  * Supports both blocking and streaming responses
  */
 
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, isAxiosError } from 'axios';
 import { config } from '../constants/config';
 import type {
   DifyInterpretationRequest,
@@ -76,7 +76,7 @@ export async function generateInterpretation(
   } catch (error) {
     console.error('Dify API Error:', error);
 
-    if (axios.isAxiosError(error)) {
+    if (isAxiosError(error)) {
       const axiosError = error as AxiosError<DifyErrorResponse>;
 
       if (axiosError.response) {
@@ -173,7 +173,7 @@ export async function generateInterpretationStream(
   } catch (error) {
     console.error('🔮 [Dify] ❌ API Error:', error);
 
-    if (axios.isAxiosError(error)) {
+    if (isAxiosError(error)) {
       const axiosError = error as AxiosError<DifyErrorResponse>;
 
       if (axiosError.response) {

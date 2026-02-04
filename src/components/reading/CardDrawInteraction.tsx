@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useCardFlip } from '@/hooks/useCardFlip';
 import { TarotCardDisplay } from '@/components/tarot/TarotCardDisplay';
 import { CardBack } from '@/components/tarot/CardBack';

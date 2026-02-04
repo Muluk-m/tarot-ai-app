@@ -26,12 +26,13 @@ import {
 } from '@/components/ui';
 import { IconButton } from '@/components/ui/Buttons';
 
-const ENTRY_TYPES: Record<JournalEntryType, { title: string; Icon: React.FC<any>; color: string }> = {
-  learning: { title: 'Learning', Icon: BookIcon, color: '#10B981' },
-  practice: { title: 'Practice', Icon: CardsIcon, color: colors.accent.purple },
-  reflection: { title: 'Reflection', Icon: EditIcon, color: colors.accent.cyan },
-  'daily-card': { title: 'Daily Card', Icon: SparkleIcon, color: colors.accent.gold },
-};
+const ENTRY_TYPES: Record<JournalEntryType, { title: string; Icon: React.FC<any>; color: string }> =
+  {
+    learning: { title: 'Learning', Icon: BookIcon, color: '#10B981' },
+    practice: { title: 'Practice', Icon: CardsIcon, color: colors.accent.purple },
+    reflection: { title: 'Reflection', Icon: EditIcon, color: colors.accent.cyan },
+    'daily-card': { title: 'Daily Card', Icon: SparkleIcon, color: colors.accent.gold },
+  };
 
 function formatFullDate(dateString: string): string {
   const date = new Date(dateString);
@@ -114,9 +115,7 @@ export default function JournalEntryScreen() {
         <View style={styles.metaContainer}>
           <View style={[styles.typeTag, { backgroundColor: typeInfo.color + '20' }]}>
             <TypeIcon size={16} color={typeInfo.color} />
-            <Text style={[styles.typeText, { color: typeInfo.color }]}>
-              {typeInfo.title}
-            </Text>
+            <Text style={[styles.typeText, { color: typeInfo.color }]}>{typeInfo.title}</Text>
           </View>
           {entry.mood && (
             <View style={styles.moodTag}>

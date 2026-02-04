@@ -6,10 +6,11 @@
 import { Platform, ViewStyle } from 'react-native';
 import { colors } from './colors';
 
-interface ShadowConfig {
-  color?: string;
-  elevation: number;
-}
+// ShadowConfig interface kept for potential future use
+// interface ShadowConfig {
+//   color?: string;
+//   elevation: number;
+// }
 
 /**
  * Creates platform-specific shadow styles

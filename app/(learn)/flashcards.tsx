@@ -23,9 +23,7 @@ import type { TarotCard } from '@/types/tarot.types';
 // UI Components
 import {
   ScreenContainer,
-  SafeScrollView,
   Row,
-  Spacer,
   responsive,
   isTablet,
   StatCard,
@@ -36,7 +34,7 @@ import {
   RefreshIcon,
   PlayIcon,
 } from '@/components/ui';
-import { IconButton, Button } from '@/components/ui/Buttons';
+import { IconButton } from '@/components/ui/Buttons';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -110,9 +108,7 @@ export default function FlashcardsScreen() {
 
     if (cardsDue.length > 0) {
       // Use due cards
-      practiceCards = TAROT_DECK.filter((c) =>
-        cardsDue.includes(c.id.toString())
-      );
+      practiceCards = TAROT_DECK.filter((c) => cardsDue.includes(c.id.toString()));
     }
 
     // Fill with random cards if needed (max 10 cards per session)
@@ -193,7 +189,8 @@ export default function FlashcardsScreen() {
 
             <Text style={styles.introTitle}>Flashcards</Text>
             <Text style={styles.introDescription}>
-              Strengthen memory through card review. See the card image, recall its name and meaning, then flip to verify!
+              Strengthen memory through card review. See the card image, recall its name and
+              meaning, then flip to verify!
             </Text>
 
             <StatCard
@@ -207,15 +204,8 @@ export default function FlashcardsScreen() {
 
           <Pressable
             onPress={handleStartSession}
-            style={({ pressed }) => [
-              styles.startButton,
-              pressed && styles.buttonPressed,
-            ]}
-          >
-            <LinearGradient
-              colors={[colors.accent.purple, '#A78BFA']}
-              style={styles.startGradient}
-            >
+            style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed]}>
+            <LinearGradient colors={[colors.accent.purple, '#A78BFA']} style={styles.startGradient}>
               <PlayIcon size={20} color={colors.text.primary} />
               <Text style={styles.startButtonText}>Start Practice</Text>
             </LinearGradient>
@@ -237,8 +227,7 @@ export default function FlashcardsScreen() {
               style={[
                 styles.resultIcon,
                 { backgroundColor: accuracy >= 70 ? '#10B981' : colors.accent.gold },
-              ]}
-            >
+              ]}>
               {accuracy >= 90 ? (
                 <Text style={styles.resultEmoji}>🌟</Text>
               ) : accuracy >= 70 ? (
@@ -254,8 +243,7 @@ export default function FlashcardsScreen() {
               style={[
                 styles.resultScore,
                 { color: accuracy >= 70 ? '#10B981' : colors.accent.gold },
-              ]}
-            >
+              ]}>
               {accuracy}%
             </Text>
 
@@ -268,8 +256,8 @@ export default function FlashcardsScreen() {
                 {accuracy >= 90
                   ? 'Excellent! You have mastered these cards!'
                   : accuracy >= 70
-                  ? 'Great progress! Keep it up!'
-                  : 'Keep practicing! You will improve with more practice!'}
+                    ? 'Great progress! Keep it up!'
+                    : 'Keep practicing! You will improve with more practice!'}
               </Text>
             </View>
           </View>
@@ -277,26 +265,17 @@ export default function FlashcardsScreen() {
           <View style={styles.resultButtons}>
             <Pressable
               onPress={handleStartSession}
-              style={({ pressed }) => [
-                styles.retryButton,
-                pressed && styles.buttonPressed,
-              ]}
-            >
+              style={({ pressed }) => [styles.retryButton, pressed && styles.buttonPressed]}>
               <RefreshIcon size={18} color={colors.text.secondary} />
               <Text style={styles.retryButtonText}>Try Again</Text>
             </Pressable>
 
             <Pressable
               onPress={() => router.back()}
-              style={({ pressed }) => [
-                styles.doneButton,
-                pressed && styles.buttonPressed,
-              ]}
-            >
+              style={({ pressed }) => [styles.doneButton, pressed && styles.buttonPressed]}>
               <LinearGradient
                 colors={[colors.accent.purple, '#A78BFA']}
-                style={styles.doneGradient}
-              >
+                style={styles.doneGradient}>
                 <Text style={styles.doneButtonText}>Done</Text>
               </LinearGradient>
             </Pressable>
@@ -338,8 +317,7 @@ export default function FlashcardsScreen() {
       <View style={styles.cardContainer}>
         <Pressable
           onPress={handleFlip}
-          style={[styles.cardTouchable, { width: cardWidth, height: cardHeight }]}
-        >
+          style={[styles.cardTouchable, { width: cardWidth, height: cardHeight }]}>
           {/* Front of card - SVG */}
           <Animated.View style={[styles.cardFace, styles.cardFront, frontAnimatedStyle]}>
             <View style={styles.cardSvgWrapper}>
@@ -360,8 +338,7 @@ export default function FlashcardsScreen() {
           <Animated.View style={[styles.cardFace, styles.cardBack, backAnimatedStyle]}>
             <LinearGradient
               colors={[colors.accent.gold + '30', colors.accent.gold + '15']}
-              style={styles.cardBackGradient}
-            >
+              style={styles.cardBackGradient}>
               <Text style={styles.cardName}>{currentCard?.name}</Text>
               <View style={styles.keywordsContainer}>
                 {currentCard?.uprightKeywords.slice(0, 4).map((keyword, i) => (
@@ -383,26 +360,15 @@ export default function FlashcardsScreen() {
         <View style={styles.answerButtons}>
           <Pressable
             onPress={() => handleAnswer(false)}
-            style={({ pressed }) => [
-              styles.wrongButton,
-              pressed && styles.buttonPressed,
-            ]}
-          >
+            style={({ pressed }) => [styles.wrongButton, pressed && styles.buttonPressed]}>
             <XIcon size={20} color={colors.error} />
             <Text style={styles.wrongButtonText}>{"Don't Remember"}</Text>
           </Pressable>
 
           <Pressable
             onPress={() => handleAnswer(true)}
-            style={({ pressed }) => [
-              styles.correctButton,
-              pressed && styles.buttonPressed,
-            ]}
-          >
-            <LinearGradient
-              colors={['#10B981', '#34D399']}
-              style={styles.correctGradient}
-            >
+            style={({ pressed }) => [styles.correctButton, pressed && styles.buttonPressed]}>
+            <LinearGradient colors={['#10B981', '#34D399']} style={styles.correctGradient}>
               <CheckIcon size={20} color={colors.text.primary} />
               <Text style={styles.correctButtonText}>Remember!</Text>
             </LinearGradient>

@@ -15,10 +15,10 @@ export interface ReadingRecord {
   timestamp: number; // Unix timestamp
   dateFormatted: string;
   spreadType: SpreadType;
-  cards: Array<{
+  cards: {
     card: TarotCard;
     position?: 'past' | 'present' | 'future';
-  }>;
+  }[];
   interpretation: string; // Full AI-generated text
   favorite?: boolean;
 }

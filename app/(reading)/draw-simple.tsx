@@ -44,6 +44,7 @@ export default function DrawSimple() {
       duration: 600,
       useNativeDriver: true,
     }).start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCardTap = (index: number) => {
@@ -74,10 +75,7 @@ export default function DrawSimple() {
         end={{ x: 1, y: 1 }}
       />
 
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <Animated.View style={[styles.header, { opacity: fadeAnim }]}>
           <Text style={styles.title}>
@@ -107,37 +105,26 @@ export default function DrawSimple() {
 
         {/* Cards Grid */}
         <Animated.View
-          style={[
-            styles.cardsContainer,
-            { opacity: fadeAnim, transform: [{ scale: fadeAnim }] },
-          ]}
-        >
+          style={[styles.cardsContainer, { opacity: fadeAnim, transform: [{ scale: fadeAnim }] }]}>
           {drawnCards.map((card, index) => {
             const isRevealed = revealedIndices.has(index);
             return (
               <TouchableOpacity
                 key={card.id}
-                style={[
-                  styles.cardWrapper,
-                  spreadType === 'single' && styles.cardWrapperSingle,
-                ]}
+                style={[styles.cardWrapper, spreadType === 'single' && styles.cardWrapperSingle]}
                 onPress={() => handleCardTap(index)}
                 disabled={isRevealed}
-                activeOpacity={0.8}
-              >
+                activeOpacity={0.8}>
                 {isRevealed ? (
                   // Revealed card (front)
                   <LinearGradient
                     colors={[colors.accent.gold + '30', colors.accent.gold + '10']}
-                    style={styles.cardFront}
-                  >
+                    style={styles.cardFront}>
                     <View style={styles.cardFrontContent}>
                       {/* Position label */}
                       {positions && (
                         <View style={styles.positionBadge}>
-                          <Text style={styles.positionLabel}>
-                            {positions[index].toUpperCase()}
-                          </Text>
+                          <Text style={styles.positionLabel}>{positions[index].toUpperCase()}</Text>
                         </View>
                       )}
 
@@ -166,8 +153,7 @@ export default function DrawSimple() {
                   // Hidden card (back)
                   <LinearGradient
                     colors={[colors.accent.purple, colors.accent.purpleLight]}
-                    style={styles.cardBack}
-                  >
+                    style={styles.cardBack}>
                     <View style={styles.cardBackContent}>
                       <Text style={styles.cardBackIcon}>🔮</Text>
                       <Text style={styles.cardBackText}>TAP TO REVEAL</Text>
@@ -190,14 +176,12 @@ export default function DrawSimple() {
             <TouchableOpacity
               style={styles.actionButton}
               onPress={handleGetReading}
-              activeOpacity={0.9}
-            >
+              activeOpacity={0.9}>
               <LinearGradient
                 colors={[colors.accent.gold, colors.accent.goldLight]}
                 style={styles.actionButtonGradient}
                 start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              >
+                end={{ x: 1, y: 0 }}>
                 <Text style={styles.actionButtonText}>✨ Receive Celestial Guidance</Text>
                 <View style={styles.actionButtonArrow}>
                   <Text style={styles.actionButtonArrowText}>→</Text>
@@ -209,11 +193,7 @@ export default function DrawSimple() {
       </ScrollView>
 
       {/* Back button */}
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.back()}
-        activeOpacity={0.8}
-      >
+      <TouchableOpacity style={styles.backButton} onPress={() => router.back()} activeOpacity={0.8}>
         <Text style={styles.backButtonText}>← Back</Text>
       </TouchableOpacity>
     </View>

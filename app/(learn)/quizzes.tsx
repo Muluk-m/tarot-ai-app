@@ -53,14 +53,8 @@ export default function QuizzesScreen() {
           styles.quizCard,
           passed && styles.quizCardPassed,
           pressed && styles.quizCardPressed,
-        ]}
-      >
-        <View
-          style={[
-            styles.quizIcon,
-            { backgroundColor: passed ? '#10B981' : color },
-          ]}
-        >
+        ]}>
+        <View style={[styles.quizIcon, { backgroundColor: passed ? '#10B981' : color }]}>
           {passed ? (
             <CheckIcon size={22} color={colors.text.primary} />
           ) : (
@@ -74,12 +68,7 @@ export default function QuizzesScreen() {
             {quiz.questions.length} questions · Pass {quiz.passingScore}%
           </Text>
           {bestScore !== null && (
-            <Text
-              style={[
-                styles.quizScore,
-                { color: passed ? '#10B981' : colors.text.tertiary },
-              ]}
-            >
+            <Text style={[styles.quizScore, { color: passed ? '#10B981' : colors.text.tertiary }]}>
               Best: {bestScore}%
             </Text>
           )}
@@ -122,10 +111,7 @@ export default function QuizzesScreen() {
         {/* Daily Challenge */}
         {dailyQuizzes.length > 0 && (
           <>
-            <SectionHeader
-              title="Daily Challenge"
-              subtitle="A quick quiz every day"
-            />
+            <SectionHeader title="Daily Challenge" subtitle="A quick quiz every day" />
             <View style={styles.quizList}>
               {dailyQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.gold, ZapIcon))}
             </View>
@@ -136,10 +122,7 @@ export default function QuizzesScreen() {
         {/* Course Quizzes */}
         {courseQuizzes.length > 0 && (
           <>
-            <SectionHeader
-              title="Course Quizzes"
-              subtitle="Quizzes paired with courses"
-            />
+            <SectionHeader title="Course Quizzes" subtitle="Quizzes paired with courses" />
             <View style={styles.quizList}>
               {courseQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.purple, BookIcon))}
             </View>
@@ -150,10 +133,7 @@ export default function QuizzesScreen() {
         {/* Challenge Quizzes */}
         {challengeQuizzes.length > 0 && (
           <>
-            <SectionHeader
-              title="Challenge Quizzes"
-              subtitle="Test your advanced knowledge"
-            />
+            <SectionHeader title="Challenge Quizzes" subtitle="Test your advanced knowledge" />
             <View style={styles.quizList}>
               {challengeQuizzes.map((quiz) => renderQuizCard(quiz, colors.accent.cyan, TrophyIcon))}
             </View>

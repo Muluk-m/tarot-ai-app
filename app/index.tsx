@@ -8,11 +8,13 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import Svg, { Path, Circle, G, Defs, LinearGradient as SvgLinearGradient, Stop, Rect } from 'react-native-svg';
+import Svg, { Path, Circle, Defs, LinearGradient as SvgLinearGradient, Stop, Rect } from 'react-native-svg';
 import { colors } from '@/theme/colors';
 import { spacing } from '@/theme/spacing';
 import { shadows } from '@/theme/shadows';
 import { useLearningStore } from '@/stores/learningStore';
+import { useCardStore } from '@/stores/cardStore';
+import { useReadingStore } from '@/stores/readingStore';
 
 // SVG Icons - No emojis, using proper vector icons
 const BookIcon = ({ size = 24, color = '#D4AF37' }: { size?: number; color?: string }) => (
@@ -269,7 +271,7 @@ export default function Index() {
         {/* Practice Section */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Practice</Text>
-          <Text style={styles.sectionSubtitle}>Apply what you've learned</Text>
+          <Text style={styles.sectionSubtitle}>Apply what you&apos;ve learned</Text>
         </View>
 
         {/* Practice Cards */}
@@ -278,10 +280,8 @@ export default function Index() {
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => {
-              const { setSpreadType } = require('@/stores/cardStore').useCardStore.getState();
-              const { clearCurrentReading } = require('@/stores/readingStore').useReadingStore.getState();
-              clearCurrentReading();
-              setSpreadType('single');
+              useReadingStore.getState().clearCurrentReading();
+              useCardStore.getState().setSpreadType('single');
               router.push('/(reading)/shuffle');
             }}
             style={styles.practiceCard}
@@ -307,10 +307,8 @@ export default function Index() {
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => {
-              const { setSpreadType } = require('@/stores/cardStore').useCardStore.getState();
-              const { clearCurrentReading } = require('@/stores/readingStore').useReadingStore.getState();
-              clearCurrentReading();
-              setSpreadType('three');
+              useReadingStore.getState().clearCurrentReading();
+              useCardStore.getState().setSpreadType('three');
               router.push('/(reading)/shuffle');
             }}
             style={styles.practiceCard}

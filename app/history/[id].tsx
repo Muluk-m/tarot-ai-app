@@ -54,11 +54,7 @@ export default function HistoryDetail() {
 
           <Pressable
             onPress={() => router.back()}
-            style={({ pressed }) => [
-              styles.errorButton,
-              pressed && styles.errorButtonPressed,
-            ]}
-          >
+            style={({ pressed }) => [styles.errorButton, pressed && styles.errorButtonPressed]}>
             <Text style={styles.errorButtonText}>Go Back</Text>
           </Pressable>
         </View>
@@ -66,7 +62,8 @@ export default function HistoryDetail() {
     );
   }
 
-  const positions = reading.spreadType === 'three' ? (['past', 'present', 'future'] as const) : undefined;
+  const positions =
+    reading.spreadType === 'three' ? (['past', 'present', 'future'] as const) : undefined;
 
   const handleToggleFavorite = () => {
     toggleFavorite(id);
@@ -86,10 +83,7 @@ export default function HistoryDetail() {
         end={{ x: 1, y: 1 }}
       />
 
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <Row justify="space-between" align="center" style={styles.header}>
           <IconButton
@@ -100,7 +94,9 @@ export default function HistoryDetail() {
           />
           <Text style={styles.headerTitle}>Reading Details</Text>
           <IconButton
-            icon={<StarIcon size={20} color={reading.favorite ? '#FFD700' : colors.text.secondary} />}
+            icon={
+              <StarIcon size={20} color={reading.favorite ? '#FFD700' : colors.text.secondary} />
+            }
             onPress={handleToggleFavorite}
             variant="filled"
             size="md"
@@ -163,17 +159,12 @@ export default function HistoryDetail() {
           {/* New Reading Button */}
           <Pressable
             onPress={() => router.push('/')}
-            style={({ pressed }) => [
-              styles.primaryButton,
-              pressed && styles.primaryButtonPressed,
-            ]}
-          >
+            style={({ pressed }) => [styles.primaryButton, pressed && styles.primaryButtonPressed]}>
             <LinearGradient
               colors={[colors.accent.gold, colors.accent.goldLight]}
               style={styles.primaryButtonGradient}
               start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
+              end={{ x: 1, y: 0 }}>
               <Row align="center" gap={10}>
                 <SparklesIcon size={20} color={colors.background.primary} />
                 <Text style={styles.primaryButtonText}>New Reading</Text>
@@ -186,11 +177,7 @@ export default function HistoryDetail() {
           {/* Delete Button */}
           <Pressable
             onPress={handleDelete}
-            style={({ pressed }) => [
-              styles.deleteButton,
-              pressed && styles.deleteButtonPressed,
-            ]}
-          >
+            style={({ pressed }) => [styles.deleteButton, pressed && styles.deleteButtonPressed]}>
             <Row align="center" justify="center" gap={8}>
               <TrashIcon size={18} color={colors.error} />
               <Text style={styles.deleteButtonText}>Delete Record</Text>

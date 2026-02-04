@@ -83,9 +83,7 @@ export default function SpreadSelection() {
         {/* Title Section */}
         <View style={styles.titleSection}>
           <Text style={styles.title}>Choose Spread</Text>
-          <Text style={styles.subtitle}>
-            Select a reading style to begin your journey
-          </Text>
+          <Text style={styles.subtitle}>Select a reading style to begin your journey</Text>
         </View>
 
         {/* Unlimited Badge */}
@@ -107,24 +105,13 @@ export default function SpreadSelection() {
                 isTablet && styles.optionCardTablet,
                 {
                   backgroundColor: option.bgColor,
-                  borderColor: pressed
-                    ? option.primaryColor
-                    : `${option.primaryColor}40`,
+                  borderColor: pressed ? option.primaryColor : `${option.primaryColor}40`,
                   transform: [{ scale: pressed ? 0.98 : 1 }],
                 },
-              ]}
-            >
+              ]}>
               {/* Icon */}
-              <View
-                style={[
-                  styles.iconContainer,
-                  { backgroundColor: `${option.primaryColor}20` },
-                ]}
-              >
-                <option.Icon
-                  size={responsive.width(36, 44)}
-                  color={option.primaryColor}
-                />
+              <View style={[styles.iconContainer, { backgroundColor: `${option.primaryColor}20` }]}>
+                <option.Icon size={responsive.width(36, 44)} color={option.primaryColor} />
               </View>
 
               {/* Title */}
@@ -133,9 +120,7 @@ export default function SpreadSelection() {
               </Text>
 
               {/* Description */}
-              <Text style={styles.optionDescription}>
-                {option.config.description}
-              </Text>
+              <Text style={styles.optionDescription}>{option.config.description}</Text>
 
               {/* Card Count Badge */}
               <Badge
@@ -145,11 +130,7 @@ export default function SpreadSelection() {
 
               {/* Arrow Indicator */}
               <View
-                style={[
-                  styles.arrowContainer,
-                  { backgroundColor: `${option.primaryColor}15` },
-                ]}
-              >
+                style={[styles.arrowContainer, { backgroundColor: `${option.primaryColor}15` }]}>
                 <ChevronRightIcon size={20} color={option.primaryColor} />
               </View>
             </Pressable>

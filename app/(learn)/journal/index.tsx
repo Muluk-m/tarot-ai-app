@@ -29,7 +29,12 @@ import {
 } from '@/components/ui';
 import { IconButton, Button } from '@/components/ui/Buttons';
 
-const ENTRY_TYPES: { key: JournalEntryType | 'all'; title: string; Icon: React.FC<any>; color: string }[] = [
+const ENTRY_TYPES: {
+  key: JournalEntryType | 'all';
+  title: string;
+  Icon: React.FC<any>;
+  color: string;
+}[] = [
   { key: 'all', title: 'All', Icon: BookIcon, color: colors.accent.gold },
   { key: 'learning', title: 'Learning', Icon: BookIcon, color: '#10B981' },
   { key: 'practice', title: 'Practice', Icon: CardsIcon, color: colors.accent.purple },
@@ -40,9 +45,7 @@ const ENTRY_TYPES: { key: JournalEntryType | 'all'; title: string; Icon: React.F
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
   const now = new Date();
-  const diffDays = Math.floor(
-    (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
-  );
+  const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
 
   if (diffDays === 0) return 'Today';
   if (diffDays === 1) return 'Yesterday';
@@ -98,17 +101,11 @@ export default function JournalScreen() {
             params: { entryId: entry.id },
           })
         }
-        style={({ pressed }) => [
-          styles.entryCard,
-          pressed && styles.entryCardPressed,
-        ]}
-      >
+        style={({ pressed }) => [styles.entryCard, pressed && styles.entryCardPressed]}>
         <View style={styles.entryHeader}>
           <View style={[styles.entryTypeTag, { backgroundColor: typeInfo.color + '20' }]}>
             <TypeIcon size={14} color={typeInfo.color} />
-            <Text style={[styles.entryTypeText, { color: typeInfo.color }]}>
-              {typeInfo.title}
-            </Text>
+            <Text style={[styles.entryTypeText, { color: typeInfo.color }]}>{typeInfo.title}</Text>
           </View>
           <Text style={styles.entryDate}>{formatDate(entry.date)}</Text>
         </View>
@@ -127,11 +124,7 @@ export default function JournalScreen() {
                 <Text style={styles.tagText}>#{tag}</Text>
               </View>
             ))}
-            {entry.tags.length > 3 && (
-              <Text style={styles.moreTags}>
-                +{entry.tags.length - 3}
-              </Text>
-            )}
+            {entry.tags.length > 3 && <Text style={styles.moreTags}>+{entry.tags.length - 3}</Text>}
           </View>
         )}
 
@@ -183,31 +176,22 @@ export default function JournalScreen() {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.filterContainer}
-        >
+          contentContainerStyle={styles.filterContainer}>
           {ENTRY_TYPES.map((type) => {
             const isSelected = selectedType === type.key;
-            const count = type.key === 'all'
-              ? totalEntries
-              : getEntriesByType(type.key as JournalEntryType).length;
+            const count =
+              type.key === 'all'
+                ? totalEntries
+                : getEntriesByType(type.key as JournalEntryType).length;
             const TypeIcon = type.Icon;
 
             return (
               <Pressable
                 key={type.key}
                 onPress={() => setSelectedType(type.key)}
-                style={[
-                  styles.filterChip,
-                  isSelected && { borderColor: type.color },
-                ]}
-              >
+                style={[styles.filterChip, isSelected && { borderColor: type.color }]}>
                 <TypeIcon size={16} color={type.color} />
-                <Text
-                  style={[
-                    styles.filterText,
-                    isSelected && { color: colors.text.primary },
-                  ]}
-                >
+                <Text style={[styles.filterText, isSelected && { color: colors.text.primary }]}>
                   {type.title} ({count})
                 </Text>
               </Pressable>
@@ -225,9 +209,7 @@ export default function JournalScreen() {
             {searchQuery ? 'No matching entries' : 'No entries yet'}
           </Text>
           <Text style={styles.emptySubtitle}>
-            {searchQuery
-              ? 'Try different search terms'
-              : 'Record your tarot learning insights'}
+            {searchQuery ? 'Try different search terms' : 'Record your tarot learning insights'}
           </Text>
           {!searchQuery && (
             <>

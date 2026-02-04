@@ -31,7 +31,7 @@ import {
   WindIcon,
   MountainIcon,
 } from '@/components/ui';
-import { IconButton, Button } from '@/components/ui/Buttons';
+import { IconButton } from '@/components/ui/Buttons';
 
 type Filter = 'all' | 'major' | 'wands' | 'cups' | 'swords' | 'pentacles';
 
@@ -76,8 +76,6 @@ export default function EncyclopediaScreen() {
   };
 
   const cards = getFilteredCards();
-  const masteredCount = cards.filter((c) => isCardMastered(c.id.toString())).length;
-  const filterInfo = FILTERS.find((f) => f.key === selectedFilter)!;
 
   // Card columns based on device
   const numColumns = isLargeTablet ? 4 : isTablet ? 3 : 2;
@@ -94,8 +92,7 @@ export default function EncyclopediaScreen() {
           mastered && styles.cardItemMastered,
           learning && !mastered && styles.cardItemLearning,
           pressed && styles.cardItemPressed,
-        ]}
-      >
+        ]}>
         <View style={styles.cardImageContainer}>
           <TarotCardSVG
             cardId={card.id}
@@ -192,21 +189,11 @@ export default function EncyclopediaScreen() {
               <Spacer size={responsive.spacing(20, 28)} />
               <SectionHeader title="Element" />
               <View style={styles.elementContainer}>
-                {selectedCard.element === 'fire' && (
-                  <FlameIcon size={20} color="#EF4444" />
-                )}
-                {selectedCard.element === 'water' && (
-                  <DropletIcon size={20} color="#22D3EE" />
-                )}
-                {selectedCard.element === 'air' && (
-                  <WindIcon size={20} color="#94A3B8" />
-                )}
-                {selectedCard.element === 'earth' && (
-                  <MountainIcon size={20} color="#10B981" />
-                )}
-                <Text style={styles.elementText}>
-                  {ELEMENT_NAMES[selectedCard.element]}
-                </Text>
+                {selectedCard.element === 'fire' && <FlameIcon size={20} color="#EF4444" />}
+                {selectedCard.element === 'water' && <DropletIcon size={20} color="#22D3EE" />}
+                {selectedCard.element === 'air' && <WindIcon size={20} color="#94A3B8" />}
+                {selectedCard.element === 'earth' && <MountainIcon size={20} color="#10B981" />}
+                <Text style={styles.elementText}>{ELEMENT_NAMES[selectedCard.element]}</Text>
               </View>
             </>
           )}
@@ -234,15 +221,10 @@ export default function EncyclopediaScreen() {
 
         {/* Progress */}
         <View style={styles.progressSection}>
-          <Text style={styles.progressLabel}>
-            {masteredCards.length} / 78 cards mastered
-          </Text>
+          <Text style={styles.progressLabel}>{masteredCards.length} / 78 cards mastered</Text>
           <View style={styles.progressBar}>
             <View
-              style={[
-                styles.progressFill,
-                { width: `${(masteredCards.length / 78) * 100}%` },
-              ]}
+              style={[styles.progressFill, { width: `${(masteredCards.length / 78) * 100}%` }]}
             />
           </View>
         </View>
@@ -251,15 +233,15 @@ export default function EncyclopediaScreen() {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.filtersContainer}
-        >
+          contentContainerStyle={styles.filtersContainer}>
           {FILTERS.map((filter) => {
             const isSelected = selectedFilter === filter.key;
-            const filterCards = filter.key === 'all'
-              ? TAROT_DECK
-              : filter.key === 'major'
-              ? TAROT_DECK.filter((c) => c.arcana === 'major')
-              : TAROT_DECK.filter((c) => c.suit === filter.key);
+            const filterCards =
+              filter.key === 'all'
+                ? TAROT_DECK
+                : filter.key === 'major'
+                  ? TAROT_DECK.filter((c) => c.arcana === 'major')
+                  : TAROT_DECK.filter((c) => c.suit === filter.key);
             const filterMastered = filterCards.filter((c) =>
               isCardMastered(c.id.toString())
             ).length;
@@ -269,20 +251,12 @@ export default function EncyclopediaScreen() {
               <Pressable
                 key={filter.key}
                 onPress={() => setSelectedFilter(filter.key)}
-                style={[
-                  styles.filterTab,
-                  isSelected && { borderColor: filter.color },
-                ]}
-              >
-                <View style={[styles.filterIconContainer, { backgroundColor: filter.color + '20' }]}>
+                style={[styles.filterTab, isSelected && { borderColor: filter.color }]}>
+                <View
+                  style={[styles.filterIconContainer, { backgroundColor: filter.color + '20' }]}>
                   <FilterIcon size={responsive.width(18, 22)} color={filter.color} />
                 </View>
-                <Text
-                  style={[
-                    styles.filterTitle,
-                    isSelected && { color: colors.text.primary },
-                  ]}
-                >
+                <Text style={[styles.filterTitle, isSelected && { color: colors.text.primary }]}>
                   {filter.title}
                 </Text>
                 <Text style={[styles.filterCount, { color: filter.color }]}>

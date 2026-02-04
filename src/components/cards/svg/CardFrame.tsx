@@ -22,7 +22,8 @@ export const CardFrame: React.FC<CardFrameProps> = ({
   borderColor = CARD_COLORS.stroke.gold,
   children,
 }) => {
-  const scale = width / SVG_CONFIG.width;
+  // Note: scale is computed but not currently used; kept for potential future animations
+  // const scale = width / SVG_CONFIG.width;
 
   return (
     <Svg width={width} height={height} viewBox={SVG_CONFIG.viewBox}>

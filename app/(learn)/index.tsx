@@ -34,9 +34,7 @@ import {
   AwardIcon,
   EditIcon,
   ChevronLeftIcon,
-  ZapIcon,
   TargetIcon,
-  LayersIcon,
 } from '@/components/ui';
 import { IconButton } from '@/components/ui/Buttons';
 
@@ -53,7 +51,6 @@ export default function LearnHub() {
     experiencePoints,
     currentStage,
     stageProgress,
-    totalXp,
   } = useLearningStore();
 
   const { getTotalUnlocked, getUnlockPercentage } = useAchievementStore();
@@ -62,7 +59,9 @@ export default function LearnHub() {
   // Calculate level progress
   const levelInfo = getLevelInfo(masteredCards.length);
   const nextLevel = getNextLevelInfo(currentLevel);
-  const cardsForNextLevel = nextLevel ? nextLevel.minCards : LEVEL_THRESHOLDS[LEVEL_THRESHOLDS.length - 1].minCards;
+  const cardsForNextLevel = nextLevel
+    ? nextLevel.minCards
+    : LEVEL_THRESHOLDS[LEVEL_THRESHOLDS.length - 1].minCards;
   const levelProgress = nextLevel
     ? ((masteredCards.length - levelInfo.minCards) / (cardsForNextLevel - levelInfo.minCards)) * 100
     : 100;
@@ -179,9 +178,7 @@ export default function LearnHub() {
             icon={<AwardIcon size={22} color="#D4AF37" />}
             onPress={() => router.push('/(learn)/achievements')}
             theme="gold"
-            rightElement={
-              <Badge text={`${getTotalUnlocked()}`} theme="gold" />
-            }
+            rightElement={<Badge text={`${getTotalUnlocked()}`} theme="gold" />}
           />
 
           <Spacer size={responsive.spacing(10, 12)} />

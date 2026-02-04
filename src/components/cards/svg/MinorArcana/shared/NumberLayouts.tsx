@@ -14,7 +14,7 @@ interface NumberLayoutProps {
 }
 
 // 预定义的布局位置（基于 120x180 的画布，中心区域 80x120）
-const LAYOUTS: Record<number, Array<{ x: number; y: number }>> = {
+const LAYOUTS: Record<number, { x: number; y: number }[]> = {
   1: [{ x: 60, y: 90 }], // Ace - 中心大符号
 
   2: [

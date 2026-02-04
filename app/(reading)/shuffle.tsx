@@ -68,14 +68,12 @@ export default function Shuffle() {
             style={({ pressed }) => [
               styles.continueButton,
               pressed && styles.continueButtonPressed,
-            ]}
-          >
+            ]}>
             <LinearGradient
               colors={[colors.accent.gold, colors.accent.goldLight]}
               style={styles.continueButtonGradient}
               start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
+              end={{ x: 1, y: 0 }}>
               <Row align="center" gap={responsive.spacing(10, 14)}>
                 <SparklesIcon size={responsive.width(20, 24)} color={colors.background.primary} />
                 <Text style={styles.continueButtonText}>Reveal Your Destiny</Text>
@@ -106,11 +104,7 @@ export default function Shuffle() {
       {/* Skip Button */}
       <Pressable
         onPress={handleSkip}
-        style={({ pressed }) => [
-          styles.skipButton,
-          pressed && styles.skipButtonPressed,
-        ]}
-      >
+        style={({ pressed }) => [styles.skipButton, pressed && styles.skipButtonPressed]}>
         <Text style={styles.skipButtonText}>Skip Animation</Text>
       </Pressable>
     </ScreenContainer>

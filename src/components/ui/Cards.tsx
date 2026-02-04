@@ -10,15 +10,13 @@ import {
   TouchableOpacity,
   StyleSheet,
   ViewStyle,
-  TextStyle,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg, { Circle, Defs, LinearGradient as SvgLinearGradient, Stop } from 'react-native-svg';
 import { colors } from '@/theme/colors';
-import { spacing } from '@/theme/spacing';
 import { shadows } from '@/theme/shadows';
 import { ChevronRightIcon } from './Icons';
-import { responsive, isTablet } from './Layout';
+import { responsive } from './Layout';
 
 // 主题色定义
 export const CARD_THEMES = {
@@ -274,10 +272,10 @@ export const ListCard: React.FC<ListCardProps> = ({
 };
 
 interface StatCardProps {
-  items: Array<{
+  items: {
     value: string | number;
     label: string;
-  }>;
+  }[];
   style?: ViewStyle;
 }
 

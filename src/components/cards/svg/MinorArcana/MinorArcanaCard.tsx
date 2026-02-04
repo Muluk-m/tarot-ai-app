@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Text as SvgText, Circle } from 'react-native-svg';
-import { SVG_CONFIG, CARD_COLORS, SUIT_GRADIENTS } from '../config';
+import Svg, { Defs, LinearGradient, Stop, Rect, G, Text as SvgText } from 'react-native-svg';
+import { SVG_CONFIG, SUIT_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 import { NumberLayout, CourtFigure, SuitSymbol, getSuitColor, type Suit, type CourtRank } from './shared';
 
@@ -59,7 +59,6 @@ export const MinorArcanaCard: React.FC<MinorArcanaCardProps> = ({
   showNumber = true,
 }) => {
   const suitColor = getSuitColor(suit);
-  const gold = CARD_COLORS.elements.spirit;
   const gradientColors = SUIT_GRADIENTS[suit];
   const number = rankToNumber(rank);
 

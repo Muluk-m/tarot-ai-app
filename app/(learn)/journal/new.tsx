@@ -33,7 +33,12 @@ import {
   EditIcon,
 } from '@/components/ui';
 
-const ENTRY_TYPES: { key: JournalEntryType; title: string; Icon: React.FC<any>; description: string }[] = [
+const ENTRY_TYPES: {
+  key: JournalEntryType;
+  title: string;
+  Icon: React.FC<any>;
+  description: string;
+}[] = [
   {
     key: 'learning',
     title: 'Learning',
@@ -120,8 +125,7 @@ export default function NewJournalEntryScreen() {
     <ScreenContainer>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
+        style={styles.keyboardView}>
         {/* Header */}
         <View style={styles.headerContainer}>
           <Row justify="space-between" align="center" style={styles.header}>
@@ -132,13 +136,8 @@ export default function NewJournalEntryScreen() {
             <Pressable
               onPress={handleSave}
               disabled={!isValid}
-              style={[styles.saveButton, !isValid && styles.saveButtonDisabled]}
-            >
-              <Text
-                style={[styles.saveText, !isValid && styles.saveTextDisabled]}
-              >
-                Save
-              </Text>
+              style={[styles.saveButton, !isValid && styles.saveButtonDisabled]}>
+              <Text style={[styles.saveText, !isValid && styles.saveTextDisabled]}>Save</Text>
             </Pressable>
           </Row>
         </View>
@@ -146,8 +145,7 @@ export default function NewJournalEntryScreen() {
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-        >
+          keyboardShouldPersistTaps="handled">
           {/* Entry Type */}
           <View style={styles.section}>
             <Text style={styles.sectionLabel}>Entry Type</Text>
@@ -160,21 +158,12 @@ export default function NewJournalEntryScreen() {
                   <Pressable
                     key={type.key}
                     onPress={() => setEntryType(type.key)}
-                    style={[
-                      styles.typeCard,
-                      isSelected && styles.typeCardSelected,
-                    ]}
-                  >
+                    style={[styles.typeCard, isSelected && styles.typeCardSelected]}>
                     <TypeIcon
                       size={responsive.width(22, 26)}
                       color={isSelected ? colors.accent.gold : colors.text.tertiary}
                     />
-                    <Text
-                      style={[
-                        styles.typeTitle,
-                        isSelected && styles.typeTitleSelected,
-                      ]}
-                    >
+                    <Text style={[styles.typeTitle, isSelected && styles.typeTitleSelected]}>
                       {type.title}
                     </Text>
                   </Pressable>
@@ -218,11 +207,7 @@ export default function NewJournalEntryScreen() {
                 <Pressable
                   key={m}
                   onPress={() => setMood(mood === m ? undefined : m)}
-                  style={[
-                    styles.moodButton,
-                    mood === m && styles.moodButtonSelected,
-                  ]}
-                >
+                  style={[styles.moodButton, mood === m && styles.moodButtonSelected]}>
                   <Text style={styles.moodEmoji}>{m}</Text>
                 </Pressable>
               ))}
@@ -240,8 +225,7 @@ export default function NewJournalEntryScreen() {
                   <Pressable
                     key={tag}
                     onPress={() => handleRemoveTag(tag)}
-                    style={styles.selectedTag}
-                  >
+                    style={styles.selectedTag}>
                     <Text style={styles.selectedTagText}>#{tag}</Text>
                     <XIcon size={12} color={colors.accent.purple} />
                   </Pressable>
@@ -261,10 +245,7 @@ export default function NewJournalEntryScreen() {
                 returnKeyType="done"
               />
               {customTag.trim().length > 0 && (
-                <Pressable
-                  onPress={() => handleAddTag(customTag)}
-                  style={styles.addTagButton}
-                >
+                <Pressable onPress={() => handleAddTag(customTag)} style={styles.addTagButton}>
                   <Text style={styles.addTagText}>Add</Text>
                 </Pressable>
               )}
@@ -273,11 +254,7 @@ export default function NewJournalEntryScreen() {
             {/* Suggested Tags */}
             <View style={styles.suggestedTags}>
               {SUGGESTED_TAGS.filter((t) => !tags.includes(t)).map((tag) => (
-                <Pressable
-                  key={tag}
-                  onPress={() => handleAddTag(tag)}
-                  style={styles.suggestedTag}
-                >
+                <Pressable key={tag} onPress={() => handleAddTag(tag)} style={styles.suggestedTag}>
                   <Text style={styles.suggestedTagText}>#{tag}</Text>
                 </Pressable>
               ))}

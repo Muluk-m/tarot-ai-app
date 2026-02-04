@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import Svg, { Path, Circle, Rect, G, Line, Polyline } from 'react-native-svg';
+import Svg, { Path, Circle, Rect, Line, Polyline } from 'react-native-svg';
 
 export interface IconProps {
   size?: number;
@@ -12,11 +12,13 @@ export interface IconProps {
   strokeWidth?: number;
 }
 
-const defaultProps: Required<IconProps> = {
+// Default props for icons
+const _defaultProps: Required<IconProps> = {
   size: 24,
   color: '#D4AF37',
   strokeWidth: 2,
 };
+void _defaultProps; // Suppress unused variable warning - kept for documentation
 
 // 书本图标 - 学习
 export const BookIcon: React.FC<IconProps> = ({ size = 24, color = '#D4AF37', strokeWidth = 2 }) => (
@@ -91,12 +93,15 @@ export const ChevronDownIcon: React.FC<IconProps> = ({ size = 24, color = '#D4AF
   </Svg>
 );
 
-// 关闭图标
+// Close/X icon
 export const CloseIcon: React.FC<IconProps> = ({ size = 24, color = '#D4AF37', strokeWidth = 2 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Path d="M18 6L6 18M6 6l12 12" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
   </Svg>
 );
+
+// Alias for CloseIcon
+export const XIcon = CloseIcon;
 
 // 勾选图标
 export const CheckIcon: React.FC<IconProps> = ({ size = 24, color = '#D4AF37', strokeWidth = 2 }) => (

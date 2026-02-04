@@ -4,14 +4,13 @@
  */
 
 // Configuration
-export * from './config';
-export * from './types';
+export { SUIT_COLORS, CARD_DIMENSIONS } from './config';
+export type { SVGSize, SVGDimensions } from './types';
 
 // Card Frame
 export { CardFrame } from './CardFrame';
 
 // Major Arcana (22 cards)
-export * from './MajorArcana';
 export { MAJOR_ARCANA_COMPONENTS, getMajorArcanaComponent } from './MajorArcana';
 
 // Minor Arcana (56 cards)

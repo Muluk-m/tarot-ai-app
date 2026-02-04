@@ -8,7 +8,7 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { colors } from '@/theme/colors';
 import { useLearningStore } from '@/stores/learningStore';
-import { ALL_COURSES, getCoursesByStage, type Course } from '@/data/courses';
+import { getCoursesByStage, type Course } from '@/data/courses';
 import type { Stage } from '@/types/learning.types';
 
 // UI Components
@@ -16,13 +16,9 @@ import {
   ScreenContainer,
   SafeScrollView,
   Row,
-  Grid,
   Spacer,
   responsive,
-  isTablet,
-  isLargeTablet,
   SectionHeader,
-  Badge,
   SeedlingIcon,
   BookIcon,
   StarIcon,
@@ -34,7 +30,7 @@ import {
   ClockIcon,
   LayersIcon,
 } from '@/components/ui';
-import { IconButton, Chip } from '@/components/ui/Buttons';
+import { IconButton } from '@/components/ui/Buttons';
 
 // Stage configuration
 const STAGES: { key: Stage; title: string; Icon: React.FC<any>; color: string }[] = [
@@ -52,9 +48,7 @@ export default function CoursesScreen() {
 
   const getProgress = (course: Course): number => {
     if (course.lessons.length === 0) return 0;
-    const completed = course.lessons.filter((l) =>
-      completedLessons.includes(l.id)
-    ).length;
+    const completed = course.lessons.filter((l) => completedLessons.includes(l.id)).length;
     return Math.round((completed / course.lessons.length) * 100);
   };
 
@@ -85,34 +79,22 @@ export default function CoursesScreen() {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.tabsContainer}
-        >
+          contentContainerStyle={styles.tabsContainer}>
           {STAGES.map((stage) => {
             const isSelected = selectedStage === stage.key;
             const stageCourses = getCoursesByStage(stage.key);
-            const completedCount = stageCourses.filter((c) =>
-              isCourseCompleted(c.id)
-            ).length;
+            const completedCount = stageCourses.filter((c) => isCourseCompleted(c.id)).length;
             const StageIcon = stage.Icon;
 
             return (
               <Pressable
                 key={stage.key}
                 onPress={() => setSelectedStage(stage.key)}
-                style={[
-                  styles.tab,
-                  isSelected && { borderColor: stage.color },
-                ]}
-              >
+                style={[styles.tab, isSelected && { borderColor: stage.color }]}>
                 <View style={[styles.tabIconContainer, { backgroundColor: stage.color + '20' }]}>
                   <StageIcon size={responsive.width(22, 26)} color={stage.color} />
                 </View>
-                <Text
-                  style={[
-                    styles.tabTitle,
-                    isSelected && { color: colors.text.primary },
-                  ]}
-                >
+                <Text style={[styles.tabTitle, isSelected && { color: colors.text.primary }]}>
                   {stage.title}
                 </Text>
                 <Text style={[styles.tabProgress, { color: stage.color }]}>
@@ -153,16 +135,14 @@ export default function CoursesScreen() {
                   styles.courseCard,
                   !unlocked && styles.lockedCard,
                   pressed && unlocked && styles.cardPressed,
-                ]}
-              >
+                ]}>
                 <View style={styles.courseContent}>
                   {/* Course Number */}
                   <View
                     style={[
                       styles.courseNumber,
                       completed && { backgroundColor: stageInfo.color },
-                    ]}
-                  >
+                    ]}>
                     {completed ? (
                       <CheckIcon size={18} color={colors.text.primary} />
                     ) : (
@@ -170,8 +150,7 @@ export default function CoursesScreen() {
                         style={[
                           styles.courseNumberText,
                           completed && { color: colors.text.primary },
-                        ]}
-                      >
+                        ]}>
                         {course.order}
                       </Text>
                     )}
@@ -181,41 +160,27 @@ export default function CoursesScreen() {
                   <View style={styles.courseInfo}>
                     <Row align="center" gap={8}>
                       <Text
-                        style={[
-                          styles.courseTitle,
-                          !unlocked && styles.lockedText,
-                        ]}
-                        numberOfLines={1}
-                      >
+                        style={[styles.courseTitle, !unlocked && styles.lockedText]}
+                        numberOfLines={1}>
                         {course.title}
                       </Text>
-                      {!unlocked && (
-                        <LockIcon size={14} color={colors.text.quaternary} />
-                      )}
+                      {!unlocked && <LockIcon size={14} color={colors.text.quaternary} />}
                     </Row>
 
                     <Text
-                      style={[
-                        styles.courseDescription,
-                        !unlocked && styles.lockedText,
-                      ]}
-                      numberOfLines={2}
-                    >
+                      style={[styles.courseDescription, !unlocked && styles.lockedText]}
+                      numberOfLines={2}>
                       {course.description}
                     </Text>
 
                     <Row gap={responsive.spacing(12, 16)} style={styles.courseMeta}>
                       <Row align="center" gap={4}>
                         <LayersIcon size={14} color={colors.text.quaternary} />
-                        <Text style={styles.courseMetaText}>
-                          {course.lessons.length} lessons
-                        </Text>
+                        <Text style={styles.courseMetaText}>{course.lessons.length} lessons</Text>
                       </Row>
                       <Row align="center" gap={4}>
                         <ClockIcon size={14} color={colors.text.quaternary} />
-                        <Text style={styles.courseMetaText}>
-                          ~{course.estimatedTime} min
-                        </Text>
+                        <Text style={styles.courseMetaText}>~{course.estimatedTime} min</Text>
                       </Row>
                     </Row>
 

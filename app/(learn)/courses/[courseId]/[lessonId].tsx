@@ -9,7 +9,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { colors } from '@/theme/colors';
 import { useLearningStore } from '@/stores/learningStore';
-import { getCourseById, type Lesson } from '@/data/courses';
+import { getCourseById } from '@/data/courses';
 import { TAROT_DECK } from '@/data/tarot-deck';
 import { TarotCardSVG } from '@/components/cards/svg';
 
@@ -168,11 +168,7 @@ export default function LessonScreen() {
           <View style={styles.errorContainer}>
             <BookIcon size={48} color={colors.text.quaternary} />
             <Text style={styles.errorText}>Lesson not found</Text>
-            <Button
-              title="Go Back"
-              onPress={() => router.back()}
-              variant="outline"
-            />
+            <Button title="Go Back" onPress={() => router.back()} variant="outline" />
           </View>
         </SafeScrollView>
       </ScreenContainer>
@@ -241,8 +237,7 @@ export default function LessonScreen() {
       <View style={styles.bottomBar}>
         <LinearGradient
           colors={['transparent', colors.background.primary]}
-          style={styles.bottomGradient}
-        >
+          style={styles.bottomGradient}>
           <Row align="center" style={styles.navigationButtons}>
             {previousLesson && (
               <Pressable
@@ -252,8 +247,7 @@ export default function LessonScreen() {
                     params: { courseId, lessonId: previousLesson.id },
                   });
                 }}
-                style={styles.navButton}
-              >
+                style={styles.navButton}>
                 <ChevronLeftIcon size={18} color={colors.text.tertiary} />
                 <Text style={styles.navButtonText}>Previous</Text>
               </Pressable>
@@ -264,15 +258,10 @@ export default function LessonScreen() {
             {!completed ? (
               <Pressable
                 onPress={handleComplete}
-                style={({ pressed }) => [
-                  styles.completeButton,
-                  pressed && styles.buttonPressed,
-                ]}
-              >
+                style={({ pressed }) => [styles.completeButton, pressed && styles.buttonPressed]}>
                 <LinearGradient
                   colors={[colors.accent.gold, '#E5C158']}
-                  style={styles.completeGradient}
-                >
+                  style={styles.completeGradient}>
                   <CheckIcon size={18} color={colors.background.primary} />
                   <Text style={styles.completeButtonText}>Mark Complete</Text>
                 </LinearGradient>
@@ -280,15 +269,8 @@ export default function LessonScreen() {
             ) : (
               <Pressable
                 onPress={handleNext}
-                style={({ pressed }) => [
-                  styles.nextButton,
-                  pressed && styles.buttonPressed,
-                ]}
-              >
-                <LinearGradient
-                  colors={['#10B981', '#34D399']}
-                  style={styles.completeGradient}
-                >
+                style={({ pressed }) => [styles.nextButton, pressed && styles.buttonPressed]}>
+                <LinearGradient colors={['#10B981', '#34D399']} style={styles.completeGradient}>
                   <Text style={styles.completeButtonText}>
                     {nextLesson ? 'Next Lesson' : 'Back to Course'}
                   </Text>

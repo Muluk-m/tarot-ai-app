@@ -36,13 +36,8 @@ export default function QuizScreen() {
   const router = useRouter();
   const { quizId } = useLocalSearchParams<{ quizId: string }>();
 
-  const {
-    startQuiz,
-    answerQuestion,
-    submitQuiz,
-    currentAnswers,
-    clearCurrentQuiz,
-  } = useQuizStore();
+  const { startQuiz, answerQuestion, submitQuiz, currentAnswers, clearCurrentQuiz } =
+    useQuizStore();
   const { completeCourse } = useLearningStore();
 
   const quiz = getQuizById(quizId);
@@ -73,11 +68,7 @@ export default function QuizScreen() {
           <View style={styles.errorContainer}>
             <BookIcon size={48} color={colors.text.quaternary} />
             <Text style={styles.errorText}>Quiz not found</Text>
-            <Button
-              title="Go Back"
-              onPress={() => router.back()}
-              variant="outline"
-            />
+            <Button title="Go Back" onPress={() => router.back()} variant="outline" />
           </View>
         </SafeScrollView>
       </ScreenContainer>
@@ -202,15 +193,8 @@ export default function QuizScreen() {
           {/* Start Button */}
           <Pressable
             onPress={handleStartQuiz}
-            style={({ pressed }) => [
-              styles.startButton,
-              pressed && styles.buttonPressed,
-            ]}
-          >
-            <LinearGradient
-              colors={[colors.accent.gold, '#E5C158']}
-              style={styles.startGradient}
-            >
+            style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed]}>
+            <LinearGradient colors={[colors.accent.gold, '#E5C158']} style={styles.startGradient}>
               <Text style={styles.startButtonText}>Start Quiz</Text>
             </LinearGradient>
           </Pressable>
@@ -232,8 +216,7 @@ export default function QuizScreen() {
               style={[
                 styles.resultIcon,
                 { backgroundColor: results.passed ? '#10B981' : colors.error },
-              ]}
-            >
+              ]}>
               {results.passed ? (
                 <TrophyIcon size={responsive.width(40, 52)} color={colors.text.primary} />
               ) : (
@@ -246,11 +229,7 @@ export default function QuizScreen() {
             </Text>
 
             <Text
-              style={[
-                styles.resultScore,
-                { color: results.passed ? '#10B981' : colors.error },
-              ]}
-            >
+              style={[styles.resultScore, { color: results.passed ? '#10B981' : colors.error }]}>
               {results.score}%
             </Text>
 
@@ -284,27 +263,17 @@ export default function QuizScreen() {
                   setShowExplanation(false);
                   setResults(null);
                 }}
-                style={styles.retryButton}
-              >
+                style={styles.retryButton}>
                 <Text style={styles.retryButtonText}>Try Again</Text>
               </Pressable>
             )}
 
             <Pressable
               onPress={() => router.back()}
-              style={({ pressed }) => [
-                styles.doneButton,
-                pressed && styles.buttonPressed,
-              ]}
-            >
+              style={({ pressed }) => [styles.doneButton, pressed && styles.buttonPressed]}>
               <LinearGradient
-                colors={
-                  results.passed
-                    ? ['#10B981', '#34D399']
-                    : [colors.accent.gold, '#E5C158']
-                }
-                style={styles.doneGradient}
-              >
+                colors={results.passed ? ['#10B981', '#34D399'] : [colors.accent.gold, '#E5C158']}
+                style={styles.doneGradient}>
                 <Text style={styles.doneButtonText}>
                   {results.passed ? 'Continue Learning' : 'Go Back'}
                 </Text>
@@ -345,8 +314,7 @@ export default function QuizScreen() {
 
       <ScrollView
         contentContainerStyle={styles.questionScrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {/* Question Card */}
         <View style={styles.questionCard}>
           <View style={styles.questionTypeTag}>
@@ -354,8 +322,8 @@ export default function QuizScreen() {
               {currentQuestion.type === 'true-false'
                 ? 'True/False'
                 : currentQuestion.type === 'scenario'
-                ? 'Scenario'
-                : 'Multiple Choice'}
+                  ? 'Scenario'
+                  : 'Multiple Choice'}
             </Text>
           </View>
 
@@ -385,14 +353,12 @@ export default function QuizScreen() {
                       showCorrect && styles.optionCorrect,
                       showWrong && styles.optionWrong,
                       pressed && !showExplanation && styles.optionPressed,
-                    ]}
-                  >
+                    ]}>
                     <Text
                       style={[
                         styles.optionText,
                         (isSelected || showCorrect) && styles.optionTextSelected,
-                      ]}
-                    >
+                      ]}>
                       {option === 'true' ? 'True' : 'False'}
                     </Text>
                     {showCorrect && <CheckIcon size={20} color="#10B981" />}
@@ -419,14 +385,12 @@ export default function QuizScreen() {
                     showCorrect && styles.optionCorrect,
                     showWrong && styles.optionWrong,
                     pressed && !showExplanation && styles.optionPressed,
-                  ]}
-                >
+                  ]}>
                   <Text
                     style={[
                       styles.optionText,
                       (isSelected || showCorrect) && styles.optionTextSelected,
-                    ]}
-                  >
+                    ]}>
                     {option.text}
                   </Text>
                   {showCorrect && <CheckIcon size={20} color="#10B981" />}
@@ -445,9 +409,7 @@ export default function QuizScreen() {
               <Text style={styles.explanationTitle}>
                 {isCorrectAnswer(selectedAnswer!) ? 'Correct!' : 'Incorrect'}
               </Text>
-              <Text style={styles.explanationText}>
-                {currentQuestion.explanation}
-              </Text>
+              <Text style={styles.explanationText}>{currentQuestion.explanation}</Text>
             </View>
           </>
         )}
@@ -459,8 +421,7 @@ export default function QuizScreen() {
       <View style={styles.bottomAction}>
         <LinearGradient
           colors={['transparent', colors.background.primary]}
-          style={styles.bottomGradient}
-        >
+          style={styles.bottomGradient}>
           {!showExplanation ? (
             <Pressable
               onPress={handleConfirmAnswer}
@@ -469,22 +430,19 @@ export default function QuizScreen() {
                 styles.actionButton,
                 !selectedAnswer && styles.actionButtonDisabled,
                 pressed && selectedAnswer && styles.buttonPressed,
-              ]}
-            >
+              ]}>
               <LinearGradient
                 colors={
                   selectedAnswer
                     ? [colors.accent.gold, '#E5C158']
                     : [colors.background.tertiary, colors.background.tertiary]
                 }
-                style={styles.actionGradient}
-              >
+                style={styles.actionGradient}>
                 <Text
                   style={[
                     styles.actionButtonText,
                     !selectedAnswer && styles.actionButtonTextDisabled,
-                  ]}
-                >
+                  ]}>
                   Confirm Answer
                 </Text>
               </LinearGradient>
@@ -492,15 +450,8 @@ export default function QuizScreen() {
           ) : (
             <Pressable
               onPress={handleNextQuestion}
-              style={({ pressed }) => [
-                styles.actionButton,
-                pressed && styles.buttonPressed,
-              ]}
-            >
-              <LinearGradient
-                colors={['#10B981', '#34D399']}
-                style={styles.actionGradient}
-              >
+              style={({ pressed }) => [styles.actionButton, pressed && styles.buttonPressed]}>
+              <LinearGradient colors={['#10B981', '#34D399']} style={styles.actionGradient}>
                 <Text style={styles.actionButtonText}>
                   {currentQuestionIndex < quiz.questions.length - 1
                     ? 'Next Question'

@@ -6,7 +6,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import type { LearningProgress, Stage } from '@/types/learning.types';
+import type { LearningProgress } from '@/types/learning.types';
 import { getLevelInfo } from '@/data/achievements';
 
 interface LearningState extends LearningProgress {
@@ -52,7 +52,7 @@ export const useLearningStore = create<LearningState>()(
 
       // Complete a lesson
       completeLesson: (lessonId: string, courseId: string) => {
-        const { completedLessons, currentCourseId } = get();
+        const { completedLessons } = get();
 
         // Don't add duplicate
         if (completedLessons.includes(lessonId)) return;
@@ -82,7 +82,7 @@ export const useLearningStore = create<LearningState>()(
 
       // Master a card (fully learned)
       masterCard: (cardId: string) => {
-        const { masteredCards, learningCards, currentLevel } = get();
+        const { masteredCards, learningCards } = get();
 
         // Already mastered
         if (masteredCards.includes(cardId)) return;
@@ -201,7 +201,6 @@ export const useLearningStore = create<LearningState>()(
       },
 
       getLevelTitle: () => {
-        const level = get().currentLevel;
         const levelInfo = getLevelInfo(get().masteredCards.length);
         return levelInfo.title;
       },

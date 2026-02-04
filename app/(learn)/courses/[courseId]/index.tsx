@@ -19,16 +19,11 @@ import {
   Row,
   Spacer,
   responsive,
-  isTablet,
   SectionHeader,
-  Badge,
   StatCard,
   ChevronLeftIcon,
   ChevronRightIcon,
   CheckIcon,
-  ClockIcon,
-  LayersIcon,
-  TargetIcon,
   TrophyIcon,
   BookIcon,
   PlayIcon,
@@ -53,7 +48,7 @@ export default function CourseDetailScreen() {
   const router = useRouter();
   const { courseId } = useLocalSearchParams<{ courseId: string }>();
 
-  const { completedLessons, isLessonCompleted, isCourseCompleted } = useLearningStore();
+  const { isLessonCompleted } = useLearningStore();
   const { hasPassedQuiz, getBestScore } = useQuizStore();
 
   const course = getCourseById(courseId);
@@ -65,11 +60,7 @@ export default function CourseDetailScreen() {
         <SafeScrollView maxWidth="md">
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>Course not found</Text>
-            <Button
-              title="Go Back"
-              onPress={() => router.back()}
-              variant="outline"
-            />
+            <Button title="Go Back" onPress={() => router.back()} variant="outline" />
           </View>
         </SafeScrollView>
       </ScreenContainer>
@@ -78,13 +69,9 @@ export default function CourseDetailScreen() {
 
   const stageColor = STAGE_COLORS[course.stage] || colors.accent.gold;
   const stageName = STAGE_NAMES[course.stage] || course.stage;
-  const completedCount = course.lessons.filter((l) =>
-    isLessonCompleted(l.id)
-  ).length;
-  const progress = course.lessons.length > 0
-    ? Math.round((completedCount / course.lessons.length) * 100)
-    : 0;
-  const courseCompleted = isCourseCompleted(course.id);
+  const completedCount = course.lessons.filter((l) => isLessonCompleted(l.id)).length;
+  const progress =
+    course.lessons.length > 0 ? Math.round((completedCount / course.lessons.length) * 100) : 0;
   const quizPassed = quiz ? hasPassedQuiz(quiz.id) : false;
   const quizBestScore = quiz ? getBestScore(quiz.id) : null;
 
@@ -105,9 +92,7 @@ export default function CourseDetailScreen() {
         <View style={styles.courseHeader}>
           {/* Stage Tag */}
           <View style={[styles.stageTag, { backgroundColor: stageColor + '20' }]}>
-            <Text style={[styles.stageTagText, { color: stageColor }]}>
-              {stageName}
-            </Text>
+            <Text style={[styles.stageTagText, { color: stageColor }]}>{stageName}</Text>
           </View>
 
           {/* Course Icon */}
@@ -162,8 +147,8 @@ export default function CourseDetailScreen() {
           <View style={styles.lessonList}>
             {course.lessons.map((lesson, index) => {
               const completed = isLessonCompleted(lesson.id);
-              const isFirstIncomplete = !completed &&
-                course.lessons.slice(0, index).every((l) => isLessonCompleted(l.id));
+              const isFirstIncomplete =
+                !completed && course.lessons.slice(0, index).every((l) => isLessonCompleted(l.id));
 
               return (
                 <Pressable
@@ -179,15 +164,13 @@ export default function CourseDetailScreen() {
                     completed && styles.lessonCompleted,
                     isFirstIncomplete && styles.lessonCurrent,
                     pressed && styles.lessonPressed,
-                  ]}
-                >
+                  ]}>
                   <View
                     style={[
                       styles.lessonNumber,
                       completed && { backgroundColor: stageColor },
                       isFirstIncomplete && { backgroundColor: colors.accent.gold },
-                    ]}
-                  >
+                    ]}>
                     {completed ? (
                       <CheckIcon size={16} color={colors.text.primary} />
                     ) : (
@@ -195,8 +178,7 @@ export default function CourseDetailScreen() {
                         style={[
                           styles.lessonNumberText,
                           (completed || isFirstIncomplete) && { color: colors.background.primary },
-                        ]}
-                      >
+                        ]}>
                         {lesson.order}
                       </Text>
                     )}
@@ -204,12 +186,8 @@ export default function CourseDetailScreen() {
 
                   <View style={styles.lessonInfo}>
                     <Text style={styles.lessonTitle}>{lesson.title}</Text>
-                    {isFirstIncomplete && (
-                      <Text style={styles.continueLabel}>Continue</Text>
-                    )}
-                    {completed && (
-                      <Text style={styles.completedLabel}>Completed</Text>
-                    )}
+                    {isFirstIncomplete && <Text style={styles.continueLabel}>Continue</Text>}
+                    {completed && <Text style={styles.completedLabel}>Completed</Text>}
                   </View>
 
                   <View style={styles.lessonArrow}>
@@ -243,14 +221,8 @@ export default function CourseDetailScreen() {
                 styles.quizCard,
                 quizPassed && styles.quizPassed,
                 pressed && styles.quizPressed,
-              ]}
-            >
-              <View
-                style={[
-                  styles.quizIcon,
-                  quizPassed && { backgroundColor: '#10B981' },
-                ]}
-              >
+              ]}>
+              <View style={[styles.quizIcon, quizPassed && { backgroundColor: '#10B981' }]}>
                 {quizPassed ? (
                   <CheckIcon size={22} color={colors.text.primary} />
                 ) : (
@@ -268,8 +240,7 @@ export default function CourseDetailScreen() {
                     style={[
                       styles.quizScore,
                       { color: quizPassed ? '#10B981' : colors.text.tertiary },
-                    ]}
-                  >
+                    ]}>
                     Best: {quizBestScore}%
                   </Text>
                 )}

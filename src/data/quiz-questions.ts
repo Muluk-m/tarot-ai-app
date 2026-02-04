@@ -3,7 +3,7 @@
  * Comprehensive questions for testing tarot knowledge
  */
 
-import type { Quiz, QuizQuestion, QuizOption } from '@/types/learning.types';
+import type { Quiz, QuizQuestion } from '@/types/learning.types';
 
 // ============================================================================
 // COURSE 1 QUIZ: Tarot Basics
