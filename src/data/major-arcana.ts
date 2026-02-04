@@ -12,7 +12,7 @@ export const MAJOR_ARCANA: TarotCard[] = [
     arcana: 'major',
     uprightKeywords: ['new beginnings', 'innocence', 'spontaneity', 'free spirit', 'adventure'],
     uprightMeaning:
-      'The Fool represents new beginnings, having faith in the future, being inexperienced, not knowing what to expect, having beginner\'s luck, improvisation and believing in the universe.',
+      "The Fool represents new beginnings, having faith in the future, being inexperienced, not knowing what to expect, having beginner's luck, improvisation and believing in the universe.",
     iconKey: 'fool',
     colorScheme: '#F4D03F',
     symbolEmoji: '🌟',
@@ -38,7 +38,13 @@ export const MAJOR_ARCANA: TarotCard[] = [
     id: 2,
     name: 'The High Priestess',
     arcana: 'major',
-    uprightKeywords: ['intuition', 'sacred knowledge', 'divine feminine', 'subconscious mind', 'mystery'],
+    uprightKeywords: [
+      'intuition',
+      'sacred knowledge',
+      'divine feminine',
+      'subconscious mind',
+      'mystery',
+    ],
     uprightMeaning:
       'The High Priestess signifies spiritual enlightenment, inner illumination, divine knowledge and wisdom. She sits between the light and darkness, acting as a mediator between realms.',
     iconKey: 'high-priestess',
@@ -54,7 +60,7 @@ export const MAJOR_ARCANA: TarotCard[] = [
     arcana: 'major',
     uprightKeywords: ['femininity', 'beauty', 'nature', 'nurturing', 'abundance', 'creativity'],
     uprightMeaning:
-      'The Empress is a card of creation, abundance, and nurturing energy. She represents fertility, beauty, and the natural world. Connect with your senses and embrace life\'s pleasures.',
+      "The Empress is a card of creation, abundance, and nurturing energy. She represents fertility, beauty, and the natural world. Connect with your senses and embrace life's pleasures.",
     iconKey: 'empress',
     colorScheme: '#10B981',
     symbolEmoji: '👑',
@@ -80,7 +86,14 @@ export const MAJOR_ARCANA: TarotCard[] = [
     id: 5,
     name: 'The Hierophant',
     arcana: 'major',
-    uprightKeywords: ['tradition', 'conformity', 'morality', 'ethics', 'spiritual wisdom', 'institutions'],
+    uprightKeywords: [
+      'tradition',
+      'conformity',
+      'morality',
+      'ethics',
+      'spiritual wisdom',
+      'institutions',
+    ],
     uprightMeaning:
       'The Hierophant is a keeper of traditional wisdom and spiritual guidance. He represents established beliefs, conventional values, and seeking counsel from trusted mentors.',
     iconKey: 'hierophant',
@@ -152,7 +165,7 @@ export const MAJOR_ARCANA: TarotCard[] = [
     arcana: 'major',
     uprightKeywords: ['good luck', 'karma', 'life cycles', 'destiny', 'turning point', 'change'],
     uprightMeaning:
-      'The Wheel of Fortune represents the ever-changing cycles of life. Good luck, karma, and destiny are at play. Embrace change and trust in the universe\'s timing.',
+      "The Wheel of Fortune represents the ever-changing cycles of life. Good luck, karma, and destiny are at play. Embrace change and trust in the universe's timing.",
     iconKey: 'wheel-fortune',
     colorScheme: '#8B5CF6',
     symbolEmoji: '☸️',
@@ -222,7 +235,7 @@ export const MAJOR_ARCANA: TarotCard[] = [
     arcana: 'major',
     uprightKeywords: ['shadow self', 'attachment', 'addiction', 'restriction', 'materialism'],
     uprightMeaning:
-      'The Devil represents bondage, materialism, and unhealthy attachments. Examine your shadow self and the chains you\'ve allowed to bind you. Freedom comes from awareness.',
+      "The Devil represents bondage, materialism, and unhealthy attachments. Examine your shadow self and the chains you've allowed to bind you. Freedom comes from awareness.",
     iconKey: 'devil',
     colorScheme: '#7C3AED',
     symbolEmoji: '😈',
@@ -234,7 +247,14 @@ export const MAJOR_ARCANA: TarotCard[] = [
     id: 16,
     name: 'The Tower',
     arcana: 'major',
-    uprightKeywords: ['sudden change', 'upheaval', 'chaos', 'revelation', 'awakening', 'disruption'],
+    uprightKeywords: [
+      'sudden change',
+      'upheaval',
+      'chaos',
+      'revelation',
+      'awakening',
+      'disruption',
+    ],
     uprightMeaning:
       'The Tower represents sudden upheaval, chaos, and revelation. Structures built on false foundations must fall. Though disruptive, this clears the way for truth and rebuilding.',
     iconKey: 'tower',
@@ -278,7 +298,7 @@ export const MAJOR_ARCANA: TarotCard[] = [
     arcana: 'major',
     uprightKeywords: ['positivity', 'fun', 'warmth', 'success', 'vitality', 'joy'],
     uprightMeaning:
-      'The Sun represents joy, success, and vitality. This is a card of optimism and positive energy. Bask in the warmth of life\'s blessings and share your light with others.',
+      "The Sun represents joy, success, and vitality. This is a card of optimism and positive energy. Bask in the warmth of life's blessings and share your light with others.",
     iconKey: 'sun',
     colorScheme: '#F59E0B',
     symbolEmoji: '☀️',
@@ -290,7 +310,14 @@ export const MAJOR_ARCANA: TarotCard[] = [
     id: 20,
     name: 'Judgement',
     arcana: 'major',
-    uprightKeywords: ['judgement', 'rebirth', 'inner calling', 'absolution', 'reflection', 'awakening'],
+    uprightKeywords: [
+      'judgement',
+      'rebirth',
+      'inner calling',
+      'absolution',
+      'reflection',
+      'awakening',
+    ],
     uprightMeaning:
       'Judgement represents reflection, reckoning, and awakening. This is a time of self-evaluation and transformation. Answer your inner calling and step into a new phase of existence.',
     iconKey: 'judgement',
@@ -304,7 +331,14 @@ export const MAJOR_ARCANA: TarotCard[] = [
     id: 21,
     name: 'The World',
     arcana: 'major',
-    uprightKeywords: ['completion', 'accomplishment', 'travel', 'fulfillment', 'unity', 'wholeness'],
+    uprightKeywords: [
+      'completion',
+      'accomplishment',
+      'travel',
+      'fulfillment',
+      'unity',
+      'wholeness',
+    ],
     uprightMeaning:
       'The World represents completion, accomplishment, and fulfillment. You have achieved your goals and reached a significant milestone. Celebrate your journey and embrace wholeness.',
     iconKey: 'world',

@@ -72,8 +72,7 @@ export const TarotCardDisplay: React.FC<TarotCardDisplayProps> = ({
             shadowOpacity: 0.5,
             shadowRadius: 15,
           },
-        ]}
-      >
+        ]}>
         <TarotCardSVG
           cardId={card.id}
           width={dimensions.width}
@@ -94,8 +93,7 @@ export const TarotCardDisplay: React.FC<TarotCardDisplayProps> = ({
               },
             ]}
             numberOfLines={2}
-            ellipsizeMode="tail"
-          >
+            ellipsizeMode="tail">
             {card.name}
           </Text>
         </View>

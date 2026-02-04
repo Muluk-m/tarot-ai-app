@@ -133,9 +133,7 @@ export const useAchievementStore = create<AchievementState>()(
 
       // Get all locked achievements (visible ones)
       getLockedAchievements: () => {
-        return ALL_ACHIEVEMENTS.filter(
-          (a) => !get().isUnlocked(a.id) && !a.hidden
-        );
+        return ALL_ACHIEVEMENTS.filter((a) => !get().isUnlocked(a.id) && !a.hidden);
       },
 
       // Get total number unlocked

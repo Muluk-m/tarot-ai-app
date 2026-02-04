@@ -25,8 +25,27 @@ export const CardBack: React.FC<CardBackProps> = ({ width = 120, height = 180 })
       <Rect width="120" height="180" fill="url(#cardBackGradient)" />
 
       {/* Gold border */}
-      <Rect x="5" y="5" width="110" height="170" stroke="#D4AF37" strokeWidth="2" fill="none" rx="8" />
-      <Rect x="10" y="10" width="100" height="160" stroke="#D4AF37" strokeWidth="1" fill="none" rx="6" opacity="0.6" />
+      <Rect
+        x="5"
+        y="5"
+        width="110"
+        height="170"
+        stroke="#D4AF37"
+        strokeWidth="2"
+        fill="none"
+        rx="8"
+      />
+      <Rect
+        x="10"
+        y="10"
+        width="100"
+        height="160"
+        stroke="#D4AF37"
+        strokeWidth="1"
+        fill="none"
+        rx="6"
+        opacity="0.6"
+      />
 
       {/* Center mystical symbol - moon and stars */}
       <G opacity="0.9">
@@ -67,7 +86,13 @@ export const CardBack: React.FC<CardBackProps> = ({ width = 120, height = 180 })
       </G>
 
       {/* Bottom decorative line */}
-      <Path d="M30 155 Q60 150, 90 155" stroke="#D4AF37" strokeWidth="1" fill="none" opacity="0.5" />
+      <Path
+        d="M30 155 Q60 150, 90 155"
+        stroke="#D4AF37"
+        strokeWidth="1"
+        fill="none"
+        opacity="0.5"
+      />
     </Svg>
   );
 };

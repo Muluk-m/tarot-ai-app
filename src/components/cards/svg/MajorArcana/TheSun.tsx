@@ -4,7 +4,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -26,7 +36,17 @@ export const TheSun: React.FC<CardSVGProps> = ({
       </Defs>
 
       <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#sun-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 太阳 */}
       <G transform="translate(60, 40)">
@@ -46,10 +66,10 @@ export const TheSun: React.FC<CardSVGProps> = ({
         {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
           <Line
             key={`straight-${i}`}
-            x1={24 * Math.cos(angle * Math.PI / 180)}
-            y1={24 * Math.sin(angle * Math.PI / 180)}
-            x2={35 * Math.cos(angle * Math.PI / 180)}
-            y2={35 * Math.sin(angle * Math.PI / 180)}
+            x1={24 * Math.cos((angle * Math.PI) / 180)}
+            y1={24 * Math.sin((angle * Math.PI) / 180)}
+            x2={35 * Math.cos((angle * Math.PI) / 180)}
+            y2={35 * Math.sin((angle * Math.PI) / 180)}
             stroke={gold}
             strokeWidth={2}
           />
@@ -57,7 +77,7 @@ export const TheSun: React.FC<CardSVGProps> = ({
 
         {/* 波浪光芒（8条，交替） */}
         {[22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5].map((angle, i) => {
-          const rad = angle * Math.PI / 180;
+          const rad = (angle * Math.PI) / 180;
           const x1 = 24 * Math.cos(rad);
           const y1 = 24 * Math.sin(rad);
           const x2 = 32 * Math.cos(rad);
@@ -113,14 +133,29 @@ export const TheSun: React.FC<CardSVGProps> = ({
         {/* 红旗 */}
         <G transform="translate(12, -20)">
           <Line x1="0" y1="0" x2="0" y2="15" stroke={stroke.silver} strokeWidth={1.5} />
-          <Path d="M0 0 L12 3 L0 6" stroke={CARD_COLORS.elements.fire} strokeWidth={1} fill="none" />
+          <Path
+            d="M0 0 L12 3 L0 6"
+            stroke={CARD_COLORS.elements.fire}
+            strokeWidth={1}
+            fill="none"
+          />
         </G>
 
         {/* 白马 */}
         {/* 马头 */}
-        <Path d="M-25 -5 Q-30 -15, -20 -18 Q-10 -15, -15 -5" stroke={stroke.white} strokeWidth={1.5} fill="none" />
+        <Path
+          d="M-25 -5 Q-30 -15, -20 -18 Q-10 -15, -15 -5"
+          stroke={stroke.white}
+          strokeWidth={1.5}
+          fill="none"
+        />
         {/* 马身 */}
-        <Path d="M-15 -3 Q5 -8, 20 -3 Q25 5, 20 15 L-20 15 Q-25 5, -15 -3" stroke={stroke.white} strokeWidth={1.5} fill="none" />
+        <Path
+          d="M-15 -3 Q5 -8, 20 -3 Q25 5, 20 15 L-20 15 Q-25 5, -15 -3"
+          stroke={stroke.white}
+          strokeWidth={1.5}
+          fill="none"
+        />
         {/* 马腿 */}
         <Line x1="-15" y1="15" x2="-18" y2="32" stroke={stroke.white} strokeWidth={1.5} />
         <Line x1="-5" y1="15" x2="-2" y2="32" stroke={stroke.white} strokeWidth={1.5} />
@@ -133,7 +168,9 @@ export const TheSun: React.FC<CardSVGProps> = ({
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>XIX</SvgText>
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>
+            XIX
+          </SvgText>
         </G>
       )}
     </Svg>

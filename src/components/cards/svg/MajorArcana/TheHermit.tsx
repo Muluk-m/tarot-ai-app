@@ -4,7 +4,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -25,13 +35,35 @@ export const TheHermit: React.FC<CardSVGProps> = ({
         </LinearGradient>
       </Defs>
 
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#hermit-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#hermit-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 隐士 */}
       <G transform="translate(55, 40)">
         {/* 头部（带兜帽） */}
-        <Path d="M-10 0 Q-12 -15, 0 -18 Q12 -15, 10 0" stroke={stroke.white} strokeWidth={1.5} fill="none" />
+        <Path
+          d="M-10 0 Q-12 -15, 0 -18 Q12 -15, 10 0"
+          stroke={stroke.white}
+          strokeWidth={1.5}
+          fill="none"
+        />
         <Circle cx="0" cy="0" r="7" fill="none" stroke={stroke.white} strokeWidth={1.5} />
 
         {/* 胡子 */}
@@ -43,7 +75,16 @@ export const TheHermit: React.FC<CardSVGProps> = ({
         {/* 灯笼 */}
         <G transform="translate(30, 0)">
           {/* 灯框 */}
-          <Rect x="-8" y="-10" width="16" height="20" fill="none" stroke={gold} strokeWidth={1.5} rx={2} />
+          <Rect
+            x="-8"
+            y="-10"
+            width="16"
+            height="20"
+            fill="none"
+            stroke={gold}
+            strokeWidth={1.5}
+            rx={2}
+          />
           {/* 六芒星（内部光源） */}
           <G transform="translate(0, 0)">
             <Path d="M0 -5 L4 3 L-4 3 Z" stroke={gold} strokeWidth={1} fill="none" />
@@ -55,7 +96,12 @@ export const TheHermit: React.FC<CardSVGProps> = ({
         </G>
 
         {/* 长袍 */}
-        <Path d="M-10 10 Q-15 40, -20 90 L20 90 Q15 40, 10 10" stroke={stroke.white} strokeWidth={1.5} fill="none" />
+        <Path
+          d="M-10 10 Q-15 40, -20 90 L20 90 Q15 40, 10 10"
+          stroke={stroke.white}
+          strokeWidth={1.5}
+          fill="none"
+        />
 
         {/* 左手持杖 */}
         <Path d="M-5 15 L-18 25" stroke={stroke.white} strokeWidth={1.5} fill="none" />
@@ -76,7 +122,9 @@ export const TheHermit: React.FC<CardSVGProps> = ({
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText x="60" y="165" textAnchor="middle" fontSize="12" fontWeight="700" fill={gold}>IX</SvgText>
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="12" fontWeight="700" fill={gold}>
+            IX
+          </SvgText>
         </G>
       )}
     </Svg>

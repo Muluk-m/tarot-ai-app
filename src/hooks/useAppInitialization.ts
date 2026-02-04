@@ -25,10 +25,7 @@ export function useAppInitialization() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const {
-    setUserId,
-    updateSettings,
-  } = useUserStore();
+  const { setUserId, updateSettings } = useUserStore();
 
   const { setReadingHistory } = useReadingStore();
   const { initializeDeck } = useCardStore();

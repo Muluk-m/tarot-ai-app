@@ -4,13 +4,7 @@
  */
 
 import React from 'react';
-import {
-  View,
-  ScrollView,
-  Dimensions,
-  StyleSheet,
-  ViewStyle,
-} from 'react-native';
+import { View, ScrollView, Dimensions, StyleSheet, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '@/theme/colors';
@@ -25,10 +19,10 @@ export const isSmallPhone = SCREEN_WIDTH < 375;
 
 // 响应式断点
 export const BREAKPOINTS = {
-  sm: 375,   // Small phones
-  md: 414,   // Regular phones
-  lg: 768,   // iPad mini / small tablets
-  xl: 1024,  // iPad / large tablets
+  sm: 375, // Small phones
+  md: 414, // Regular phones
+  lg: 768, // iPad mini / small tablets
+  xl: 1024, // iPad / large tablets
   xxl: 1366, // iPad Pro
 } as const;
 
@@ -141,8 +135,7 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
           width: '100%',
         },
         style,
-      ]}
-    >
+      ]}>
       {children}
     </View>
   );
@@ -184,8 +177,7 @@ export const SafeScrollView: React.FC<SafeScrollViewProps> = ({
         contentContainerStyle,
       ]}
       showsVerticalScrollIndicator={showsVerticalScrollIndicator}
-      bounces={bounces}
-    >
+      bounces={bounces}>
       <View
         style={[
           {
@@ -193,8 +185,7 @@ export const SafeScrollView: React.FC<SafeScrollViewProps> = ({
             alignSelf: 'center',
             width: '100%',
           },
-        ]}
-      >
+        ]}>
         {children}
       </View>
     </ScrollView>
@@ -217,9 +208,10 @@ export const Grid: React.FC<GridProps> = ({
   gap = responsive.spacing(12, 16),
   style,
 }) => {
-  const columnCount = typeof columns === 'number'
-    ? columns
-    : responsive.columns(columns.phone, columns.tablet, columns.largeTablet);
+  const columnCount =
+    typeof columns === 'number'
+      ? columns
+      : responsive.columns(columns.phone, columns.tablet, columns.largeTablet);
 
   return (
     <View style={[styles.grid, { gap }, style]}>
@@ -227,8 +219,7 @@ export const Grid: React.FC<GridProps> = ({
         <View
           style={{
             width: `${(100 - (columnCount - 1) * (gap / SCREEN_WIDTH) * 100) / columnCount}%`,
-          }}
-        >
+          }}>
           {child}
         </View>
       ))}
@@ -242,7 +233,13 @@ interface RowProps {
   style?: ViewStyle;
   wrap?: boolean;
   align?: 'flex-start' | 'center' | 'flex-end' | 'stretch';
-  justify?: 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
+  justify?:
+    | 'flex-start'
+    | 'center'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
 }
 
 /**
@@ -267,8 +264,7 @@ export const Row: React.FC<RowProps> = ({
           justifyContent: justify,
         },
         style,
-      ]}
-    >
+      ]}>
       {children}
     </View>
   );
@@ -284,15 +280,8 @@ interface SectionProps {
 /**
  * 内容区块组件
  */
-export const Section: React.FC<SectionProps> = ({
-  children,
-  style,
-}) => {
-  return (
-    <View style={[styles.section, style]}>
-      {children}
-    </View>
-  );
+export const Section: React.FC<SectionProps> = ({ children, style }) => {
+  return <View style={[styles.section, style]}>{children}</View>;
 };
 
 interface SpacerProps {
@@ -303,10 +292,7 @@ interface SpacerProps {
 /**
  * 间距组件
  */
-export const Spacer: React.FC<SpacerProps> = ({
-  size = 16,
-  horizontal = false,
-}) => {
+export const Spacer: React.FC<SpacerProps> = ({ size = 16, horizontal = false }) => {
   return (
     <View
       style={{

@@ -5,7 +5,21 @@
 export type Arcana = 'major' | 'minor';
 export type Suit = 'wands' | 'cups' | 'swords' | 'pentacles';
 export type Element = 'fire' | 'water' | 'air' | 'earth';
-export type CardRank = 'ace' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | 'page' | 'knight' | 'queen' | 'king';
+export type CardRank =
+  | 'ace'
+  | '2'
+  | '3'
+  | '4'
+  | '5'
+  | '6'
+  | '7'
+  | '8'
+  | '9'
+  | '10'
+  | 'page'
+  | 'knight'
+  | 'queen'
+  | 'king';
 
 export interface TarotCard {
   id: number; // 0-77 unique ID

@@ -54,10 +54,7 @@ export const CardBack: React.FC<CardBackProps> = ({ size = 120 }) => {
       {/* Central mystical symbol (moon and stars) */}
       <G opacity="0.9">
         {/* Crescent moon */}
-        <Path
-          d="M 55 70 Q 65 70, 65 60 Q 65 50, 55 50 Q 60 60, 55 70"
-          fill="#D4AF37"
-        />
+        <Path d="M 55 70 Q 65 70, 65 60 Q 65 50, 55 50 Q 60 60, 55 70" fill="#D4AF37" />
 
         {/* Stars around */}
         {[
@@ -84,18 +81,10 @@ export const CardBack: React.FC<CardBackProps> = ({ size = 120 }) => {
       </G>
 
       {/* Top decorative element */}
-      <Path
-        d="M 50 20 L 45 25 L 50 23 L 55 25 Z"
-        fill="#D4AF37"
-        opacity="0.7"
-      />
+      <Path d="M 50 20 L 45 25 L 50 23 L 55 25 Z" fill="#D4AF37" opacity="0.7" />
 
       {/* Bottom decorative element */}
-      <Path
-        d="M 50 120 L 45 115 L 50 117 L 55 115 Z"
-        fill="#D4AF37"
-        opacity="0.7"
-      />
+      <Path d="M 50 120 L 45 115 L 50 117 L 55 115 Z" fill="#D4AF37" opacity="0.7" />
 
       {/* Text: TAROT */}
       <Path

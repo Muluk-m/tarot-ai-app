@@ -422,7 +422,8 @@ Choose one goal and identify all the resources (skills, tools, people) you alrea
 export const COURSE_2: Course = {
   id: 'course-2',
   title: 'Major Arcana Deep Dive',
-  description: "The Fool's Journey through all 22 Major Arcana cards, learning their meanings, symbolism, and spiritual lessons.",
+  description:
+    "The Fool's Journey through all 22 Major Arcana cards, learning their meanings, symbolism, and spiritual lessons.",
   stage: 'beginner',
   order: 2,
   lessons: course2Lessons,

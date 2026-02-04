@@ -8,9 +8,30 @@ import React from 'react';
 import Svg, { Defs, LinearGradient, Stop, Rect, G, Text as SvgText } from 'react-native-svg';
 import { SVG_CONFIG, SUIT_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
-import { NumberLayout, CourtFigure, SuitSymbol, getSuitColor, type Suit, type CourtRank } from './shared';
+import {
+  NumberLayout,
+  CourtFigure,
+  SuitSymbol,
+  getSuitColor,
+  type Suit,
+  type CourtRank,
+} from './shared';
 
-export type MinorArcanaRank = 'ace' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | 'page' | 'knight' | 'queen' | 'king';
+export type MinorArcanaRank =
+  | 'ace'
+  | '2'
+  | '3'
+  | '4'
+  | '5'
+  | '6'
+  | '7'
+  | '8'
+  | '9'
+  | '10'
+  | 'page'
+  | 'knight'
+  | 'queen'
+  | 'king';
 
 interface MinorArcanaCardProps extends CardSVGProps {
   suit: Suit;
@@ -72,10 +93,27 @@ export const MinorArcanaCard: React.FC<MinorArcanaCardProps> = ({
       </Defs>
 
       {/* 背景 */}
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill={`url(#${suit}-${rank}-bg)`} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill={`url(#${suit}-${rank}-bg)`}
+      />
 
       {/* 边框 */}
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={suitColor} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={suitColor}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 内容 */}
       {number !== null ? (
@@ -91,7 +129,13 @@ export const MinorArcanaCard: React.FC<MinorArcanaCardProps> = ({
         <G>
           {/* 左上角 */}
           <G transform="translate(12, 20)">
-            <SvgText x="0" y="0" fontSize="10" fontWeight="700" fill={suitColor} textAnchor="middle">
+            <SvgText
+              x="0"
+              y="0"
+              fontSize="10"
+              fontWeight="700"
+              fill={suitColor}
+              textAnchor="middle">
               {getRankDisplay(rank)}
             </SvgText>
             <G transform="translate(0, 10)">
@@ -101,7 +145,13 @@ export const MinorArcanaCard: React.FC<MinorArcanaCardProps> = ({
 
           {/* 右下角（倒置） */}
           <G transform="translate(108, 160) rotate(180)">
-            <SvgText x="0" y="0" fontSize="10" fontWeight="700" fill={suitColor} textAnchor="middle">
+            <SvgText
+              x="0"
+              y="0"
+              fontSize="10"
+              fontWeight="700"
+              fill={suitColor}
+              textAnchor="middle">
               {getRankDisplay(rank)}
             </SvgText>
             <G transform="translate(0, 10)">

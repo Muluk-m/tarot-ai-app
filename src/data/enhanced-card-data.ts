@@ -48,8 +48,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     lifeApplications: {
       career:
         'Time for a fresh start. Consider a new job, career change, or entrepreneurial venture. Trust your instincts and be willing to take calculated risks.',
-      love:
-        'New beginnings in romance. Single: Be open to unexpected connections. Relationship: Inject spontaneity and adventure. Approach with innocence and openness.',
+      love: 'New beginnings in romance. Single: Be open to unexpected connections. Relationship: Inject spontaneity and adventure. Approach with innocence and openness.',
       health:
         'Try new wellness practices. Listen to your body and be willing to experiment with different approaches to health. Trust your intuition about what feels right.',
       finance:
@@ -61,7 +60,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     actionSuggestions: [
       'Take a calculated risk on something new',
       'Let go of fear and trust the process',
-      'Embrace beginner\'s mind in a situation',
+      "Embrace beginner's mind in a situation",
       'Say yes to an unexpected opportunity',
       'Travel or explore new places',
       'Start a project without overthinking',
@@ -119,8 +118,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     lifeApplications: {
       career:
         'You have all the skills needed for success. Time to act decisively. Use your talents and resources strategically. Excellent time for presentations, pitches, or launching projects.',
-      love:
-        'Take initiative in romance. Use your charm and communication skills. Create the relationship you desire through clear intention and authentic action.',
+      love: 'Take initiative in romance. Use your charm and communication skills. Create the relationship you desire through clear intention and authentic action.',
       health:
         'You have power over your health outcomes. Use all available tools: diet, exercise, mindfulness, medical help. Mind-body connection is especially strong now.',
       finance:
@@ -155,7 +153,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '2': {
     // The High Priestess
-    reversedKeywords: ['secrets', 'disconnected from intuition', 'repressed feelings', 'hidden agendas', 'surface knowledge'],
+    reversedKeywords: [
+      'secrets',
+      'disconnected from intuition',
+      'repressed feelings',
+      'hidden agendas',
+      'surface knowledge',
+    ],
     reversedMeaning:
       'Reversed, The High Priestess suggests you are ignoring your intuition or keeping secrets that burden you. Surface-level thinking prevents deeper understanding. Trust your inner voice more.',
 
@@ -181,11 +185,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Trust your gut feelings about workplace situations. Hidden information may come to light. Good time for research and study rather than action.',
+      career:
+        'Trust your gut feelings about workplace situations. Hidden information may come to light. Good time for research and study rather than action.',
       love: 'Look beneath the surface in relationships. Trust your intuition about partners. Mysteries may be revealed. Honor your need for emotional depth.',
-      health: 'Listen to your body\'s subtle signals. Consider holistic or intuitive healing approaches. Explore the emotional roots of physical symptoms.',
-      finance: 'Hidden financial information may surface. Trust instincts about investments. Not a time for impulsive spending. Research thoroughly.',
-      spiritual: 'Deep intuitive development. Meditation and dream work are powerful now. Access to hidden knowledge. Honor the mysteries.',
+      health:
+        "Listen to your body's subtle signals. Consider holistic or intuitive healing approaches. Explore the emotional roots of physical symptoms.",
+      finance:
+        'Hidden financial information may surface. Trust instincts about investments. Not a time for impulsive spending. Research thoroughly.',
+      spiritual:
+        'Deep intuitive development. Meditation and dream work are powerful now. Access to hidden knowledge. Honor the mysteries.',
     },
 
     actionSuggestions: [
@@ -240,11 +248,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Creative projects flourish. Nurturing leadership style succeeds. Good time for business growth. Beauty-related ventures favored.',
+      career:
+        'Creative projects flourish. Nurturing leadership style succeeds. Good time for business growth. Beauty-related ventures favored.',
       love: 'Deep nurturing love. Fertility and pregnancy possible. Relationships bloom. Sensual pleasure and romance heightened.',
-      health: 'Focus on nurturing your body. Excellent time for spa treatments, good food, rest. Fertility and women\'s health supported.',
-      finance: 'Abundance flows naturally. Investments grow. Good time for luxury purchases if affordable. Trust in natural prosperity.',
-      spiritual: 'Connect with nature spirits and earth energy. Honor the divine feminine. Practice gratitude for abundance.',
+      health:
+        "Focus on nurturing your body. Excellent time for spa treatments, good food, rest. Fertility and women's health supported.",
+      finance:
+        'Abundance flows naturally. Investments grow. Good time for luxury purchases if affordable. Trust in natural prosperity.',
+      spiritual:
+        'Connect with nature spirits and earth energy. Honor the divine feminine. Practice gratitude for abundance.',
     },
 
     actionSuggestions: [
@@ -299,11 +311,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Take charge and lead. Structure and organization bring success. Authority figures may help you. Good time for business building.',
+      career:
+        'Take charge and lead. Structure and organization bring success. Authority figures may help you. Good time for business building.',
       love: 'Provide stability in relationships. Balance protectiveness with warmth. Father figures may be significant. Commitment and structure.',
-      health: 'Disciplined approach to health works. Establish routines. Structure your fitness and diet. Take control of health decisions.',
-      finance: 'Financial discipline pays off. Build solid foundations. Long-term planning succeeds. Authority in financial matters.',
-      spiritual: 'Master your domain through discipline. Structure your spiritual practice. Balance power with wisdom.',
+      health:
+        'Disciplined approach to health works. Establish routines. Structure your fitness and diet. Take control of health decisions.',
+      finance:
+        'Financial discipline pays off. Build solid foundations. Long-term planning succeeds. Authority in financial matters.',
+      spiritual:
+        'Master your domain through discipline. Structure your spiritual practice. Balance power with wisdom.',
     },
 
     actionSuggestions: [
@@ -332,7 +348,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '5': {
     // The Hierophant
-    reversedKeywords: ['rebellion', 'subversiveness', 'new approaches', 'breaking tradition', 'personal beliefs'],
+    reversedKeywords: [
+      'rebellion',
+      'subversiveness',
+      'new approaches',
+      'breaking tradition',
+      'personal beliefs',
+    ],
     reversedMeaning:
       'Reversed, The Hierophant suggests questioning authority or traditional beliefs. You may need to find your own path rather than following established rules.',
 
@@ -345,11 +367,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Papal Blessing Hand - Benediction and teaching',
         'Red and White Robes - Passion and purity',
       ],
-      colors: [
-        'Red - Spiritual passion',
-        'White - Purity of teaching',
-        'Gold - Divine authority',
-      ],
+      colors: ['Red - Spiritual passion', 'White - Purity of teaching', 'Gold - Divine authority'],
       patterns: [
         'Formal seated position - Traditional authority',
         'Students at feet - Teacher-student relationship',
@@ -358,11 +376,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Follow established procedures. Seek mentorship. Traditional paths lead to success. Education and credentials valued.',
+      career:
+        'Follow established procedures. Seek mentorship. Traditional paths lead to success. Education and credentials valued.',
       love: 'Traditional relationships or marriage. Commitment ceremonies. Seek relationship counseling if needed. Honor traditions.',
-      health: 'Follow conventional medical advice. Established treatments work. Seek expert guidance. Traditional approaches effective.',
-      finance: 'Conservative financial strategies. Seek professional advice. Traditional investments. Follow established financial wisdom.',
-      spiritual: 'Explore established spiritual traditions. Find a teacher or guide. Study sacred texts. Honor religious or spiritual heritage.',
+      health:
+        'Follow conventional medical advice. Established treatments work. Seek expert guidance. Traditional approaches effective.',
+      finance:
+        'Conservative financial strategies. Seek professional advice. Traditional investments. Follow established financial wisdom.',
+      spiritual:
+        'Explore established spiritual traditions. Find a teacher or guide. Study sacred texts. Honor religious or spiritual heritage.',
     },
 
     actionSuggestions: [
@@ -417,11 +439,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Choose work aligned with your values. Partnerships succeed when based on shared vision. Important career decisions ahead.',
+      career:
+        'Choose work aligned with your values. Partnerships succeed when based on shared vision. Important career decisions ahead.',
       love: 'Deep romantic connection. Soulmate energy. Important relationship decisions. Choose from the heart. Harmony in partnerships.',
-      health: 'Mind-body harmony essential. Choices about lifestyle have lasting impact. Partner support in health matters.',
-      finance: 'Financial decisions should align with values. Joint finances require harmony. Ethical investing.',
-      spiritual: 'Union of opposites within self. Sacred partnership. Aligning actions with higher values. Divine love.',
+      health:
+        'Mind-body harmony essential. Choices about lifestyle have lasting impact. Partner support in health matters.',
+      finance:
+        'Financial decisions should align with values. Joint finances require harmony. Ethical investing.',
+      spiritual:
+        'Union of opposites within self. Sacred partnership. Aligning actions with higher values. Divine love.',
     },
 
     actionSuggestions: [
@@ -476,11 +502,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Victory through determination. Overcome obstacles. Travel for work. Take control of career direction. Ambition succeeds.',
+      career:
+        'Victory through determination. Overcome obstacles. Travel for work. Take control of career direction. Ambition succeeds.',
       love: 'Take charge in relationships. Overcome relationship obstacles. Travel together. Balance emotion with direction.',
-      health: 'Willpower drives health improvements. Overcome health challenges. Physical movement important. Discipline wins.',
-      finance: 'Financial goals achieved through determination. Overcome financial obstacles. Control spending through will.',
-      spiritual: 'Master your inner conflicts. Will and intention create reality. Spiritual discipline and direction.',
+      health:
+        'Willpower drives health improvements. Overcome health challenges. Physical movement important. Discipline wins.',
+      finance:
+        'Financial goals achieved through determination. Overcome financial obstacles. Control spending through will.',
+      spiritual:
+        'Master your inner conflicts. Will and intention create reality. Spiritual discipline and direction.',
     },
 
     actionSuggestions: [
@@ -535,11 +565,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Lead with compassion. Handle difficult colleagues with grace. Persistence over force. Patient approach succeeds.',
+      career:
+        'Lead with compassion. Handle difficult colleagues with grace. Persistence over force. Patient approach succeeds.',
       love: 'Gentle approach to relationship challenges. Tame your own strong emotions. Patient love endures. Compassion in conflict.',
-      health: 'Inner strength supports healing. Mind over matter. Gentle persistence in health goals. Courage in facing challenges.',
-      finance: 'Patient approach to finances. Courage in financial decisions. Inner strength over external circumstances.',
-      spiritual: 'Master your primal nature with love. Courage on spiritual path. Infinite inner strength available.',
+      health:
+        'Inner strength supports healing. Mind over matter. Gentle persistence in health goals. Courage in facing challenges.',
+      finance:
+        'Patient approach to finances. Courage in financial decisions. Inner strength over external circumstances.',
+      spiritual:
+        'Master your primal nature with love. Courage on spiritual path. Infinite inner strength available.',
     },
 
     actionSuggestions: [
@@ -594,11 +628,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Time for reflection before action. Seek wise counsel. Solo work preferred. Mentorship role possible.',
+      career:
+        'Time for reflection before action. Seek wise counsel. Solo work preferred. Mentorship role possible.',
       love: 'Need for space in relationship. Self-reflection about love. Solitude before partnership. Wisdom in relating.',
-      health: 'Quiet healing. Retreat and rest. Reflect on health patterns. Spiritual approaches to wellness.',
-      finance: 'Careful financial reflection. Seek expert guidance. Conservative approach. Wisdom over speed.',
-      spiritual: 'Deep spiritual seeking. Meditation and solitude. Inner teacher awakens. Wisdom gained through reflection.',
+      health:
+        'Quiet healing. Retreat and rest. Reflect on health patterns. Spiritual approaches to wellness.',
+      finance:
+        'Careful financial reflection. Seek expert guidance. Conservative approach. Wisdom over speed.',
+      spiritual:
+        'Deep spiritual seeking. Meditation and solitude. Inner teacher awakens. Wisdom gained through reflection.',
     },
 
     actionSuggestions: [
@@ -627,7 +665,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '10': {
     // Wheel of Fortune
-    reversedKeywords: ['bad luck', 'resistance to change', 'breaking cycles', 'setbacks', 'external forces'],
+    reversedKeywords: [
+      'bad luck',
+      'resistance to change',
+      'breaking cycles',
+      'setbacks',
+      'external forces',
+    ],
     reversedMeaning:
       'Reversed, the Wheel of Fortune indicates a downturn or resistance to necessary change. You may be experiencing bad luck or fighting against fate. Accept what cannot be controlled.',
 
@@ -648,16 +692,20 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       patterns: [
         'Turning wheel - Constant change',
         'Creatures in clouds - Stability amid change',
-        'Figures rising/falling - Fortune\'s cycle',
+        "Figures rising/falling - Fortune's cycle",
       ],
     },
 
     lifeApplications: {
-      career: 'Change coming to career. Lucky opportunities. Go with the flow. New cycles beginning. Destiny at work.',
+      career:
+        'Change coming to career. Lucky opportunities. Go with the flow. New cycles beginning. Destiny at work.',
       love: 'Relationship entering new phase. Fated meetings possible. Cycles in love. Accept relationship changes.',
-      health: 'Health changes, often positive. Cycles in wellness. Turning point in health journey. Karma and health.',
-      finance: 'Financial changes ahead. Luck in money matters. Cycles of prosperity. Accept financial flows.',
-      spiritual: 'Karmic cycles turning. Fate and destiny active. Accept life\'s rhythms. Trust divine timing.',
+      health:
+        'Health changes, often positive. Cycles in wellness. Turning point in health journey. Karma and health.',
+      finance:
+        'Financial changes ahead. Luck in money matters. Cycles of prosperity. Accept financial flows.',
+      spiritual:
+        "Karmic cycles turning. Fate and destiny active. Accept life's rhythms. Trust divine timing.",
     },
 
     actionSuggestions: [
@@ -712,11 +760,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Fair treatment expected. Legal matters resolved. Contracts and agreements favored. Just outcomes in disputes.',
+      career:
+        'Fair treatment expected. Legal matters resolved. Contracts and agreements favored. Just outcomes in disputes.',
       love: 'Balance in relationships. Fair treatment of partners. Relationship decisions have consequences. Honest communication.',
-      health: 'Cause and effect in health. Lifestyle choices have consequences. Balance in health approach. Fair medical treatment.',
-      finance: 'Fair financial dealings. Legal matters resolved. Contracts honored. Karma in finances.',
-      spiritual: 'Karmic justice at work. Truth and integrity essential. Balance inner masculine and feminine. Cosmic fairness.',
+      health:
+        'Cause and effect in health. Lifestyle choices have consequences. Balance in health approach. Fair medical treatment.',
+      finance:
+        'Fair financial dealings. Legal matters resolved. Contracts honored. Karma in finances.',
+      spiritual:
+        'Karmic justice at work. Truth and integrity essential. Balance inner masculine and feminine. Cosmic fairness.',
     },
 
     actionSuggestions: [
@@ -745,7 +797,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '12': {
     // The Hanged Man
-    reversedKeywords: ['stalling', 'resistance', 'indecision', 'needless sacrifice', 'fear of sacrifice'],
+    reversedKeywords: [
+      'stalling',
+      'resistance',
+      'indecision',
+      'needless sacrifice',
+      'fear of sacrifice',
+    ],
     reversedMeaning:
       'Reversed, The Hanged Man suggests resistance to necessary surrender or stalling. You may be making needless sacrifices or avoiding required ones. Release resistance.',
 
@@ -771,11 +829,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Pause career action. Gain new perspective. Sacrifice may be needed. Wait before deciding. See from different angle.',
+      career:
+        'Pause career action. Gain new perspective. Sacrifice may be needed. Wait before deciding. See from different angle.',
       love: 'Relationship pause beneficial. See partner differently. Sacrifice for love. Patience in matters of heart.',
-      health: 'Rest and healing time. See health from new angle. Surrender control. Patience with healing process.',
-      finance: 'Financial sacrifice may be needed. Wait before investing. New perspective on money. Let go of attachment.',
-      spiritual: 'Surrender to divine will. New spiritual perspective. Sacrifice ego. Patience on spiritual path.',
+      health:
+        'Rest and healing time. See health from new angle. Surrender control. Patience with healing process.',
+      finance:
+        'Financial sacrifice may be needed. Wait before investing. New perspective on money. Let go of attachment.',
+      spiritual:
+        'Surrender to divine will. New spiritual perspective. Sacrifice ego. Patience on spiritual path.',
     },
 
     actionSuggestions: [
@@ -804,7 +866,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '13': {
     // Death
-    reversedKeywords: ['resistance to change', 'stagnation', 'decay', 'fear of change', 'holding on'],
+    reversedKeywords: [
+      'resistance to change',
+      'stagnation',
+      'decay',
+      'fear of change',
+      'holding on',
+    ],
     reversedMeaning:
       'Reversed, Death indicates resistance to necessary endings or stagnation. You may be holding onto what needs to die. Let go to allow rebirth.',
 
@@ -830,11 +898,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Career transformation. End of one chapter. New beginnings require letting go. Major professional change.',
+      career:
+        'Career transformation. End of one chapter. New beginnings require letting go. Major professional change.',
       love: 'Relationship transformation or ending. Let go of old patterns. Rebirth in love. Accept necessary endings.',
-      health: 'Old health habits die. Transformation in wellness. End unhealthy patterns. Rebirth of vitality.',
-      finance: 'Financial transformation. End of financial era. Let go of money attachments. New financial beginning.',
-      spiritual: 'Ego death and rebirth. Major spiritual transformation. Let go of old beliefs. Embrace new consciousness.',
+      health:
+        'Old health habits die. Transformation in wellness. End unhealthy patterns. Rebirth of vitality.',
+      finance:
+        'Financial transformation. End of financial era. Let go of money attachments. New financial beginning.',
+      spiritual:
+        'Ego death and rebirth. Major spiritual transformation. Let go of old beliefs. Embrace new consciousness.',
     },
 
     actionSuggestions: [
@@ -876,11 +948,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Triangle on Chest - Spirit over matter',
         'Path to Mountains - Spiritual journey',
       ],
-      colors: [
-        'Blue/Red Wings - Balanced action',
-        'White Robe - Purity',
-        'Gold - Divine blessing',
-      ],
+      colors: ['Blue/Red Wings - Balanced action', 'White Robe - Purity', 'Gold - Divine blessing'],
       patterns: [
         'Water flowing between cups - Continuous balance',
         'Feet in both elements - Balance of realms',
@@ -889,11 +957,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Balance work demands. Patience in career growth. Blend skills harmoniously. Moderate approach succeeds.',
+      career:
+        'Balance work demands. Patience in career growth. Blend skills harmoniously. Moderate approach succeeds.',
       love: 'Balance in relationship. Patience with partner. Harmonious connection. Moderate expectations.',
-      health: 'Balance all aspects of health. Moderation in diet and exercise. Integrate mind and body.',
-      finance: 'Financial balance and moderation. Patient investing. Mix of savings and spending. Harmonious money flow.',
-      spiritual: 'Balance spiritual and material. Patience on the path. Integrate opposites. Divine alignment.',
+      health:
+        'Balance all aspects of health. Moderation in diet and exercise. Integrate mind and body.',
+      finance:
+        'Financial balance and moderation. Patient investing. Mix of savings and spending. Harmonious money flow.',
+      spiritual:
+        'Balance spiritual and material. Patience on the path. Integrate opposites. Divine alignment.',
     },
 
     actionSuggestions: [
@@ -922,7 +994,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '15': {
     // The Devil
-    reversedKeywords: ['releasing bondage', 'breaking free', 'facing shadow', 'reclaiming power', 'detachment'],
+    reversedKeywords: [
+      'releasing bondage',
+      'breaking free',
+      'facing shadow',
+      'reclaiming power',
+      'detachment',
+    ],
     reversedMeaning:
       'Reversed, The Devil indicates breaking free from bondage or facing your shadow. You are reclaiming power over addictions or toxic patterns. Liberation is possible.',
 
@@ -948,11 +1026,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Watch for power games. Materialism may trap you. Are golden handcuffs holding you? Face career shadow.',
+      career:
+        'Watch for power games. Materialism may trap you. Are golden handcuffs holding you? Face career shadow.',
       love: 'Toxic relationship patterns. Codependency issues. Sexual obsession. Face relationship shadow.',
-      health: 'Addiction awareness. Unhealthy habits. Face what controls you. Shadow work for healing.',
-      finance: 'Materialism and greed. Money controls you. Face financial shadow. Release money obsession.',
-      spiritual: 'Shadow work essential. Face your demons. Release what binds you. Spiritual materialism.',
+      health:
+        'Addiction awareness. Unhealthy habits. Face what controls you. Shadow work for healing.',
+      finance:
+        'Materialism and greed. Money controls you. Face financial shadow. Release money obsession.',
+      spiritual:
+        'Shadow work essential. Face your demons. Release what binds you. Spiritual materialism.',
     },
 
     actionSuggestions: [
@@ -981,7 +1063,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '16': {
     // The Tower
-    reversedKeywords: ['avoiding disaster', 'delayed destruction', 'fear of change', 'resisting upheaval', 'personal transformation'],
+    reversedKeywords: [
+      'avoiding disaster',
+      'delayed destruction',
+      'fear of change',
+      'resisting upheaval',
+      'personal transformation',
+    ],
     reversedMeaning:
       'Reversed, The Tower may indicate avoiding necessary destruction or delaying inevitable change. You may fear upheaval. Sometimes the collapse must happen.',
 
@@ -1007,11 +1095,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Sudden career upheaval. Job loss possible. Destruction of professional identity. Rebuild on truth.',
+      career:
+        'Sudden career upheaval. Job loss possible. Destruction of professional identity. Rebuild on truth.',
       love: 'Relationship shakeup. Sudden breakup possible. Truth revealed. Rebuild authentic connection.',
-      health: 'Health crisis possible. Wake-up call about health. Dramatic health changes. Crisis as catalyst.',
-      finance: 'Financial upheaval. Sudden losses possible. Rebuild from ground up. Crisis reveals truth.',
-      spiritual: 'Ego death. Spiritual crisis and breakthrough. Old beliefs destroyed. Awakening through chaos.',
+      health:
+        'Health crisis possible. Wake-up call about health. Dramatic health changes. Crisis as catalyst.',
+      finance:
+        'Financial upheaval. Sudden losses possible. Rebuild from ground up. Crisis reveals truth.',
+      spiritual:
+        'Ego death. Spiritual crisis and breakthrough. Old beliefs destroyed. Awakening through chaos.',
     },
 
     actionSuggestions: [
@@ -1067,11 +1159,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Career hope and inspiration. Follow your star. Healing after work difficulties. Authentic self-expression.',
+      career:
+        'Career hope and inspiration. Follow your star. Healing after work difficulties. Authentic self-expression.',
       love: 'Renewed hope in love. Healing after heartbreak. Authentic connection. Inspiration in relationship.',
-      health: 'Healing and recovery. Hope for health. Natural remedies. Mind-body-spirit connection.',
-      finance: 'Financial hope. Recovery after difficulty. Inspired abundance. Give and receive freely.',
-      spiritual: 'Spiritual hope and inspiration. Healing on all levels. Connect with cosmic guidance. Faith renewed.',
+      health:
+        'Healing and recovery. Hope for health. Natural remedies. Mind-body-spirit connection.',
+      finance:
+        'Financial hope. Recovery after difficulty. Inspired abundance. Give and receive freely.',
+      spiritual:
+        'Spiritual hope and inspiration. Healing on all levels. Connect with cosmic guidance. Faith renewed.',
     },
 
     actionSuggestions: [
@@ -1100,7 +1196,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '18': {
     // The Moon
-    reversedKeywords: ['release of fear', 'clarity emerging', 'truth revealed', 'overcoming anxiety', 'working through illusion'],
+    reversedKeywords: [
+      'release of fear',
+      'clarity emerging',
+      'truth revealed',
+      'overcoming anxiety',
+      'working through illusion',
+    ],
     reversedMeaning:
       'Reversed, The Moon indicates fears releasing or illusions clearing. Truth emerges from confusion. Anxiety decreases as clarity comes.',
 
@@ -1126,10 +1228,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Career confusion or deception. Trust intuition over facts. Hidden information. Navigate uncertainty.',
+      career:
+        'Career confusion or deception. Trust intuition over facts. Hidden information. Navigate uncertainty.',
       love: 'Relationship illusions. Hidden feelings. Trust intuition about partner. Work through fears.',
-      health: 'Psychosomatic symptoms. Emotional roots of illness. Trust body wisdom. Work with dreams.',
-      finance: 'Financial deception possible. Hidden information. Trust instincts. Navigate uncertainty.',
+      health:
+        'Psychosomatic symptoms. Emotional roots of illness. Trust body wisdom. Work with dreams.',
+      finance:
+        'Financial deception possible. Hidden information. Trust instincts. Navigate uncertainty.',
       spiritual: 'Deep unconscious work. Dream wisdom. Face inner fears. Trust intuition on path.',
     },
 
@@ -1159,7 +1264,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '19': {
     // The Sun
-    reversedKeywords: ['temporary setback', 'inner child wounded', 'lack of enthusiasm', 'overly optimistic', 'delayed success'],
+    reversedKeywords: [
+      'temporary setback',
+      'inner child wounded',
+      'lack of enthusiasm',
+      'overly optimistic',
+      'delayed success',
+    ],
     reversedMeaning:
       'Reversed, The Sun indicates temporary setbacks in happiness or wounded inner child. You may be overly optimistic or struggling to find joy. The light still shines.',
 
@@ -1172,11 +1283,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Red Banner - Vitality and life force',
         'Wall - Boundary between known and unknown',
       ],
-      colors: [
-        'Yellow - Joy and optimism',
-        'Orange - Vitality and enthusiasm',
-        'Red - Life force',
-      ],
+      colors: ['Yellow - Joy and optimism', 'Orange - Vitality and enthusiasm', 'Red - Life force'],
       patterns: [
         'Open arms - Embracing life',
         'Sun face - Conscious awareness',
@@ -1185,11 +1292,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Career success and recognition. Joyful work. Creative expression. Vitality in professional life.',
+      career:
+        'Career success and recognition. Joyful work. Creative expression. Vitality in professional life.',
       love: 'Joy in relationships. Playful romance. Authentic connection. Happy partnership.',
-      health: 'Vital health and energy. Recovery and wellness. Joy supports healing. Child-like vitality.',
-      finance: 'Financial success. Abundance and prosperity. Generous sharing. Sunny financial outlook.',
-      spiritual: 'Spiritual joy and enlightenment. Inner child healed. Radiant consciousness. Light of awareness.',
+      health:
+        'Vital health and energy. Recovery and wellness. Joy supports healing. Child-like vitality.',
+      finance:
+        'Financial success. Abundance and prosperity. Generous sharing. Sunny financial outlook.',
+      spiritual:
+        'Spiritual joy and enlightenment. Inner child healed. Radiant consciousness. Light of awareness.',
     },
 
     actionSuggestions: [
@@ -1218,7 +1329,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '20': {
     // Judgement
-    reversedKeywords: ['self-doubt', 'refusing the call', 'self-criticism', 'ignoring lessons', 'fear of change'],
+    reversedKeywords: [
+      'self-doubt',
+      'refusing the call',
+      'self-criticism',
+      'ignoring lessons',
+      'fear of change',
+    ],
     reversedMeaning:
       'Reversed, Judgement suggests ignoring your calling or harsh self-criticism. You may refuse necessary evaluation or fear transformation. Answer the call.',
 
@@ -1231,11 +1348,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Mountains - Stability behind change',
         'Flag with Cross - Redemption',
       ],
-      colors: [
-        'Blue/Gray - Transition state',
-        'Red - Passion reborn',
-        'White - Purity of renewal',
-      ],
+      colors: ['Blue/Gray - Transition state', 'Red - Passion reborn', 'White - Purity of renewal'],
       patterns: [
         'Arms raised - Answering the call',
         'Rising from coffins - Rebirth',
@@ -1244,11 +1357,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Career calling becomes clear. Time for professional rebirth. Evaluation leads to promotion. Answer your calling.',
+      career:
+        'Career calling becomes clear. Time for professional rebirth. Evaluation leads to promotion. Answer your calling.',
       love: 'Relationship renewal. Past loves reviewed. Forgiveness and second chances. Love reborn.',
-      health: 'Health turning point. Wake up to wellness. Second chance at health. Healing crisis and renewal.',
-      finance: 'Financial evaluation and renewal. Past financial decisions reviewed. Second chance with money.',
-      spiritual: 'Spiritual awakening. Answer divine calling. Soul purpose revealed. Karmic review and release.',
+      health:
+        'Health turning point. Wake up to wellness. Second chance at health. Healing crisis and renewal.',
+      finance:
+        'Financial evaluation and renewal. Past financial decisions reviewed. Second chance with money.',
+      spiritual:
+        'Spiritual awakening. Answer divine calling. Soul purpose revealed. Karmic review and release.',
     },
 
     actionSuggestions: [
@@ -1277,7 +1394,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '21': {
     // The World
-    reversedKeywords: ['incompletion', 'lack of closure', 'stagnation', 'shortcuts', 'unfulfilled potential'],
+    reversedKeywords: [
+      'incompletion',
+      'lack of closure',
+      'stagnation',
+      'shortcuts',
+      'unfulfilled potential',
+    ],
     reversedMeaning:
       'Reversed, The World indicates incompletion or seeking shortcuts. You may lack closure or feel stagnant. Complete what you started before moving on.',
 
@@ -1303,11 +1426,15 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     },
 
     lifeApplications: {
-      career: 'Career completion and success. Goal achieved. Ready for next level. International opportunities.',
+      career:
+        'Career completion and success. Goal achieved. Ready for next level. International opportunities.',
       love: 'Relationship completion. Wholeness in partnership. Full cycle in love. Ready for next chapter.',
-      health: 'Health goals achieved. Wholeness and integration. Complete wellness. Ready for new cycle.',
-      finance: 'Financial goals reached. Completion of financial cycle. Abundance achieved. Ready for new level.',
-      spiritual: 'Spiritual completion. Enlightenment or integration. Cycle complete. Ready for new journey.',
+      health:
+        'Health goals achieved. Wholeness and integration. Complete wellness. Ready for new cycle.',
+      finance:
+        'Financial goals reached. Completion of financial cycle. Abundance achieved. Ready for new level.',
+      spiritual:
+        'Spiritual completion. Enlightenment or integration. Cycle complete. Ready for new journey.',
     },
 
     actionSuggestions: [
@@ -1342,7 +1469,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '23': {
     // Two of Wands
-    reversedKeywords: ['fear of unknown', 'lack of planning', 'playing it safe', 'bad partnerships', 'indecision'],
+    reversedKeywords: [
+      'fear of unknown',
+      'lack of planning',
+      'playing it safe',
+      'bad partnerships',
+      'indecision',
+    ],
     reversedMeaning:
       'Reversed, Two of Wands indicates fear of stepping into the unknown or poor planning. You may be playing it too safe or hesitating on important decisions.',
 
@@ -1355,16 +1488,27 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Red Robe - Passion for future',
         'Roses and Lilies - Passion and purity',
       ],
-      colors: ['Red - Passion and action', 'Brown - Earth and stability', 'Blue Sea - Emotional journey ahead'],
-      patterns: ['One wand held, one mounted - Action and stability', 'Gazing outward - Vision and planning', 'Elevated position - Perspective and power'],
+      colors: [
+        'Red - Passion and action',
+        'Brown - Earth and stability',
+        'Blue Sea - Emotional journey ahead',
+      ],
+      patterns: [
+        'One wand held, one mounted - Action and stability',
+        'Gazing outward - Vision and planning',
+        'Elevated position - Perspective and power',
+      ],
     },
 
     lifeApplications: {
-      career: 'Planning future career moves. Partnerships forming. Expand your horizons. Vision for professional growth.',
+      career:
+        'Planning future career moves. Partnerships forming. Expand your horizons. Vision for professional growth.',
       love: 'Planning relationship future. Potential partnership decisions. Long-distance possibilities. Vision for love.',
       health: 'Plan for long-term health. Vision for wellness journey. Consider new approaches.',
-      finance: 'Financial planning and vision. Investment decisions. Global opportunities. Partnership finances.',
-      spiritual: 'Expanding spiritual horizons. Planning spiritual journey. Global awareness. Partnership in growth.',
+      finance:
+        'Financial planning and vision. Investment decisions. Global opportunities. Partnership finances.',
+      spiritual:
+        'Expanding spiritual horizons. Planning spiritual journey. Global awareness. Partnership in growth.',
     },
 
     actionSuggestions: [
@@ -1402,16 +1546,27 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Elevated Cliff - Perspective and vision',
         'Orange Sky - Energy and anticipation',
       ],
-      colors: ['Yellow - Optimism and success', 'Orange - Energy and passion', 'Blue Sea - Emotional/business waters'],
-      patterns: ['Looking outward - Anticipation', 'Wands firmly planted - Stable foundation', 'Ships moving - Progress in motion'],
+      colors: [
+        'Yellow - Optimism and success',
+        'Orange - Energy and passion',
+        'Blue Sea - Emotional/business waters',
+      ],
+      patterns: [
+        'Looking outward - Anticipation',
+        'Wands firmly planted - Stable foundation',
+        'Ships moving - Progress in motion',
+      ],
     },
 
     lifeApplications: {
-      career: 'Career expansion succeeding. Waiting for results. International business. Leadership position.',
+      career:
+        'Career expansion succeeding. Waiting for results. International business. Leadership position.',
       love: 'Relationship expanding. Long-distance love. Waiting for love to develop. Future together.',
       health: 'Health improvements taking hold. Waiting for results. Expand wellness horizons.',
-      finance: 'Financial expansion. Investments bearing fruit. International opportunities. Waiting for returns.',
-      spiritual: 'Spiritual growth expanding. Teacher or leader role. Waiting for enlightenment. Global awareness.',
+      finance:
+        'Financial expansion. Investments bearing fruit. International opportunities. Waiting for returns.',
+      spiritual:
+        'Spiritual growth expanding. Teacher or leader role. Waiting for enlightenment. Global awareness.',
     },
 
     actionSuggestions: [
@@ -1431,12 +1586,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'What is on the horizon?',
     ],
 
-    commonCombinations: ['three-wands-eight-wands', 'three-wands-world', 'three-wands-ace-pentacles'],
+    commonCombinations: [
+      'three-wands-eight-wands',
+      'three-wands-world',
+      'three-wands-ace-pentacles',
+    ],
   },
 
   '25': {
     // Four of Wands
-    reversedKeywords: ['instability', 'lack of support', 'transience', 'home conflicts', 'cancelled celebration'],
+    reversedKeywords: [
+      'instability',
+      'lack of support',
+      'transience',
+      'home conflicts',
+      'cancelled celebration',
+    ],
     reversedMeaning:
       'Reversed, Four of Wands indicates home instability or lack of foundation. Celebrations may be delayed. You may feel unsupported or rootless.',
 
@@ -1449,8 +1614,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Yellow Sky - Joy and optimism',
         'Grapes - Abundance and harvest',
       ],
-      colors: ['Yellow - Joy and celebration', 'Green - Growth and vitality', 'Red - Passion and life'],
-      patterns: ['Decorated structure - Preparation and effort rewarded', 'Two people - Community and partnership', 'Stable frame - Foundation achieved'],
+      colors: [
+        'Yellow - Joy and celebration',
+        'Green - Growth and vitality',
+        'Red - Passion and life',
+      ],
+      patterns: [
+        'Decorated structure - Preparation and effort rewarded',
+        'Two people - Community and partnership',
+        'Stable frame - Foundation achieved',
+      ],
     },
 
     lifeApplications: {
@@ -1458,7 +1631,8 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       love: 'Relationship milestone. Engagement or wedding. Home together. Celebration of love.',
       health: 'Health milestone reached. Celebrate wellness wins. Stable health foundation.',
       finance: 'Financial celebration. Home purchase. Stable finances. Community support.',
-      spiritual: 'Spiritual community. Celebration of growth. Stable spiritual practice. Milestones reached.',
+      spiritual:
+        'Spiritual community. Celebration of growth. Stable spiritual practice. Milestones reached.',
     },
 
     actionSuggestions: [
@@ -1483,7 +1657,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '26': {
     // Five of Wands
-    reversedKeywords: ['avoiding conflict', 'inner conflict', 'tension releasing', 'finding agreement', 'competition ending'],
+    reversedKeywords: [
+      'avoiding conflict',
+      'inner conflict',
+      'tension releasing',
+      'finding agreement',
+      'competition ending',
+    ],
     reversedMeaning:
       'Reversed, Five of Wands can indicate avoiding necessary conflict or inner turmoil. Alternatively, competition may be ending. Find constructive ways to handle conflict.',
 
@@ -1496,14 +1676,23 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Chaotic Scene - Confusion and struggle',
         'Blue Sky - Potential for clarity',
       ],
-      colors: ['Multiple Colors - Diversity and difference', 'Blue Background - Possibility of resolution', 'Brown Earth - Grounded conflict'],
-      patterns: ['Wands crossing - Competing interests', 'No order - Chaos and confusion', 'All engaged - Everyone involved'],
+      colors: [
+        'Multiple Colors - Diversity and difference',
+        'Blue Background - Possibility of resolution',
+        'Brown Earth - Grounded conflict',
+      ],
+      patterns: [
+        'Wands crossing - Competing interests',
+        'No order - Chaos and confusion',
+        'All engaged - Everyone involved',
+      ],
     },
 
     lifeApplications: {
       career: 'Workplace competition. Creative differences. Team conflicts. Healthy rivalry.',
       love: 'Relationship disagreements. Power struggles. Competition for attention. Working through conflict.',
-      health: 'Competing health advice. Internal conflict affecting health. Stress management needed.',
+      health:
+        'Competing health advice. Internal conflict affecting health. Stress management needed.',
       finance: 'Financial competition. Bidding wars. Competing for resources. Budget conflicts.',
       spiritual: 'Spiritual debates. Competing beliefs. Inner conflict. Growth through challenge.',
     },
@@ -1530,7 +1719,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '27': {
     // Six of Wands
-    reversedKeywords: ['private achievement', 'fall from grace', 'egotism', 'lack of recognition', 'self-doubt after success'],
+    reversedKeywords: [
+      'private achievement',
+      'fall from grace',
+      'egotism',
+      'lack of recognition',
+      'self-doubt after success',
+    ],
     reversedMeaning:
       'Reversed, Six of Wands indicates lack of recognition or private victories. You may be dealing with ego issues or fearing success. Celebrate yourself.',
 
@@ -1543,16 +1738,26 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Six Wands - Community celebration',
         'White Horse - Purity of victory',
       ],
-      colors: ['Green - Growth and success', 'Red - Passion and victory', 'White Horse - Pure achievement'],
-      patterns: ['Elevated position - Above the crowd', 'Forward movement - Continued progress', 'Public display - Recognition and honor'],
+      colors: [
+        'Green - Growth and success',
+        'Red - Passion and victory',
+        'White Horse - Pure achievement',
+      ],
+      patterns: [
+        'Elevated position - Above the crowd',
+        'Forward movement - Continued progress',
+        'Public display - Recognition and honor',
+      ],
     },
 
     lifeApplications: {
       career: 'Career victory. Public recognition. Leadership acknowledged. Promotion or award.',
       love: 'Relationship triumph. Public acknowledgment of love. Pride in partnership. Success together.',
-      health: 'Health victory. Recognized for wellness achievements. Successful recovery. Triumph over illness.',
+      health:
+        'Health victory. Recognized for wellness achievements. Successful recovery. Triumph over illness.',
       finance: 'Financial success recognized. Investment victory. Public financial achievement.',
-      spiritual: 'Spiritual achievement. Recognition as teacher. Victory over ego. Community honor.',
+      spiritual:
+        'Spiritual achievement. Recognition as teacher. Victory over ego. Community honor.',
     },
 
     actionSuggestions: [
@@ -1590,16 +1795,26 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Green Tunic - Growth under pressure',
         'Determined Expression - Will to persevere',
       ],
-      colors: ['Green - Growth and persistence', 'Brown - Earth and grounding', 'Blue Sky - Clarity above conflict'],
-      patterns: ['Higher ground - Strategic advantage', 'One against many - David vs Goliath', 'Active stance - Ready for battle'],
+      colors: [
+        'Green - Growth and persistence',
+        'Brown - Earth and grounding',
+        'Blue Sky - Clarity above conflict',
+      ],
+      patterns: [
+        'Higher ground - Strategic advantage',
+        'One against many - David vs Goliath',
+        'Active stance - Ready for battle',
+      ],
     },
 
     lifeApplications: {
-      career: 'Defending your position. Competition pressing. Standing firm. Protecting your territory.',
+      career:
+        'Defending your position. Competition pressing. Standing firm. Protecting your territory.',
       love: 'Defending relationship. Outside pressures. Standing up for love. Protecting boundaries.',
       health: 'Fighting for health. Defending against illness. Persistent effort. Not giving up.',
       finance: 'Protecting assets. Financial defense. Standing firm on money matters. Competition.',
-      spiritual: 'Defending beliefs. Standing firm in faith. Spiritual challenges. Persistence on path.',
+      spiritual:
+        'Defending beliefs. Standing firm in faith. Spiritual challenges. Persistence on path.',
     },
 
     actionSuggestions: [
@@ -1624,7 +1839,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '29': {
     // Eight of Wands
-    reversedKeywords: ['delays', 'frustration', 'slow progress', 'miscommunication', 'cancelled plans'],
+    reversedKeywords: [
+      'delays',
+      'frustration',
+      'slow progress',
+      'miscommunication',
+      'cancelled plans',
+    ],
     reversedMeaning:
       'Reversed, Eight of Wands indicates delays, miscommunication, or frustrated progress. Plans may be cancelled. Patience needed when things slow down.',
 
@@ -1637,8 +1858,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Diagonal Movement - Swift direction',
         'No Figures - Pure energy in motion',
       ],
-      colors: ['Blue Sky - Clear communication', 'Green - Growth and movement', 'Brown Wands - Grounded action'],
-      patterns: ['Parallel flight - Coordinated movement', 'Downward angle - Coming to completion', 'Open space - No obstacles'],
+      colors: [
+        'Blue Sky - Clear communication',
+        'Green - Growth and movement',
+        'Brown Wands - Grounded action',
+      ],
+      patterns: [
+        'Parallel flight - Coordinated movement',
+        'Downward angle - Coming to completion',
+        'Open space - No obstacles',
+      ],
     },
 
     lifeApplications: {
@@ -1684,22 +1913,31 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Watchful Stance - Vigilance',
         'Green Tunic - Life force persists',
       ],
-      colors: ['Green - Perseverance and life', 'Brown - Earth and endurance', 'Yellow Background - Hope despite struggle'],
-      patterns: ['Defensive posture - Protective stance', 'One in front of many - Final stand', 'Looking back - Aware of past battles'],
+      colors: [
+        'Green - Perseverance and life',
+        'Brown - Earth and endurance',
+        'Yellow Background - Hope despite struggle',
+      ],
+      patterns: [
+        'Defensive posture - Protective stance',
+        'One in front of many - Final stand',
+        'Looking back - Aware of past battles',
+      ],
     },
 
     lifeApplications: {
-      career: 'Near the finish line. Final obstacles. Persistence required. Don\'t give up now.',
+      career: "Near the finish line. Final obstacles. Persistence required. Don't give up now.",
       love: 'Relationship endurance tested. Past hurts creating walls. Almost through difficulties.',
-      health: 'Health persistence needed. Near recovery. Final challenges. Don\'t give up on wellness.',
-      finance: 'Financial persistence. Near financial goal. Final push needed. Don\'t quit now.',
+      health:
+        "Health persistence needed. Near recovery. Final challenges. Don't give up on wellness.",
+      finance: "Financial persistence. Near financial goal. Final push needed. Don't quit now.",
       spiritual: 'Spiritual endurance. Near breakthrough. Final tests. Persistence on path.',
     },
 
     actionSuggestions: [
-      'Persist - you\'re almost there',
+      "Persist - you're almost there",
       'Guard your boundaries',
-      'Rest but don\'t quit',
+      "Rest but don't quit",
       'Learn from past challenges',
       'Prepare for one final effort',
       'Trust your resilience',
@@ -1718,7 +1956,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '31': {
     // Ten of Wands
-    reversedKeywords: ['release', 'delegating', 'burnout averted', 'lightening load', 'refusing burdens'],
+    reversedKeywords: [
+      'release',
+      'delegating',
+      'burnout averted',
+      'lightening load',
+      'refusing burdens',
+    ],
     reversedMeaning:
       'Reversed, Ten of Wands indicates releasing burdens or refusing to take on too much. You may be learning to delegate or avoiding burnout. Let some things go.',
 
@@ -1731,8 +1975,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Green Field - Life beneath struggle',
         'All Wands Carried - Taking on everything',
       ],
-      colors: ['Brown - Heavy earth energy', 'Green - Life struggling under burden', 'Blue Sky - Relief possible'],
-      patterns: ['Moving toward goal - End in sight', 'Obscured vision - Can\'t see clearly', 'Hunched body - Physical and emotional weight'],
+      colors: [
+        'Brown - Heavy earth energy',
+        'Green - Life struggling under burden',
+        'Blue Sky - Relief possible',
+      ],
+      patterns: [
+        'Moving toward goal - End in sight',
+        "Obscured vision - Can't see clearly",
+        'Hunched body - Physical and emotional weight',
+      ],
     },
 
     lifeApplications: {
@@ -1740,7 +1992,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       love: 'Relationship burdens heavy. Taking on too much for partner. Overwhelmed by love duties.',
       health: 'Health suffering from stress. Burden affecting wellness. Need to lighten load.',
       finance: 'Financial burdens heavy. Too many obligations. Debt weight. Need relief.',
-      spiritual: 'Spiritual burnout. Taking on others\' karma. Overwhelmed by responsibility.',
+      spiritual: "Spiritual burnout. Taking on others' karma. Overwhelmed by responsibility.",
     },
 
     actionSuggestions: [
@@ -1765,7 +2017,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '32': {
     // Page of Wands
-    reversedKeywords: ['lack of direction', 'procrastination', 'immaturity', 'cancelled plans', 'creative block'],
+    reversedKeywords: [
+      'lack of direction',
+      'procrastination',
+      'immaturity',
+      'cancelled plans',
+      'creative block',
+    ],
     reversedMeaning:
       'Reversed, Page of Wands indicates lack of direction or creative blocks. Ideas may not develop or enthusiasm fades. Reignite your spark.',
 
@@ -1778,16 +2036,26 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Looking at Wand - Contemplating potential',
         'Feathered Cap - Ideas taking flight',
       ],
-      colors: ['Yellow - Enthusiasm and optimism', 'Red - Fire and passion', 'Brown - Earth beneath fire'],
-      patterns: ['Stationary pose - Contemplation', 'Wand held upright - New ideas', 'Alert posture - Ready for adventure'],
+      colors: [
+        'Yellow - Enthusiasm and optimism',
+        'Red - Fire and passion',
+        'Brown - Earth beneath fire',
+      ],
+      patterns: [
+        'Stationary pose - Contemplation',
+        'Wand held upright - New ideas',
+        'Alert posture - Ready for adventure',
+      ],
     },
 
     lifeApplications: {
-      career: 'New career ideas. Creative inspiration. Learning new skills. Youthful energy at work.',
+      career:
+        'New career ideas. Creative inspiration. Learning new skills. Youthful energy at work.',
       love: 'New romantic excitement. Fresh start in love. Playful connection. Adventure in romance.',
       health: 'New health interests. Enthusiasm for fitness. Fresh approaches to wellness.',
       finance: 'New financial ideas. Entrepreneurial spark. Learning about money. Fresh start.',
-      spiritual: 'New spiritual interests. Beginner\'s enthusiasm. Exploring paths. Creative spirituality.',
+      spiritual:
+        "New spiritual interests. Beginner's enthusiasm. Exploring paths. Creative spirituality.",
     },
 
     actionSuggestions: [
@@ -1812,7 +2080,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '33': {
     // Knight of Wands
-    reversedKeywords: ['recklessness', 'delays', 'frustration', 'scattered energy', 'hasty decisions'],
+    reversedKeywords: [
+      'recklessness',
+      'delays',
+      'frustration',
+      'scattered energy',
+      'hasty decisions',
+    ],
     reversedMeaning:
       'Reversed, Knight of Wands warns against recklessness or frustration from delays. Energy may be scattered. Channel passion more carefully.',
 
@@ -1825,15 +2099,25 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Raised Wand - Ready for action',
         'Red Horse - Passionate movement',
       ],
-      colors: ['Red/Orange - Fire and passion', 'Yellow - Confidence and optimism', 'Brown - Grounded action'],
-      patterns: ['Rearing horse - Energy and movement', 'Looking forward - Focus on goals', 'Armor complete - Protected in action'],
+      colors: [
+        'Red/Orange - Fire and passion',
+        'Yellow - Confidence and optimism',
+        'Brown - Grounded action',
+      ],
+      patterns: [
+        'Rearing horse - Energy and movement',
+        'Looking forward - Focus on goals',
+        'Armor complete - Protected in action',
+      ],
     },
 
     lifeApplications: {
-      career: 'Bold career moves. Action-oriented work. Travel for business. Entrepreneurial ventures.',
+      career:
+        'Bold career moves. Action-oriented work. Travel for business. Entrepreneurial ventures.',
       love: 'Passionate romance. Adventurous love. Fast-moving relationship. Exciting partner.',
       health: 'Active fitness. Bold health changes. Adventure sports. Energetic approach.',
-      finance: 'Risk-taking with money. Fast financial moves. Bold investments. Adventurous finances.',
+      finance:
+        'Risk-taking with money. Fast financial moves. Bold investments. Adventurous finances.',
       spiritual: 'Bold spiritual seeking. Active spiritual practices. Adventure on path.',
     },
 
@@ -1843,7 +2127,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'Embrace adventure',
       'Channel your energy',
       'Move forward confidently',
-      'Don\'t hold back',
+      "Don't hold back",
     ],
 
     meditationPrompts: [
@@ -1872,16 +2156,27 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Wand and Sunflower - Creative life force',
         'Yellow Robe - Optimism and warmth',
       ],
-      colors: ['Yellow - Warmth and confidence', 'Orange - Creative fire', 'Black Cat - Mystery and intuition'],
-      patterns: ['Seated confidently - Comfortable with power', 'Open posture - Welcoming and warm', 'Cat at feet - Intuition grounded'],
+      colors: [
+        'Yellow - Warmth and confidence',
+        'Orange - Creative fire',
+        'Black Cat - Mystery and intuition',
+      ],
+      patterns: [
+        'Seated confidently - Comfortable with power',
+        'Open posture - Welcoming and warm',
+        'Cat at feet - Intuition grounded',
+      ],
     },
 
     lifeApplications: {
-      career: 'Confident leadership. Creative direction. Warm management style. Passionate about work.',
+      career:
+        'Confident leadership. Creative direction. Warm management style. Passionate about work.',
       love: 'Confident in love. Warm and passionate partner. Independent yet loving. Attractive energy.',
-      health: 'Vital and energetic. Confident in health choices. Warm self-care. Independent wellness.',
+      health:
+        'Vital and energetic. Confident in health choices. Warm self-care. Independent wellness.',
       finance: 'Confident with money. Creative income. Generous yet smart. Independent finances.',
-      spiritual: 'Confident spiritual leader. Warm guidance. Independent path. Creative spirituality.',
+      spiritual:
+        'Confident spiritual leader. Warm guidance. Independent path. Creative spirituality.',
     },
 
     actionSuggestions: [
@@ -1906,7 +2201,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '35': {
     // King of Wands
-    reversedKeywords: ['tyranny', 'ruthlessness', 'impulsiveness', 'overbearing', 'unrealistic expectations'],
+    reversedKeywords: [
+      'tyranny',
+      'ruthlessness',
+      'impulsiveness',
+      'overbearing',
+      'unrealistic expectations',
+    ],
     reversedMeaning:
       'Reversed, King of Wands warns against tyrannical or overbearing behavior. Leadership may have become ruthless. Temper fire with wisdom.',
 
@@ -1919,15 +2220,24 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Salamander Biting Tail - Infinite creative cycle',
         'Looking Forward - Visionary leadership',
       ],
-      colors: ['Orange/Red - Fire and passion', 'Yellow - Wisdom and optimism', 'Green Salamander - Life force'],
-      patterns: ['Seated powerfully - Confident authority', 'Wand prominent - Creative power', 'Lions everywhere - Courage mastered'],
+      colors: [
+        'Orange/Red - Fire and passion',
+        'Yellow - Wisdom and optimism',
+        'Green Salamander - Life force',
+      ],
+      patterns: [
+        'Seated powerfully - Confident authority',
+        'Wand prominent - Creative power',
+        'Lions everywhere - Courage mastered',
+      ],
     },
 
     lifeApplications: {
       career: 'Leadership mastery. Visionary business. Inspiring others. Creative direction.',
       love: 'Passionate mature love. Leadership in relationship. Inspiring partner. Protective love.',
       health: 'Mastery over vitality. Strong life force. Leadership in health community.',
-      finance: 'Financial leadership. Entrepreneurial success. Generous with wealth. Visionary investments.',
+      finance:
+        'Financial leadership. Entrepreneurial success. Generous with wealth. Visionary investments.',
       spiritual: 'Spiritual leadership. Mastery of will. Inspiring teacher. Creative wisdom.',
     },
 
@@ -1965,7 +2275,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'sadness',
     ],
     reversedMeaning:
-      'Reversed, Ace of Cups indicates emotional blockages or difficulty expressing feelings. You may feel empty or disconnected from your emotions. Time to process and release what you\'ve been holding back.',
+      "Reversed, Ace of Cups indicates emotional blockages or difficulty expressing feelings. You may feel empty or disconnected from your emotions. Time to process and release what you've been holding back.",
 
     symbolism: {
       mainSymbols: [
@@ -1991,8 +2301,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     lifeApplications: {
       career:
         'New creative opportunities emerge. Follow your passion. Work that fulfills you emotionally is within reach. Time to pursue heart-centered career paths.',
-      love:
-        'New love beginning or renewed passion in existing relationship. Open your heart. Deep emotional connection possible. Single: Stay receptive to new love.',
+      love: 'New love beginning or renewed passion in existing relationship. Open your heart. Deep emotional connection possible. Single: Stay receptive to new love.',
       health:
         'Emotional healing begins. Address emotional roots of physical symptoms. Practices that nourish the soul: therapy, journaling, creative expression.',
       finance:
@@ -2042,7 +2351,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       mainSymbols: [
         'Two Figures - Partnership and equality',
         'Two Cups - Emotional exchange',
-        "Caduceus of Hermes - Communication and healing",
+        'Caduceus of Hermes - Communication and healing',
         "Lion's Head - Passion and courage",
         'Wings - Spiritual elevation through love',
         'Equal Eye Level - Mutual respect',
@@ -2062,10 +2371,9 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     lifeApplications: {
       career:
         'Successful partnerships and collaborations. Find the right business partner or colleague. Teamwork leads to success. Mutual respect in professional relationships.',
-      love:
-        'Beautiful partnership based on equality. Mutual attraction and respect. Perfect card for new relationships or renewed commitment. Both partners equally invested.',
+      love: 'Beautiful partnership based on equality. Mutual attraction and respect. Perfect card for new relationships or renewed commitment. Both partners equally invested.',
       health:
-        'Partnership in healing. Work with healthcare providers as team. Couples may support each other\'s health goals. Balance give-and-take in relationships.',
+        "Partnership in healing. Work with healthcare providers as team. Couples may support each other's health goals. Balance give-and-take in relationships.",
       finance:
         'Financial partnership succeeds. Joint investments or shared resources work well. Fair exchange of value. Good time for business partnerships with financial component.',
       spiritual:
@@ -2098,7 +2406,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '38': {
     // Three of Cups
-    reversedKeywords: ['overindulgence', 'gossip', 'isolation', 'third party in relationship', 'cancelled celebration'],
+    reversedKeywords: [
+      'overindulgence',
+      'gossip',
+      'isolation',
+      'third party in relationship',
+      'cancelled celebration',
+    ],
     reversedMeaning:
       'Reversed, Three of Cups warns of overindulgence or social problems. Watch for gossip or a third party affecting relationships. You may feel isolated or celebrations may be cancelled.',
 
@@ -2111,15 +2425,26 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Circle Dance - Unity and connection',
         'Flowing Robes - Movement and joy',
       ],
-      colors: ['Red/Orange/White - Different personalities united', 'Green - Growth and abundance', 'Blue Sky - Joy and clarity'],
-      patterns: ['Circle formation - Equality and unity', 'Raised cups - Shared celebration', 'Dance movement - Joy in motion'],
+      colors: [
+        'Red/Orange/White - Different personalities united',
+        'Green - Growth and abundance',
+        'Blue Sky - Joy and clarity',
+      ],
+      patterns: [
+        'Circle formation - Equality and unity',
+        'Raised cups - Shared celebration',
+        'Dance movement - Joy in motion',
+      ],
     },
 
     lifeApplications: {
-      career: 'Team celebration. Work friendships. Collaborative success. Office party or milestone.',
+      career:
+        'Team celebration. Work friendships. Collaborative success. Office party or milestone.',
       love: 'Friendship in love. Social aspects of relationship. Celebrating love with others.',
-      health: 'Social support for health. Celebration of wellness. Group fitness. Friends supporting recovery.',
-      finance: 'Shared financial success. Group investments. Celebrating financial wins with others.',
+      health:
+        'Social support for health. Celebration of wellness. Group fitness. Friends supporting recovery.',
+      finance:
+        'Shared financial success. Group investments. Celebrating financial wins with others.',
       spiritual: 'Spiritual community. Celebration of growth. Group rituals. Sacred friendship.',
     },
 
@@ -2145,7 +2470,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '39': {
     // Four of Cups
-    reversedKeywords: ['awareness', 'acceptance', 'motivation renewed', 'seizing opportunity', 'gratitude'],
+    reversedKeywords: [
+      'awareness',
+      'acceptance',
+      'motivation renewed',
+      'seizing opportunity',
+      'gratitude',
+    ],
     reversedMeaning:
       'Reversed, Four of Cups indicates awakening from apathy or finally seeing opportunities. You may be ready to accept what is offered or feel renewed motivation.',
 
@@ -2158,15 +2489,25 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Crossed Arms - Closed off attitude',
         'Tree - Growth and shade',
       ],
-      colors: ['Green - Growth potential', 'Blue - Emotional contemplation', 'Brown - Earthly concerns'],
-      patterns: ['Looking down - Missing opportunities', 'Cup extended - Help available', 'Seated stillness - Contemplative withdrawal'],
+      colors: [
+        'Green - Growth potential',
+        'Blue - Emotional contemplation',
+        'Brown - Earthly concerns',
+      ],
+      patterns: [
+        'Looking down - Missing opportunities',
+        'Cup extended - Help available',
+        'Seated stillness - Contemplative withdrawal',
+      ],
     },
 
     lifeApplications: {
-      career: 'Boredom or dissatisfaction at work. New opportunity presenting. Missing chances due to apathy.',
+      career:
+        'Boredom or dissatisfaction at work. New opportunity presenting. Missing chances due to apathy.',
       love: 'Emotional withdrawal. Taking love for granted. New love offering but not seeing it.',
       health: 'Apathy about health. Ignoring wellness options. Need to appreciate body.',
-      finance: 'Financial dissatisfaction. Missing money opportunities. Taking abundance for granted.',
+      finance:
+        'Financial dissatisfaction. Missing money opportunities. Taking abundance for granted.',
       spiritual: 'Spiritual apathy. Divine gifts unnoticed. Need for gratitude practice.',
     },
 
@@ -2206,11 +2547,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Black Cloak - Mourning',
       ],
       colors: ['Black - Grief and loss', 'Blue River - Emotional flow', 'Gray Sky - Sorrow'],
-      patterns: ['Back turned - Not seeing positives', 'Focus on spilled - Dwelling on loss', 'Bridge available - Way forward exists'],
+      patterns: [
+        'Back turned - Not seeing positives',
+        'Focus on spilled - Dwelling on loss',
+        'Bridge available - Way forward exists',
+      ],
     },
 
     lifeApplications: {
-      career: 'Work disappointment. Loss of job or opportunity. Focus on what remains. Path forward exists.',
+      career:
+        'Work disappointment. Loss of job or opportunity. Focus on what remains. Path forward exists.',
       love: 'Relationship grief. Breakup or loss. Focus on remaining love. Healing from heartbreak.',
       health: 'Health setback. Processing health grief. Focus on remaining wellness.',
       finance: 'Financial loss. Mourning money mistakes. Still have resources. Recovery possible.',
@@ -2252,8 +2598,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Guard Walking Away - Protection leaving',
         'Old House - Childhood home',
       ],
-      colors: ['Yellow - Warmth of memories', 'White Flowers - Pure intentions', 'Gray Stone - Stability of past'],
-      patterns: ['Child giving to child - Innocence shared', 'Looking back - Nostalgia', 'Safe environment - Protected memories'],
+      colors: [
+        'Yellow - Warmth of memories',
+        'White Flowers - Pure intentions',
+        'Gray Stone - Stability of past',
+      ],
+      patterns: [
+        'Child giving to child - Innocence shared',
+        'Looking back - Nostalgia',
+        'Safe environment - Protected memories',
+      ],
     },
 
     lifeApplications: {
@@ -2299,8 +2653,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Snake - Wisdom or deception',
         'Jewels and Castle - Material and spiritual desires',
       ],
-      colors: ['Gray Clouds - Uncertainty', 'Various Colors - Multiple options', 'Blue Figure - Emotional contemplation'],
-      patterns: ['Floating cups - Unrealistic options', 'Observer position - Not acting', 'Multiple choices - Overwhelm'],
+      colors: [
+        'Gray Clouds - Uncertainty',
+        'Various Colors - Multiple options',
+        'Blue Figure - Emotional contemplation',
+      ],
+      patterns: [
+        'Floating cups - Unrealistic options',
+        'Observer position - Not acting',
+        'Multiple choices - Overwhelm',
+      ],
     },
 
     lifeApplications: {
@@ -2333,7 +2695,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '43': {
     // Eight of Cups
-    reversedKeywords: ['fear of change', 'staying in comfort zone', 'aimless wandering', 'returning', 'avoidance'],
+    reversedKeywords: [
+      'fear of change',
+      'staying in comfort zone',
+      'aimless wandering',
+      'returning',
+      'avoidance',
+    ],
     reversedMeaning:
       'Reversed, Eight of Cups indicates fear of leaving or returning to what was abandoned. You may be avoiding necessary change or aimlessly drifting.',
 
@@ -2346,15 +2714,24 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Gap in Cups - Something missing',
         'Staff - Support for journey',
       ],
-      colors: ['Blue Night - Emotional depth', 'Red Cloak - Passion for new', 'Gray Mountains - Unknown ahead'],
-      patterns: ['Walking away - Conscious departure', 'Cups incomplete - Something missing', 'Moon phases - Cyclical journey'],
+      colors: [
+        'Blue Night - Emotional depth',
+        'Red Cloak - Passion for new',
+        'Gray Mountains - Unknown ahead',
+      ],
+      patterns: [
+        'Walking away - Conscious departure',
+        'Cups incomplete - Something missing',
+        'Moon phases - Cyclical journey',
+      ],
     },
 
     lifeApplications: {
       career: 'Leaving unfulfilling job. Walking away from success. Seeking deeper meaning.',
       love: 'Leaving relationship. Walking away from love that is not enough. Seeking deeper connection.',
       health: 'Leaving unhealthy patterns. Walking away from harmful habits. Seeking wellness.',
-      finance: 'Leaving financial security. Walking away from money for meaning. Seeking fulfillment.',
+      finance:
+        'Leaving financial security. Walking away from money for meaning. Seeking fulfillment.',
       spiritual: 'Spiritual departure. Leaving old beliefs. Seeking deeper truth.',
     },
 
@@ -2380,7 +2757,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '44': {
     // Nine of Cups
-    reversedKeywords: ['dissatisfaction', 'greed', 'materialism', 'emptiness after achievement', 'smugness'],
+    reversedKeywords: [
+      'dissatisfaction',
+      'greed',
+      'materialism',
+      'emptiness after achievement',
+      'smugness',
+    ],
     reversedMeaning:
       'Reversed, Nine of Cups warns of dissatisfaction despite having much. Greed or smugness may be issues. True fulfillment comes from within.',
 
@@ -2393,8 +2776,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Blue Cloth - Emotional satisfaction',
         'Curved Display - Abundance on show',
       ],
-      colors: ['Yellow - Success and optimism', 'Red - Passion and satisfaction', 'Blue - Emotional fulfillment'],
-      patterns: ['Seated comfort - Achievement', 'Cups behind - Success accumulated', 'Proud posture - Self-satisfaction'],
+      colors: [
+        'Yellow - Success and optimism',
+        'Red - Passion and satisfaction',
+        'Blue - Emotional fulfillment',
+      ],
+      patterns: [
+        'Seated comfort - Achievement',
+        'Cups behind - Success accumulated',
+        'Proud posture - Self-satisfaction',
+      ],
     },
 
     lifeApplications: {
@@ -2427,7 +2818,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '45': {
     // Ten of Cups
-    reversedKeywords: ['broken family', 'domestic issues', 'neglected values', 'unhappy home', 'misaligned goals'],
+    reversedKeywords: [
+      'broken family',
+      'domestic issues',
+      'neglected values',
+      'unhappy home',
+      'misaligned goals',
+    ],
     reversedMeaning:
       'Reversed, Ten of Cups indicates family troubles or broken dreams of happiness. Domestic harmony is disrupted. Values may be neglected.',
 
@@ -2440,8 +2837,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Home in Distance - Security and stability',
         'River and Trees - Abundant nature',
       ],
-      colors: ['Rainbow - All emotional colors', 'Green - Growth and abundance', 'Blue Sky - Joy and peace'],
-      patterns: ['Family unit - Togetherness', 'Arms raised - Celebration', 'Children playing - Innocent joy'],
+      colors: [
+        'Rainbow - All emotional colors',
+        'Green - Growth and abundance',
+        'Blue Sky - Joy and peace',
+      ],
+      patterns: [
+        'Family unit - Togetherness',
+        'Arms raised - Celebration',
+        'Children playing - Innocent joy',
+      ],
     },
 
     lifeApplications: {
@@ -2474,7 +2879,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '46': {
     // Page of Cups
-    reversedKeywords: ['emotional immaturity', 'creative blocks', 'bad news', 'oversensitivity', 'escapism'],
+    reversedKeywords: [
+      'emotional immaturity',
+      'creative blocks',
+      'bad news',
+      'oversensitivity',
+      'escapism',
+    ],
     reversedMeaning:
       'Reversed, Page of Cups indicates emotional immaturity or creative blocks. You may be too sensitive or escaping into fantasy. Ground your emotions.',
 
@@ -2488,7 +2899,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Looking at Fish - Wonder and curiosity',
       ],
       colors: ['Blue - Emotion and intuition', 'Pink/Orange - Creativity', 'Gold - Divine gift'],
-      patterns: ['Fish appearing - Unexpected message', 'Curious gaze - Openness to emotion', 'Still stance - Receptive'],
+      patterns: [
+        'Fish appearing - Unexpected message',
+        'Curious gaze - Openness to emotion',
+        'Still stance - Receptive',
+      ],
     },
 
     lifeApplications: {
@@ -2521,7 +2936,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '47': {
     // Knight of Cups
-    reversedKeywords: ['moodiness', 'unrealistic', 'jealousy', 'emotional manipulation', 'broken promises'],
+    reversedKeywords: [
+      'moodiness',
+      'unrealistic',
+      'jealousy',
+      'emotional manipulation',
+      'broken promises',
+    ],
     reversedMeaning:
       'Reversed, Knight of Cups warns of moodiness, unrealistic expectations, or emotional manipulation. Romance may be insincere. Check motives.',
 
@@ -2534,15 +2955,25 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Fish on Tunic - Creativity and intuition',
         'Gentle Approach - Romantic advance',
       ],
-      colors: ['Blue/Gray - Emotional journey', 'White Horse - Pure intentions', 'Silver Armor - Sensitive protection'],
-      patterns: ['Peaceful movement - Gentle approach', 'Cup extended - Offering emotions', 'River crossing - Emotional journey'],
+      colors: [
+        'Blue/Gray - Emotional journey',
+        'White Horse - Pure intentions',
+        'Silver Armor - Sensitive protection',
+      ],
+      patterns: [
+        'Peaceful movement - Gentle approach',
+        'Cup extended - Offering emotions',
+        'River crossing - Emotional journey',
+      ],
     },
 
     lifeApplications: {
-      career: 'Creative opportunity approaching. Emotional intelligence at work. Romantic work environment.',
+      career:
+        'Creative opportunity approaching. Emotional intelligence at work. Romantic work environment.',
       love: 'Romantic proposal or advance. Charming partner. Following the heart. Love arriving.',
       health: 'Emotional healing journey. Gentle approach to wellness. Following intuition.',
-      finance: 'Creative financial opportunity. Following heart in money. Romantic financial gestures.',
+      finance:
+        'Creative financial opportunity. Following heart in money. Romantic financial gestures.',
       spiritual: 'Spiritual quest for love. Following heart on path. Romantic spirituality.',
     },
 
@@ -2568,7 +2999,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '48': {
     // Queen of Cups
-    reversedKeywords: ['co-dependency', 'emotional manipulation', 'martyr complex', 'smothering', 'insecurity'],
+    reversedKeywords: [
+      'co-dependency',
+      'emotional manipulation',
+      'martyr complex',
+      'smothering',
+      'insecurity',
+    ],
     reversedMeaning:
       'Reversed, Queen of Cups warns of co-dependency, emotional manipulation, or martyrdom. Nurturing may become smothering. Balance giving with self-care.',
 
@@ -2582,11 +3019,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Flowing Robes - Emotional fluidity',
       ],
       colors: ['Blue - Emotional depth', 'White/Silver - Intuition', 'Sea Colors - Unconscious'],
-      patterns: ['Water setting - Emotional realm', 'Closed cup - Private emotions', 'Serene expression - Emotional peace'],
+      patterns: [
+        'Water setting - Emotional realm',
+        'Closed cup - Private emotions',
+        'Serene expression - Emotional peace',
+      ],
     },
 
     lifeApplications: {
-      career: 'Emotionally intelligent leader. Caring professional. Creative mastery. Intuitive business.',
+      career:
+        'Emotionally intelligent leader. Caring professional. Creative mastery. Intuitive business.',
       love: 'Nurturing partner. Deep emotional connection. Loving and supportive. Intuitive love.',
       health: 'Emotional healing mastery. Intuitive health choices. Nurturing self-care.',
       finance: 'Intuitive finances. Caring about money impact. Generous yet wise.',
@@ -2615,7 +3057,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '49': {
     // King of Cups
-    reversedKeywords: ['emotional coldness', 'manipulation', 'moodiness', 'volatility', 'emotional abuse'],
+    reversedKeywords: [
+      'emotional coldness',
+      'manipulation',
+      'moodiness',
+      'volatility',
+      'emotional abuse',
+    ],
     reversedMeaning:
       'Reversed, King of Cups warns of emotional manipulation, coldness, or volatility. Emotions may be used as weapons. Seek emotional balance and integrity.',
 
@@ -2628,12 +3076,21 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Fish Necklace - Creative power',
         'Dolphin and Ship - Unconscious and conscious',
       ],
-      colors: ['Blue - Emotional depth', 'Yellow - Conscious mastery', 'Red Cloak - Passion controlled'],
-      patterns: ['Stable on water - Emotional stability', 'Cup held firmly - Emotional control', 'Looking forward - Wise perspective'],
+      colors: [
+        'Blue - Emotional depth',
+        'Yellow - Conscious mastery',
+        'Red Cloak - Passion controlled',
+      ],
+      patterns: [
+        'Stable on water - Emotional stability',
+        'Cup held firmly - Emotional control',
+        'Looking forward - Wise perspective',
+      ],
     },
 
     lifeApplications: {
-      career: 'Emotionally intelligent leadership. Mastery of feelings at work. Creative direction.',
+      career:
+        'Emotionally intelligent leadership. Mastery of feelings at work. Creative direction.',
       love: 'Mature emotional partner. Steady and supportive love. Wise in relationships.',
       health: 'Emotional health mastery. Calm approach to wellness. Balanced feelings.',
       finance: 'Emotionally intelligent finances. Calm money decisions. Generous leadership.',
@@ -2679,12 +3136,21 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Double-Edged Blade - Truth cuts both ways',
         'Yods Falling - Divine blessing',
       ],
-      colors: ['Gray/White - Mental realm', 'Gold Crown - Achievement', 'Blue Sky - Mental clarity'],
-      patterns: ['Upright sword - Clear direction', 'Crown at tip - Victory', 'Wreath - Achievement crowned'],
+      colors: [
+        'Gray/White - Mental realm',
+        'Gold Crown - Achievement',
+        'Blue Sky - Mental clarity',
+      ],
+      patterns: [
+        'Upright sword - Clear direction',
+        'Crown at tip - Victory',
+        'Wreath - Achievement crowned',
+      ],
     },
 
     lifeApplications: {
-      career: 'Breakthrough ideas. Mental clarity at work. Truth revealed. New intellectual pursuits.',
+      career:
+        'Breakthrough ideas. Mental clarity at work. Truth revealed. New intellectual pursuits.',
       love: 'Clarity in relationships. Truth in love. Honest communication. New understanding.',
       health: 'Mental clarity about health. Decisive health action. Cutting through confusion.',
       finance: 'Clear financial thinking. Decisive money moves. Truth about finances.',
@@ -2713,7 +3179,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '51': {
     // Two of Swords
-    reversedKeywords: ['information overload', 'indecision', 'confusion', 'mental turmoil', 'seeing the truth'],
+    reversedKeywords: [
+      'information overload',
+      'indecision',
+      'confusion',
+      'mental turmoil',
+      'seeing the truth',
+    ],
     reversedMeaning:
       'Reversed, Two of Swords indicates breaking through denial or making a delayed decision. Information may finally be revealed. End the stalemate.',
 
@@ -2726,8 +3198,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Rocky Islands - Obstacles in feeling',
         'White Gown - Attempted purity',
       ],
-      colors: ['White - Attempted purity', 'Blue Water - Blocked emotions', 'Yellow Moon - Intuitive light'],
-      patterns: ['Crossed arms - Protective stance', 'Blindfold - Denial', 'Perfect balance - Stalemate'],
+      colors: [
+        'White - Attempted purity',
+        'Blue Water - Blocked emotions',
+        'Yellow Moon - Intuitive light',
+      ],
+      patterns: [
+        'Crossed arms - Protective stance',
+        'Blindfold - Denial',
+        'Perfect balance - Stalemate',
+      ],
     },
 
     lifeApplications: {
@@ -2755,12 +3235,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'What truth needs acknowledging?',
     ],
 
-    commonCombinations: ['two-swords-justice', 'two-swords-hanged-man', 'two-swords-high-priestess'],
+    commonCombinations: [
+      'two-swords-justice',
+      'two-swords-hanged-man',
+      'two-swords-high-priestess',
+    ],
   },
 
   '52': {
     // Three of Swords
-    reversedKeywords: ['recovery', 'forgiveness', 'releasing pain', 'moving on', 'optimism returning'],
+    reversedKeywords: [
+      'recovery',
+      'forgiveness',
+      'releasing pain',
+      'moving on',
+      'optimism returning',
+    ],
     reversedMeaning:
       'Reversed, Three of Swords indicates beginning to recover from heartbreak. Pain is releasing and healing begins. Forgiveness becomes possible.',
 
@@ -2774,7 +3264,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Isolated Heart - Painful vulnerability',
       ],
       colors: ['Gray - Sorrow', 'Red Heart - Love wounded', 'Silver Swords - Painful truth'],
-      patterns: ['Piercing arrangement - Multiple hurts', 'Rain falling - Tears flowing', 'No ground - Floating in grief'],
+      patterns: [
+        'Piercing arrangement - Multiple hurts',
+        'Rain falling - Tears flowing',
+        'No ground - Floating in grief',
+      ],
     },
 
     lifeApplications: {
@@ -2807,7 +3301,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '53': {
     // Four of Swords
-    reversedKeywords: ['restlessness', 'burnout', 'slow recovery', 'refusing rest', 'mental exhaustion'],
+    reversedKeywords: [
+      'restlessness',
+      'burnout',
+      'slow recovery',
+      'refusing rest',
+      'mental exhaustion',
+    ],
     reversedMeaning:
       'Reversed, Four of Swords warns of refusing necessary rest or slow recovery. You may be too restless or burned out. Forced rest may come.',
 
@@ -2820,8 +3320,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Praying Hands - Meditation and prayer',
         'Tomb/Bed - Deep rest needed',
       ],
-      colors: ['Gray Stone - Stillness', 'Gold and Blue Glass - Divine healing', 'Yellow Light - Spiritual peace'],
-      patterns: ['Horizontal position - Complete rest', 'Prayer pose - Spiritual recovery', 'Weapons stored - Pause from battle'],
+      colors: [
+        'Gray Stone - Stillness',
+        'Gold and Blue Glass - Divine healing',
+        'Yellow Light - Spiritual peace',
+      ],
+      patterns: [
+        'Horizontal position - Complete rest',
+        'Prayer pose - Spiritual recovery',
+        'Weapons stored - Pause from battle',
+      ],
     },
 
     lifeApplications: {
@@ -2854,7 +3362,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '54': {
     // Five of Swords
-    reversedKeywords: ['reconciliation', 'making amends', 'past resentment', 'moving on from conflict', 'learning from defeat'],
+    reversedKeywords: [
+      'reconciliation',
+      'making amends',
+      'past resentment',
+      'moving on from conflict',
+      'learning from defeat',
+    ],
     reversedMeaning:
       'Reversed, Five of Swords indicates moving past conflict or making amends. You may be reconciling or learning from past defeats. Let go of resentment.',
 
@@ -2867,8 +3381,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Retreating Figures - Walking away',
         'Smug Expression - Unsavory victory',
       ],
-      colors: ['Gray/Green - Uncomfortable atmosphere', 'Yellow Sky - Conflict energy', 'Blue Water - Emotional aftermath'],
-      patterns: ['Three collected, two dropped - Taking too much', 'Looking at losers - Gloating', 'Others leaving - Relationship cost'],
+      colors: [
+        'Gray/Green - Uncomfortable atmosphere',
+        'Yellow Sky - Conflict energy',
+        'Blue Water - Emotional aftermath',
+      ],
+      patterns: [
+        'Three collected, two dropped - Taking too much',
+        'Looking at losers - Gloating',
+        'Others leaving - Relationship cost',
+      ],
     },
 
     lifeApplications: {
@@ -2883,7 +3405,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'Consider the cost of winning',
       'Avoid pyrrhic victories',
       'Choose battles wisely',
-      'Don\'t burn bridges',
+      "Don't burn bridges",
       'Consider reconciliation',
       'Learn from defeats gracefully',
     ],
@@ -2901,7 +3423,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '55': {
     // Six of Swords
-    reversedKeywords: ['stuck', 'resistance to change', 'unfinished business', 'turbulent transition', 'returning to trouble'],
+    reversedKeywords: [
+      'stuck',
+      'resistance to change',
+      'unfinished business',
+      'turbulent transition',
+      'returning to trouble',
+    ],
     reversedMeaning:
       'Reversed, Six of Swords indicates difficulty moving on or turbulent transitions. You may be stuck in troubled waters or returning to problems.',
 
@@ -2914,8 +3442,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Rough Water Behind - Troubles left',
         'Ferryman - Guide through change',
       ],
-      colors: ['Gray/Blue - Transition state', 'Calm vs Choppy Water - Contrast', 'Muted Tones - Somber journey'],
-      patterns: ['Moving forward - Progress', 'Swords carried - Taking lessons', 'Calm ahead - Better times coming'],
+      colors: [
+        'Gray/Blue - Transition state',
+        'Calm vs Choppy Water - Contrast',
+        'Muted Tones - Somber journey',
+      ],
+      patterns: [
+        'Moving forward - Progress',
+        'Swords carried - Taking lessons',
+        'Calm ahead - Better times coming',
+      ],
     },
 
     lifeApplications: {
@@ -2948,7 +3484,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '56': {
     // Seven of Swords
-    reversedKeywords: ['coming clean', 'confession', 'conscience', 'getting caught', 'returning what was taken'],
+    reversedKeywords: [
+      'coming clean',
+      'confession',
+      'conscience',
+      'getting caught',
+      'returning what was taken',
+    ],
     reversedMeaning:
       'Reversed, Seven of Swords indicates confession, getting caught, or conscience awakening. Time to come clean or return what was taken.',
 
@@ -2961,8 +3503,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Looking Back - Fear of discovery',
         'Tip-Toe Walk - Secrecy',
       ],
-      colors: ['Yellow - Mental activity', 'Red/White Tents - Scene of deception', 'Blue Sky - Clarity despite deceit'],
-      patterns: ['Sneaking posture - Guilt and secrecy', 'Partial taking - Cannot succeed fully', 'Looking back - Paranoia'],
+      colors: [
+        'Yellow - Mental activity',
+        'Red/White Tents - Scene of deception',
+        'Blue Sky - Clarity despite deceit',
+      ],
+      patterns: [
+        'Sneaking posture - Guilt and secrecy',
+        'Partial taking - Cannot succeed fully',
+        'Looking back - Paranoia',
+      ],
     },
 
     lifeApplications: {
@@ -2977,7 +3527,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'Be strategic but ethical',
       'Watch for deception',
       'Come clean if needed',
-      'Don\'t take shortcuts',
+      "Don't take shortcuts",
       'Protect your ideas',
       'Be honest with yourself',
     ],
@@ -2995,7 +3545,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '57': {
     // Eight of Swords
-    reversedKeywords: ['self-acceptance', 'new perspective', 'freedom', 'releasing limiting beliefs', 'empowerment'],
+    reversedKeywords: [
+      'self-acceptance',
+      'new perspective',
+      'freedom',
+      'releasing limiting beliefs',
+      'empowerment',
+    ],
     reversedMeaning:
       'Reversed, Eight of Swords indicates breaking free from limiting beliefs. You are releasing self-imposed restrictions. Freedom and empowerment come.',
 
@@ -3008,8 +3564,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Castle in Distance - Help available',
         'Muddy Ground - Stuck feeling',
       ],
-      colors: ['Gray - Limitation', 'Blue Sky - Freedom possible', 'Red Dress - Life force constrained'],
-      patterns: ['Surrounded but not touching - Self-created prison', 'Loose ties - Can escape', 'Castle visible - Help exists'],
+      colors: [
+        'Gray - Limitation',
+        'Blue Sky - Freedom possible',
+        'Red Dress - Life force constrained',
+      ],
+      patterns: [
+        'Surrounded but not touching - Self-created prison',
+        'Loose ties - Can escape',
+        'Castle visible - Help exists',
+      ],
     },
 
     lifeApplications: {
@@ -3042,7 +3606,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '58': {
     // Nine of Swords
-    reversedKeywords: ['hope', 'recovery from anxiety', 'facing fears', 'releasing worry', 'reaching out'],
+    reversedKeywords: [
+      'hope',
+      'recovery from anxiety',
+      'facing fears',
+      'releasing worry',
+      'reaching out',
+    ],
     reversedMeaning:
       'Reversed, Nine of Swords indicates recovery from anxiety or facing fears. Worry begins to release. Help and hope are available.',
 
@@ -3055,8 +3625,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Quilt with Symbols - Life story',
         'Carved Bed - Mind as prison',
       ],
-      colors: ['Black - Despair', 'Red/Yellow Quilt - Life amid darkness', 'Silver Swords - Cutting thoughts'],
-      patterns: ['Upright in bed - Cannot sleep', 'Swords above - Thoughts oppressing', 'Alone in darkness - Isolation'],
+      colors: [
+        'Black - Despair',
+        'Red/Yellow Quilt - Life amid darkness',
+        'Silver Swords - Cutting thoughts',
+      ],
+      patterns: [
+        'Upright in bed - Cannot sleep',
+        'Swords above - Thoughts oppressing',
+        'Alone in darkness - Isolation',
+      ],
     },
 
     lifeApplications: {
@@ -3089,7 +3667,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '59': {
     // Ten of Swords
-    reversedKeywords: ['recovery', 'improvement', 'lessons learned', 'worst is over', 'rising again'],
+    reversedKeywords: [
+      'recovery',
+      'improvement',
+      'lessons learned',
+      'worst is over',
+      'rising again',
+    ],
     reversedMeaning:
       'Reversed, Ten of Swords indicates the worst is over. Recovery begins. You are rising from rock bottom with lessons learned.',
 
@@ -3103,7 +3687,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Hand Gesture - Acceptance or blessing',
       ],
       colors: ['Black - Complete ending', 'Yellow Dawn - Hope', 'Red - Life remains'],
-      patterns: ['Complete defeat - Nowhere to go but up', 'Dawn coming - New beginning', 'Stillness - Acceptance'],
+      patterns: [
+        'Complete defeat - Nowhere to go but up',
+        'Dawn coming - New beginning',
+        'Stillness - Acceptance',
+      ],
     },
 
     lifeApplications: {
@@ -3136,7 +3724,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '60': {
     // Page of Swords
-    reversedKeywords: ['haste', 'scattered thoughts', 'deception', 'all talk no action', 'cynicism'],
+    reversedKeywords: [
+      'haste',
+      'scattered thoughts',
+      'deception',
+      'all talk no action',
+      'cynicism',
+    ],
     reversedMeaning:
       'Reversed, Page of Swords indicates scattered thinking or all talk no action. You may be hasty or cynical. Ground your mental energy.',
 
@@ -3150,7 +3744,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Alert Stance - Vigilance',
       ],
       colors: ['Yellow - Mental energy', 'Blue Sky - Clarity possible', 'Green - Youthful growth'],
-      patterns: ['Looking back - Watching surroundings', 'Sword raised - Ready to fight', 'Wind blowing - Thoughts moving'],
+      patterns: [
+        'Looking back - Watching surroundings',
+        'Sword raised - Ready to fight',
+        'Wind blowing - Thoughts moving',
+      ],
     },
 
     lifeApplications: {
@@ -3197,7 +3795,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Determined Expression - Single-minded focus',
       ],
       colors: ['Blue/Gray - Mental storm', 'White Horse - Swift action', 'Red Plume - Aggression'],
-      patterns: ['Charging forward - Aggressive advance', 'Sword raised - Ready for battle', 'Wind blowing - Fast movement'],
+      patterns: [
+        'Charging forward - Aggressive advance',
+        'Sword raised - Ready for battle',
+        'Wind blowing - Fast movement',
+      ],
     },
 
     lifeApplications: {
@@ -3213,7 +3815,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'Cut through obstacles',
       'Communicate directly',
       'Move fast when needed',
-      'Don\'t hesitate',
+      "Don't hesitate",
       'Balance speed with wisdom',
     ],
 
@@ -3225,7 +3827,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'When is speed helpful vs harmful?',
     ],
 
-    commonCombinations: ['knight-swords-chariot', 'knight-swords-tower', 'knight-swords-eight-wands'],
+    commonCombinations: [
+      'knight-swords-chariot',
+      'knight-swords-tower',
+      'knight-swords-eight-wands',
+    ],
   },
 
   '62': {
@@ -3243,8 +3849,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Clouds and Sky - Mental realm',
         'Butterfly on Throne - Transformation',
       ],
-      colors: ['Blue/Gray - Mental clarity', 'White Clouds - Clear thinking', 'Gold Crown - Wise authority'],
-      patterns: ['Sword upright - Direct truth', 'Open hand - Fair judgment', 'Profile view - Objective perspective'],
+      colors: [
+        'Blue/Gray - Mental clarity',
+        'White Clouds - Clear thinking',
+        'Gold Crown - Wise authority',
+      ],
+      patterns: [
+        'Sword upright - Direct truth',
+        'Open hand - Fair judgment',
+        'Profile view - Objective perspective',
+      ],
     },
 
     lifeApplications: {
@@ -3272,7 +3886,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'How can I think more independently?',
     ],
 
-    commonCombinations: ['queen-swords-justice', 'queen-swords-high-priestess', 'queen-swords-emperor'],
+    commonCombinations: [
+      'queen-swords-justice',
+      'queen-swords-high-priestess',
+      'queen-swords-emperor',
+    ],
   },
 
   '63': {
@@ -3290,8 +3908,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Purple Cloak - Authority and wisdom',
         'Ring on Hand - Commitment to truth',
       ],
-      colors: ['Blue/Purple - Mental authority', 'White Clouds - Clear judgment', 'Gold Crown - Wise rulership'],
-      patterns: ['Sword upright - Direct authority', 'Stern expression - Serious judgment', 'Formal posture - Official authority'],
+      colors: [
+        'Blue/Purple - Mental authority',
+        'White Clouds - Clear judgment',
+        'Gold Crown - Wise rulership',
+      ],
+      patterns: [
+        'Sword upright - Direct authority',
+        'Stern expression - Serious judgment',
+        'Formal posture - Official authority',
+      ],
     },
 
     lifeApplications: {
@@ -3328,7 +3954,13 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
   '64': {
     // Ace of Pentacles
-    reversedKeywords: ['missed opportunity', 'lack of planning', 'scarcity mindset', 'bad investment', 'financial loss'],
+    reversedKeywords: [
+      'missed opportunity',
+      'lack of planning',
+      'scarcity mindset',
+      'bad investment',
+      'financial loss',
+    ],
     reversedMeaning:
       'Reversed, Ace of Pentacles warns of missed financial opportunities or poor planning. Your scarcity mindset may block abundance. Ground your material goals.',
 
@@ -3341,8 +3973,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Lilies - Purity of abundance',
         'Path Through - Way to wealth',
       ],
-      colors: ['Gold - Wealth and abundance', 'Green - Growth and fertility', 'White Flowers - Pure prosperity'],
-      patterns: ['Hand from cloud - Divine provision', 'Garden flourishing - Abundance available', 'Clear path - Way forward'],
+      colors: [
+        'Gold - Wealth and abundance',
+        'Green - Growth and fertility',
+        'White Flowers - Pure prosperity',
+      ],
+      patterns: [
+        'Hand from cloud - Divine provision',
+        'Garden flourishing - Abundance available',
+        'Clear path - Way forward',
+      ],
     },
 
     lifeApplications: {
@@ -3370,12 +4010,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'How can I trust in abundance?',
     ],
 
-    commonCombinations: ['ace-pentacles-ten-pentacles', 'ace-pentacles-empress', 'ace-pentacles-magician'],
+    commonCombinations: [
+      'ace-pentacles-ten-pentacles',
+      'ace-pentacles-empress',
+      'ace-pentacles-magician',
+    ],
   },
 
   '65': {
     // Two of Pentacles
-    reversedKeywords: ['overwhelm', 'poor time management', 'financial disorganization', 'imbalance', 'overcommitted'],
+    reversedKeywords: [
+      'overwhelm',
+      'poor time management',
+      'financial disorganization',
+      'imbalance',
+      'overcommitted',
+    ],
     reversedMeaning:
       'Reversed, Two of Pentacles indicates overwhelm and poor balance. You may be overcommitted or financially disorganized. Simplify and prioritize.',
 
@@ -3388,8 +4038,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Dancing Pose - Flexibility',
         'Red Hat - Passionate engagement',
       ],
-      colors: ['Orange/Red - Active energy', 'Blue Sea - Emotional balance', 'Green - Balanced growth'],
-      patterns: ['Juggling motion - Continuous adjustment', 'Infinity loop - Endless balancing', 'Waves behind - Managing change'],
+      colors: [
+        'Orange/Red - Active energy',
+        'Blue Sea - Emotional balance',
+        'Green - Balanced growth',
+      ],
+      patterns: [
+        'Juggling motion - Continuous adjustment',
+        'Infinity loop - Endless balancing',
+        'Waves behind - Managing change',
+      ],
     },
 
     lifeApplications: {
@@ -3406,7 +4064,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'Manage your time wisely',
       'Go with the flow',
       'Juggle responsibilities carefully',
-      'Don\'t overcommit',
+      "Don't overcommit",
     ],
 
     meditationPrompts: [
@@ -3417,12 +4075,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'How can I simplify?',
     ],
 
-    commonCombinations: ['two-pentacles-wheel', 'two-pentacles-temperance', 'two-pentacles-seven-pentacles'],
+    commonCombinations: [
+      'two-pentacles-wheel',
+      'two-pentacles-temperance',
+      'two-pentacles-seven-pentacles',
+    ],
   },
 
   '66': {
     // Three of Pentacles
-    reversedKeywords: ['lack of teamwork', 'poor quality', 'misalignment', 'working alone', 'apprentice struggles'],
+    reversedKeywords: [
+      'lack of teamwork',
+      'poor quality',
+      'misalignment',
+      'working alone',
+      'apprentice struggles',
+    ],
     reversedMeaning:
       'Reversed, Three of Pentacles indicates poor teamwork or quality issues. Collaboration may be failing. Realign with team goals.',
 
@@ -3436,7 +4104,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Nobleman - Patron or client',
       ],
       colors: ['Gray Stone - Solid work', 'Brown Monk Robe - Dedication', 'Yellow Plan - Vision'],
-      patterns: ['Three looking at plans - Shared vision', 'Different roles - Team diversity', 'Building together - Collaborative creation'],
+      patterns: [
+        'Three looking at plans - Shared vision',
+        'Different roles - Team diversity',
+        'Building together - Collaborative creation',
+      ],
     },
 
     lifeApplications: {
@@ -3464,12 +4136,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'Where is quality important?',
     ],
 
-    commonCombinations: ['three-pentacles-eight-pentacles', 'three-pentacles-hierophant', 'three-pentacles-three-wands'],
+    commonCombinations: [
+      'three-pentacles-eight-pentacles',
+      'three-pentacles-hierophant',
+      'three-pentacles-three-wands',
+    ],
   },
 
   '67': {
     // Four of Pentacles
-    reversedKeywords: ['releasing control', 'generosity', 'reckless spending', 'letting go', 'open to change'],
+    reversedKeywords: [
+      'releasing control',
+      'generosity',
+      'reckless spending',
+      'letting go',
+      'open to change',
+    ],
     reversedMeaning:
       'Reversed, Four of Pentacles indicates releasing grip on possessions or reckless spending. Balance security with generosity.',
 
@@ -3482,8 +4164,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'City Behind - Material world',
         'Throne-like Seat - Position of power',
       ],
-      colors: ['Black Outfit - Restrictive holding', 'Gold Pentacles - Wealth focused', 'Gray City - Material world'],
-      patterns: ['Tight grip - Fear of loss', 'Closed posture - Protective', 'Separated from city - Isolation through hoarding'],
+      colors: [
+        'Black Outfit - Restrictive holding',
+        'Gold Pentacles - Wealth focused',
+        'Gray City - Material world',
+      ],
+      patterns: [
+        'Tight grip - Fear of loss',
+        'Closed posture - Protective',
+        'Separated from city - Isolation through hoarding',
+      ],
     },
 
     lifeApplications: {
@@ -3511,12 +4201,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'How does control limit me?',
     ],
 
-    commonCombinations: ['four-pentacles-devil', 'four-pentacles-emperor', 'four-pentacles-ten-pentacles'],
+    commonCombinations: [
+      'four-pentacles-devil',
+      'four-pentacles-emperor',
+      'four-pentacles-ten-pentacles',
+    ],
   },
 
   '68': {
     // Five of Pentacles
-    reversedKeywords: ['recovery', 'end of hard times', 'spiritual poverty', 'finding help', 'positive changes'],
+    reversedKeywords: [
+      'recovery',
+      'end of hard times',
+      'spiritual poverty',
+      'finding help',
+      'positive changes',
+    ],
     reversedMeaning:
       'Reversed, Five of Pentacles indicates recovery from hardship or finding help. Hard times are ending. Look for available support.',
 
@@ -3529,8 +4229,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Snow - Cold hard times',
         'Torn Clothes - Poverty and need',
       ],
-      colors: ['White Snow - Cold hardship', 'Gold Window - Help available', 'Gray - Difficult times'],
-      patterns: ['Passing by church - Missing help', 'Supporting each other - Companionship in hardship', 'Looking down - Not seeing options'],
+      colors: [
+        'White Snow - Cold hardship',
+        'Gold Window - Help available',
+        'Gray - Difficult times',
+      ],
+      patterns: [
+        'Passing by church - Missing help',
+        'Supporting each other - Companionship in hardship',
+        'Looking down - Not seeing options',
+      ],
     },
 
     lifeApplications: {
@@ -3543,7 +4251,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
 
     actionSuggestions: [
       'Look for available help',
-      'Don\'t isolate in hardship',
+      "Don't isolate in hardship",
       'Know this will pass',
       'Seek support from others',
       'Find the open door',
@@ -3558,12 +4266,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'Where is the light in this darkness?',
     ],
 
-    commonCombinations: ['five-pentacles-star', 'five-pentacles-six-pentacles', 'five-pentacles-ten-pentacles'],
+    commonCombinations: [
+      'five-pentacles-star',
+      'five-pentacles-six-pentacles',
+      'five-pentacles-ten-pentacles',
+    ],
   },
 
   '69': {
     // Six of Pentacles
-    reversedKeywords: ['strings attached', 'power imbalance', 'debt', 'selfishness', 'charity misused'],
+    reversedKeywords: [
+      'strings attached',
+      'power imbalance',
+      'debt',
+      'selfishness',
+      'charity misused',
+    ],
     reversedMeaning:
       'Reversed, Six of Pentacles warns of strings attached to giving or receiving. Power imbalance in generosity. Examine motives.',
 
@@ -3577,7 +4295,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Kneeling Posture - Receiving humbly',
       ],
       colors: ['Purple - Generosity and wealth', 'Gold - Abundance shared', 'Gray - Those in need'],
-      patterns: ['Scales balanced - Fair giving', 'One gives, others receive - Cycle of generosity', 'Open hands - Willing exchange'],
+      patterns: [
+        'Scales balanced - Fair giving',
+        'One gives, others receive - Cycle of generosity',
+        'Open hands - Willing exchange',
+      ],
     },
 
     lifeApplications: {
@@ -3605,12 +4327,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'How do I feel about receiving?',
     ],
 
-    commonCombinations: ['six-pentacles-empress', 'six-pentacles-justice', 'six-pentacles-ten-cups'],
+    commonCombinations: [
+      'six-pentacles-empress',
+      'six-pentacles-justice',
+      'six-pentacles-ten-cups',
+    ],
   },
 
   '70': {
     // Seven of Pentacles
-    reversedKeywords: ['impatience', 'poor planning', 'lack of growth', 'wasted effort', 'giving up too soon'],
+    reversedKeywords: [
+      'impatience',
+      'poor planning',
+      'lack of growth',
+      'wasted effort',
+      'giving up too soon',
+    ],
     reversedMeaning:
       'Reversed, Seven of Pentacles warns of impatience or poor planning. You may give up too soon or see lack of growth. Reassess your approach.',
 
@@ -3623,8 +4355,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Vine Growing - Progress visible',
         'Thoughtful Expression - Evaluating efforts',
       ],
-      colors: ['Green - Growth', 'Gold Pentacles - Wealth developing', 'Brown Earth - Grounded work'],
-      patterns: ['Waiting posture - Patience needed', 'Looking at progress - Assessment', 'Growth visible - Efforts paying off'],
+      colors: [
+        'Green - Growth',
+        'Gold Pentacles - Wealth developing',
+        'Brown Earth - Grounded work',
+      ],
+      patterns: [
+        'Waiting posture - Patience needed',
+        'Looking at progress - Assessment',
+        'Growth visible - Efforts paying off',
+      ],
     },
 
     lifeApplications: {
@@ -3652,12 +4392,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'What adjustments are needed?',
     ],
 
-    commonCombinations: ['seven-pentacles-eight-pentacles', 'seven-pentacles-nine-pentacles', 'seven-pentacles-empress'],
+    commonCombinations: [
+      'seven-pentacles-eight-pentacles',
+      'seven-pentacles-nine-pentacles',
+      'seven-pentacles-empress',
+    ],
   },
 
   '71': {
     // Eight of Pentacles
-    reversedKeywords: ['perfectionism', 'lack of focus', 'poor quality', 'shortcuts', 'unfulfilling work'],
+    reversedKeywords: [
+      'perfectionism',
+      'lack of focus',
+      'poor quality',
+      'shortcuts',
+      'unfulfilling work',
+    ],
     reversedMeaning:
       'Reversed, Eight of Pentacles warns of perfectionism or cutting corners. Work may be unfulfilling or quality suffering. Find balance.',
 
@@ -3671,7 +4421,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Town in Distance - Removed from distraction',
       ],
       colors: ['Blue - Dedication', 'Gold Pentacles - Quality work', 'Brown - Practical skill'],
-      patterns: ['Repetitive work - Practice and mastery', 'Focused attention - Dedication', 'Isolated work - Concentration'],
+      patterns: [
+        'Repetitive work - Practice and mastery',
+        'Focused attention - Dedication',
+        'Isolated work - Concentration',
+      ],
     },
 
     lifeApplications: {
@@ -3699,12 +4453,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'What work fulfills me?',
     ],
 
-    commonCombinations: ['eight-pentacles-three-pentacles', 'eight-pentacles-magician', 'eight-pentacles-nine-pentacles'],
+    commonCombinations: [
+      'eight-pentacles-three-pentacles',
+      'eight-pentacles-magician',
+      'eight-pentacles-nine-pentacles',
+    ],
   },
 
   '72': {
     // Nine of Pentacles
-    reversedKeywords: ['financial dependence', 'overwork', 'superficiality', 'hustling', 'lack of self-worth'],
+    reversedKeywords: [
+      'financial dependence',
+      'overwork',
+      'superficiality',
+      'hustling',
+      'lack of self-worth',
+    ],
     reversedMeaning:
       'Reversed, Nine of Pentacles warns of financial dependence or overwork for status. True abundance comes from self-worth, not external validation.',
 
@@ -3718,7 +4482,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Grape Vines - Fruits of labor',
       ],
       colors: ['Yellow/Gold - Prosperity', 'Green - Abundance', 'Red - Passion fulfilled'],
-      patterns: ['Alone in garden - Independent success', 'Falcon controlled - Power mastered', 'Relaxed posture - Comfortable achievement'],
+      patterns: [
+        'Alone in garden - Independent success',
+        'Falcon controlled - Power mastered',
+        'Relaxed posture - Comfortable achievement',
+      ],
     },
 
     lifeApplications: {
@@ -3746,12 +4514,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'How can I appreciate my success?',
     ],
 
-    commonCombinations: ['nine-pentacles-empress', 'nine-pentacles-queen-pentacles', 'nine-pentacles-sun'],
+    commonCombinations: [
+      'nine-pentacles-empress',
+      'nine-pentacles-queen-pentacles',
+      'nine-pentacles-sun',
+    ],
   },
 
   '73': {
     // Ten of Pentacles
-    reversedKeywords: ['family disputes', 'financial loss', 'broken legacy', 'instability', 'isolation from family'],
+    reversedKeywords: [
+      'family disputes',
+      'financial loss',
+      'broken legacy',
+      'instability',
+      'isolation from family',
+    ],
     reversedMeaning:
       'Reversed, Ten of Pentacles warns of family financial disputes or broken legacy. Wealth may not bring happiness. Heal family relationships.',
 
@@ -3765,7 +4543,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Children Playing - Future generation',
       ],
       colors: ['Gold - Wealth', 'Red/Blue - Passion and stability', 'White - Purity of family'],
-      patterns: ['Three generations - Family continuity', 'Dogs loyal - Faithful wealth', 'Stable structure - Lasting legacy'],
+      patterns: [
+        'Three generations - Family continuity',
+        'Dogs loyal - Faithful wealth',
+        'Stable structure - Lasting legacy',
+      ],
     },
 
     lifeApplications: {
@@ -3793,12 +4575,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'What do I want to leave behind?',
     ],
 
-    commonCombinations: ['ten-pentacles-empress', 'ten-pentacles-hierophant', 'ten-pentacles-four-wands'],
+    commonCombinations: [
+      'ten-pentacles-empress',
+      'ten-pentacles-hierophant',
+      'ten-pentacles-four-wands',
+    ],
   },
 
   '74': {
     // Page of Pentacles
-    reversedKeywords: ['procrastination', 'missed opportunities', 'poor grades', 'lack of progress', 'irresponsibility'],
+    reversedKeywords: [
+      'procrastination',
+      'missed opportunities',
+      'poor grades',
+      'lack of progress',
+      'irresponsibility',
+    ],
     reversedMeaning:
       'Reversed, Page of Pentacles indicates procrastination or missed opportunities for learning. Progress may be slow. Get grounded and practical.',
 
@@ -3811,8 +4603,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Mountain - Goals to achieve',
         'Green Tunic - Growth and learning',
       ],
-      colors: ['Green - Growth and learning', 'Gold Pentacle - Material focus', 'Brown Earth - Grounded approach'],
-      patterns: ['Contemplating pentacle - Learning value', 'Still stance - Patient study', 'Fertile surroundings - Potential'],
+      colors: [
+        'Green - Growth and learning',
+        'Gold Pentacle - Material focus',
+        'Brown Earth - Grounded approach',
+      ],
+      patterns: [
+        'Contemplating pentacle - Learning value',
+        'Still stance - Patient study',
+        'Fertile surroundings - Potential',
+      ],
     },
 
     lifeApplications: {
@@ -3840,12 +4640,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'What opportunities await?',
     ],
 
-    commonCombinations: ['page-pentacles-ace-pentacles', 'page-pentacles-three-pentacles', 'page-pentacles-fool'],
+    commonCombinations: [
+      'page-pentacles-ace-pentacles',
+      'page-pentacles-three-pentacles',
+      'page-pentacles-fool',
+    ],
   },
 
   '75': {
     // Knight of Pentacles
-    reversedKeywords: ['laziness', 'stuck', 'boredom', 'perfectionism paralyzing', 'lack of progress'],
+    reversedKeywords: [
+      'laziness',
+      'stuck',
+      'boredom',
+      'perfectionism paralyzing',
+      'lack of progress',
+    ],
     reversedMeaning:
       'Reversed, Knight of Pentacles warns of being stuck or lazy. Perfectionism may paralyze progress. Find balance between patience and action.',
 
@@ -3858,8 +4668,16 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Looking at Pentacle - Evaluating worth',
         'Steady Gaze - Determined focus',
       ],
-      colors: ['Brown/Green - Earthy stability', 'Gold Pentacle - Material focus', 'Black Horse - Reliable strength'],
-      patterns: ['Still horse - Patient waiting', 'Pentacle held carefully - Protecting investment', 'Grounded stance - Stability'],
+      colors: [
+        'Brown/Green - Earthy stability',
+        'Gold Pentacle - Material focus',
+        'Black Horse - Reliable strength',
+      ],
+      patterns: [
+        'Still horse - Patient waiting',
+        'Pentacle held carefully - Protecting investment',
+        'Grounded stance - Stability',
+      ],
     },
 
     lifeApplications: {
@@ -3875,7 +4693,7 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'Be patient with progress',
       'Work hard and consistently',
       'Protect your investments',
-      'Don\'t rush the process',
+      "Don't rush the process",
       'Trust in gradual growth',
     ],
 
@@ -3887,12 +4705,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'What am I building gradually?',
     ],
 
-    commonCombinations: ['knight-pentacles-eight-pentacles', 'knight-pentacles-hermit', 'knight-pentacles-seven-pentacles'],
+    commonCombinations: [
+      'knight-pentacles-eight-pentacles',
+      'knight-pentacles-hermit',
+      'knight-pentacles-seven-pentacles',
+    ],
   },
 
   '76': {
     // Queen of Pentacles
-    reversedKeywords: ['neglecting self', 'smothering', 'financial dependence', 'work-home imbalance', 'materialism'],
+    reversedKeywords: [
+      'neglecting self',
+      'smothering',
+      'financial dependence',
+      'work-home imbalance',
+      'materialism',
+    ],
     reversedMeaning:
       'Reversed, Queen of Pentacles warns of neglecting self-care or being too focused on others. Balance nurturing with self-nourishment.',
 
@@ -3906,7 +4734,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Caring Expression - Nurturing presence',
       ],
       colors: ['Green - Growth and nature', 'Red - Passion for nurturing', 'Gold - Abundance'],
-      patterns: ['Cradling pentacle - Nurturing resources', 'Surrounded by nature - Connected to earth', 'Throne in garden - Comfort in nature'],
+      patterns: [
+        'Cradling pentacle - Nurturing resources',
+        'Surrounded by nature - Connected to earth',
+        'Throne in garden - Comfort in nature',
+      ],
     },
 
     lifeApplications: {
@@ -3934,12 +4766,22 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'How can I connect with nature?',
     ],
 
-    commonCombinations: ['queen-pentacles-empress', 'queen-pentacles-nine-pentacles', 'queen-pentacles-ten-pentacles'],
+    commonCombinations: [
+      'queen-pentacles-empress',
+      'queen-pentacles-nine-pentacles',
+      'queen-pentacles-ten-pentacles',
+    ],
   },
 
   '77': {
     // King of Pentacles
-    reversedKeywords: ['greed', 'materialism', 'poor financial management', 'stubborn', 'corruption'],
+    reversedKeywords: [
+      'greed',
+      'materialism',
+      'poor financial management',
+      'stubborn',
+      'corruption',
+    ],
     reversedMeaning:
       'Reversed, King of Pentacles warns of greed, poor management, or corruption. Material success without integrity fails. Balance wealth with ethics.',
 
@@ -3953,7 +4795,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
         'Grape Vines - Fruits of success',
       ],
       colors: ['Gold/Yellow - Wealth mastered', 'Green - Abundance', 'Black - Serious authority'],
-      patterns: ['Comfortable seated - Established success', 'Pentacle displayed - Wealth shown', 'Surrounded by abundance - Complete prosperity'],
+      patterns: [
+        'Comfortable seated - Established success',
+        'Pentacle displayed - Wealth shown',
+        'Surrounded by abundance - Complete prosperity',
+      ],
     },
 
     lifeApplications: {
@@ -3981,7 +4827,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'What does true prosperity look like?',
     ],
 
-    commonCombinations: ['king-pentacles-emperor', 'king-pentacles-ten-pentacles', 'king-pentacles-queen-pentacles'],
+    commonCombinations: [
+      'king-pentacles-emperor',
+      'king-pentacles-ten-pentacles',
+      'king-pentacles-queen-pentacles',
+    ],
   },
 
   '22': {
@@ -4020,12 +4870,11 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
     lifeApplications: {
       career:
         'Exciting new career opportunity. Time to pursue your passion project. Entrepreneurial ventures favored. Your creative ideas have real potential. Take initiative.',
-      love:
-        'Passionate new attraction or renewed spark in relationship. Sexual chemistry. Exciting new phase of romance. Follow your enthusiasm.',
+      love: 'Passionate new attraction or renewed spark in relationship. Sexual chemistry. Exciting new phase of romance. Follow your enthusiasm.',
       health:
         'Burst of vital energy. Good time to start new fitness routine. Your life force is strong. Channel energy into physical activity. Passion energizes you.',
       finance:
-        'New income opportunity. Your ideas have earning potential. Good time to start business or side hustle. Invest in ventures you\'re passionate about.',
+        "New income opportunity. Your ideas have earning potential. Good time to start business or side hustle. Invest in ventures you're passionate about.",
       spiritual:
         'Spiritual calling or awakening. New creative or spiritual practice. Your life purpose becomes clearer. Act on divine inspiration.',
     },
@@ -4053,7 +4902,6 @@ export const ENHANCED_CARD_DATA: Record<string, EnhancedCardData> = {
       'ace-wands-fool', // Passionate new beginning',
     ],
   },
-
 };
 
 /**

@@ -8,7 +8,10 @@ import { CardIconBase, CardIconProps } from './MajorArcanaIcons';
  */
 
 // Wands (Fire Element) - Vertical staff with flames
-export const WandSymbol: React.FC<CardIconProps & { count?: number }> = ({ color = '#EF4444', count = 1 }) => {
+export const WandSymbol: React.FC<CardIconProps & { count?: number }> = ({
+  color = '#EF4444',
+  count = 1,
+}) => {
   const renderWand = (x: number, y: number) => (
     <G key={`wand-${x}-${y}`}>
       <Rect x={x - 2} y={y} width="4" height="40" fill={color} />
@@ -18,18 +21,22 @@ export const WandSymbol: React.FC<CardIconProps & { count?: number }> = ({ color
 
   const positions = getSymbolPositions(count);
 
-  return (
-    <CardIconBase>
-      {positions.map((pos) => renderWand(pos.x, pos.y))}
-    </CardIconBase>
-  );
+  return <CardIconBase>{positions.map((pos) => renderWand(pos.x, pos.y))}</CardIconBase>;
 };
 
 // Cups (Water Element) - Chalice/goblet
-export const CupSymbol: React.FC<CardIconProps & { count?: number }> = ({ color = '#06B6D4', count = 1 }) => {
+export const CupSymbol: React.FC<CardIconProps & { count?: number }> = ({
+  color = '#06B6D4',
+  count = 1,
+}) => {
   const renderCup = (x: number, y: number) => (
     <G key={`cup-${x}-${y}`}>
-      <Path d={`M${x - 10} ${y} L${x - 8} ${y + 20} L${x + 8} ${y + 20} L${x + 10} ${y} Z`} stroke={color} strokeWidth="2" fill="none" />
+      <Path
+        d={`M${x - 10} ${y} L${x - 8} ${y + 20} L${x + 8} ${y + 20} L${x + 10} ${y} Z`}
+        stroke={color}
+        strokeWidth="2"
+        fill="none"
+      />
       <Rect x={x - 3} y={y + 20} width="6" height="10" fill={color} />
       <Line x1={x - 15} y1={y} x2={x + 15} y2={y} stroke={color} strokeWidth="2" />
     </G>
@@ -37,15 +44,14 @@ export const CupSymbol: React.FC<CardIconProps & { count?: number }> = ({ color 
 
   const positions = getSymbolPositions(count);
 
-  return (
-    <CardIconBase>
-      {positions.map((pos) => renderCup(pos.x, pos.y))}
-    </CardIconBase>
-  );
+  return <CardIconBase>{positions.map((pos) => renderCup(pos.x, pos.y))}</CardIconBase>;
 };
 
 // Swords (Air Element) - Simple sword silhouette
-export const SwordSymbol: React.FC<CardIconProps & { count?: number }> = ({ color = '#94A3B8', count = 1 }) => {
+export const SwordSymbol: React.FC<CardIconProps & { count?: number }> = ({
+  color = '#94A3B8',
+  count = 1,
+}) => {
   const renderSword = (x: number, y: number) => (
     <G key={`sword-${x}-${y}`}>
       <Rect x={x - 2} y={y + 10} width="4" height="35" fill={color} />
@@ -56,15 +62,14 @@ export const SwordSymbol: React.FC<CardIconProps & { count?: number }> = ({ colo
 
   const positions = getSymbolPositions(count);
 
-  return (
-    <CardIconBase>
-      {positions.map((pos) => renderSword(pos.x, pos.y))}
-    </CardIconBase>
-  );
+  return <CardIconBase>{positions.map((pos) => renderSword(pos.x, pos.y))}</CardIconBase>;
 };
 
 // Pentacles (Earth Element) - Five-pointed star in circle
-export const PentacleSymbol: React.FC<CardIconProps & { count?: number }> = ({ color = '#10B981', count = 1 }) => {
+export const PentacleSymbol: React.FC<CardIconProps & { count?: number }> = ({
+  color = '#10B981',
+  count = 1,
+}) => {
   const renderPentacle = (x: number, y: number) => (
     <G key={`pentacle-${x}-${y}`}>
       <Circle cx={x} cy={y + 20} r="15" stroke={color} strokeWidth="2" fill="none" />
@@ -77,11 +82,7 @@ export const PentacleSymbol: React.FC<CardIconProps & { count?: number }> = ({ c
 
   const positions = getSymbolPositions(count);
 
-  return (
-    <CardIconBase>
-      {positions.map((pos) => renderPentacle(pos.x, pos.y))}
-    </CardIconBase>
-  );
+  return <CardIconBase>{positions.map((pos) => renderPentacle(pos.x, pos.y))}</CardIconBase>;
 };
 
 // Helper function to calculate symbol positions based on count
@@ -190,10 +191,9 @@ function getSymbolPositions(count: number): { x: number; y: number }[] {
 
 // Court Cards (Page, Knight, Queen, King) - Add figure/crown elements
 
-export const PageIcon: React.FC<CardIconProps & { suit: 'wands' | 'cups' | 'swords' | 'pentacles' }> = ({
-  suit,
-  color
-}) => {
+export const PageIcon: React.FC<
+  CardIconProps & { suit: 'wands' | 'cups' | 'swords' | 'pentacles' }
+> = ({ suit, color }) => {
   const suitColor = getSuitColor(suit);
   const Symbol = getSuitSymbol(suit);
 
@@ -206,10 +206,9 @@ export const PageIcon: React.FC<CardIconProps & { suit: 'wands' | 'cups' | 'swor
   );
 };
 
-export const KnightIcon: React.FC<CardIconProps & { suit: 'wands' | 'cups' | 'swords' | 'pentacles' }> = ({
-  suit,
-  color
-}) => {
+export const KnightIcon: React.FC<
+  CardIconProps & { suit: 'wands' | 'cups' | 'swords' | 'pentacles' }
+> = ({ suit, color }) => {
   const suitColor = getSuitColor(suit);
   const Symbol = getSuitSymbol(suit);
 
@@ -223,10 +222,9 @@ export const KnightIcon: React.FC<CardIconProps & { suit: 'wands' | 'cups' | 'sw
   );
 };
 
-export const QueenIcon: React.FC<CardIconProps & { suit: 'wands' | 'cups' | 'swords' | 'pentacles' }> = ({
-  suit,
-  color
-}) => {
+export const QueenIcon: React.FC<
+  CardIconProps & { suit: 'wands' | 'cups' | 'swords' | 'pentacles' }
+> = ({ suit, color }) => {
   const suitColor = getSuitColor(suit);
   const Symbol = getSuitSymbol(suit);
 
@@ -242,10 +240,9 @@ export const QueenIcon: React.FC<CardIconProps & { suit: 'wands' | 'cups' | 'swo
   );
 };
 
-export const KingIcon: React.FC<CardIconProps & { suit: 'wands' | 'cups' | 'swords' | 'pentacles' }> = ({
-  suit,
-  color
-}) => {
+export const KingIcon: React.FC<
+  CardIconProps & { suit: 'wands' | 'cups' | 'swords' | 'pentacles' }
+> = ({ suit, color }) => {
   const suitColor = getSuitColor(suit);
   const Symbol = getSuitSymbol(suit);
 
@@ -289,4 +286,9 @@ function getSuitSymbol(suit: 'wands' | 'cups' | 'swords' | 'pentacles') {
   }
 }
 
-export { WandSymbol as Wands, CupSymbol as Cups, SwordSymbol as Swords, PentacleSymbol as Pentacles };
+export {
+  WandSymbol as Wands,
+  CupSymbol as Cups,
+  SwordSymbol as Swords,
+  PentacleSymbol as Pentacles,
+};

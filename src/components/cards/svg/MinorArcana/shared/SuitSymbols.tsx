@@ -43,7 +43,12 @@ const CupSymbol: React.FC<{ size: number }> = ({ size }) => {
   return (
     <G transform={`scale(${scale})`}>
       {/* 杯身 */}
-      <Path d="M-8 -8 Q-10 0, -6 8 L6 8 Q10 0, 8 -8 Z" stroke={color} strokeWidth={1.5} fill="none" />
+      <Path
+        d="M-8 -8 Q-10 0, -6 8 L6 8 Q10 0, 8 -8 Z"
+        stroke={color}
+        strokeWidth={1.5}
+        fill="none"
+      />
       {/* 杯脚 */}
       <Line x1="0" y1="8" x2="0" y2="12" stroke={color} strokeWidth={1.5} />
       {/* 底座 */}

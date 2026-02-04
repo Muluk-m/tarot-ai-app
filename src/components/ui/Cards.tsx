@@ -4,13 +4,7 @@
  */
 
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ViewStyle,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg, { Circle, Defs, LinearGradient as SvgLinearGradient, Stop } from 'react-native-svg';
 import { colors } from '@/theme/colors';
@@ -143,8 +137,7 @@ export const HeroCard: React.FC<HeroCardProps> = ({
         colors={themeColors.gradient}
         style={[styles.heroGradient, { borderColor: themeColors.border }]}
         start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
+        end={{ x: 1, y: 1 }}>
         <View style={styles.heroDecoTop} />
         <View style={styles.heroDecoBottom} />
 
@@ -159,16 +152,28 @@ export const HeroCard: React.FC<HeroCardProps> = ({
               {progress !== undefined && (
                 <View style={styles.heroProgressContainer}>
                   <View style={styles.heroProgressBar}>
-                    <View style={[styles.heroProgressFill, { width: `${progress}%`, backgroundColor: themeColors.accent }]} />
+                    <View
+                      style={[
+                        styles.heroProgressFill,
+                        { width: `${progress}%`, backgroundColor: themeColors.accent },
+                      ]}
+                    />
                   </View>
-                  <Text style={[styles.heroProgressText, { color: themeColors.accent }]}>{progress}%</Text>
+                  <Text style={[styles.heroProgressText, { color: themeColors.accent }]}>
+                    {progress}%
+                  </Text>
                 </View>
               )}
             </View>
           </View>
           {progress !== undefined && (
             <View style={styles.heroRight}>
-              <ProgressRing progress={progress} size={responsive.width(60, 70)} strokeWidth={5} color={themeColors.accent} />
+              <ProgressRing
+                progress={progress}
+                size={responsive.width(60, 70)}
+                strokeWidth={5}
+                color={themeColors.accent}
+              />
               {progressLabel && <Text style={styles.heroStageText}>{progressLabel}</Text>}
             </View>
           )}
@@ -207,10 +212,10 @@ export const QuickCard: React.FC<QuickCardProps> = ({
 
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={onPress} style={[styles.quickCard, style]}>
-      <LinearGradient colors={themeColors.gradient} style={[styles.quickCardGradient, { borderColor: themeColors.border }]}>
-        <View style={[styles.quickCardIcon, { backgroundColor: themeColors.iconBg }]}>
-          {icon}
-        </View>
+      <LinearGradient
+        colors={themeColors.gradient}
+        style={[styles.quickCardGradient, { borderColor: themeColors.border }]}>
+        <View style={[styles.quickCardIcon, { backgroundColor: themeColors.iconBg }]}>{icon}</View>
         <Text style={styles.quickCardTitle}>{title}</Text>
         <Text style={styles.quickCardSubtitle}>{subtitle}</Text>
       </LinearGradient>
@@ -250,18 +255,16 @@ export const ListCard: React.FC<ListCardProps> = ({
     <TouchableOpacity
       activeOpacity={disabled ? 1 : 0.9}
       onPress={disabled ? undefined : onPress}
-      style={[styles.listCard, disabled && styles.listCardDisabled, style]}
-    >
+      style={[styles.listCard, disabled && styles.listCardDisabled, style]}>
       <LinearGradient
         colors={themeColors.gradient}
-        style={[styles.listCardGradient, { borderColor: themeColors.border }]}
-      >
+        style={[styles.listCardGradient, { borderColor: themeColors.border }]}>
         <View style={styles.listCardContent}>
-          <View style={[styles.listCardIcon, { backgroundColor: themeColors.iconBg }]}>
-            {icon}
-          </View>
+          <View style={[styles.listCardIcon, { backgroundColor: themeColors.iconBg }]}>{icon}</View>
           <View style={styles.listCardText}>
-            <Text style={[styles.listCardTitle, disabled && styles.listCardTitleDisabled]}>{title}</Text>
+            <Text style={[styles.listCardTitle, disabled && styles.listCardTitleDisabled]}>
+              {title}
+            </Text>
             {subtitle && <Text style={styles.listCardSubtitle}>{subtitle}</Text>}
           </View>
           {rightElement || (showArrow && <ChevronRightIcon size={20} color={themeColors.accent} />)}
@@ -311,12 +314,7 @@ interface SectionHeaderProps {
 /**
  * 区块标题
  */
-export const SectionHeader: React.FC<SectionHeaderProps> = ({
-  title,
-  subtitle,
-  action,
-  style,
-}) => {
+export const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle, action, style }) => {
   return (
     <View style={[styles.sectionHeader, style]}>
       <View style={styles.sectionHeaderLeft}>
@@ -343,12 +341,7 @@ interface BadgeProps {
 /**
  * 徽章组件
  */
-export const Badge: React.FC<BadgeProps> = ({
-  text,
-  icon,
-  theme = 'gold',
-  style,
-}) => {
+export const Badge: React.FC<BadgeProps> = ({ text, icon, theme = 'gold', style }) => {
   const themeColors = CARD_THEMES[theme];
 
   return (

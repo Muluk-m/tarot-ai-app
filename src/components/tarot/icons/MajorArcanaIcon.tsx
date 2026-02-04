@@ -48,7 +48,12 @@ export const MajorArcanaIcon: React.FC<MajorArcanaIconProps> = ({
         return (
           <G>
             <Path d="M 10 12 Q 8 12, 8 10 Q 8 8, 10 8" stroke={color} strokeWidth="2" fill="none" />
-            <Path d="M 14 8 Q 16 8, 16 10 Q 16 12, 14 12" stroke={color} strokeWidth="2" fill="none" />
+            <Path
+              d="M 14 8 Q 16 8, 16 10 Q 16 12, 14 12"
+              stroke={color}
+              strokeWidth="2"
+              fill="none"
+            />
             <Rect x="6" y="8" width="2" height="12" fill={color} />
             <Rect x="16" y="8" width="2" height="12" fill={color} />
           </G>
@@ -61,7 +66,12 @@ export const MajorArcanaIcon: React.FC<MajorArcanaIconProps> = ({
             <Circle cx="12" cy="14" r="4" stroke={color} strokeWidth="2" fill="none" />
             <Line x1="12" y1="18" x2="12" y2="20" stroke={color} strokeWidth="2" />
             <Line x1="10" y1="20" x2="14" y2="20" stroke={color} strokeWidth="2" />
-            <Path d="M 8 6 L 10 10 L 12 8 L 14 10 L 16 6" stroke={color} strokeWidth="2" fill="none" />
+            <Path
+              d="M 8 6 L 10 10 L 12 8 L 14 10 L 16 6"
+              stroke={color}
+              strokeWidth="2"
+              fill="none"
+            />
           </G>
         );
 
@@ -102,7 +112,10 @@ export const MajorArcanaIcon: React.FC<MajorArcanaIconProps> = ({
         return (
           <G>
             <Path d="M 12 4 L 18 12 L 12 20 L 6 12 Z" stroke={color} strokeWidth="2" fill="none" />
-            <Polygon points="12,10 13,12 15,12 13.5,13.5 14,15.5 12,14 10,15.5 10.5,13.5 9,12 11,12" fill={color} />
+            <Polygon
+              points="12,10 13,12 15,12 13.5,13.5 14,15.5 12,14 10,15.5 10.5,13.5 9,12 11,12"
+              fill={color}
+            />
           </G>
         );
 
@@ -111,12 +124,7 @@ export const MajorArcanaIcon: React.FC<MajorArcanaIconProps> = ({
         return (
           <G>
             <Circle cx="12" cy="14" r="6" stroke={color} strokeWidth="2" fill="none" />
-            <Path
-              d="M 8 8 Q 10 6, 12 8 Q 14 10, 16 8"
-              stroke={color}
-              strokeWidth="2"
-              fill="none"
-            />
+            <Path d="M 8 8 Q 10 6, 12 8 Q 14 10, 16 8" stroke={color} strokeWidth="2" fill="none" />
           </G>
         );
 
@@ -143,7 +151,9 @@ export const MajorArcanaIcon: React.FC<MajorArcanaIconProps> = ({
               const y1 = 12 + 2 * Math.sin(rad);
               const x2 = 12 + 8 * Math.cos(rad);
               const y2 = 12 + 8 * Math.sin(rad);
-              return <Line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="1.5" />;
+              return (
+                <Line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="1.5" />
+              );
             })}
           </G>
         );
@@ -198,12 +208,7 @@ export const MajorArcanaIcon: React.FC<MajorArcanaIconProps> = ({
         return (
           <G>
             <Circle cx="12" cy="12" r="8" stroke={color} strokeWidth="2" fill="none" />
-            <Polygon
-              points="12,16 9,10 15,10"
-              stroke={color}
-              strokeWidth="1.5"
-              fill="none"
-            />
+            <Polygon points="12,16 9,10 15,10" stroke={color} strokeWidth="1.5" fill="none" />
             <Path d="M 9 10 L 15 14 M 15 10 L 9 14" stroke={color} strokeWidth="1.5" />
           </G>
         );
@@ -213,7 +218,13 @@ export const MajorArcanaIcon: React.FC<MajorArcanaIconProps> = ({
         return (
           <G>
             <Rect x="8" y="8" width="8" height="12" stroke={color} strokeWidth="2" fill="none" />
-            <Path d="M 14 4 L 10 12 L 13 12 L 10 20" stroke={color} strokeWidth="2" strokeLinejoin="miter" fill="none" />
+            <Path
+              d="M 14 4 L 10 12 L 13 12 L 10 20"
+              stroke={color}
+              strokeWidth="2"
+              strokeLinejoin="miter"
+              fill="none"
+            />
             <Circle cx="10" cy="8" r="1" fill={color} />
             <Circle cx="14" cy="8" r="1" fill={color} />
           </G>
@@ -260,7 +271,9 @@ export const MajorArcanaIcon: React.FC<MajorArcanaIconProps> = ({
               const y1 = 12 + 6 * Math.sin(rad);
               const x2 = 12 + 9 * Math.cos(rad);
               const y2 = 12 + 9 * Math.sin(rad);
-              return <Line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="2" />;
+              return (
+                <Line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="2" />
+              );
             })}
           </G>
         );

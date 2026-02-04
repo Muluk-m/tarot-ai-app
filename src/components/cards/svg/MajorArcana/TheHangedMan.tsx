@@ -4,7 +4,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -25,8 +35,25 @@ export const TheHangedMan: React.FC<CardSVGProps> = ({
         </LinearGradient>
       </Defs>
 
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#hangedman-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#hangedman-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* T形绞刑架（由活木构成） */}
       <G transform="translate(60, 15)">
@@ -37,10 +64,30 @@ export const TheHangedMan: React.FC<CardSVGProps> = ({
         {/* 右支柱 */}
         <Line x1="35" y1="0" x2="35" y2="130" stroke={stroke.silver} strokeWidth={3} />
         {/* 叶子装饰（表示活木） */}
-        <Path d="M-38 20 Q-45 15, -42 25" stroke={CARD_COLORS.elements.earth} strokeWidth={1} fill="none" />
-        <Path d="M-38 60 Q-45 55, -42 65" stroke={CARD_COLORS.elements.earth} strokeWidth={1} fill="none" />
-        <Path d="M38 30 Q45 25, 42 35" stroke={CARD_COLORS.elements.earth} strokeWidth={1} fill="none" />
-        <Path d="M38 70 Q45 65, 42 75" stroke={CARD_COLORS.elements.earth} strokeWidth={1} fill="none" />
+        <Path
+          d="M-38 20 Q-45 15, -42 25"
+          stroke={CARD_COLORS.elements.earth}
+          strokeWidth={1}
+          fill="none"
+        />
+        <Path
+          d="M-38 60 Q-45 55, -42 65"
+          stroke={CARD_COLORS.elements.earth}
+          strokeWidth={1}
+          fill="none"
+        />
+        <Path
+          d="M38 30 Q45 25, 42 35"
+          stroke={CARD_COLORS.elements.earth}
+          strokeWidth={1}
+          fill="none"
+        />
+        <Path
+          d="M38 70 Q45 65, 42 75"
+          stroke={CARD_COLORS.elements.earth}
+          strokeWidth={1}
+          fill="none"
+        />
       </G>
 
       {/* 倒吊人 */}
@@ -77,7 +124,9 @@ export const TheHangedMan: React.FC<CardSVGProps> = ({
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>XII</SvgText>
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>
+            XII
+          </SvgText>
         </G>
       )}
     </Svg>

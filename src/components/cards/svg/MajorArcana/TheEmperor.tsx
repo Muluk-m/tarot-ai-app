@@ -11,7 +11,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -34,12 +44,34 @@ export const TheEmperor: React.FC<CardSVGProps> = ({
       </Defs>
 
       {/* 背景 */}
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#emperor-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#emperor-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 山脉背景 */}
       <G opacity={0.2}>
-        <Path d="M0 70 L20 40 L40 65 L55 35 L70 60 L90 30 L110 55 L120 45 L120 70 Z" stroke={fire} strokeWidth={1} fill="none" />
+        <Path
+          d="M0 70 L20 40 L40 65 L55 35 L70 60 L90 30 L110 55 L120 45 L120 70 Z"
+          stroke={fire}
+          strokeWidth={1}
+          fill="none"
+        />
       </G>
 
       {/* 宝座 */}
@@ -68,10 +100,20 @@ export const TheEmperor: React.FC<CardSVGProps> = ({
         <Circle cx="0" cy="0" r="8" fill="none" stroke={stroke.white} strokeWidth={2} />
 
         {/* 皇冠 */}
-        <Path d="M-8 -10 L-5 -18 L0 -12 L5 -18 L8 -10" stroke={gold} strokeWidth={1.5} fill="none" />
+        <Path
+          d="M-8 -10 L-5 -18 L0 -12 L5 -18 L8 -10"
+          stroke={gold}
+          strokeWidth={1.5}
+          fill="none"
+        />
 
         {/* 胡须 */}
-        <Path d="M-4 6 L-2 12 M0 7 L0 14 M4 6 L2 12" stroke={stroke.white} strokeWidth={1} opacity={0.6} />
+        <Path
+          d="M-4 6 L-2 12 M0 7 L0 14 M4 6 L2 12"
+          stroke={stroke.white}
+          strokeWidth={1}
+          opacity={0.6}
+        />
 
         {/* 身体 */}
         <Path d="M0 8 L0 40" stroke={stroke.white} strokeWidth={2} fill="none" />
@@ -98,7 +140,13 @@ export const TheEmperor: React.FC<CardSVGProps> = ({
         <Path d="M0 40 L10 60" stroke={stroke.white} strokeWidth={2} fill="none" />
 
         {/* 盔甲/长袍暗示 */}
-        <Path d="M-12 15 L-15 40 L15 40 L12 15" stroke={stroke.white} strokeWidth={1} fill="none" opacity={0.4} />
+        <Path
+          d="M-12 15 L-15 40 L15 40 L12 15"
+          stroke={stroke.white}
+          strokeWidth={1}
+          fill="none"
+          opacity={0.4}
+        />
       </G>
 
       {/* 火星符号 - 右上 */}

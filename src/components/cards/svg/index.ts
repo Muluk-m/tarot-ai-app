@@ -15,7 +15,15 @@ export { MAJOR_ARCANA_COMPONENTS, getMajorArcanaComponent } from './MajorArcana'
 
 // Minor Arcana (56 cards)
 export { MinorArcanaCard, type MinorArcanaRank } from './MinorArcana';
-export { SuitSymbol, getSuitColor, getSuitElement, NumberLayout, CourtFigure, type Suit, type CourtRank } from './MinorArcana';
+export {
+  SuitSymbol,
+  getSuitColor,
+  getSuitElement,
+  NumberLayout,
+  CourtFigure,
+  type Suit,
+  type CourtRank,
+} from './MinorArcana';
 
 // Unified Card Renderer
 export { TarotCardSVG } from './TarotCardSVG';

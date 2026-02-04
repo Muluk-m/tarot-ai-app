@@ -33,14 +33,15 @@ export const CardIcon: React.FC<CardIconProps> = ({ card, size = 48, showMultipl
       const count = parseInt(card.rank);
       if (!isNaN(count) && count >= 2 && count <= 10) {
         return (
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', maxWidth: size * 2 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              maxWidth: size * 2,
+            }}>
             {Array.from({ length: Math.min(count, 5) }).map((_, i) => (
-              <SuitSymbol
-                key={i}
-                suit={card.suit!}
-                size={size / 2}
-                color={card.colorScheme}
-              />
+              <SuitSymbol key={i} suit={card.suit!} size={size / 2} color={card.colorScheme} />
             ))}
             {count > 5 && (
               <View style={{ width: '100%', alignItems: 'center', marginTop: 4 }}>

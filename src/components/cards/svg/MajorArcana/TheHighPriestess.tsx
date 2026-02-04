@@ -11,7 +11,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -34,30 +44,87 @@ export const TheHighPriestess: React.FC<CardSVGProps> = ({
       </Defs>
 
       {/* 背景 */}
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#priestess-bg)" />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#priestess-bg)"
+      />
 
       {/* 边框 */}
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 帷幕 - 背景装饰 */}
       <G opacity={0.15}>
-        <Path d="M15 20 Q20 60, 15 100 Q10 130, 15 145" stroke={purple} strokeWidth={1} fill="none" />
-        <Path d="M105 20 Q100 60, 105 100 Q110 130, 105 145" stroke={purple} strokeWidth={1} fill="none" />
+        <Path
+          d="M15 20 Q20 60, 15 100 Q10 130, 15 145"
+          stroke={purple}
+          strokeWidth={1}
+          fill="none"
+        />
+        <Path
+          d="M105 20 Q100 60, 105 100 Q110 130, 105 145"
+          stroke={purple}
+          strokeWidth={1}
+          fill="none"
+        />
         <Path d="M15 20 Q60 35, 105 20" stroke={purple} strokeWidth={1} fill="none" />
       </G>
 
       {/* 左柱 - B */}
       <G transform="translate(22, 75)">
-        <Rect x="-6" y="-40" width="12" height="80" fill="none" stroke={stroke.silver} strokeWidth={1.5} rx={2} />
-        <SvgText x="0" y="-25" textAnchor="middle" fontSize="10" fontWeight="600" fill={stroke.silver}>
+        <Rect
+          x="-6"
+          y="-40"
+          width="12"
+          height="80"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={1.5}
+          rx={2}
+        />
+        <SvgText
+          x="0"
+          y="-25"
+          textAnchor="middle"
+          fontSize="10"
+          fontWeight="600"
+          fill={stroke.silver}>
           B
         </SvgText>
       </G>
 
       {/* 右柱 - J */}
       <G transform="translate(98, 75)">
-        <Rect x="-6" y="-40" width="12" height="80" fill="none" stroke={stroke.white} strokeWidth={1.5} rx={2} />
-        <SvgText x="0" y="-25" textAnchor="middle" fontSize="10" fontWeight="600" fill={stroke.white}>
+        <Rect
+          x="-6"
+          y="-40"
+          width="12"
+          height="80"
+          fill="none"
+          stroke={stroke.white}
+          strokeWidth={1.5}
+          rx={2}
+        />
+        <SvgText
+          x="0"
+          y="-25"
+          textAnchor="middle"
+          fontSize="10"
+          fontWeight="600"
+          fill={stroke.white}>
           J
         </SvgText>
       </G>
@@ -85,7 +152,16 @@ export const TheHighPriestess: React.FC<CardSVGProps> = ({
 
         {/* 卷轴 */}
         <G transform="translate(0, 30)">
-          <Rect x="-8" y="-5" width="16" height="10" fill="none" stroke={gold} strokeWidth={1} rx={1} />
+          <Rect
+            x="-8"
+            y="-5"
+            width="16"
+            height="10"
+            fill="none"
+            stroke={gold}
+            strokeWidth={1}
+            rx={1}
+          />
           <Line x1="-5" y1="-2" x2="5" y2="-2" stroke={gold} strokeWidth={0.5} opacity={0.5} />
           <Line x1="-5" y1="2" x2="5" y2="2" stroke={gold} strokeWidth={0.5} opacity={0.5} />
         </G>
@@ -102,12 +178,7 @@ export const TheHighPriestess: React.FC<CardSVGProps> = ({
 
       {/* 月亮 - 左上角 */}
       <G transform="translate(20, 25)">
-        <Path
-          d="M5 -5 Q-2 0, 5 5 Q10 0, 5 -5"
-          stroke={stroke.silver}
-          strokeWidth={1}
-          fill="none"
-        />
+        <Path d="M5 -5 Q-2 0, 5 5 Q10 0, 5 -5" stroke={stroke.silver} strokeWidth={1} fill="none" />
       </G>
 
       {/* 装饰 - 星点 */}

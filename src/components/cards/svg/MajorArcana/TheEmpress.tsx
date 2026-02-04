@@ -11,7 +11,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -34,13 +44,40 @@ export const TheEmpress: React.FC<CardSVGProps> = ({
       </Defs>
 
       {/* 背景 */}
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#empress-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#empress-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 自然背景 - 树木轮廓 */}
       <G opacity={0.2}>
-        <Path d="M10 145 L10 80 Q5 70, 10 60 Q15 50, 10 40" stroke={earth} strokeWidth={1} fill="none" />
-        <Path d="M110 145 L110 85 Q115 75, 110 65 Q105 55, 110 45" stroke={earth} strokeWidth={1} fill="none" />
+        <Path
+          d="M10 145 L10 80 Q5 70, 10 60 Q15 50, 10 40"
+          stroke={earth}
+          strokeWidth={1}
+          fill="none"
+        />
+        <Path
+          d="M110 145 L110 85 Q115 75, 110 65 Q105 55, 110 45"
+          stroke={earth}
+          strokeWidth={1}
+          fill="none"
+        />
       </G>
 
       {/* 金星符号 - 左上 */}
@@ -101,8 +138,18 @@ export const TheEmpress: React.FC<CardSVGProps> = ({
 
       {/* 小麦/草地 */}
       <G transform="translate(60, 145)" opacity={0.4}>
-        <Path d="M-30 0 L-28 -8 M-25 0 L-23 -10 M-20 0 L-18 -7" stroke={earth} strokeWidth={1} fill="none" />
-        <Path d="M30 0 L28 -8 M25 0 L23 -10 M20 0 L18 -7" stroke={earth} strokeWidth={1} fill="none" />
+        <Path
+          d="M-30 0 L-28 -8 M-25 0 L-23 -10 M-20 0 L-18 -7"
+          stroke={earth}
+          strokeWidth={1}
+          fill="none"
+        />
+        <Path
+          d="M30 0 L28 -8 M25 0 L23 -10 M20 0 L18 -7"
+          stroke={earth}
+          strokeWidth={1}
+          fill="none"
+        />
       </G>
 
       {/* 卡牌编号 */}

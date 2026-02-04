@@ -17,10 +17,7 @@ import { colors } from './colors';
  * @param elevation - Shadow intensity (1-24)
  * @param color - Shadow color (defaults to gold)
  */
-export const createShadow = (
-  elevation: number,
-  color: string = colors.accent.gold
-): ViewStyle => {
+export const createShadow = (elevation: number, color: string = colors.accent.gold): ViewStyle => {
   if (Platform.OS === 'ios') {
     return {
       shadowColor: color,
@@ -49,7 +46,7 @@ export const shadows = {
   lg: createShadow(8),
   xl: createShadow(12),
   xxl: createShadow(16),
-  
+
   // Glow effects
   goldGlow: createShadow(10, colors.accent.gold),
   purpleGlow: createShadow(10, colors.accent.purple),

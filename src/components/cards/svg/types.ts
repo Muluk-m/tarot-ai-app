@@ -33,7 +33,21 @@ export interface MajorArcanaCardProps extends CardSVGProps {
 // 小阿卡纳卡牌组件
 export interface MinorArcanaCardProps extends CardSVGProps {
   suit: 'wands' | 'cups' | 'swords' | 'pentacles';
-  rank: 'ace' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | 'page' | 'knight' | 'queen' | 'king';
+  rank:
+    | 'ace'
+    | '2'
+    | '3'
+    | '4'
+    | '5'
+    | '6'
+    | '7'
+    | '8'
+    | '9'
+    | '10'
+    | 'page'
+    | 'knight'
+    | 'queen'
+    | 'king';
 }
 
 // 花色符号属性
@@ -87,7 +101,10 @@ export type MajorArcanaKey =
   | 'the-world';
 
 // 大阿卡纳编号到名称的映射
-export const MAJOR_ARCANA_NAMES: Record<number, { key: MajorArcanaKey; name: string; numeral: string }> = {
+export const MAJOR_ARCANA_NAMES: Record<
+  number,
+  { key: MajorArcanaKey; name: string; numeral: string }
+> = {
   0: { key: 'the-fool', name: 'The Fool', numeral: '0' },
   1: { key: 'the-magician', name: 'The Magician', numeral: 'I' },
   2: { key: 'the-high-priestess', name: 'The High Priestess', numeral: 'II' },

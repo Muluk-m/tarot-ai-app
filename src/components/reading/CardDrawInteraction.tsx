@@ -51,10 +51,7 @@ export const CardDrawInteraction: React.FC<CardDrawInteractionProps> = ({
   // Animated style for front face (card back)
   const frontAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        { perspective: 1000 },
-        { rotateY: `${getFrontRotation()}deg` },
-      ],
+      transform: [{ perspective: 1000 }, { rotateY: `${getFrontRotation()}deg` }],
       backfaceVisibility: 'hidden' as any,
       opacity: flipProgress.value < 0.5 ? 1 : 0,
     };
@@ -63,10 +60,7 @@ export const CardDrawInteraction: React.FC<CardDrawInteractionProps> = ({
   // Animated style for back face (card front)
   const backAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        { perspective: 1000 },
-        { rotateY: `${getBackRotation()}deg` },
-      ],
+      transform: [{ perspective: 1000 }, { rotateY: `${getBackRotation()}deg` }],
       backfaceVisibility: 'hidden' as any,
       opacity: flipProgress.value >= 0.5 ? 1 : 0,
     };
@@ -94,11 +88,7 @@ export const CardDrawInteraction: React.FC<CardDrawInteractionProps> = ({
         activeOpacity={0.9}
         onPress={handlePress}
         disabled={disabled || isFlipped.value}
-        style={[
-          styles.cardContainer,
-          { width: currentSize.width, height: currentSize.height },
-        ]}
-      >
+        style={[styles.cardContainer, { width: currentSize.width, height: currentSize.height }]}>
         {/* Front face - Card back */}
         <Animated.View style={[styles.cardFace, frontAnimatedStyle]}>
           <CardBack width={currentSize.width} height={currentSize.height} />
@@ -106,12 +96,7 @@ export const CardDrawInteraction: React.FC<CardDrawInteractionProps> = ({
 
         {/* Back face - Card front */}
         <Animated.View style={[styles.cardFace, styles.backFace, backAnimatedStyle]}>
-          <TarotCardDisplay
-            card={card}
-            size={size}
-            showName={true}
-            glowEffect={true}
-          />
+          <TarotCardDisplay card={card} size={size} showName={true} glowEffect={true} />
         </Animated.View>
 
         {/* Tap hint (only show if not flipped) */}

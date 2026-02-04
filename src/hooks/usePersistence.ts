@@ -1,11 +1,7 @@
 import { useEffect } from 'react';
 import { useUserStore } from '@/stores/userStore';
 import { useReadingStore } from '@/stores/readingStore';
-import {
-  saveDailyLimit,
-  saveUserSettings,
-  saveReadingHistory,
-} from '@/services/storageService';
+import { saveDailyLimit, saveUserSettings, saveReadingHistory } from '@/services/storageService';
 
 /**
  * Persistence Hook

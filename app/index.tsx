@@ -1,14 +1,15 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import Svg, { Path, Circle, Defs, LinearGradient as SvgLinearGradient, Stop, Rect } from 'react-native-svg';
+import Svg, {
+  Path,
+  Circle,
+  Defs,
+  LinearGradient as SvgLinearGradient,
+  Stop,
+  Rect,
+} from 'react-native-svg';
 import { colors } from '@/theme/colors';
 import { spacing } from '@/theme/spacing';
 import { shadows } from '@/theme/shadows';
@@ -74,7 +75,13 @@ const TrophyIcon = ({ size = 24, color = '#F59E0B' }: { size?: number; color?: s
 const HistoryIcon = ({ size = 24, color = '#22D3EE' }: { size?: number; color?: string }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Circle cx="12" cy="12" r="10" stroke={color} strokeWidth={2} />
-    <Path d="M12 6v6l4 2" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+    <Path
+      d="M12 6v6l4 2"
+      stroke={color}
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </Svg>
 );
 
@@ -93,12 +100,26 @@ const SparkleIcon = ({ size = 24, color = '#D4AF37' }: { size?: number; color?: 
 
 const ChevronRightIcon = ({ size = 20, color = '#D4AF37' }: { size?: number; color?: string }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-    <Path d="M9 18l6-6-6-6" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+    <Path
+      d="M9 18l6-6-6-6"
+      stroke={color}
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </Svg>
 );
 
 // Progress Ring Component
-const ProgressRing = ({ progress, size = 60, strokeWidth = 4 }: { progress: number; size?: number; strokeWidth?: number }) => {
+const ProgressRing = ({
+  progress,
+  size = 60,
+  strokeWidth = 4,
+}: {
+  progress: number;
+  size?: number;
+  strokeWidth?: number;
+}) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
@@ -158,10 +179,7 @@ export default function Index() {
         end={{ x: 1, y: 1 }}
       />
 
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Compact Header */}
         <View style={styles.header}>
           <View style={styles.headerLeft}>
@@ -181,14 +199,12 @@ export default function Index() {
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={() => router.push('/(learn)')}
-          style={styles.heroCard}
-        >
+          style={styles.heroCard}>
           <LinearGradient
             colors={['#1E2638', '#2E1A47']}
             style={styles.heroGradient}
             start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-          >
+            end={{ x: 1, y: 1 }}>
             {/* Decorative elements */}
             <View style={styles.heroDecoTop} />
             <View style={styles.heroDecoBottom} />
@@ -200,9 +216,7 @@ export default function Index() {
                 </View>
                 <View style={styles.heroTextContainer}>
                   <Text style={styles.heroTitle}>Continue Learning</Text>
-                  <Text style={styles.heroSubtitle}>
-                    Master the wisdom of 78 tarot cards
-                  </Text>
+                  <Text style={styles.heroSubtitle}>Master the wisdom of 78 tarot cards</Text>
                   <View style={styles.heroProgressContainer}>
                     <View style={styles.heroProgressBar}>
                       <View style={[styles.heroProgressFill, { width: `${overallProgress}%` }]} />
@@ -235,12 +249,10 @@ export default function Index() {
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => router.push('/(learn)/flashcards')}
-            style={styles.quickCard}
-          >
+            style={styles.quickCard}>
             <LinearGradient
               colors={['rgba(212, 175, 55, 0.15)', 'rgba(212, 175, 55, 0.05)']}
-              style={styles.quickCardGradient}
-            >
+              style={styles.quickCardGradient}>
               <View style={styles.quickCardIcon}>
                 <CardsIcon size={28} color="#D4AF37" />
               </View>
@@ -253,12 +265,10 @@ export default function Index() {
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => router.push('/(learn)/quizzes')}
-            style={styles.quickCard}
-          >
+            style={styles.quickCard}>
             <LinearGradient
               colors={['rgba(139, 92, 246, 0.15)', 'rgba(139, 92, 246, 0.05)']}
-              style={styles.quickCardGradient}
-            >
+              style={styles.quickCardGradient}>
               <View style={styles.quickCardIcon}>
                 <TrophyIcon size={28} color="#8B5CF6" />
               </View>
@@ -284,14 +294,16 @@ export default function Index() {
               useCardStore.getState().setSpreadType('single');
               router.push('/(reading)/shuffle');
             }}
-            style={styles.practiceCard}
-          >
+            style={styles.practiceCard}>
             <LinearGradient
               colors={['rgba(34, 211, 238, 0.12)', 'rgba(34, 211, 238, 0.04)']}
-              style={styles.practiceCardGradient}
-            >
+              style={styles.practiceCardGradient}>
               <View style={styles.practiceCardContent}>
-                <View style={[styles.practiceCardIcon, { backgroundColor: 'rgba(34, 211, 238, 0.15)' }]}>
+                <View
+                  style={[
+                    styles.practiceCardIcon,
+                    { backgroundColor: 'rgba(34, 211, 238, 0.15)' },
+                  ]}>
                   <SparkleIcon size={24} color="#22D3EE" />
                 </View>
                 <View style={styles.practiceCardText}>
@@ -311,14 +323,16 @@ export default function Index() {
               useCardStore.getState().setSpreadType('three');
               router.push('/(reading)/shuffle');
             }}
-            style={styles.practiceCard}
-          >
+            style={styles.practiceCard}>
             <LinearGradient
               colors={['rgba(16, 185, 129, 0.12)', 'rgba(16, 185, 129, 0.04)']}
-              style={styles.practiceCardGradient}
-            >
+              style={styles.practiceCardGradient}>
               <View style={styles.practiceCardContent}>
-                <View style={[styles.practiceCardIcon, { backgroundColor: 'rgba(16, 185, 129, 0.15)' }]}>
+                <View
+                  style={[
+                    styles.practiceCardIcon,
+                    { backgroundColor: 'rgba(16, 185, 129, 0.15)' },
+                  ]}>
                   <CardsIcon size={24} color="#10B981" />
                 </View>
                 <View style={styles.practiceCardText}>
@@ -334,14 +348,16 @@ export default function Index() {
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => router.push('/history')}
-            style={styles.practiceCard}
-          >
+            style={styles.practiceCard}>
             <LinearGradient
               colors={['rgba(148, 163, 184, 0.12)', 'rgba(148, 163, 184, 0.04)']}
-              style={styles.practiceCardGradient}
-            >
+              style={styles.practiceCardGradient}>
               <View style={styles.practiceCardContent}>
-                <View style={[styles.practiceCardIcon, { backgroundColor: 'rgba(148, 163, 184, 0.15)' }]}>
+                <View
+                  style={[
+                    styles.practiceCardIcon,
+                    { backgroundColor: 'rgba(148, 163, 184, 0.15)' },
+                  ]}>
                   <HistoryIcon size={24} color="#94A3B8" />
                 </View>
                 <View style={styles.practiceCardText}>
@@ -373,9 +389,7 @@ export default function Index() {
         </View>
 
         {/* Footer */}
-        <Text style={styles.footer}>
-          Learn Tarot, Explore Yourself
-        </Text>
+        <Text style={styles.footer}>Learn Tarot, Explore Yourself</Text>
       </ScrollView>
     </View>
   );

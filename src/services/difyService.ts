@@ -50,7 +50,8 @@ export async function generateInterpretation(
     const { spreadType, cards, query } = request;
 
     // Format the prompt
-    const spreadTypeLabel = spreadType === 'single' ? 'Single Card Reading' : 'Three Card Spread (Past, Present, Future)';
+    const spreadTypeLabel =
+      spreadType === 'single' ? 'Single Card Reading' : 'Three Card Spread (Past, Present, Future)';
     const cardsPrompt = formatCardsForPrompt(cards);
 
     const userMessage = query
@@ -81,9 +82,7 @@ export async function generateInterpretation(
 
       if (axiosError.response) {
         // Server responded with error
-        throw new Error(
-          `API Error: ${axiosError.response.data?.message || axiosError.message}`
-        );
+        throw new Error(`API Error: ${axiosError.response.data?.message || axiosError.message}`);
       } else if (axiosError.request) {
         // Request made but no response
         throw new Error('Network error: Unable to reach AI service');
@@ -142,9 +141,7 @@ export async function generateInterpretationStream(
 
     // Format the prompt
     const spreadTypeLabel =
-      spreadType === 'single'
-        ? 'Single Card Reading'
-        : 'Three Card Spread (Past, Present, Future)';
+      spreadType === 'single' ? 'Single Card Reading' : 'Three Card Spread (Past, Present, Future)';
     const cardsPrompt = formatCardsForPrompt(cards);
 
     const userMessage = query
@@ -169,7 +166,6 @@ export async function generateInterpretationStream(
 
     // Call onStream with the complete answer
     onStream(answer, true);
-
   } catch (error) {
     console.error('🔮 [Dify] ❌ API Error:', error);
 
@@ -178,9 +174,7 @@ export async function generateInterpretationStream(
 
       if (axiosError.response) {
         console.error('🔮 [Dify] Error response data:', axiosError.response.data);
-        throw new Error(
-          `API Error: ${axiosError.response.data?.message || axiosError.message}`
-        );
+        throw new Error(`API Error: ${axiosError.response.data?.message || axiosError.message}`);
       } else if (axiosError.request) {
         console.error('🔮 [Dify] No response received');
         throw new Error('Network error: Unable to reach AI service');

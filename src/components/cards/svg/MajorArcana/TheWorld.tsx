@@ -4,7 +4,18 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText, Ellipse } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+  Ellipse,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -25,18 +36,63 @@ export const TheWorld: React.FC<CardSVGProps> = ({
         </LinearGradient>
       </Defs>
 
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#world-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#world-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 月桂花环 */}
       <G transform="translate(60, 85)">
         {/* 椭圆形花环 */}
-        <Ellipse cx="0" cy="0" rx="35" ry="50" fill="none" stroke={CARD_COLORS.elements.earth} strokeWidth={3} />
+        <Ellipse
+          cx="0"
+          cy="0"
+          rx="35"
+          ry="50"
+          fill="none"
+          stroke={CARD_COLORS.elements.earth}
+          strokeWidth={3}
+        />
         {/* 花环上的叶子装饰（简化） */}
-        <Path d="M-35 -10 Q-40 -15, -35 -20" stroke={CARD_COLORS.elements.earth} strokeWidth={1} fill="none" />
-        <Path d="M-35 10 Q-40 15, -35 20" stroke={CARD_COLORS.elements.earth} strokeWidth={1} fill="none" />
-        <Path d="M35 -10 Q40 -15, 35 -20" stroke={CARD_COLORS.elements.earth} strokeWidth={1} fill="none" />
-        <Path d="M35 10 Q40 15, 35 20" stroke={CARD_COLORS.elements.earth} strokeWidth={1} fill="none" />
+        <Path
+          d="M-35 -10 Q-40 -15, -35 -20"
+          stroke={CARD_COLORS.elements.earth}
+          strokeWidth={1}
+          fill="none"
+        />
+        <Path
+          d="M-35 10 Q-40 15, -35 20"
+          stroke={CARD_COLORS.elements.earth}
+          strokeWidth={1}
+          fill="none"
+        />
+        <Path
+          d="M35 -10 Q40 -15, 35 -20"
+          stroke={CARD_COLORS.elements.earth}
+          strokeWidth={1}
+          fill="none"
+        />
+        <Path
+          d="M35 10 Q40 15, 35 20"
+          stroke={CARD_COLORS.elements.earth}
+          strokeWidth={1}
+          fill="none"
+        />
         {/* 顶部和底部的丝带 */}
         <G transform="translate(0, -52)">
           <Path d="M-8 0 Q0 5, 8 0" stroke={gold} strokeWidth={1.5} fill="none" />
@@ -77,7 +133,13 @@ export const TheWorld: React.FC<CardSVGProps> = ({
         </G>
 
         {/* 飘带 */}
-        <Path d="M-5 -15 Q-15 -20, -10 -30 Q-5 -25, 5 -30 Q10 -20, 5 -15" stroke={gold} strokeWidth={1} fill="none" opacity={0.6} />
+        <Path
+          d="M-5 -15 Q-15 -20, -10 -30 Q-5 -25, 5 -30 Q10 -20, 5 -15"
+          stroke={gold}
+          strokeWidth={1}
+          fill="none"
+          opacity={0.6}
+        />
       </G>
 
       {/* 四角神秘生物 */}
@@ -120,7 +182,9 @@ export const TheWorld: React.FC<CardSVGProps> = ({
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>XXI</SvgText>
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>
+            XXI
+          </SvgText>
         </G>
       )}
     </Svg>

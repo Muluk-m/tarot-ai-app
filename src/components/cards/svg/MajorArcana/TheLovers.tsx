@@ -4,7 +4,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -25,8 +35,25 @@ export const TheLovers: React.FC<CardSVGProps> = ({
         </LinearGradient>
       </Defs>
 
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#lovers-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#lovers-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 天使 */}
       <G transform="translate(60, 25)">
@@ -85,16 +112,29 @@ export const TheLovers: React.FC<CardSVGProps> = ({
       <G transform="translate(100, 115)">
         <Line x1="0" y1="0" x2="0" y2="25" stroke={stroke.silver} strokeWidth={1.5} />
         {/* 火焰叶子 */}
-        <Path d="M-6 -8 Q0 -18, 6 -8 Q0 0, -6 -8" stroke={CARD_COLORS.elements.fire} strokeWidth={1} fill="none" />
+        <Path
+          d="M-6 -8 Q0 -18, 6 -8 Q0 0, -6 -8"
+          stroke={CARD_COLORS.elements.fire}
+          strokeWidth={1}
+          fill="none"
+        />
       </G>
 
       {/* 山 */}
-      <Path d="M50 150 L60 130 L70 150" stroke={stroke.silver} strokeWidth={1} fill="none" opacity={0.5} />
+      <Path
+        d="M50 150 L60 130 L70 150"
+        stroke={stroke.silver}
+        strokeWidth={1}
+        fill="none"
+        opacity={0.5}
+      />
 
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText x="60" y="165" textAnchor="middle" fontSize="12" fontWeight="700" fill={gold}>VI</SvgText>
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="12" fontWeight="700" fill={gold}>
+            VI
+          </SvgText>
         </G>
       )}
     </Svg>

@@ -5,17 +5,11 @@ export default function TestButtons() {
     <View style={styles.container}>
       <Text style={styles.title}>Button Test</Text>
 
-      <Pressable
-        style={styles.button1}
-        onPress={() => {}}
-      >
+      <Pressable style={styles.button1} onPress={() => {}}>
         <Text style={styles.buttonText}>BUTTON 1 (GOLD)</Text>
       </Pressable>
 
-      <Pressable
-        style={styles.button2}
-        onPress={() => {}}
-      >
+      <Pressable style={styles.button2} onPress={() => {}}>
         <Text style={styles.buttonText}>BUTTON 2 (PURPLE)</Text>
       </Pressable>
 

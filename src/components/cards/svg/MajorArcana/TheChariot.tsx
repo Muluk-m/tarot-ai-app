@@ -4,7 +4,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -25,8 +35,25 @@ export const TheChariot: React.FC<CardSVGProps> = ({
         </LinearGradient>
       </Defs>
 
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#chariot-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#chariot-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 星星华盖 */}
       <G transform="translate(60, 20)">
@@ -45,7 +72,16 @@ export const TheChariot: React.FC<CardSVGProps> = ({
         {/* 王冠 */}
         <Path d="M-6 -8 L-4 -14 L0 -10 L4 -14 L6 -8" stroke={gold} strokeWidth={1.5} fill="none" />
         {/* 身体/盔甲 */}
-        <Rect x="-12" y="8" width="24" height="25" fill="none" stroke={stroke.white} strokeWidth={1.5} rx={2} />
+        <Rect
+          x="-12"
+          y="8"
+          width="24"
+          height="25"
+          fill="none"
+          stroke={stroke.white}
+          strokeWidth={1.5}
+          rx={2}
+        />
         {/* 月亮护肩（左） */}
         <Path d="M-15 12 Q-22 15, -15 20" stroke={stroke.silver} strokeWidth={1.5} fill="none" />
         {/* 太阳护肩（右） */}
@@ -57,7 +93,16 @@ export const TheChariot: React.FC<CardSVGProps> = ({
       {/* 战车车身 */}
       <G transform="translate(60, 100)">
         {/* 车身主体 */}
-        <Rect x="-30" y="0" width="60" height="25" fill="none" stroke={stroke.white} strokeWidth={1.5} rx={3} />
+        <Rect
+          x="-30"
+          y="0"
+          width="60"
+          height="25"
+          fill="none"
+          stroke={stroke.white}
+          strokeWidth={1.5}
+          rx={3}
+        />
         {/* 翅膀装饰 */}
         <Path d="M-30 5 L-40 0 L-35 10" stroke={gold} strokeWidth={1} fill="none" />
         <Path d="M30 5 L40 0 L35 10" stroke={gold} strokeWidth={1} fill="none" />
@@ -86,7 +131,9 @@ export const TheChariot: React.FC<CardSVGProps> = ({
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>VII</SvgText>
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>
+            VII
+          </SvgText>
         </G>
       )}
     </Svg>

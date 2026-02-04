@@ -93,7 +93,8 @@ export const useFlashcardStore = create<FlashcardState>()(
         }
 
         // Calculate next review date based on spaced repetition
-        const intervalDays = REVIEW_INTERVALS[newLevel] || REVIEW_INTERVALS[REVIEW_INTERVALS.length - 1];
+        const intervalDays =
+          REVIEW_INTERVALS[newLevel] || REVIEW_INTERVALS[REVIEW_INTERVALS.length - 1];
         const nextReview = new Date(now);
         nextReview.setDate(nextReview.getDate() + intervalDays);
 

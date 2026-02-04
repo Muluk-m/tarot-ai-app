@@ -38,7 +38,10 @@ interface ButtonProps {
 }
 
 // 尺寸配置
-const SIZE_CONFIG: Record<ButtonSize, { paddingH: number; paddingV: number; fontSize: number; iconSize: number; borderRadius: number }> = {
+const SIZE_CONFIG: Record<
+  ButtonSize,
+  { paddingH: number; paddingV: number; fontSize: number; iconSize: number; borderRadius: number }
+> = {
   sm: { paddingH: 12, paddingV: 8, fontSize: 13, iconSize: 16, borderRadius: 8 },
   md: { paddingH: 16, paddingV: 12, fontSize: 14, iconSize: 18, borderRadius: 10 },
   lg: { paddingH: 20, paddingV: 14, fontSize: 15, iconSize: 20, borderRadius: 12 },
@@ -116,9 +119,7 @@ export const Button: React.FC<ButtonProps> = ({
           style={{ marginRight: title ? 8 : 0 }}
         />
       ) : (
-        icon && iconPosition === 'left' && (
-          <View style={{ marginRight: 8 }}>{icon}</View>
-        )
+        icon && iconPosition === 'left' && <View style={{ marginRight: 8 }}>{icon}</View>
       )}
       <Text
         style={[
@@ -128,8 +129,7 @@ export const Button: React.FC<ButtonProps> = ({
             color: variantStyles.textColor,
           },
           textStyle,
-        ]}
-      >
+        ]}>
         {title}
       </Text>
       {!loading && icon && iconPosition === 'right' && (
@@ -143,12 +143,7 @@ export const Button: React.FC<ButtonProps> = ({
       activeOpacity={0.8}
       onPress={disabled || loading ? undefined : onPress}
       disabled={disabled || loading}
-      style={[
-        fullWidth && { width: '100%' },
-        { opacity: variantStyles.opacity },
-        style,
-      ]}
-    >
+      style={[fullWidth && { width: '100%' }, { opacity: variantStyles.opacity }, style]}>
       <LinearGradient
         colors={variantStyles.gradient}
         style={[
@@ -162,8 +157,7 @@ export const Button: React.FC<ButtonProps> = ({
           },
         ]}
         start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
+        end={{ x: 1, y: 1 }}>
         {content}
       </LinearGradient>
     </TouchableOpacity>
@@ -231,8 +225,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
           opacity: disabled ? 0.5 : 1,
         },
         style,
-      ]}
-    >
+      ]}>
       {icon}
     </TouchableOpacity>
   );
@@ -265,12 +258,9 @@ export const Chip: React.FC<ChipProps> = ({
         selected && styles.chipSelected,
         disabled && styles.chipDisabled,
         style,
-      ]}
-    >
+      ]}>
       {icon && <View style={{ marginRight: 6 }}>{icon}</View>}
-      <Text style={[styles.chipText, selected && styles.chipTextSelected]}>
-        {label}
-      </Text>
+      <Text style={[styles.chipText, selected && styles.chipTextSelected]}>{label}</Text>
     </View>
   );
 
@@ -279,8 +269,7 @@ export const Chip: React.FC<ChipProps> = ({
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={disabled ? undefined : onPress}
-        disabled={disabled}
-      >
+        disabled={disabled}>
         {content}
       </TouchableOpacity>
     );
@@ -312,14 +301,12 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
       activeOpacity={0.9}
       onPress={disabled ? undefined : onPress}
       disabled={disabled}
-      style={[styles.fab, disabled && styles.fabDisabled, style]}
-    >
+      style={[styles.fab, disabled && styles.fabDisabled, style]}>
       <LinearGradient
         colors={['#D4AF37', '#B8962F']}
         style={[styles.fabGradient, label && styles.fabExtended]}
         start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
+        end={{ x: 1, y: 1 }}>
         {icon}
         {label && <Text style={styles.fabLabel}>{label}</Text>}
       </LinearGradient>

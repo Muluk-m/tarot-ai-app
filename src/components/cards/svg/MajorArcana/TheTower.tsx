@@ -4,7 +4,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -26,8 +36,25 @@ export const TheTower: React.FC<CardSVGProps> = ({
         </LinearGradient>
       </Defs>
 
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#tower-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#tower-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 闪电 */}
       <Path
@@ -62,12 +89,60 @@ export const TheTower: React.FC<CardSVGProps> = ({
         <Line x1="0" y1="0" x2="0" y2="15" stroke={fire} strokeWidth={1.5} />
 
         {/* 窗户 */}
-        <Rect x="-8" y="25" width="6" height="8" fill="none" stroke={stroke.silver} strokeWidth={1} />
-        <Rect x="2" y="25" width="6" height="8" fill="none" stroke={stroke.silver} strokeWidth={1} />
-        <Rect x="-8" y="45" width="6" height="8" fill="none" stroke={stroke.silver} strokeWidth={1} />
-        <Rect x="2" y="45" width="6" height="8" fill="none" stroke={stroke.silver} strokeWidth={1} />
-        <Rect x="-8" y="65" width="6" height="8" fill="none" stroke={stroke.silver} strokeWidth={1} />
-        <Rect x="2" y="65" width="6" height="8" fill="none" stroke={stroke.silver} strokeWidth={1} />
+        <Rect
+          x="-8"
+          y="25"
+          width="6"
+          height="8"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={1}
+        />
+        <Rect
+          x="2"
+          y="25"
+          width="6"
+          height="8"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={1}
+        />
+        <Rect
+          x="-8"
+          y="45"
+          width="6"
+          height="8"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={1}
+        />
+        <Rect
+          x="2"
+          y="45"
+          width="6"
+          height="8"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={1}
+        />
+        <Rect
+          x="-8"
+          y="65"
+          width="6"
+          height="8"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={1}
+        />
+        <Rect
+          x="2"
+          y="65"
+          width="6"
+          height="8"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={1}
+        />
 
         {/* 火焰从窗口冒出 */}
         <Path d="M-5 23 Q-3 18, -1 23" stroke={fire} strokeWidth={1} fill="none" />
@@ -107,12 +182,20 @@ export const TheTower: React.FC<CardSVGProps> = ({
       <Circle cx="95" cy="90" r="1" fill={gold} opacity={0.4} />
 
       {/* 岩石基座 */}
-      <Path d="M30 145 Q60 140, 90 145" stroke={stroke.silver} strokeWidth={1} fill="none" opacity={0.5} />
+      <Path
+        d="M30 145 Q60 140, 90 145"
+        stroke={stroke.silver}
+        strokeWidth={1}
+        fill="none"
+        opacity={0.5}
+      />
 
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>XVI</SvgText>
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>
+            XVI
+          </SvgText>
         </G>
       )}
     </Svg>

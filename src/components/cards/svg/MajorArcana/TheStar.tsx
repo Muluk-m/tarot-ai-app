@@ -4,7 +4,16 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -21,7 +30,7 @@ export const TheStar: React.FC<CardSVGProps> = ({
   const starPath = (size: number) => {
     const points = [];
     for (let i = 0; i < 8; i++) {
-      const angle = (i * 45 - 90) * Math.PI / 180;
+      const angle = ((i * 45 - 90) * Math.PI) / 180;
       const r = i % 2 === 0 ? size : size * 0.4;
       points.push(`${r * Math.cos(angle)},${r * Math.sin(angle)}`);
     }
@@ -37,8 +46,25 @@ export const TheStar: React.FC<CardSVGProps> = ({
         </LinearGradient>
       </Defs>
 
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#star-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#star-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 大八芒星（中央） */}
       <G transform="translate(60, 30)">
@@ -102,26 +128,52 @@ export const TheStar: React.FC<CardSVGProps> = ({
 
       {/* 水池 */}
       <G transform="translate(85, 135)">
-        <Path d="M-15 0 Q0 8, 15 0 Q0 -8, -15 0" stroke={water} strokeWidth={1} fill="none" opacity={0.5} />
+        <Path
+          d="M-15 0 Q0 8, 15 0 Q0 -8, -15 0"
+          stroke={water}
+          strokeWidth={1}
+          fill="none"
+          opacity={0.5}
+        />
         {/* 涟漪 */}
         <Circle cx="0" cy="0" r="8" fill="none" stroke={water} strokeWidth={0.5} opacity={0.3} />
       </G>
 
       {/* 地面（绿地） */}
-      <Path d="M10 145 Q60 150, 110 145" stroke={CARD_COLORS.elements.earth} strokeWidth={1} fill="none" opacity={0.4} />
+      <Path
+        d="M10 145 Q60 150, 110 145"
+        stroke={CARD_COLORS.elements.earth}
+        strokeWidth={1}
+        fill="none"
+        opacity={0.4}
+      />
 
       {/* 远处的山 */}
-      <Path d="M85 125 L95 110 L105 125" stroke={stroke.silver} strokeWidth={1} fill="none" opacity={0.3} />
+      <Path
+        d="M85 125 L95 110 L105 125"
+        stroke={stroke.silver}
+        strokeWidth={1}
+        fill="none"
+        opacity={0.3}
+      />
 
       {/* 小鸟（灵魂象征） */}
       <G transform="translate(100, 100)">
-        <Path d="M-5 0 Q0 -3, 5 0 Q0 -1, -5 0" stroke={stroke.white} strokeWidth={1} fill="none" opacity={0.6} />
+        <Path
+          d="M-5 0 Q0 -3, 5 0 Q0 -1, -5 0"
+          stroke={stroke.white}
+          strokeWidth={1}
+          fill="none"
+          opacity={0.6}
+        />
       </G>
 
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText x="60" y="165" textAnchor="middle" fontSize="9" fontWeight="700" fill={gold}>XVII</SvgText>
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="9" fontWeight="700" fill={gold}>
+            XVII
+          </SvgText>
         </G>
       )}
     </Svg>

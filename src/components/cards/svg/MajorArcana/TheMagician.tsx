@@ -10,7 +10,18 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Ellipse, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Ellipse,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -33,10 +44,27 @@ export const TheMagician: React.FC<CardSVGProps> = ({
       </Defs>
 
       {/* 背景 */}
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#magician-bg)" />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#magician-bg)"
+      />
 
       {/* 边框 */}
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 无限符号 - 头顶 */}
       <G transform="translate(60, 25)">
@@ -96,7 +124,12 @@ export const TheMagician: React.FC<CardSVGProps> = ({
 
         {/* 圣杯 (水) */}
         <G transform="translate(-8, 0)">
-          <Path d="M-4 5 L-3 -2 Q0 -5, 3 -2 L4 5 Z" stroke={elements.water} strokeWidth={1} fill="none" />
+          <Path
+            d="M-4 5 L-3 -2 Q0 -5, 3 -2 L4 5 Z"
+            stroke={elements.water}
+            strokeWidth={1}
+            fill="none"
+          />
         </G>
 
         {/* 宝剑 (风) */}
@@ -114,8 +147,10 @@ export const TheMagician: React.FC<CardSVGProps> = ({
 
       {/* 能量光环 */}
       <Ellipse
-        cx="60" cy="70"
-        rx="35" ry="50"
+        cx="60"
+        cy="70"
+        rx="35"
+        ry="50"
         stroke={gold}
         strokeWidth={0.5}
         fill="none"

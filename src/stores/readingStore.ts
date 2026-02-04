@@ -42,11 +42,7 @@ export interface ReadingState {
   setError: (error: string | null) => void;
 
   // New: Generate reading with streaming
-  generateReading: (
-    spreadType: SpreadType,
-    cards: TarotCard[],
-    query?: string
-  ) => Promise<void>;
+  generateReading: (spreadType: SpreadType, cards: TarotCard[], query?: string) => Promise<void>;
 }
 
 export const useReadingStore = create<ReadingState>((set, get) => ({

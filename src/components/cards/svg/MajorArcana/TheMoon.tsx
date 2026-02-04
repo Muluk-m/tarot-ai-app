@@ -4,7 +4,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -26,17 +36,47 @@ export const TheMoon: React.FC<CardSVGProps> = ({
         </LinearGradient>
       </Defs>
 
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#moon-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#moon-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 月亮（包含侧脸） */}
       <G transform="translate(60, 35)">
         {/* 月亮圆盘 */}
         <Circle cx="0" cy="0" r="20" fill="none" stroke={stroke.silver} strokeWidth={2} />
         {/* 内圈 */}
-        <Circle cx="0" cy="0" r="15" fill="none" stroke={stroke.silver} strokeWidth={1} opacity={0.5} />
+        <Circle
+          cx="0"
+          cy="0"
+          r="15"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={1}
+          opacity={0.5}
+        />
         {/* 侧脸轮廓 */}
-        <Path d="M-8 -8 Q-5 -5, -5 0 Q-5 5, -2 8 Q2 5, 5 8" stroke={stroke.silver} strokeWidth={1} fill="none" />
+        <Path
+          d="M-8 -8 Q-5 -5, -5 0 Q-5 5, -2 8 Q2 5, 5 8"
+          stroke={stroke.silver}
+          strokeWidth={1}
+          fill="none"
+        />
         {/* 眼睛 */}
         <Circle cx="-3" cy="-2" r="1.5" fill={stroke.silver} opacity={0.7} />
 
@@ -44,10 +84,10 @@ export const TheMoon: React.FC<CardSVGProps> = ({
         {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, i) => (
           <Line
             key={i}
-            x1={22 * Math.cos(angle * Math.PI / 180)}
-            y1={22 * Math.sin(angle * Math.PI / 180)}
-            x2={(i % 2 === 0 ? 28 : 25) * Math.cos(angle * Math.PI / 180)}
-            y2={(i % 2 === 0 ? 28 : 25) * Math.sin(angle * Math.PI / 180)}
+            x1={22 * Math.cos((angle * Math.PI) / 180)}
+            y1={22 * Math.sin((angle * Math.PI) / 180)}
+            x2={(i % 2 === 0 ? 28 : 25) * Math.cos((angle * Math.PI) / 180)}
+            y2={(i % 2 === 0 ? 28 : 25) * Math.sin((angle * Math.PI) / 180)}
             stroke={stroke.silver}
             strokeWidth={i % 2 === 0 ? 1 : 0.5}
             opacity={0.6}
@@ -66,22 +106,62 @@ export const TheMoon: React.FC<CardSVGProps> = ({
 
       {/* 两座塔 */}
       <G transform="translate(25, 80)">
-        <Rect x="-8" y="0" width="16" height="35" fill="none" stroke={stroke.silver} strokeWidth={1.5} rx={1} />
+        <Rect
+          x="-8"
+          y="0"
+          width="16"
+          height="35"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={1.5}
+          rx={1}
+        />
         {/* 塔顶 */}
         <Path d="M-8 0 L0 -8 L8 0" stroke={stroke.silver} strokeWidth={1.5} fill="none" />
         {/* 窗户 */}
-        <Rect x="-3" y="10" width="6" height="8" fill="none" stroke={stroke.silver} strokeWidth={0.5} />
+        <Rect
+          x="-3"
+          y="10"
+          width="6"
+          height="8"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={0.5}
+        />
       </G>
       <G transform="translate(95, 80)">
-        <Rect x="-8" y="0" width="16" height="35" fill="none" stroke={stroke.silver} strokeWidth={1.5} rx={1} />
+        <Rect
+          x="-8"
+          y="0"
+          width="16"
+          height="35"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={1.5}
+          rx={1}
+        />
         {/* 塔顶 */}
         <Path d="M-8 0 L0 -8 L8 0" stroke={stroke.silver} strokeWidth={1.5} fill="none" />
         {/* 窗户 */}
-        <Rect x="-3" y="10" width="6" height="8" fill="none" stroke={stroke.silver} strokeWidth={0.5} />
+        <Rect
+          x="-3"
+          y="10"
+          width="6"
+          height="8"
+          fill="none"
+          stroke={stroke.silver}
+          strokeWidth={0.5}
+        />
       </G>
 
       {/* 小路蜿蜒到远方 */}
-      <Path d="M60 150 Q50 140, 60 130 Q70 120, 60 110 Q50 100, 60 90" stroke={gold} strokeWidth={1} fill="none" opacity={0.4} />
+      <Path
+        d="M60 150 Q50 140, 60 130 Q70 120, 60 110 Q50 100, 60 90"
+        stroke={gold}
+        strokeWidth={1}
+        fill="none"
+        opacity={0.4}
+      />
 
       {/* 狗（左） */}
       <G transform="translate(35, 130)">
@@ -121,7 +201,9 @@ export const TheMoon: React.FC<CardSVGProps> = ({
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText x="60" y="165" textAnchor="middle" fontSize="8" fontWeight="700" fill={gold}>XVIII</SvgText>
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="8" fontWeight="700" fill={gold}>
+            XVIII
+          </SvgText>
         </G>
       )}
     </Svg>

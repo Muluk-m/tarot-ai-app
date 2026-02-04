@@ -27,8 +27,20 @@ const parseMinorArcanaId = (id: number): { suit: Suit; rank: MinorArcanaRank } |
 
   const suits: Suit[] = ['wands', 'cups', 'swords', 'pentacles'];
   const ranks: MinorArcanaRank[] = [
-    'ace', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-    'page', 'knight', 'queen', 'king'
+    'ace',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    'page',
+    'knight',
+    'queen',
+    'king',
   ];
 
   return {

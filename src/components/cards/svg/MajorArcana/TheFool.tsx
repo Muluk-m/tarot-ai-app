@@ -11,7 +11,17 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Line, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Line,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -34,16 +44,20 @@ export const TheFool: React.FC<CardSVGProps> = ({
 
       {/* 背景 */}
       <Rect
-        x="0" y="0"
-        width="120" height="180"
+        x="0"
+        y="0"
+        width="120"
+        height="180"
         rx={SVG_CONFIG.borderRadius}
         fill="url(#fool-bg)"
       />
 
       {/* 边框 */}
       <Rect
-        x="3" y="3"
-        width="114" height="174"
+        x="3"
+        y="3"
+        width="114"
+        height="174"
         rx={SVG_CONFIG.borderRadius - 1}
         fill="none"
         stroke={gold}
@@ -61,15 +75,7 @@ export const TheFool: React.FC<CardSVGProps> = ({
           const y1 = Math.sin(rad) * 12;
           const x2 = Math.cos(rad) * 16;
           const y2 = Math.sin(rad) * 16;
-          return (
-            <Line
-              key={i}
-              x1={x1} y1={y1}
-              x2={x2} y2={y2}
-              stroke={gold}
-              strokeWidth={1}
-            />
-          );
+          return <Line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={gold} strokeWidth={1} />;
         })}
       </G>
 
@@ -79,44 +85,19 @@ export const TheFool: React.FC<CardSVGProps> = ({
         <Circle cx="0" cy="-30" r="8" fill="none" stroke={stroke.white} strokeWidth={2} />
 
         {/* 身体 */}
-        <Path
-          d="M0 -22 L0 5"
-          stroke={stroke.white}
-          strokeWidth={2}
-          fill="none"
-        />
+        <Path d="M0 -22 L0 5" stroke={stroke.white} strokeWidth={2} fill="none" />
 
         {/* 左臂（举起持杖） */}
-        <Path
-          d="M0 -15 L-15 -25"
-          stroke={stroke.white}
-          strokeWidth={2}
-          fill="none"
-        />
+        <Path d="M0 -15 L-15 -25" stroke={stroke.white} strokeWidth={2} fill="none" />
 
         {/* 右臂 */}
-        <Path
-          d="M0 -15 L12 -5"
-          stroke={stroke.white}
-          strokeWidth={2}
-          fill="none"
-        />
+        <Path d="M0 -15 L12 -5" stroke={stroke.white} strokeWidth={2} fill="none" />
 
         {/* 左腿（前迈） */}
-        <Path
-          d="M0 5 L-8 30"
-          stroke={stroke.white}
-          strokeWidth={2}
-          fill="none"
-        />
+        <Path d="M0 5 L-8 30" stroke={stroke.white} strokeWidth={2} fill="none" />
 
         {/* 右腿 */}
-        <Path
-          d="M0 5 L10 28"
-          stroke={stroke.white}
-          strokeWidth={2}
-          fill="none"
-        />
+        <Path d="M0 5 L10 28" stroke={stroke.white} strokeWidth={2} fill="none" />
 
         {/* 包袱杖 */}
         <Line x1="-15" y1="-25" x2="-25" y2="-45" stroke={stroke.white} strokeWidth={1.5} />
@@ -155,14 +136,7 @@ export const TheFool: React.FC<CardSVGProps> = ({
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText
-            x="60"
-            y="165"
-            textAnchor="middle"
-            fontSize="14"
-            fontWeight="700"
-            fill={gold}
-          >
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="14" fontWeight="700" fill={gold}>
             0
           </SvgText>
         </G>

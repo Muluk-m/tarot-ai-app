@@ -109,7 +109,12 @@ export const LoversIcon: React.FC<CardIconProps> = ({ color = '#EC4899' }) => (
 export const ChariotIcon: React.FC<CardIconProps> = ({ color = '#3B82F6' }) => (
   <CardIconBase>
     {/* Shield with star */}
-    <Path d="M60 50 L80 70 L80 110 Q80 120, 60 130 Q40 120, 40 110 L40 70 Z" stroke={color} strokeWidth="3" fill="none" />
+    <Path
+      d="M60 50 L80 70 L80 110 Q80 120, 60 130 Q40 120, 40 110 L40 70 Z"
+      stroke={color}
+      strokeWidth="3"
+      fill="none"
+    />
     <Polygon points="60,70 65,82 77,82 67,90 72,102 60,94 48,102 53,90 43,82 55,82" fill={color} />
   </CardIconBase>
 );
@@ -172,7 +177,12 @@ export const HangedManIcon: React.FC<CardIconProps> = ({ color = '#6366F1' }) =>
 export const DeathIcon: React.FC<CardIconProps> = ({ color = '#1F2937' }) => (
   <CardIconBase>
     {/* Phoenix rising (transformation) */}
-    <Path d="M60 110 Q45 95, 45 75 Q45 55, 60 50 Q75 55, 75 75 Q75 95, 60 110 Z" stroke={color} strokeWidth="3" fill="none" />
+    <Path
+      d="M60 110 Q45 95, 45 75 Q45 55, 60 50 Q75 55, 75 75 Q75 95, 60 110 Z"
+      stroke={color}
+      strokeWidth="3"
+      fill="none"
+    />
     <Path d="M40 75 Q35 70, 40 65" stroke={color} strokeWidth="2" fill="none" />
     <Path d="M80 75 Q85 70, 80 65" stroke={color} strokeWidth="2" fill="none" />
     <Circle cx="60" cy="70" r="5" fill={color} />
@@ -191,7 +201,12 @@ export const TemperanceIcon: React.FC<CardIconProps> = ({ color = '#06B6D4' }) =
 export const DevilIcon: React.FC<CardIconProps> = ({ color = '#DC2626' }) => (
   <CardIconBase>
     {/* Inverted pentagram (stylized) */}
-    <Polygon points="60,100 50,75 35,85 45,65 35,50 60,60 85,50 75,65 85,85 70,75" stroke={color} strokeWidth="2" fill="none" />
+    <Polygon
+      points="60,100 50,75 35,85 45,65 35,50 60,60 85,50 75,65 85,85 70,75"
+      stroke={color}
+      strokeWidth="2"
+      fill="none"
+    />
     <Circle cx="60" cy="70" r="8" fill={color} opacity="0.6" />
   </CardIconBase>
 );
@@ -200,7 +215,13 @@ export const TowerIcon: React.FC<CardIconProps> = ({ color = '#B91C1C' }) => (
   <CardIconBase>
     {/* Lightning bolt striking structure */}
     <Rect x="45" y="70" width="30" height="50" stroke={color} strokeWidth="3" fill="none" />
-    <Path d="M70 40 L55 75 L65 75 L50 110" stroke={color} strokeWidth="3" fill={color} opacity="0.8" />
+    <Path
+      d="M70 40 L55 75 L65 75 L50 110"
+      stroke={color}
+      strokeWidth="3"
+      fill={color}
+      opacity="0.8"
+    />
   </CardIconBase>
 );
 

@@ -75,12 +75,8 @@ export function InterpretationDisplay({
   if (error) {
     return (
       <View className={`rounded-2xl bg-bg-secondary p-6 ${className}`}>
-        <Text className="text-center text-base text-red-400">
-          ✨ Unable to divine your reading
-        </Text>
-        <Text className="mt-2 text-center text-sm text-text-secondary">
-          {error}
-        </Text>
+        <Text className="text-center text-base text-red-400">✨ Unable to divine your reading</Text>
+        <Text className="mt-2 text-center text-sm text-text-secondary">{error}</Text>
       </View>
     );
   }
@@ -106,30 +102,23 @@ export function InterpretationDisplay({
     <Pressable
       onPress={handleSkip}
       disabled={!allowSkip || !typewriter.isTyping}
-      className={`rounded-2xl bg-bg-secondary p-6 ${className}`}
-    >
+      className={`rounded-2xl bg-bg-secondary p-6 ${className}`}>
       {/* Interpretation text with typewriter effect */}
       <Text className="text-base leading-7 text-text-primary">
         {typewriter.displayedText}
-        {typewriter.isTyping && showCursor && (
-          <Text className="text-accent-gold">▊</Text>
-        )}
+        {typewriter.isTyping && showCursor && <Text className="text-accent-gold">▊</Text>}
       </Text>
 
       {/* Skip hint */}
       {allowSkip && typewriter.isTyping && (
-        <Text className="mt-4 text-center text-xs text-text-tertiary">
-          Tap to skip to end
-        </Text>
+        <Text className="mt-4 text-center text-xs text-text-tertiary">Tap to skip to end</Text>
       )}
 
       {/* Streaming indicator */}
       {isStreaming && (
         <View className="mt-4 flex-row items-center justify-center">
           <ActivityIndicator size="small" color="#8B5CF6" />
-          <Text className="ml-2 text-xs text-accent-purple">
-            Receiving divine wisdom...
-          </Text>
+          <Text className="ml-2 text-xs text-accent-purple">Receiving divine wisdom...</Text>
         </View>
       )}
     </Pressable>

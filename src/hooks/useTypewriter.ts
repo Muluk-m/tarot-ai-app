@@ -40,16 +40,8 @@ export interface TypewriterResult {
  * @param fullText - The complete text to animate
  * @param options - Configuration options
  */
-export function useTypewriter(
-  fullText: string,
-  options: TypewriterOptions = {}
-): TypewriterResult {
-  const {
-    speed = 30,
-    delay = 0,
-    onComplete,
-    onTick,
-  } = options;
+export function useTypewriter(fullText: string, options: TypewriterOptions = {}): TypewriterResult {
+  const { speed = 30, delay = 0, onComplete, onTick } = options;
 
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -137,22 +129,25 @@ export function useTypewriter(
     onComplete?.();
   }, [stop, onComplete]);
 
-  const updateFullText = useCallback((text: string) => {
-    fullTextRef.current = text;
-
-    // If we're currently typing and the new text is longer,
-    // continue typing from current position
-    if (isTyping && text.length > displayedText.length) {
-      // Keep typing
-      return;
-    }
-
-    // If the text changed dramatically, restart
-    if (!text.startsWith(displayedText)) {
-      reset();
+  const updateFullText = useCallback(
+    (text: string) => {
       fullTextRef.current = text;
-    }
-  }, [isTyping, displayedText, reset]);
+
+      // If we're currently typing and the new text is longer,
+      // continue typing from current position
+      if (isTyping && text.length > displayedText.length) {
+        // Keep typing
+        return;
+      }
+
+      // If the text changed dramatically, restart
+      if (!text.startsWith(displayedText)) {
+        reset();
+        fullTextRef.current = text;
+      }
+    },
+    [isTyping, displayedText, reset]
+  );
 
   return {
     displayedText,

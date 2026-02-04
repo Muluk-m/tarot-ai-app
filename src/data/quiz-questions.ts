@@ -159,7 +159,8 @@ export const COURSE_1_QUIZ: Quiz = {
   id: 'quiz-course-1',
   courseId: 'course-1',
   title: 'Tarot Basics Quiz',
-  description: 'Test your understanding of tarot fundamentals, deck structure, and the four elements.',
+  description:
+    'Test your understanding of tarot fundamentals, deck structure, and the four elements.',
   questions: course1Questions,
   passingScore: 80,
   category: 'course',
@@ -242,7 +243,7 @@ const course2Questions: QuizQuestion[] = [
   {
     id: 'c2-q5',
     type: 'multiple-choice',
-    question: 'What do the four symbols on The Magician\'s table represent?',
+    question: "What do the four symbols on The Magician's table represent?",
     options: [
       { id: 'a', text: 'The four seasons', isCorrect: false },
       { id: 'b', text: 'The four suits/elements', isCorrect: true },
@@ -258,7 +259,7 @@ const course2Questions: QuizQuestion[] = [
   {
     id: 'c2-q6',
     type: 'true-false',
-    question: 'The Fool\'s Journey is a metaphor for human spiritual development.',
+    question: "The Fool's Journey is a metaphor for human spiritual development.",
     correctAnswer: 'true',
     explanation:
       "True! The Fool's Journey through the 22 Major Arcana cards represents the soul's journey from innocence to enlightenment.",
@@ -308,7 +309,7 @@ const course2Questions: QuizQuestion[] = [
   {
     id: 'c2-q10',
     type: 'multiple-choice',
-    question: 'What does the infinity symbol above The Magician\'s head represent?',
+    question: "What does the infinity symbol above The Magician's head represent?",
     options: [
       { id: 'a', text: 'Unlimited potential and eternal wisdom', isCorrect: true },
       { id: 'b', text: 'Mathematical knowledge', isCorrect: false },
@@ -349,7 +350,8 @@ const dailyChallengeQuestions: QuizQuestion[] = [
       { id: 'd', text: 'Ace of Pentacles', isCorrect: false },
     ],
     correctAnswer: 'b',
-    explanation: 'Ace of Cups represents new emotional beginnings, love, compassion, and creativity.',
+    explanation:
+      'Ace of Cups represents new emotional beginnings, love, compassion, and creativity.',
     relatedCards: ['36'],
     difficulty: 'easy',
   },
@@ -614,7 +616,7 @@ const course3Questions: QuizQuestion[] = [
     question: 'The Three of Swords always indicates betrayal by another person.',
     correctAnswer: 'false',
     explanation:
-      "False! While Three of Swords can indicate betrayal, it more broadly represents heartbreak, grief, and painful truths - which can come from many sources including self-realization.",
+      'False! While Three of Swords can indicate betrayal, it more broadly represents heartbreak, grief, and painful truths - which can come from many sources including self-realization.',
     relatedCards: ['52'],
     difficulty: 'medium',
   },

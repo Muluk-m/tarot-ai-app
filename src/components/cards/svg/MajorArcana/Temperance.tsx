@@ -4,7 +4,16 @@
  */
 
 import React from 'react';
-import Svg, { Defs, LinearGradient, Stop, Rect, G, Path, Circle, Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Rect,
+  G,
+  Path,
+  Circle,
+  Text as SvgText,
+} from 'react-native-svg';
 import { SVG_CONFIG, CARD_COLORS, MAJOR_GRADIENTS } from '../config';
 import type { CardSVGProps } from '../types';
 
@@ -25,8 +34,25 @@ export const Temperance: React.FC<CardSVGProps> = ({
         </LinearGradient>
       </Defs>
 
-      <Rect x="0" y="0" width="120" height="180" rx={SVG_CONFIG.borderRadius} fill="url(#temperance-bg)" />
-      <Rect x="3" y="3" width="114" height="174" rx={SVG_CONFIG.borderRadius - 1} fill="none" stroke={gold} strokeWidth={1} opacity={0.5} />
+      <Rect
+        x="0"
+        y="0"
+        width="120"
+        height="180"
+        rx={SVG_CONFIG.borderRadius}
+        fill="url(#temperance-bg)"
+      />
+      <Rect
+        x="3"
+        y="3"
+        width="114"
+        height="174"
+        rx={SVG_CONFIG.borderRadius - 1}
+        fill="none"
+        stroke={gold}
+        strokeWidth={1}
+        opacity={0.5}
+      />
 
       {/* 远山和太阳 */}
       <G transform="translate(60, 25)">
@@ -39,7 +65,13 @@ export const Temperance: React.FC<CardSVGProps> = ({
       </G>
 
       {/* 远处的山 */}
-      <Path d="M70 35 L85 20 L100 35" stroke={stroke.silver} strokeWidth={1} fill="none" opacity={0.4} />
+      <Path
+        d="M70 35 L85 20 L100 35"
+        stroke={stroke.silver}
+        strokeWidth={1}
+        fill="none"
+        opacity={0.4}
+      />
 
       {/* 天使 */}
       <G transform="translate(60, 55)">
@@ -52,16 +84,31 @@ export const Temperance: React.FC<CardSVGProps> = ({
         {/* 翅膀 */}
         <G opacity={0.8}>
           {/* 左翼 */}
-          <Path d="M-8 5 Q-30 -10, -35 15 Q-25 10, -20 20 Q-15 10, -8 12" stroke={stroke.white} strokeWidth={1} fill="none" />
+          <Path
+            d="M-8 5 Q-30 -10, -35 15 Q-25 10, -20 20 Q-15 10, -8 12"
+            stroke={stroke.white}
+            strokeWidth={1}
+            fill="none"
+          />
           {/* 右翼 */}
-          <Path d="M8 5 Q30 -10, 35 15 Q25 10, 20 20 Q15 10, 8 12" stroke={stroke.white} strokeWidth={1} fill="none" />
+          <Path
+            d="M8 5 Q30 -10, 35 15 Q25 10, 20 20 Q15 10, 8 12"
+            stroke={stroke.white}
+            strokeWidth={1}
+            fill="none"
+          />
         </G>
 
         {/* 身体 */}
         <Path d="M0 8 L0 45" stroke={stroke.white} strokeWidth={2} fill="none" />
 
         {/* 长袍 */}
-        <Path d="M-12 30 Q-18 50, -15 75 L15 75 Q18 50, 12 30" stroke={stroke.white} strokeWidth={1.5} fill="none" />
+        <Path
+          d="M-12 30 Q-18 50, -15 75 L15 75 Q18 50, 12 30"
+          stroke={stroke.white}
+          strokeWidth={1.5}
+          fill="none"
+        />
 
         {/* 三角形符号（胸前） */}
         <Path d="M-5 20 L0 12 L5 20 Z" stroke={gold} strokeWidth={1} fill="none" />
@@ -81,7 +128,13 @@ export const Temperance: React.FC<CardSVGProps> = ({
         </G>
 
         {/* 水流（杯间流动） */}
-        <Path d="M-25 45 Q0 60, 25 55" stroke={CARD_COLORS.elements.water} strokeWidth={1.5} fill="none" opacity={0.7} />
+        <Path
+          d="M-25 45 Q0 60, 25 55"
+          stroke={CARD_COLORS.elements.water}
+          strokeWidth={1.5}
+          fill="none"
+          opacity={0.7}
+        />
       </G>
 
       {/* 一只脚在水中，一只脚在陆地 */}
@@ -94,7 +147,13 @@ export const Temperance: React.FC<CardSVGProps> = ({
         {/* 右脚（水中） */}
         <Path d="M10 0 L15 15" stroke={stroke.white} strokeWidth={1.5} fill="none" />
         {/* 水波 */}
-        <Path d="M5 18 Q15 15, 25 18 Q35 21, 45 18" stroke={CARD_COLORS.elements.water} strokeWidth={1} fill="none" opacity={0.5} />
+        <Path
+          d="M5 18 Q15 15, 25 18 Q35 21, 45 18"
+          stroke={CARD_COLORS.elements.water}
+          strokeWidth={1}
+          fill="none"
+          opacity={0.5}
+        />
       </G>
 
       {/* 路径通向远方 */}
@@ -103,7 +162,9 @@ export const Temperance: React.FC<CardSVGProps> = ({
       {showNumber && (
         <G>
           <Circle cx="60" cy="160" r="10" fill={gold} opacity={0.15} />
-          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>XIV</SvgText>
+          <SvgText x="60" y="165" textAnchor="middle" fontSize="10" fontWeight="700" fill={gold}>
+            XIV
+          </SvgText>
         </G>
       )}
     </Svg>
