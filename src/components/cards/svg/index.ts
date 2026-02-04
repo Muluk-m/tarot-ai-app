@@ -6,7 +6,12 @@
 // Configuration
 export { SVG_CONFIG, CARD_COLORS, CARD_SIZES, getSuitColor, getSuitGradient } from './config';
 export type { CardSize, SuitType } from './config';
-export type { CardSVGProps, CardFrameProps, MajorArcanaCardProps, MinorArcanaCardProps } from './types';
+export type {
+  CardSVGProps,
+  CardFrameProps,
+  MajorArcanaCardProps,
+  MinorArcanaCardProps,
+} from './types';
 
 // Card Frame
 export { CardFrame } from './CardFrame';
@@ -18,7 +23,6 @@ export { MAJOR_ARCANA_COMPONENTS, getMajorArcanaComponent } from './MajorArcana'
 export { MinorArcanaCard, type MinorArcanaRank } from './MinorArcana';
 export {
   SuitSymbol,
-  getSuitColor,
   getSuitElement,
   NumberLayout,
   CourtFigure,

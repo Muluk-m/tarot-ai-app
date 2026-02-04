@@ -387,7 +387,7 @@ export default function Index() {
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
-            <Text style={styles.statValue}>{totalXp}</Text>
+            <Text style={styles.statValue}>{experiencePoints}</Text>
             <Text style={styles.statLabel}>Total XP</Text>
           </View>
         </View>
