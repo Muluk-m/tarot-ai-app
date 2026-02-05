@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 /// Manages the tarot deck with shuffling and drawing operations
 class TarotDeck: ObservableObject {

@@ -1,0 +1,11 @@
+{
+"appclips": {
+"apps": ["29R48H85Z8.com.qlj.CelestialEye.Clip"]
+},
+"applinks": {
+"details": [{
+"appIDs": ["29R48H85Z8.com.qlj.CelestialEye"],
+"components": [{"/" : "/*"}]
+}]
+}
+}
